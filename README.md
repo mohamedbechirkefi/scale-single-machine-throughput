@@ -3,7 +3,7 @@
 
 **Question.** What bottlenecks dominate local request throughput under different architecture choices?
 
-**Status: M0 (bootstrap and feasibility), 2026-11-24.** No experiment has run. There are no findings. The study protocol is a draft awaiting the owner's freeze; until then any run is exploratory.
+**Status: M2 (core implementation) done, 2026-11-24.** No confirmatory experiment has run. There are no findings. The study protocol is a draft awaiting the owner's freeze; until then every run is exploratory. Exploratory smoke and pilot runs (harness checks, planning values) are under `results/exploratory/` and are not results.
 
 ## Why it matters
 
@@ -11,7 +11,10 @@ Caching, database indexes, request batching and bounded concurrency are standard
 
 ## What is implemented
 
-Nothing yet beyond the control files and draft protocols. Implementation starts at M2 (`roadmap.md`).
+- The `scale` Python package (`src/scale/`): synthetic dataset and request streams, the HTTP server with arms A0 to A4, closed-loop and open-loop load generator, metrics, runner, versioned result schema with run manifests, report generator and CLI. See `src/README.md`.
+- A pytest suite (`tests/`, see `tests/README.md`); the latest real count is in `progress.md`.
+- Experiment configs (`experiments/`). Confirmatory configs are refused until the owner freezes the protocol.
+- No demo yet (M5).
 
 ## Planned design (draft)
 
@@ -24,7 +27,7 @@ Nothing yet beyond the control files and draft protocols. Implementation starts 
 
 | ID | Title | Status |
 |---|---|---|
-| EXP-001 | Load-generator and measurement validation | planned (protocol draft, awaiting owner freeze) |
+| EXP-001 | Load-generator and measurement validation | exploratory smoke checks only (2026-11-24); confirmatory run awaits owner freeze |
 | EXP-002 | One-factor-at-a-time comparison (primary) | planned (protocol draft, awaiting owner freeze) |
 | EXP-003 | Open-loop SLO goodput (sensitivity) | planned (protocol draft, awaiting owner freeze) |
 | EXP-004 | Workload sensitivity (optional) | planned (protocol draft, awaiting owner freeze) |
@@ -41,7 +44,12 @@ Localhost only, one laptop, one implementation. No claim about production traffi
 
 ## Quick start
 
-Not available yet (M2). The dependency lockfile is `uv.lock`.
+    uv sync --locked                      # environment from uv.lock
+    uv run scale test -q                  # test suite
+    uv run scale smoke                    # exploratory smoke matrix (about 40 s)
+    uv run scale report results/exploratory/<dir> [--pdf]
+
+`uv run scale run experiments/EXP-002.json` refuses to start while the protocol is unfrozen.
 
 ## Licence
 

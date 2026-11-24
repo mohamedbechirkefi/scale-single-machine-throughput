@@ -7,7 +7,7 @@ Status values: `done`, `in progress`, `planned`, `blocked(<reason>)`, `gated(<ga
 |---|---|---|---|---|---|
 | M0 Bootstrap and feasibility | P0 | 0.5 d | none | done (2026-11-24; see progress.md) | none |
 | M1 Research and preregistration | P0 | 0.5 d | M0 | in progress (drafts written; freeze pending) | gated(G-FREEZE): owner review and freeze of the protocol |
-| M2 Core implementation | P0 | 1 d | M1 drafts (implementation may start before the freeze) | planned | none |
+| M2 Core implementation | P0 | 1 d | M1 drafts (implementation may start before the freeze) | done (2026-11-24; see progress.md); exploratory pilot raised amendment proposals D-008 for the owner | none for M2; the freeze (M1) is pending |
 | M3 Experiments | P0 | 1 d (about 6 h machine time) | M2, owner freeze | planned | gated(G-FREEZE) for confirmatory runs |
 | M4 Interpretation | P0 | 0.75 d | M3 | planned | none |
 | M5 Interactive experience | P1 | 0.75 d | M4 | planned | none |
@@ -31,18 +31,22 @@ Acceptance criteria:
 - [x] Draft study protocol with H0/H1, baseline, primary metric, units, seeds, sample-size rationale, uncertainty, exclusions, stopping, smoke and full matrices, sensitivity analyses.
 - [x] Draft per-experiment protocols (11.2 structure) and registry rows.
 - [ ] Literature open items resolved or explicitly left unverified.
-- [ ] Smoke pilot run (exploratory) estimates the between-block SD of log R, to settle n before the freeze.
+- [x] Smoke pilot run (exploratory) estimates the between-block SD of log R, to settle n before the freeze (J-0005, 3 blocks under heavy background load; SD above the 0.07 trigger for A1 and A2; repeat on a quiet machine recommended, D-008 item 6).
+- [ ] Owner decisions on the amendment proposals D-008 (A4 queue, baseline dominance, sweep range, cold cache, generator-limited rule, n).
 - [ ] Owner freeze recorded with protocol hashes (G-FREEZE). Confirmatory runs are not allowed before this.
 
 ## M2 Core implementation (11.6: schemas, manifests, report generators alongside the core)
 
-Tasks: data generator; server with arms A0 to A4 behind one configuration switch; load generator (closed and open loop); metrics; runner; versioned JSON result schema with validation; run manifests (runtime, peak memory, OS, CPU, package versions, git revision, config hash); report generator (Markdown, figures, Typst PDF); CLI `scale smoke | exp | report | test`.
-Acceptance criteria:
-- [ ] Baseline A0 implemented first, then A1 to A4.
-- [ ] Unit tests for deterministic functions, invalid inputs and edge cases; hand-computed metric examples; property tests (bounds, monotonic counts).
-- [ ] Response equivalence across arms; cache invalidation; correctness under concurrency; generator cancellation and extreme parameters.
-- [ ] Results validated against the schema at export and import.
-- [ ] Test suite executed, actual counts recorded in progress.md.
+Tasks: data generator; server with arms A0 to A4 behind one configuration switch; load generator (closed and open loop); metrics; runner; versioned JSON result schema with validation; run manifests (runtime, peak memory, OS, CPU, package versions, git revision, config hash); report generator (Markdown, figures, Typst PDF); CLI `scale smoke | run | report | test` (the brief names the run command `run`; the protocols' `scale exp EXP-NNN` is `scale run experiments/EXP-NNN.json`).
+Acceptance criteria (status 2026-11-24):
+- [x] Baseline A0 implemented first, then A1 to A4 (`src/scale/server.py`).
+- [x] Unit tests for deterministic functions, invalid inputs and edge cases; hand-computed metric examples; property tests (bounds, monotonicity).
+- [x] Response equivalence across arms; cache invalidation; correctness under concurrency; differential test against a dictionary reference; generator cancellation and extreme parameters; coordinated-omission check.
+- [x] Results validated against the schema at export and import (schema 1.0.0; report fails closed on malformed files).
+- [x] Run manifests per run; `run` refuses confirmatory configs while the protocol is unfrozen (exit code 3).
+- [x] Report generator: Markdown tables, PNG and SVG figure, pilot analysis, runtime projection, degenerate-case list; PDF through pandoc and Typst verified on the pilot report (7 pages, kept out of git).
+- [x] Test suite executed, actual counts recorded in progress.md.
+- [x] Exploratory smoke and pilot runs journaled (J-0002 to J-0007), outputs under `results/exploratory/`.
 
 ## M3 Experiments (11.6: individual reports as experiments finish)
 

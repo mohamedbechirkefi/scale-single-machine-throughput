@@ -1,0 +1,31 @@
+{
+ "degenerate": [],
+ "figures": [
+  "figures/goodput_vs_concurrency.png",
+  "figures/goodput_vs_concurrency.svg"
+ ],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 2,
+ "pilot": {
+  "A2": {
+   "geometric_mean_ratio": 125.35000000000004,
+   "log_ratios": [
+    4.831109824604303
+   ],
+   "n_blocks": 1
+  }
+ },
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 4.418144584000039,
+  "measure_s": 15.0,
+  "per_run_s": 146.51814458400003,
+  "runs": 50,
+  "total_h": 2.034974230333334,
+  "total_s": 7325.907229200001,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/exploratory/SMOKE-20261124/"
+}

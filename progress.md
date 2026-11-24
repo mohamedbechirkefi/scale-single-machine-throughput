@@ -45,3 +45,54 @@ Generator and server share the CPU; the workload parameters may decide the answe
 
 ### Next action
 M2: implement the data generator and baseline A0, the closed-loop generator, the result schema and the first tests; then the exploratory smoke pilot.
+
+## 2026-11-24: Session M2 (core implementation while the freeze is pending)
+
+**Milestone:** M2. **Next bounded task at start:** implement the data generator, baseline A0, generator, schema and tests, then the exploratory smoke pilot (previous entry's next action). Brief: `labs/_shared/M2-brief.md`.
+
+### Starting state
+`git status`: `On branch main`, `nothing to commit, working tree clean`; HEAD `98e5c77`. Protocol `research/protocol.md` still DRAFT v0.1, not frozen.
+
+### Implemented
+- Package `scale` in `src/scale/` (see `src/README.md`): `config` (typed validated configs, arms A0 to A4), `data` (dataset `items-v1.0`, response encoding, SQLite build, Zipf sampler, request streams), `server` (A0 first, then A1 to A4), `loadgen` (closed and open loop), `metrics` (pure functions), `schema` (result and manifest schema 1.0.0, validated at export and import), `manifest`, `runner`, `report`, `cli` (`scale smoke | run | report | test`).
+- Configs in `experiments/`: exploratory `smoke`, `smoke-null`, `smoke-null-gp2`, `pilot`, `stall-open`, `stall-closed`; confirmatory `EXP-001`, `EXP-002` with draft values, refused by the CLI while unfrozen.
+- Build backend and entry point (D-007). Operational choices left open by the draft protocol recorded as D-006.
+
+### Commands and actual outputs (trimmed only where marked)
+- `uv lock` gave `Resolved 26 packages`; `uv sync --locked` installed `scale-single-machine-throughput==0.1.0` (editable). No third-party dependency added or upgraded.
+- `.venv/bin/scale run experiments/EXP-002.json` gave `REFUSED: EXP-002 is confirmatory and research/protocol.md is not frozen (owner decision, G-FREEZE).`, exit code 3.
+- First full pytest run: `2 failed, 94 passed`. (1) `test_transport_errors_counted_not_crashing`: a refused connection raised `ConnectionRefusedError` outside the client's error handling and killed the generator thread; fixed in `loadgen.HttpClient.request`. (2) `test_cache_invalidation_under_concurrent_readers`: the test's oracle flagged reads that returned a value newer than the last acknowledgement (committed but not yet acknowledged), which is not staleness; the oracle was corrected to flag only older values.
+- Mutation checks (temporary edits to `server.py`, reverted from a backup, `git diff` clean afterwards): removing A1 invalidation failed 3 tests; removing the generation guard failed the concurrent-readers test. The concurrent-readers test alone initially missed the no-invalidation mutant (original prices were above the written values); the written values were moved above every generated price and the mutant is now caught by it too.
+- Exploratory runs (all labelled exploratory, J-0002 to J-0007, outputs in `results/exploratory/`). The machine was shared with other agents' workloads throughout: 1-minute load average 10.9 to 82.9, idle probe 22.6 % to 100 % (every run would have failed the 15 % probe). All throughput numbers are noisy.
+  - `scale smoke --config experiments/smoke-null.json`: ab cross-check returned nothing and the run took 70.4 s; ab output `apr_pollset_poll: The timeout specified has expired (70007)`. Cause: ApacheBench `-k` speaks HTTP/1.0 and waits for `Connection: keep-alive` in the response. Fixed in `server.py`, regression test added; the failed run is kept (J-0002).
+  - Rerun (J-0003): c=1 SCALE 21426.3 rps vs ab 21640.97 rps (ratio 0.990); c=8 19594.0 vs 20680.54 (0.947).
+  - `scale smoke` (J-0004): A2 G* 9192.3 rps, A0 G* 73.3 rps, zero errors, about 20 s per run.
+  - `scale smoke --config experiments/pilot.json` (J-0005): 15 runs, all ok, 291.1 s; 18.9 to 19.9 s per run. Geometric mean within-block R (SD of log R): A1 1.711 (0.092), A2 248.975 (0.248), A3 12.844 (0.043), A4 1.014 (0.045).
+  - Stall check (J-0006): open loop intended-time p99 191.66 ms; closed loop p99 0.85 ms for the same injected 200 ms pause every 2 s.
+  - Two generator processes on /null at c=8 (J-0007): 27666.0 rps.
+- `scale report <dir>` for every exploratory directory: Markdown, `summary.json`, PNG/SVG figure. `scale report <copy> --pdf` in the session scratchpad: 7-page PDF, figure page inspected as PNG; the PDF and `.typ` are not committed (M0 `.gitignore` question still open).
+- `uv run scale test -q` first failed with `scale: error: unrecognized arguments: -q` (argparse did not pass leading options to pytest); fixed in `cli.main`, test added. Then `100 passed in 23.97s`. After the last edit (tools path in `report.py`, PDF rebuilt successfully) the final run before committing gave `100 passed in 23.59s` (0 failed).
+
+### Smoke-run measurements for the owner (exploratory, noisy)
+- **Runtime per run:** 18.9 to 20.3 s for 3 levels of 2 s + 3 s; worst overhead outside measurement windows 4.0 s.
+- **Projected full matrix:** EXP-002 about 146 s per run, 50 runs about 2.03 h (planning value 2.1 h); with n = 20 blocks about 4.1 h.
+- **Seed spread:** SD of log R from 3 blocks: A1 0.092, A2 0.248, A3 0.043, A4 0.045. A1 and A2 exceed the 0.07 trigger, under heavy background load. The planned n = 10 cannot be confirmed from this pilot.
+- **Degenerate cases:** A4 never rejected a request (W + Q = 72 > c max 64); A1 cache hit ratio 0.34 to 0.36 (cold); A1 and A3 peak at the top of the sweep (G* truncated); A2 peaks at c = 1 and falls with c; A2's peak exceeds 50 % of the null ceiling, so the draft generator-limited rule would exclude it.
+
+### Proposed amendments (owner decision; protocol not changed)
+D-008 in `research/decision_log.md`: (1) A4 queue size or sweep range; (2) baseline full scan makes the index dominant almost by construction; (3) sweep range truncates G*; (4) cold A1 cache, warmup by request count; (5) generator-limited rule versus A2's peak, more generator processes; (6) repeat the pilot on a quiet machine before choosing n; (7) idle probe needs a quiet machine; (8) runtime as planned.
+
+### Files changed
+New: `src/scale/*.py`, `tests/*.py`, `experiments/*.json`, `results/exploratory/` (7 run directories). Modified: `pyproject.toml`, `uv.lock`, `README.md`, `CONTRIBUTING.md` (development commands appended), `roadmap.md`, `data/manifest.json`, `research/decision_log.md` (D-006 to D-008), `research/experiment_journal.jsonl` (J-0002 to J-0007), `research/experiment_registry.csv` (statuses), READMEs of `src/`, `tests/`, `experiments/`, `results/`. Licence files and `master_prompt.md` unchanged.
+
+### Not done, and why
+- No confirmatory run and no freeze (G-FREEZE).
+- EXP-003 open-loop ladder runs only as a mechanism check (stall configs); no EXP-003 or EXP-004 config yet, because their ladders and variants depend on owner decisions (D-008).
+- No per-experiment `report.md`: no registered experiment has run; the exploratory runs are smoke checks recorded in the journal and in `results/exploratory/*/report.md`.
+- Generated PDFs not committed (open `.gitignore` question from M0).
+
+### Outstanding risks
+Background load from other workloads on this machine; the dominance of the index by construction; generator ceiling close to A2's peak.
+
+### Next action
+Owner: decide on D-008 and freeze the protocol. Then M3: EXP-001 on a quiet machine, then EXP-002.

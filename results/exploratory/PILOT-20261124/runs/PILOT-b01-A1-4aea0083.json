@@ -1,0 +1,116 @@
+{
+ "arm": "A1",
+ "arm_position": 3,
+ "block": 1,
+ "config_hash": "4aea0083710aa9a68d142dd040fde159843b48a0cf1f11a89a9b637c39f6700f",
+ "endpoint": "item",
+ "experiment_id": "PILOT",
+ "factor": "cache",
+ "failure": null,
+ "kind": "closed_sweep",
+ "label": "exploratory",
+ "levels": [
+  {
+   "ab_rps": null,
+   "attempts": 210,
+   "concurrency": 1,
+   "connections_finished": 1,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.005118521856988118,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 70.0,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 24.512291,
+   "offered_rate_rps": null,
+   "p50_ms": 18.750791,
+   "p95_ms": 20.978,
+   "p99_ms": 22.288417,
+   "server_cpu_util": 0.9849308520752195,
+   "server_rss_mb": 27.295744,
+   "status_counts": {
+    "200": 210
+   },
+   "transport_errors": 0,
+   "validated_ok": 210,
+   "window_s": 3.0
+  },
+  {
+   "ab_rps": null,
+   "attempts": 298,
+   "concurrency": 8,
+   "connections_finished": 8,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.012071786747816352,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 99.33333333333333,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 230.397958,
+   "offered_rate_rps": null,
+   "p50_ms": 111.069625,
+   "p95_ms": 139.307375,
+   "p99_ms": 147.333875,
+   "server_cpu_util": 6.573048488640668,
+   "server_rss_mb": 70.434816,
+   "status_counts": {
+    "200": 298
+   },
+   "transport_errors": 0,
+   "validated_ok": 298,
+   "window_s": 3.0
+  },
+  {
+   "ab_rps": null,
+   "attempts": 350,
+   "concurrency": 64,
+   "connections_finished": 64,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.013370627398956243,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 116.66666666666667,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 2965.55525,
+   "offered_rate_rps": null,
+   "p50_ms": 646.632458,
+   "p95_ms": 1236.467125,
+   "p99_ms": 1534.579958,
+   "server_cpu_util": 8.58223501634193,
+   "server_rss_mb": 251.723776,
+   "status_counts": {
+    "200": 350
+   },
+   "transport_errors": 0,
+   "validated_ok": 350,
+   "window_s": 3.0
+  }
+ ],
+ "run_id": "PILOT-b01-A1-4aea0083",
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 651062744157681411,
+  "requests": 4281350381593664768,
+  "study": 9003
+ },
+ "server_stats": {
+  "arm": "A1",
+  "cache_hits": 479,
+  "cache_misses": 928,
+  "cpu_sys_s": 76.562851,
+  "cpu_user_s": 10.870313,
+  "internal_errors": 0,
+  "ru_maxrss_bytes": 251723776
+ },
+ "status": "ok",
+ "summary": {
+  "c_at_peak": 64,
+  "c_sat": 64,
+  "generator_limited_levels": [],
+  "peak_goodput_rps": 116.66666666666667
+ }
+}

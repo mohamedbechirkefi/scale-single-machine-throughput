@@ -1,0 +1,15 @@
+{
+ "_comment": "EXPLORATORY pilot: all five arms, c in {1, 8, 64}, 3 blocks, short windows. Purpose: runtime per run, between-block SD of log R for the sample-size decision, degenerate cells. Never confirmatory.",
+ "experiment_id": "PILOT",
+ "label": "exploratory",
+ "kind": "closed_sweep",
+ "endpoint": "item",
+ "arms": ["A0", "A1", "A2", "A3", "A4"],
+ "concurrency": [1, 8, 64],
+ "warmup_s": 2.0,
+ "measure_s": 3.0,
+ "blocks": 3,
+ "study_seed": 9003,
+ "idle_probe_enforce": false,
+ "description": "Exploratory seed-spread pilot."
+}

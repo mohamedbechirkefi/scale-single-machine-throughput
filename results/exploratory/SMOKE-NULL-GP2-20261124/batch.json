@@ -1,0 +1,20 @@
+{
+ "config_hash": "779d6be81e1db1b95350e0d07027fb35b307409aab075019f294f221f338d39d",
+ "experiment_id": "SMOKE-NULL-GP2",
+ "finished_utc": "2026-11-24T16:15:38.011359Z",
+ "label": "exploratory",
+ "runs": [
+  {
+   "arm": "A0",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 27666.0,
+   "position": 0,
+   "run_id": "SMOKE-NULL-GP2-b00-A0-779d6be8",
+   "runtime_s": 5.824,
+   "status": "ok"
+  }
+ ],
+ "runtime_s": 5.834633332999147,
+ "started_utc": "2026-11-24T16:15:32.176595Z"
+}

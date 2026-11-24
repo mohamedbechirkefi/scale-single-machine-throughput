@@ -1,0 +1,30 @@
+{
+ "config_hash": "431d6ecd800772b3bcf2f16596a2f3d726ecd0a67b9d6c438cef7b7435579743",
+ "experiment_id": "SMOKE",
+ "finished_utc": "2026-11-24T16:08:27.566327Z",
+ "label": "exploratory",
+ "runs": [
+  {
+   "arm": "A2",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 9192.333333333334,
+   "position": 0,
+   "run_id": "SMOKE-b00-A2-431d6ecd",
+   "runtime_s": 20.318,
+   "status": "ok"
+  },
+  {
+   "arm": "A0",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 73.33333333333333,
+   "position": 1,
+   "run_id": "SMOKE-b00-A0-431d6ecd",
+   "runtime_s": 19.605,
+   "status": "ok"
+  }
+ ],
+ "runtime_s": 39.9766713329991,
+ "started_utc": "2026-11-24T16:07:47.589920Z"
+}

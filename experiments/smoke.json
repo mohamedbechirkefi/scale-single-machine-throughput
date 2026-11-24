@@ -1,0 +1,15 @@
+{
+ "_comment": "EXPLORATORY smoke matrix of research/protocol.md section 11 (draft v0.1): arms A0 and A2, c in {1, 8, 64}, 1 block, 2 s warmup, 3 s measurement. Never confirmatory.",
+ "experiment_id": "SMOKE",
+ "label": "exploratory",
+ "kind": "closed_sweep",
+ "endpoint": "item",
+ "arms": ["A0", "A2"],
+ "concurrency": [1, 8, 64],
+ "warmup_s": 2.0,
+ "measure_s": 3.0,
+ "blocks": 1,
+ "study_seed": 9001,
+ "idle_probe_enforce": false,
+ "description": "Exploratory smoke matrix: validates harness, schema and metrics."
+}

@@ -1,0 +1,17 @@
+{
+ "_comment": "EXPLORATORY part of the smoke matrix: EXP-001 sensitivity item 19: null endpoint at c = 8 with 2 generator processes instead of 1. Never confirmatory.",
+ "experiment_id": "SMOKE-NULL-GP2",
+ "label": "exploratory",
+ "kind": "closed_sweep",
+ "endpoint": "null",
+ "arms": ["A0"],
+ "concurrency": [8],
+ "warmup_s": 1.0,
+ "measure_s": 3.0,
+ "blocks": 1,
+ "study_seed": 9002,
+ "generator_processes": 2,
+ "idle_probe_enforce": false,
+ "ab_crosscheck": false,
+ "description": "Exploratory generator ceiling check on GET /null."
+}

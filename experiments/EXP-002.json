@@ -1,0 +1,17 @@
+{
+ "_comment": "CONFIRMATORY config of EXP-002 (draft v0.1 values). The CLI refuses it until the owner freezes research/protocol.md and fills protocol_sha256 (G-FREEZE).",
+ "experiment_id": "EXP-002",
+ "label": "confirmatory",
+ "kind": "closed_sweep",
+ "endpoint": "item",
+ "arms": ["A0", "A1", "A2", "A3", "A4"],
+ "concurrency": [1, 2, 4, 8, 16, 32, 64],
+ "warmup_s": 5.0,
+ "measure_s": 15.0,
+ "blocks": 10,
+ "study_seed": 20261124,
+ "idle_probe_enforce": true,
+ "protocol_path": "research/experiments/EXP-002/protocol.md",
+ "protocol_sha256": null,
+ "description": "Primary one-factor-at-a-time comparison."
+}

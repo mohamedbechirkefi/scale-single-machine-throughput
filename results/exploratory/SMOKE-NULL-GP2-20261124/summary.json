@@ -1,0 +1,20 @@
+{
+ "degenerate": [],
+ "figures": [],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 1,
+ "pilot": {},
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 1.5239324580008544,
+  "measure_s": 15.0,
+  "per_run_s": 143.62393245800084,
+  "runs": 50,
+  "total_h": 1.994776839694456,
+  "total_s": 7181.196622900042,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/exploratory/SMOKE-NULL-GP2-20261124/"
+}

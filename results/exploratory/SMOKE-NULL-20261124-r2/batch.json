@@ -1,0 +1,20 @@
+{
+ "config_hash": "11432873ece321c58de62620618d2c2a6138da60379c9d0b3e903965e35f315b",
+ "experiment_id": "SMOKE-NULL",
+ "finished_utc": "2026-11-24T16:09:50.830234Z",
+ "label": "exploratory",
+ "runs": [
+  {
+   "arm": "A0",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 21426.333333333332,
+   "position": 0,
+   "run_id": "SMOKE-NULL-b00-A0-11432873",
+   "runtime_s": 16.195,
+   "status": "ok"
+  }
+ ],
+ "runtime_s": 16.20910420800101,
+ "started_utc": "2026-11-24T16:09:34.621155Z"
+}

@@ -2,32 +2,69 @@
   "schema_version": "0.1",
   "project": "SCALE",
   "updated": "2026-11-24",
-  "status": "M0: no data generated or downloaded",
+  "status": "M2: generator implemented; synthetic data regenerated per run and never committed",
   "license_note": "Synthetic data produced by this project are covered by NOTICE.md (LicenseRef-SCALE-NC-Research-1.0). Third-party sources keep their own terms.",
   "external_datasets": [],
   "external_datasets_note": "No external dataset is needed: the workload is synthetic and generated locally from recorded seeds. No dataset was downloaded in M0.",
   "synthetic_datasets": [
     {
       "id": "items-v1",
-      "status": "planned (generator to be implemented at M2)",
+      "status": "implemented (M2); used by exploratory runs only",
       "description": "Synthetic catalogue table items(id INTEGER PRIMARY KEY, sku TEXT, category INTEGER, price_cents INTEGER, payload TEXT) in SQLite, WAL mode",
-      "generator": "src/scale (version to be recorded at M2)",
-      "parameters_planned": {"rows": 200000, "payload_bytes": 256, "variants": {"V1": {"rows": 10000}, "V2": {"rows": 200000, "key_distribution": "uniform"}}},
-      "seed": "to be fixed at protocol freeze",
-      "sha256": null,
+      "generator": "src/scale/data.py, GENERATOR_VERSION items-v1.0",
+      "parameters_planned": {
+        "rows": 200000,
+        "payload_bytes": 256,
+        "variants": {
+          "V1": {
+            "rows": 10000
+          },
+          "V2": {
+            "rows": 200000,
+            "key_distribution": "uniform"
+          }
+        }
+      },
+      "seed": "20261124 used for exploratory runs (config default); to be confirmed at the protocol freeze",
+      "sha256": "7a0c2b88f5e37c20659d0dc9e074785e2247e896245b3eb922edbb156cf57f9b",
       "redistribution": "Not bundled; regenerated deterministically by script. Small fixtures may be committed under the project licence.",
-      "personal_data": "none"
+      "personal_data": "none",
+      "parameters_used_exploratory": {
+        "rows": 200000,
+        "payload_bytes": 256,
+        "dataset_seed": 20261124
+      },
+      "sha256_definition": "SHA-256 over the concatenated fixed-length JSON encodings of all rows in id order (data.build_database), independent of the SQLite file layout and of the index"
     }
   ],
   "request_sequences": {
-    "status": "planned",
+    "status": "implemented (M2): data.request_stream, seeds from runner.block_seeds and runner.connection_seeds",
     "description": "Seeded request streams: 98 percent reads, 2 percent writes, Zipf s=0.99 over a seeded key permutation (planning values)",
     "seed_policy": "derived from the study seed and block index; recorded per run"
   },
   "software_components_with_separate_terms": [
-    {"name": "SQLite", "license": "public domain", "source": "https://www.sqlite.org/copyright.html", "accessed": "2026-11-24", "verified": true},
-    {"name": "Python standard library", "license": "PSF License (not re-verified in M0)", "verified": false},
-    {"name": "ApacheBench 2.3 (preinstalled /usr/sbin/ab)", "license": "Apache-2.0 (not re-verified in M0)", "use": "local differential check only, not redistributed", "verified": false},
-    {"name": "Python dependencies", "license": "see pyproject.toml and uv.lock; to be tabulated at M2", "verified": false}
+    {
+      "name": "SQLite",
+      "license": "public domain",
+      "source": "https://www.sqlite.org/copyright.html",
+      "accessed": "2026-11-24",
+      "verified": true
+    },
+    {
+      "name": "Python standard library",
+      "license": "PSF License (not re-verified in M0)",
+      "verified": false
+    },
+    {
+      "name": "ApacheBench 2.3 (preinstalled /usr/sbin/ab)",
+      "license": "Apache-2.0 (not re-verified in M0)",
+      "use": "local differential check only, not redistributed",
+      "verified": false
+    },
+    {
+      "name": "Python dependencies",
+      "license": "see pyproject.toml and uv.lock; to be tabulated at M2",
+      "verified": false
+    }
   ]
 }

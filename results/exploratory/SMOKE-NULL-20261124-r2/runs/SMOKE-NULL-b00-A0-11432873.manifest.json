@@ -1,0 +1,104 @@
+{
+ "command": [
+  "scale",
+  "smoke",
+  "--config",
+  "experiments/smoke-null.json",
+  "--out",
+  "results/exploratory/SMOKE-NULL-20261124-r2"
+ ],
+ "config": {
+  "ab_crosscheck": true,
+  "arms": [
+   "A0"
+  ],
+  "blocks": 1,
+  "concurrency": [
+   1,
+   8
+  ],
+  "config_version": "1.0",
+  "description": "Exploratory generator ceiling check on GET /null.",
+  "endpoint": "null",
+  "experiment_id": "SMOKE-NULL",
+  "generator_ceiling_rps": null,
+  "generator_processes": 1,
+  "idle_probe_enforce": false,
+  "idle_probe_threshold_pct": 15.0,
+  "kind": "closed_sweep",
+  "label": "exploratory",
+  "measure_s": 3.0,
+  "protocol_path": null,
+  "protocol_sha256": null,
+  "rates_rps": [],
+  "slo_max_error_rate": 0.01,
+  "slo_p99_ms": 50.0,
+  "stall_ms": 0.0,
+  "stall_period_s": 0.0,
+  "study_seed": 9002,
+  "warmup_s": 1.0,
+  "workload": {
+   "dataset_seed": 20261124,
+   "payload_bytes": 256,
+   "rows": 200000,
+   "write_fraction": 0.02,
+   "zipf_s": 0.99
+  }
+ },
+ "config_hash": "11432873ece321c58de62620618d2c2a6138da60379c9d0b3e903965e35f315b",
+ "cpu": {
+  "brand": "Apple M1 Pro",
+  "logical_cpus": 10,
+  "memory_bytes": 17179869184,
+  "physical_cpus": 10
+ },
+ "dataset_sha256": null,
+ "finished_utc": "2026-11-24T16:09:50.816016Z",
+ "git": {
+  "dirty": true,
+  "revision": "98e5c77296e29747ba20a4390c7d85680afe6999"
+ },
+ "idle_probe": {
+  "cpu_pct": 70.0,
+  "enforced": false,
+  "interval_s": 1.0,
+  "passed": false,
+  "threshold_pct": 15.0
+ },
+ "label": "exploratory",
+ "load_average": [
+  25.76,
+  37.7,
+  21.8
+ ],
+ "platform": {
+  "machine": "arm64",
+  "macos": "15.3.1",
+  "python_executable": "python3",
+  "python_implementation": "CPython",
+  "release": "24.3.0",
+  "system": "Darwin"
+ },
+ "power": "Now drawing from 'AC Power'",
+ "run_id": "SMOKE-NULL-b00-A0-11432873",
+ "runner_peak_rss_mb": 54.755328,
+ "runtime_s": 16.19479925000087,
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 5483423797094325913,
+  "requests": 4514146817211667779,
+  "study": 9002
+ },
+ "server_peak_rss_mb": 25.116672,
+ "started_utc": "2026-11-24T16:09:34.621475Z",
+ "versions": {
+  "jsonschema": "4.26.0",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "psutil": "7.2.2",
+  "python": "3.12.1",
+  "scale": "0.1.0",
+  "sqlite": "3.43.1"
+ }
+}

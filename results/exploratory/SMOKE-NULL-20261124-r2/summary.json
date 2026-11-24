@@ -1,0 +1,22 @@
+{
+ "degenerate": [
+  "SMOKE-NULL-b00-A0-11432873: peak at the lowest swept concurrency c=1; goodput falls as concurrency rises"
+ ],
+ "figures": [],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 1,
+ "pilot": {},
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 7.59479925000087,
+  "measure_s": 15.0,
+  "per_run_s": 149.69479925000087,
+  "runs": 50,
+  "total_h": 2.0790944340277897,
+  "total_s": 7484.7399625000435,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/exploratory/SMOKE-NULL-20261124-r2/"
+}

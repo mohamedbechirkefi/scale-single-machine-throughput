@@ -52,3 +52,10 @@ Tools used read-only from the shared folder (see `research/feasibility.md`):
     /Users/bechir/research/labs/.tools/pandoc research/paper/manuscript.md -s -t latex -o research/paper/manuscript.tex
 
 The experiment CLI (`scale smoke | exp | report | test`) is added at M2.
+
+### Experiment CLI (M2)
+
+    /Users/bechir/research/labs/.tools/py/bin/uv run scale test -q
+    /Users/bechir/research/labs/.tools/py/bin/uv run scale smoke [--config experiments/<exploratory>.json] [--out DIR]
+    /Users/bechir/research/labs/.tools/py/bin/uv run scale run experiments/<config>.json [--out DIR]   # confirmatory configs are refused until the owner's freeze
+    /Users/bechir/research/labs/.tools/py/bin/uv run scale report DIR [--pdf]

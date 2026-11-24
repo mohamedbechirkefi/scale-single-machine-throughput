@@ -1,0 +1,18 @@
+{
+ "_comment": "EXPLORATORY coordinated-omission check (EXP-001 item 5): 200 ms injected server pause every 2 s, open-loop constant rate on GET /null, intended-time latency. Never confirmatory.",
+ "experiment_id": "STALL-OPEN",
+ "label": "exploratory",
+ "kind": "open_ladder",
+ "endpoint": "null",
+ "arms": ["A0"],
+ "concurrency": [8],
+ "rates_rps": [200],
+ "warmup_s": 1.0,
+ "measure_s": 6.0,
+ "blocks": 1,
+ "study_seed": 9004,
+ "idle_probe_enforce": false,
+ "stall_period_s": 2.0,
+ "stall_ms": 200.0,
+ "description": "Exploratory stall check, open loop."
+}

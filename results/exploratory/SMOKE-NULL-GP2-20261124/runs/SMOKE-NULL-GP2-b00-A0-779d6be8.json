@@ -1,0 +1,62 @@
+{
+ "arm": "A0",
+ "arm_position": 0,
+ "block": 0,
+ "config_hash": "779d6be81e1db1b95350e0d07027fb35b307409aab075019f294f221f338d39d",
+ "endpoint": "null",
+ "experiment_id": "SMOKE-NULL-GP2",
+ "factor": "baseline",
+ "failure": null,
+ "kind": "closed_sweep",
+ "label": "exploratory",
+ "levels": [
+  {
+   "ab_rps": null,
+   "attempts": 82998,
+   "concurrency": 8,
+   "connections_finished": 8,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.5858249082788768,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 27666.0,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 3.5045,
+   "offered_rate_rps": null,
+   "p50_ms": 0.239917,
+   "p95_ms": 0.644042,
+   "p99_ms": 0.931917,
+   "server_cpu_util": 1.3258675564246347,
+   "server_rss_mb": 24.444928,
+   "status_counts": {
+    "200": 82998
+   },
+   "transport_errors": 0,
+   "validated_ok": 82998,
+   "window_s": 3.0
+  }
+ ],
+ "run_id": "SMOKE-NULL-GP2-b00-A0-779d6be8",
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 5483423797094325913,
+  "requests": 4514146817211667779,
+  "study": 9002
+ },
+ "server_stats": {
+  "arm": "A0",
+  "cpu_sys_s": 2.6357939999999997,
+  "cpu_user_s": 2.710381,
+  "internal_errors": 0,
+  "ru_maxrss_bytes": 24444928
+ },
+ "status": "ok",
+ "summary": {
+  "c_at_peak": 8,
+  "c_sat": 8,
+  "generator_limited_levels": [],
+  "peak_goodput_rps": 27666.0
+ }
+}

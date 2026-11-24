@@ -1,0 +1,114 @@
+{
+ "arm": "A2",
+ "arm_position": 2,
+ "block": 1,
+ "config_hash": "4aea0083710aa9a68d142dd040fde159843b48a0cf1f11a89a9b637c39f6700f",
+ "endpoint": "item",
+ "experiment_id": "PILOT",
+ "factor": "index",
+ "failure": null,
+ "kind": "closed_sweep",
+ "label": "exploratory",
+ "levels": [
+  {
+   "ab_rps": null,
+   "attempts": 54463,
+   "concurrency": 1,
+   "connections_finished": 1,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.29255878248733624,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 18154.333333333332,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 14.59525,
+   "offered_rate_rps": null,
+   "p50_ms": 0.045583,
+   "p95_ms": 0.074209,
+   "p99_ms": 0.148083,
+   "server_cpu_util": 0.6414760623526508,
+   "server_rss_mb": 27.066368,
+   "status_counts": {
+    "200": 54463
+   },
+   "transport_errors": 0,
+   "validated_ok": 54463,
+   "window_s": 3.0
+  },
+  {
+   "ab_rps": null,
+   "attempts": 27934,
+   "concurrency": 8,
+   "connections_finished": 8,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.27222341101985853,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 9311.333333333334,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 7.983917,
+   "offered_rate_rps": null,
+   "p50_ms": 0.808125,
+   "p95_ms": 1.491125,
+   "p99_ms": 1.910375,
+   "server_cpu_util": 2.6947447355827743,
+   "server_rss_mb": 32.800768,
+   "status_counts": {
+    "200": 27934
+   },
+   "transport_errors": 0,
+   "validated_ok": 27934,
+   "window_s": 3.0
+  },
+  {
+   "ab_rps": null,
+   "attempts": 25539,
+   "concurrency": 64,
+   "connections_finished": 64,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.2635075453180106,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 8513.0,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 30.680208,
+   "offered_rate_rps": null,
+   "p50_ms": 7.0215,
+   "p95_ms": 14.072834,
+   "p99_ms": 17.861917,
+   "server_cpu_util": 2.7452565850772217,
+   "server_rss_mb": 48.283648,
+   "status_counts": {
+    "200": 25539
+   },
+   "transport_errors": 0,
+   "validated_ok": 25539,
+   "window_s": 3.0
+  }
+ ],
+ "run_id": "PILOT-b01-A2-4aea0083",
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 651062744157681411,
+  "requests": 4281350381593664768,
+  "study": 9003
+ },
+ "server_stats": {
+  "arm": "A2",
+  "cpu_sys_s": 22.227816,
+  "cpu_user_s": 7.817436,
+  "internal_errors": 0,
+  "ru_maxrss_bytes": 48283648
+ },
+ "status": "ok",
+ "summary": {
+  "c_at_peak": 1,
+  "c_sat": 1,
+  "generator_limited_levels": [],
+  "peak_goodput_rps": 18154.333333333332
+ }
+}

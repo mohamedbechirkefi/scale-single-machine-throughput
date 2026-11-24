@@ -1,0 +1,17 @@
+{
+ "_comment": "EXPLORATORY companion of stall-open.json: the same injected pause measured by the closed-loop generator, to show coordinated omission. Never confirmatory.",
+ "experiment_id": "STALL-CLOSED",
+ "label": "exploratory",
+ "kind": "closed_sweep",
+ "endpoint": "null",
+ "arms": ["A0"],
+ "concurrency": [8],
+ "warmup_s": 1.0,
+ "measure_s": 6.0,
+ "blocks": 1,
+ "study_seed": 9004,
+ "idle_probe_enforce": false,
+ "stall_period_s": 2.0,
+ "stall_ms": 200.0,
+ "description": "Exploratory stall check, closed loop."
+}

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0
 [project]
 name = "scale-single-machine-throughput"
-version = "0.0.1"
+version = "0.1.0"
 description = "SCALE: single-machine study of what bottlenecks dominate local request throughput"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -14,6 +14,14 @@ dependencies = [
     "matplotlib>=3.9",
 ]
 
+[project.scripts]
+scale = "scale.cli:main"
+
+[build-system]
+# uv's own build backend, pinned to the installed uv minor (released 2025-10, before the D-005 cut-off)
+requires = ["uv_build>=0.9.5,<0.10"]
+build-backend = "uv_build"
+
 [dependency-groups]
 dev = [
     "pytest>=8.3",
@@ -23,4 +31,9 @@ dev = [
 [tool.uv]
 # D-005: only versions released at least two weeks before 2026-11-24
 exclude-newer = "2026-11-10T00:00:00Z"
-package = false
+
+[tool.uv.build-backend]
+module-name = "scale"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

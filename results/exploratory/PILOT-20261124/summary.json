@@ -1,0 +1,107 @@
+{
+ "degenerate": [
+  "PILOT-b00-A1-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b00-A1-4aea0083: A1 cache hit ratio 0.35 (514 hits, 951 misses); the cache is mostly cold",
+  "PILOT-b00-A2-4aea0083: peak at the lowest swept concurrency c=1; goodput falls as concurrency rises",
+  "PILOT-b00-A3-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b00-A4-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b00-A4-4aea0083: A4 admission limit never triggered (no HTTP 503)",
+  "PILOT-b01-A0-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b01-A1-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b01-A1-4aea0083: A1 cache hit ratio 0.34 (479 hits, 928 misses); the cache is mostly cold",
+  "PILOT-b01-A2-4aea0083: peak at the lowest swept concurrency c=1; goodput falls as concurrency rises",
+  "PILOT-b01-A3-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b01-A4-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b01-A4-4aea0083: A4 admission limit never triggered (no HTTP 503)",
+  "PILOT-b02-A1-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b02-A1-4aea0083: A1 cache hit ratio 0.36 (497 hits, 886 misses); the cache is mostly cold",
+  "PILOT-b02-A2-4aea0083: peak at the lowest swept concurrency c=1; goodput falls as concurrency rises",
+  "PILOT-b02-A3-4aea0083: peak at the highest swept concurrency c=64; saturation not reached, G* is truncated by the sweep",
+  "PILOT-b02-A4-4aea0083: A4 admission limit never triggered (no HTTP 503)"
+ ],
+ "figures": [
+  "figures/goodput_vs_concurrency.png",
+  "figures/goodput_vs_concurrency.svg"
+ ],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 15,
+ "pilot": {
+  "A1": {
+   "bootstrap95_ratio": [
+    1.544186046511628,
+    1.8421052631578947
+   ],
+   "geometric_mean_ratio": 1.7110228235097935,
+   "half_width_n10": 0.06556438273527239,
+   "half_width_n20": 0.04289726529576914,
+   "log_ratios": [
+    0.5658679791944727,
+    0.6109090823229731,
+    0.4344969407888258
+   ],
+   "n_blocks": 3,
+   "sd_log_ratio": 0.0916590551841208
+  },
+  "A2": {
+   "bootstrap95_ratio": [
+    186.92682926829266,
+    288.03720930232566
+   ],
+   "geometric_mean_ratio": 248.97518532893488,
+   "half_width_n10": 0.17757202558331592,
+   "half_width_n20": 0.11618128582573561,
+   "log_ratios": [
+    5.230717252946389,
+    5.658252778851943,
+    5.663089670756887
+   ],
+   "n_blocks": 3,
+   "sd_log_ratio": 0.24824582209238188
+  },
+  "A3": {
+   "bootstrap95_ratio": [
+    12.278048780487808,
+    13.389473684210525
+   ],
+   "geometric_mean_ratio": 12.843901770961864,
+   "half_width_n10": 0.031066644785341078,
+   "half_width_n20": 0.020326190038074527,
+   "log_ratios": [
+    2.507813015996908,
+    2.5944688522995265,
+    2.5563255167353156
+   ],
+   "n_blocks": 3,
+   "sd_log_ratio": 0.04343119221090653
+  },
+  "A4": {
+   "bootstrap95_ratio": [
+    0.9627906976744185,
+    1.0439024390243903
+   ],
+   "geometric_mean_ratio": 1.01383700992788,
+   "half_width_n10": 0.032094806477749455,
+   "half_width_n20": 0.020998892548891594,
+   "log_ratios": [
+    0.04296603588344334,
+    0.036179656577502474,
+    -0.03791923486229384
+   ],
+   "n_blocks": 3,
+   "sd_log_ratio": 0.044868563011500655
+  }
+ },
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 4.021640583001137,
+  "measure_s": 15.0,
+  "per_run_s": 146.12164058300112,
+  "runs": 50,
+  "total_h": 2.02946723031946,
+  "total_s": 7306.082029150056,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/exploratory/PILOT-20261124/"
+}

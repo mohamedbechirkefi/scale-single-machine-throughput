@@ -1,0 +1,20 @@
+{
+ "config_hash": "bcacbbf271c9690ae79a192d4159b3934b187f191e854d122af1d138efa257fd",
+ "experiment_id": "STALL-OPEN",
+ "finished_utc": "2026-11-24T16:14:55.041723Z",
+ "label": "exploratory",
+ "runs": [
+  {
+   "arm": "A0",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": null,
+   "position": 0,
+   "run_id": "STALL-OPEN-b00-A0-bcacbbf2",
+   "runtime_s": 8.975,
+   "status": "ok"
+  }
+ ],
+ "runtime_s": 8.986515749998944,
+ "started_utc": "2026-11-24T16:14:46.055136Z"
+}

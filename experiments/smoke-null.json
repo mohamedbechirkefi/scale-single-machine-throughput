@@ -1,0 +1,16 @@
+{
+ "_comment": "EXPLORATORY part of the smoke matrix: EXP-001-style null-endpoint check at c in {1, 8} with the ApacheBench 2.3 cross-check. Never confirmatory.",
+ "experiment_id": "SMOKE-NULL",
+ "label": "exploratory",
+ "kind": "closed_sweep",
+ "endpoint": "null",
+ "arms": ["A0"],
+ "concurrency": [1, 8],
+ "warmup_s": 1.0,
+ "measure_s": 3.0,
+ "blocks": 1,
+ "study_seed": 9002,
+ "idle_probe_enforce": false,
+ "ab_crosscheck": true,
+ "description": "Exploratory generator ceiling check on GET /null."
+}
