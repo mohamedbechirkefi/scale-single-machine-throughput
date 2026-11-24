@@ -48,7 +48,7 @@ The baseline is the simplest configuration and the primary comparator for every 
 - Separate generator process or processes on the same machine, keep-alive HTTP/1.1 connections, monotonic clock (`time.perf_counter_ns`).
 - **Closed loop (primary, EXP-002):** c connections, each sending its next request as soon as the previous response arrives, zero think time. Concurrency sweep c in {1, 2, 4, ..., c_max} (doubling), extended beyond 64 until A1 and A3 peak inside the range: c_max is one of 128, 256, 512 or 1024, set by the rule of section 7.1 from the quiet-machine pilot. The server's listen backlog is set to max(128, c_max) (the kernel may cap it; macOS `kern.ipc.somaxconn` is 128 on this machine). Per level: 5 s warmup (discarded), then 15 s measurement window.
 - **Open loop (sensitivity, EXP-003):** requests scheduled at a constant offered rate; latency measured from the *intended* send time, correcting coordinated omission as described in the wrk2 README (Tene, accessed 2026-11-24).
-- The generator's own ceiling is measured in EXP-001 and cross-checked against ApacheBench 2.3 (preinstalled at `/usr/sbin/ab`). Any measurement cell whose goodput exceeds 50 % of the generator ceiling, or whose generator CPU exceeds 85 % of its allotted cores, is flagged generator-limited and excluded from confirmatory comparison (reported, not dropped).
+- The generator's own ceiling is measured in EXP-001 and cross-checked against ApacheBench 2.3 (preinstalled at `/usr/sbin/ab`). Any measurement cell whose goodput exceeds 50 % of the generator ceiling, or whose generator CPU exceeds 85 % of its allotted cores, is flagged generator-limited and excluded from confirmatory comparison (reported, not dropped). The ceiling used by EXP-002 is the median of the EXP-001 ceiling runs (AM-5, section 15).
 
 ## 5. Hypotheses
 
@@ -150,6 +150,12 @@ Source: the owner's approvals of 2026-11-24 (`labs/_shared/owner-approvals-2026-
 - **AM-3 (sweep extended).** The sweep continues by doubling beyond 64 until A1 and A3 peak inside the range; c_max in {128, 256, 512, 1024} is set by the rule of section 7.1. The listen backlog follows the sweep (section 4).
 - **AM-4 (seed count after a quiet pilot).** n is to be set by the pre-stated rule from the quiet pilot (section 7.1): n = 10 if every treatment arm's between-block SD of log R is at most 0.07, otherwise n = 20 (the trigger and both values are those of draft v0.1 and D-008 item 6).
 - **Unchanged.** All other draft v0.1 parameters are kept as approved: N = 200,000, Zipf s = 0.99, 2 % writes, payload 256 B, A1 capacity 10 % with time-based warmup, A3 1 ms or 32 requests, 5 s + 15 s windows, 1 generator process, the 50 % and 85 % generator-limited rule, the 15 % idle probe, the 50 ms SLO, the [0.95, 1.05] threshold, bootstrap and Bonferroni analysis, EXP-003 and EXP-004 with 5 blocks.
+
+### Amendment before confirmatory data (owner-approved 2026-11-24, second round)
+
+Source: the owner's second-round approvals of 2026-11-24 (`labs/_shared/owner-approvals-2026-11-24b.md`, section 4, "Rules fixed before data"; the owner answered "Approve all"). Recorded in D-011. Made before any confirmatory run of any experiment: no EXP-001, pilot or EXP-002 output exists when this rule is written.
+
+- **AM-5 (generator ceiling).** The generator ceiling used by EXP-002 (`generator_ceiling_rps`, the C_gen of EXP-001 item 21, used by the 50 % generator-limited rule of section 4) is the median of the EXP-001 ceiling runs. A ceiling run is one of the five EXP-001 repeats (config `experiments/EXP-001.json`: SCALE generator, `GET /null`, c in {1, 8, 32}); its ceiling is its peak goodput over those levels (ties to the smallest c). The rule applies only if all five repeats have status ok with the idle probe enforced and passed; otherwise no value is set and EXP-001 is repeated. The per-level C_gen table and the ApacheBench cross-check are still reported in full; the 85 % generator-CPU criterion is unchanged. The rule reads EXP-001 runs only, never a study arm. Implemented in `src/scale/ceiling.py` (`scale resolve-ceiling <dir>`, rule version `ceiling-rule-1.0`); its output is recorded with the section 7.1 resolution. This closes the open point of D-009 (how the per-level table becomes one number).
 
 ### After the freeze
 

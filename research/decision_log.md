@@ -85,3 +85,18 @@ Append-only. Each entry: id, date, decision, decided by, context, alternatives, 
 - **Freeze record.** `research/freeze.json`: git revision 9471b588002cc384c607ec01f325c1e6c3957698; SHA-256 of `research/protocol.md` 18dd4f8dd888fd9aa61718cf17ae2485dfd87453cd39693d55df156b1d634b1f; SHA-256 of the four EXP protocols, of `experiments/EXP-001.json`, of the pilot config and of the rule module. EXP-002's config is a template with `blocks`, `concurrency` and `generator_ceiling_rps` unset (deferred); its hash is appended at resolution.
 - **Guard.** `scale run` (`src/scale/freeze.py`) accepts a confirmatory config only if the protocol status says FROZEN, the protocol, EXP protocol and config file hashes match the freeze record, and no value is deferred. Tested both ways (`tests/test_freeze.py`).
 - **Consequences.** Confirmatory runs may start once the coordinator schedules a quiet machine: EXP-001, then the quiet pilot and its resolution, then EXP-002. Runtime grows to about 2.3 h to 6.2 h for EXP-002 depending on the rule. Open point for the resolution step: EXP-001 item 21 gives a per-level C_gen table while the config takes one `generator_ceiling_rps`; how the table becomes one number must be stated (as a dated note) before EXP-001 output is seen.
+
+## D-010 (2026-11-24): Ratified follow-on choice, A4 queue = 16
+
+- **Decided by:** the owner (second-round approvals of 2026-11-24, `labs/_shared/owner-approvals-2026-11-24b.md`, section 3). The owner answered "Approve all" (2026-11-24) to the coordinator's list.
+- **Choice ratified.** "A4 queue = 16."
+- **Consequences.** The value is already in the frozen text (AM-1, D-009; `src/scale/config.py`), so no file hash changes. Recorded in `research/freeze.json` under `amendments` (RATIFY-SCALE-1).
+
+## D-011 (2026-11-24): Generator-ceiling rule fixed before data (AM-5)
+
+- **Decided by:** the owner (second-round approvals of 2026-11-24, `labs/_shared/owner-approvals-2026-11-24b.md`, section 4, "Rules fixed before data"; the owner answered "Approve all", 2026-11-24). Applied by the AI assistant.
+- **Rule (quoted).** "The generator ceiling used by EXP-002 is the median of the EXP-001 ceiling runs."
+- **Made before any confirmatory data.** No EXP-001, quiet-pilot or EXP-002 run exists. This closes the open point of D-009 (how the per-level C_gen table of EXP-001 item 21 becomes the single `generator_ceiling_rps`).
+- **Operational definition** (`research/protocol.md` section 15, AM-5, plus a pointer sentence in section 4). A ceiling run is one of the five confirmatory EXP-001 repeats (SCALE generator, `GET /null`, c in {1, 8, 32}); its ceiling is its peak goodput over those levels. The value is the median over the five. All five must have status ok with the idle probe enforced and passed, else no value is set. The rule reads no study arm.
+- **Implementation.** `src/scale/ceiling.py` (rule version `ceiling-rule-1.0`), CLI `scale resolve-ceiling <dir>`, tests `tests/test_ceiling.py`.
+- **Freeze record.** `research/protocol.md` re-hashed: 5ea0c481132059752d4923c0518ebe9e22a56924959bd13146c41bfab372712e (was 18dd4f8dd888fd9aa61718cf17ae2485dfd87453cd39693d55df156b1d634b1f, kept under `superseded_hashes` with the reason). `src/scale/ceiling.py` hash 0ecd60269a9e18855c53bc5c42b12eca69e4abd4dee5c3d2704fae1b9b1cd371 added to `pre_stated_rule_inputs`. No config changed; EXP protocols unchanged.

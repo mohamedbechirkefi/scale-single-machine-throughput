@@ -131,3 +131,25 @@ Owner: decide on D-008 and freeze the protocol. Then M3: EXP-001 on a quiet mach
 
 ### Next action
 Coordinator: schedule a quiet window. Then `scale run experiments/EXP-001.json`, `scale smoke --config experiments/pilot-quiet.json` (or `scale run`), `scale resolve-pilot <dir>`, append the resolution and the completed EXP-002 config hash to `research/freeze.json`, then EXP-002.
+
+## 2026-11-24: Session RATIFY (owner second-round decisions, pre-M3 fix)
+
+**Brief:** `labs/_shared/RATIFY-brief.md`; authority: `labs/_shared/owner-approvals-2026-11-24b.md` (owner: "Approve all").
+
+### Starting state
+`git status`: clean on `main`, HEAD `2ca4107`.
+
+### Done
+- Ratification (D-010): "A4 queue = 16" recorded; already frozen (AM-1), no hash change. Added to `research/freeze.json` `amendments`.
+- New pre-data rule AM-5 (D-011): the generator ceiling used by EXP-002 is the median of the EXP-001 ceiling runs. Protocol section 15 (dated amendment) and a pointer in section 4. Code `src/scale/ceiling.py`, `scale resolve-ceiling`; tests `tests/test_ceiling.py` (11 tests).
+- Freeze record: protocol hash now 5ea0c481132059752d4923c0518ebe9e22a56924959bd13146c41bfab372712e; old hash 18dd4f8d... kept under `superseded_hashes` with the reason; `ceiling.py` hash 0ecd6026... recorded; EXP-002 deferred rule text updated. No config changed.
+
+### Commands and actual outputs
+- `.venv/bin/python -m pytest -q tests/test_ceiling.py`: `10 passed in 0.21s` (before the freeze-record test was added).
+- `.venv/bin/python -m pytest -q` (dev dependencies installed): `125 passed in 24.02s`.
+
+### Not done
+- No confirmatory run (brief).
+
+### Next action
+Coordinator: quiet window. `scale run experiments/EXP-001.json`, then `scale resolve-ceiling <EXP-001 dir>`, the quiet pilot and `scale resolve-pilot <dir>`; complete the EXP-002 config from both outputs and append its hash to `research/freeze.json`.

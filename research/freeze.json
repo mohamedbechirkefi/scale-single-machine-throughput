@@ -48,7 +48,8 @@
  ],
  "protocol": {
   "path": "research/protocol.md",
-  "sha256": "18dd4f8dd888fd9aa61718cf17ae2485dfd87453cd39693d55df156b1d634b1f"
+  "sha256": "5ea0c481132059752d4923c0518ebe9e22a56924959bd13146c41bfab372712e",
+  "note": "Re-hashed after AM-5 (owner-approved 2026-11-24, before any confirmatory data, D-011)."
  },
  "experiment_protocols": [
   {
@@ -94,6 +95,11 @@
    "path": "src/scale/pilotrule.py",
    "sha256": "7102cbe583959970b383b03a4249eac5487a6bd2ffa0653c50c841ab394a0412",
    "rule_version": "pilot-rule-1.0"
+  },
+  {
+   "path": "src/scale/ceiling.py",
+   "sha256": "0ecd60269a9e18855c53bc5c42b12eca69e4abd4dee5c3d2704fae1b9b1cd371",
+   "rule_version": "ceiling-rule-1.0"
   }
  ],
  "deferred": [
@@ -104,7 +110,7 @@
     "concurrency",
     "generator_ceiling_rps"
    ],
-   "rule": "research/protocol.md section 7.1 (blocks, concurrency); EXP-001 protocol item 21 (generator_ceiling_rps)",
+   "rule": "research/protocol.md section 7.1 (blocks, concurrency); section 15 AM-5, median of the EXP-001 ceiling runs (generator_ceiling_rps)",
    "template": {
     "path": "experiments/EXP-002.json",
     "sha256": "b0aa85369b76dad72647db7bb61d959ca0ccb2150016f7ab9762417f9516afb4"
@@ -117,5 +123,37 @@
   "EXP-003": "rate ladder fixed from EXP-002 results before it runs (protocol item 9)",
   "EXP-004": "config written once c_max is resolved; 5 blocks per variant"
  },
- "resolutions": []
+ "resolutions": [],
+ "superseded_hashes": [
+  {
+   "path": "research/protocol.md",
+   "sha256": "18dd4f8dd888fd9aa61718cf17ae2485dfd87453cd39693d55df156b1d634b1f",
+   "superseded_on": "2026-11-24",
+   "reason": "AM-5 added to section 15 and a pointer sentence to section 4: the generator ceiling used by EXP-002 is the median of the EXP-001 ceiling runs (owner second-round approval, rule fixed before data, D-011). No other text changed; no confirmatory data existed."
+  }
+ ],
+ "amendments": [
+  {
+   "id": "RATIFY-SCALE-1",
+   "date": "2026-11-24",
+   "kind": "ratified follow-on choice",
+   "source": "labs/_shared/owner-approvals-2026-11-24b.md section 3",
+   "owner_quote": "Approve all",
+   "choice": "A4 queue = 16.",
+   "effect": "Already in the frozen text (AM-1); no hash changes.",
+   "decision": "D-010"
+  },
+  {
+   "id": "AM-5",
+   "date": "2026-11-24",
+   "kind": "rule fixed before data",
+   "source": "labs/_shared/owner-approvals-2026-11-24b.md section 4",
+   "owner_quote": "Approve all",
+   "rule": "The generator ceiling used by EXP-002 is the median of the EXP-001 ceiling runs.",
+   "protocol_section": "research/protocol.md section 15 (and section 4)",
+   "implementation": "src/scale/ceiling.py (scale resolve-ceiling), tests/test_ceiling.py",
+   "effect": "research/protocol.md re-hashed (old hash under superseded_hashes); no config changed.",
+   "decision": "D-011"
+  }
+ ]
 }

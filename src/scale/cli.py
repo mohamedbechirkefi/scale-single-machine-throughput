@@ -4,7 +4,8 @@
 ``run`` refuses a confirmatory config unless the study protocol records an owner
 freeze, ``research/freeze.json`` lists the protocol, the experiment protocol and the
 config file with matching SHA-256 values, and no value of the experiment is still
-deferred (G-FREEZE). ``resolve-pilot`` applies the pre-stated quiet-pilot rule.
+deferred (G-FREEZE). ``resolve-pilot`` applies the pre-stated quiet-pilot rule;
+``resolve-ceiling`` applies the pre-stated generator-ceiling rule (AM-5).
 """
 
 from __future__ import annotations
@@ -109,6 +110,19 @@ def cmd_resolve_pilot(results_dir: str) -> int:
     return 0
 
 
+def cmd_resolve_ceiling(results_dir: str) -> int:
+    from .ceiling import CeilingRuleError, resolve_ceiling
+    from .report import load_runs
+
+    try:
+        out = resolve_ceiling(load_runs(results_dir))
+    except (CeilingRuleError, Exception) as exc:
+        print(f"ceiling rule not applicable (no value set): {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(json.dumps(out, indent=1, sort_keys=True))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     if argv and argv[0] == "test":  # pass every remaining argument to pytest unchanged
@@ -130,6 +144,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--full-runs", type=int, default=50)
     q = sub.add_parser("resolve-pilot", help="apply the frozen quiet-pilot rule (protocol 7.1) to a pilot results directory")
     q.add_argument("results_dir")
+    g = sub.add_parser("resolve-ceiling", help="apply the frozen generator-ceiling rule (AM-5) to an EXP-001 results directory")
+    g.add_argument("results_dir")
     t = sub.add_parser("test", help="run the pytest suite")
     t.add_argument("pytest_args", nargs=argparse.REMAINDER)
     a = ap.parse_args(argv)
@@ -146,6 +162,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_report(a.results_dir, a.pdf, a.full_levels, a.full_warmup_s, a.full_measure_s, a.full_runs)
     if a.cmd == "resolve-pilot":
         return cmd_resolve_pilot(a.results_dir)
+    if a.cmd == "resolve-ceiling":
+        return cmd_resolve_ceiling(a.results_dir)
     if a.cmd == "test":
         return subprocess.call([sys.executable, "-m", "pytest", *a.pytest_args], cwd=repo_root())
     return 2
