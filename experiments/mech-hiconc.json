@@ -1,0 +1,26 @@
+{
+ "_comment": "EXPLORATORY harness check at the freeze session (J-0008): connection handling up to c = 1024 and A4 rejection with Q = 16. Small table (N = 2,000), not the study workload. Never confirmatory.",
+ "experiment_id": "MECH-HICONC",
+ "label": "exploratory",
+ "arms": [
+  "A0",
+  "A1",
+  "A3",
+  "A4"
+ ],
+ "concurrency": [
+  64,
+  256,
+  1024
+ ],
+ "warmup_s": 1.0,
+ "measure_s": 2.0,
+ "blocks": 1,
+ "study_seed": 9010,
+ "idle_probe_enforce": false,
+ "workload": {
+  "rows": 2000,
+  "payload_bytes": 256
+ },
+ "description": "High-concurrency mechanics check (J-0008)."
+}

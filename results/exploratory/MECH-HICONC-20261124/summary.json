@@ -1,0 +1,58 @@
+{
+ "degenerate": [
+  "MECH-HICONC-b00-A0-d57d01f8: peak at the lowest swept concurrency c=64; goodput falls as concurrency rises",
+  "MECH-HICONC-b00-A0-d57d01f8 c=1024: error rate 0.0442 {'200': 9022} transport=417",
+  "MECH-HICONC-b00-A1-d57d01f8: peak at the lowest swept concurrency c=64; goodput falls as concurrency rises",
+  "MECH-HICONC-b00-A1-d57d01f8 c=1024: error rate 0.0137 {'200': 16344} transport=227",
+  "MECH-HICONC-b00-A3-d57d01f8: peak at the lowest swept concurrency c=64; goodput falls as concurrency rises",
+  "MECH-HICONC-b00-A3-d57d01f8 c=64: generator-limited (generator CPU 1.57 > 0.85 x 1 cores)",
+  "MECH-HICONC-b00-A3-d57d01f8 c=256: generator-limited (generator CPU 1.31 > 0.85 x 1 cores)",
+  "MECH-HICONC-b00-A3-d57d01f8 c=1024: generator-limited (generator CPU 1.31 > 0.85 x 1 cores)",
+  "MECH-HICONC-b00-A4-d57d01f8: peak at the lowest swept concurrency c=64; goodput falls as concurrency rises",
+  "MECH-HICONC-b00-A4-d57d01f8 c=64: error rate 0.9289 {'200': 3232, '503': 42222} transport=0",
+  "MECH-HICONC-b00-A4-d57d01f8 c=256: error rate 0.9864 {'200': 680, '503': 49371} transport=0",
+  "MECH-HICONC-b00-A4-d57d01f8 c=1024: error rate 0.9870 {'200': 604, '503': 45615} transport=188"
+ ],
+ "figures": [
+  "figures/goodput_vs_concurrency.png",
+  "figures/goodput_vs_concurrency.svg"
+ ],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 4,
+ "pilot": {
+  "A1": {
+   "geometric_mean_ratio": 1.65091642845132,
+   "log_ratios": [
+    0.5013305449114042
+   ],
+   "n_blocks": 1
+  },
+  "A3": {
+   "geometric_mean_ratio": 2.5855052967882965,
+   "log_ratios": [
+    0.94992096150348
+   ],
+   "n_blocks": 1
+  },
+  "A4": {
+   "geometric_mean_ratio": 0.27173364721708426,
+   "log_ratios": [
+    -1.3029329306255528
+   ],
+   "n_blocks": 1
+  }
+ },
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 3.5108981659992438,
+  "measure_s": 15.0,
+  "per_run_s": 145.61089816599923,
+  "runs": 50,
+  "total_h": 2.0223735856388783,
+  "total_s": 7280.544908299961,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/exploratory/MECH-HICONC-20261124"
+}

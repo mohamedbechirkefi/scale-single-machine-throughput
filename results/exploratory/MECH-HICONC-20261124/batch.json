@@ -1,0 +1,50 @@
+{
+ "config_hash": "d57d01f8aef298c4c1fe65b651e6594c471f3bdd771fcf611b59745063b87ca4",
+ "experiment_id": "MECH-HICONC",
+ "finished_utc": "2026-11-24T17:47:52.398262Z",
+ "label": "exploratory",
+ "runs": [
+  {
+   "arm": "A3",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 15376.0,
+   "position": 0,
+   "run_id": "MECH-HICONC-b00-A3-d57d01f8",
+   "runtime_s": 11.589,
+   "status": "ok"
+  },
+  {
+   "arm": "A1",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 9818.0,
+   "position": 1,
+   "run_id": "MECH-HICONC-b00-A1-d57d01f8",
+   "runtime_s": 13.403,
+   "status": "ok"
+  },
+  {
+   "arm": "A4",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 1616.0,
+   "position": 2,
+   "run_id": "MECH-HICONC-b00-A4-d57d01f8",
+   "runtime_s": 13.324,
+   "status": "ok"
+  },
+  {
+   "arm": "A0",
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 5947.0,
+   "position": 3,
+   "run_id": "MECH-HICONC-b00-A0-d57d01f8",
+   "runtime_s": 13.411,
+   "status": "ok"
+  }
+ ],
+ "runtime_s": 51.773563791000925,
+ "started_utc": "2026-11-24T17:47:00.623784Z"
+}

@@ -96,3 +96,38 @@ Background load from other workloads on this machine; the dominance of the index
 
 ### Next action
 Owner: decide on D-008 and freeze the protocol. Then M3: EXP-001 on a quiet machine, then EXP-002.
+
+## 2026-11-24: Session FREEZE (owner-approved amendments and protocol freeze)
+
+**Milestone:** M1 gate (G-FREEZE). **Brief:** `labs/_shared/FREEZE-brief.md`; authority: SCALE section of `labs/_shared/owner-approvals-2026-11-24.md`; coordinator instruction: freeze everything else and record the seed count as "to be set by the pre-stated rule from the quiet pilot".
+
+### Starting state
+`git status`: clean on `main`, HEAD `a725d3f`.
+
+### Amendments applied (protocol section 15, D-009)
+- AM-1: A4 queue Q = 16 (was 64), W = 8 (`src/scale/config.py`).
+- AM-2: protocol sections 3 and 5, EXP-002 items 2, 4, 5, limitation 10 state that the index wins by design against the full-scan baseline.
+- AM-3: sweep 1 to c_max by doubling, c_max in {128, 256, 512, 1024}; listen backlog max(128, c_max) (`server.listen_backlog`, `--backlog`).
+- AM-4: n in {10, 20}. AM-3 and AM-4 are set by the pre-stated rule of protocol section 7.1 from a quiet pilot (`experiments/pilot-quiet.json`, `src/scale/pilotrule.py`, `scale resolve-pilot`).
+- Everything else kept as in draft v0.1. EXP-001, EXP-003, EXP-004 protocols unchanged in content apart from status and an amendments note.
+
+### Freeze record and guard
+- `research/freeze.json`: approval quote, C1 to C4, C4 disclosure (J-0004, J-0005, J-0008 with paths and values), SHA-256 of `research/protocol.md` (18dd4f8dd888fd9aa61718cf17ae2485dfd87453cd39693d55df156b1d634b1f), of EXP-001 to EXP-004 protocols, of `experiments/EXP-001.json`, of the pilot config and the rule module; git revision 9471b588002cc384c607ec01f325c1e6c3957698. EXP-002 is listed as deferred (template hash recorded).
+- `src/scale/freeze.py`; `scale run` now checks the record.
+
+### Commands and actual outputs
+- `scale run <scratchpad>/mech.json` (config copied to `experiments/mech-hiconc.json`, results to `results/exploratory/MECH-HICONC-20261124`; exploratory harness check J-0008, N = 2,000): 4 runs ok, 51.8 s; all 1024 connections served; A4 rejected 196,114 requests with Q = 16; error rates at c = 1024 of 0.044 (A0) and 0.014 (A1), not diagnosed.
+- First `pytest` after the config change: `1 failed, 27 passed` (stopped at first failure): `test_repository_configs_parse` could not parse the deferred EXP-002 template; the test now checks the template explicitly. Then `UnboundLocalError` from a local `import json` in that test; removed.
+- `.venv/bin/python -m pytest -q` before the freeze record existed: 7 freeze-guard tests failed as expected (no record). After writing `research/freeze.json`: `114 passed in 23.77s`.
+- `scale run experiments/EXP-002.json`: `REFUSED: EXP-002 is confirmatory and its values blocks, concurrency, generator_ceiling_rps are to be set by the pre-stated quiet-machine pilot rule ...`, exit 3.
+- `scale run <copy of EXP-001.json with blocks 6>`: `REFUSED: EXP-001 is confirmatory and config file is not in the freeze record (changed since the freeze, or never frozen).`, exit 3.
+- `cli.freeze_status(EXP-001)`: `(True, 'frozen')`. `scale run experiments/EXP-001.json` was not executed (no confirmatory run in this session); acceptance by `cmd_run` is tested with a stubbed runner.
+- `pandoc research/paper/manuscript.md -s -t latex` regenerated `manuscript.tex` (exit 0) after the C3 author update.
+
+### Not done, and why
+- No confirmatory run (brief; quiet machine needed).
+- EXP-003 and EXP-004 configs not written: they depend on EXP-002 results and on c_max (recorded in the freeze record).
+- Open point: EXP-001 item 21 gives a per-level C_gen table, the config takes one ceiling; the reduction must be stated before EXP-001 output is seen.
+
+### Next action
+Coordinator: schedule a quiet window. Then `scale run experiments/EXP-001.json`, `scale smoke --config experiments/pilot-quiet.json` (or `scale run`), `scale resolve-pilot <dir>`, append the resolution and the completed EXP-002 config hash to `research/freeze.json`, then EXP-002.

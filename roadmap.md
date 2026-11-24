@@ -6,9 +6,9 @@ Status values: `done`, `in progress`, `planned`, `blocked(<reason>)`, `gated(<ga
 | Milestone | Priority | Effort | Depends on | Status | Blockers |
 |---|---|---|---|---|---|
 | M0 Bootstrap and feasibility | P0 | 0.5 d | none | done (2026-11-24; see progress.md) | none |
-| M1 Research and preregistration | P0 | 0.5 d | M0 | in progress (drafts written; freeze pending) | gated(G-FREEZE): owner review and freeze of the protocol |
-| M2 Core implementation | P0 | 1 d | M1 drafts (implementation may start before the freeze) | done (2026-11-24; see progress.md); exploratory pilot raised amendment proposals D-008 for the owner | none for M2; the freeze (M1) is pending |
-| M3 Experiments | P0 | 1 d (about 6 h machine time) | M2, owner freeze | planned | gated(G-FREEZE) for confirmatory runs |
+| M1 Research and preregistration | P0 | 0.5 d | M0 | gate passed: protocol frozen v1.0 (owner-approved 2026-11-24, D-009, `research/freeze.json`); literature open items remain | none for the freeze; EXP-002 c_max and n await the quiet-pilot rule (protocol 7.1) |
+| M2 Core implementation | P0 | 1 d | M1 drafts (implementation may start before the freeze) | done (2026-11-24; see progress.md); amendments D-008 decided by the owner and applied (D-009) | none |
+| M3 Experiments | P0 | 1 to 1.5 d (about 6 h to 11 h machine time) | M2, owner freeze (done) | planned | needs a quiet machine scheduled by the coordinator; order EXP-001, quiet pilot and resolution, EXP-002, EXP-003, EXP-004 |
 | M4 Interpretation | P0 | 0.75 d | M3 | planned | none |
 | M5 Interactive experience | P1 | 0.75 d | M4 | planned | none |
 | M6 Release candidate | P0 | 0.5 d | M4, M5 | planned | gated(G-PUBLIC) for any publication |
@@ -32,8 +32,8 @@ Acceptance criteria:
 - [x] Draft per-experiment protocols (11.2 structure) and registry rows.
 - [ ] Literature open items resolved or explicitly left unverified.
 - [x] Smoke pilot run (exploratory) estimates the between-block SD of log R, to settle n before the freeze (J-0005, 3 blocks under heavy background load; SD above the 0.07 trigger for A1 and A2; repeat on a quiet machine recommended, D-008 item 6).
-- [ ] Owner decisions on the amendment proposals D-008 (A4 queue, baseline dominance, sweep range, cold cache, generator-limited rule, n).
-- [ ] Owner freeze recorded with protocol hashes (G-FREEZE). Confirmatory runs are not allowed before this.
+- [x] Owner decisions on the amendment proposals D-008 (2026-11-24): AM-1 to AM-4 applied, other draft parameters kept (D-009).
+- [x] Owner freeze recorded with protocol hashes (G-FREEZE): `research/freeze.json`, git revision 9471b58. The EXP-002 block count and sweep top are to be set by the pre-stated quiet-pilot rule (protocol 7.1).
 
 ## M2 Core implementation (11.6: schemas, manifests, report generators alongside the core)
 
@@ -50,7 +50,7 @@ Acceptance criteria (status 2026-11-24):
 
 ## M3 Experiments (11.6: individual reports as experiments finish)
 
-Order: smoke matrix, EXP-001, EXP-002, EXP-003, EXP-004 (optional).
+Order: EXP-001, quiet pilot (`experiments/pilot-quiet.json`) and `scale resolve-pilot` (resolution appended to `research/freeze.json`), EXP-002, EXP-003, EXP-004 (optional). Quiet machine required (idle probe enforced).
 Acceptance criteria:
 - [ ] Smoke run validates metrics; labelled exploratory.
 - [ ] Frozen full matrix complete, or failures documented; no silently dropped runs; generator-limited cells flagged.

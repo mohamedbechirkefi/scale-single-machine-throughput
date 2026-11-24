@@ -1,0 +1,107 @@
+{
+ "command": [
+  "scale",
+  "run",
+  "/private/tmp/claude-501/-Users-bechir-research/d17d72fe-4ad4-4cdb-b113-2cbf6d17ea36/scratchpad/mech.json",
+  "--out",
+  "/private/tmp/claude-501/-Users-bechir-research/d17d72fe-4ad4-4cdb-b113-2cbf6d17ea36/scratchpad/mech-out"
+ ],
+ "config": {
+  "ab_crosscheck": false,
+  "arms": [
+   "A0",
+   "A1",
+   "A3",
+   "A4"
+  ],
+  "blocks": 1,
+  "concurrency": [
+   64,
+   256,
+   1024
+  ],
+  "config_version": "1.0",
+  "description": "",
+  "endpoint": "item",
+  "experiment_id": "MECH-HICONC",
+  "generator_ceiling_rps": null,
+  "generator_processes": 1,
+  "idle_probe_enforce": false,
+  "idle_probe_threshold_pct": 15.0,
+  "kind": "closed_sweep",
+  "label": "exploratory",
+  "measure_s": 2.0,
+  "protocol_path": null,
+  "protocol_sha256": null,
+  "rates_rps": [],
+  "slo_max_error_rate": 0.01,
+  "slo_p99_ms": 50.0,
+  "stall_ms": 0.0,
+  "stall_period_s": 0.0,
+  "study_seed": 9010,
+  "warmup_s": 1.0,
+  "workload": {
+   "dataset_seed": 20261124,
+   "payload_bytes": 256,
+   "rows": 2000,
+   "write_fraction": 0.02,
+   "zipf_s": 0.99
+  }
+ },
+ "config_hash": "d57d01f8aef298c4c1fe65b651e6594c471f3bdd771fcf611b59745063b87ca4",
+ "cpu": {
+  "brand": "Apple M1 Pro",
+  "logical_cpus": 10,
+  "memory_bytes": 17179869184,
+  "physical_cpus": 10
+ },
+ "dataset_sha256": "dbad317b4203b318088e091542d7fb9c9316dcade53f7acfb2f7598ab5547754",
+ "finished_utc": "2026-11-24T17:47:38.963079Z",
+ "git": {
+  "dirty": true,
+  "revision": "a725d3fef9fd3115022a5da80c84cb8b4ff5bd3f"
+ },
+ "idle_probe": {
+  "cpu_pct": 9.9,
+  "enforced": false,
+  "interval_s": 1.0,
+  "passed": true,
+  "threshold_pct": 15.0
+ },
+ "label": "exploratory",
+ "load_average": [
+  5.44,
+  2.89,
+  2.14
+ ],
+ "platform": {
+  "machine": "arm64",
+  "macos": "15.3.1",
+  "python_executable": "python3",
+  "python_implementation": "CPython",
+  "release": "24.3.0",
+  "system": "Darwin"
+ },
+ "power": "Now drawing from 'AC Power'",
+ "run_id": "MECH-HICONC-b00-A4-d57d01f8",
+ "runner_peak_rss_mb": 49.348608,
+ "runtime_s": 13.324051458999747,
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 3499569656291794177,
+  "requests": 7413217067914426383,
+  "study": 9010
+ },
+ "server_peak_rss_mb": 999.325696,
+ "started_utc": "2026-11-24T17:47:25.638860Z",
+ "versions": {
+  "jsonschema": "4.26.0",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "psutil": "7.2.2",
+  "python": "3.12.1",
+  "scale": "0.1.0",
+  "sqlite": "3.43.1"
+ }
+}

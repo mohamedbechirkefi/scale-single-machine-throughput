@@ -1,6 +1,6 @@
 ---
 title: "SCALE: what bottlenecks dominate local request throughput on one machine? (working title)"
-author: "Author metadata pending owner approval"
+author: "Mohamed Bechir Kefi"
 date: "Skeleton, 2026-11-24"
 status: "Independent research manuscript draft. Not peer reviewed. No results yet."
 ---
@@ -59,6 +59,8 @@ status: "Independent research manuscript draft. Not peer reviewed. No results ye
 # 10. Data and code availability
 
 # 11. Funding, competing interests and AI assistance
+
+AI assistance: an AI system (Claude, Anthropic) was used as a research and development assistant for code, protocol drafting and text. It is not an author. The author is responsible for every decision and claim (owner decision C3, 2026-11-24).
 
 # References
 

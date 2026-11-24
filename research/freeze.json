@@ -1,0 +1,121 @@
+{
+ "schema": "scale-freeze-1",
+ "status": "frozen",
+ "protocol_version": "1.0",
+ "date": "2026-11-24",
+ "git_revision": "9471b588002cc384c607ec01f325c1e6c3957698",
+ "git_revision_note": "Commit that holds every frozen file below at the recorded hashes. This record is added in the next commit.",
+ "approval": {
+  "source": "labs/_shared/owner-approvals-2026-11-24.md (owner answers to the M2 decision list, 2026-11-24)",
+  "quoted_answers": [
+   "2. yes 3. yes 4. yes",
+   "yes for all others"
+  ],
+  "scale_section": [
+   "Make A4's queue smaller than the maximum concurrency so that it can reject.",
+   "State that the index wins by design against a full-scan baseline.",
+   "Extend the concurrency sweep beyond 64 until A1 and A3 peak inside the range.",
+   "Set the seed count only after a quiet-machine pilot (a separate step, run later).",
+   "Keep the other draft parameters."
+  ],
+  "coordinator_instruction": "Freeze everything else, and record the seed count as \"to be set by the pre-stated rule from the quiet pilot\" with that rule written into the frozen protocol."
+ },
+ "common_decisions": {
+  "C1": "Data. Synthetic data only.",
+  "C2": "PDFs. Built with pandoc and Typst (-V mainfont=\"Libertinus Serif\"); there is no LaTeX on the machine.",
+  "C3": "Authorship. \"Mohamed Bechir Kefi\", no affiliation. The AI is disclosed as a research and development assistant, not as an author.",
+  "C4": "Disclosure. Where exploratory values of the primary contrast were seen before the freeze, the freeze record says so, with the values and where they are stored."
+ },
+ "c4_disclosure": [
+  {
+   "journal": "J-0004",
+   "path": "results/exploratory/SMOKE-20261124",
+   "workload": "study workload (N = 200,000), 1 block, 2 s + 3 s, heavy background load",
+   "values_seen": "A2 G* 9192.3 rps, A0 G* 73.3 rps (both at c = 8)"
+  },
+  {
+   "journal": "J-0005",
+   "path": "results/exploratory/PILOT-20261124",
+   "workload": "study workload, all five arms, c in {1, 8, 64}, 3 blocks, 2 s + 3 s, heavy background load",
+   "values_seen": "within-block geometric mean R (SD of log R): A1 1.711 (0.092), A2 248.975 (0.248), A3 12.844 (0.043), A4 1.014 (0.045, with the draft Q = 64)"
+  },
+  {
+   "journal": "J-0008",
+   "path": "results/exploratory/MECH-HICONC-20261124",
+   "workload": "harness check at the freeze session, N = 2,000 (not the study workload), 1 block, c in {64, 256, 1024}, 1 s + 2 s",
+   "values_seen": "G* A0 5947.0, A1 9818.0, A3 15376.0, A4 1616.0 rps (all at c = 64); A4 with Q = 16 rejected 196,114 requests"
+  }
+ ],
+ "protocol": {
+  "path": "research/protocol.md",
+  "sha256": "18dd4f8dd888fd9aa61718cf17ae2485dfd87453cd39693d55df156b1d634b1f"
+ },
+ "experiment_protocols": [
+  {
+   "experiment_id": "EXP-001",
+   "path": "research/experiments/EXP-001/protocol.md",
+   "sha256": "4af93dc2f5c7f856b3da54a8b77accd7448491c5341023759a00455fe3e73e18",
+   "confirmatory": true
+  },
+  {
+   "experiment_id": "EXP-002",
+   "path": "research/experiments/EXP-002/protocol.md",
+   "sha256": "8da83b076a0785e58c3749218e119cd7885f8879f10eab309af13644a4da1171",
+   "confirmatory": true
+  },
+  {
+   "experiment_id": "EXP-003",
+   "path": "research/experiments/EXP-003/protocol.md",
+   "sha256": "82846c72319e6a83f20be193f7ada14d271cdbf861f3eb69a11254b26b34eabd",
+   "confirmatory": true
+  },
+  {
+   "experiment_id": "EXP-004",
+   "path": "research/experiments/EXP-004/protocol.md",
+   "sha256": "f3c62a26c1e3d8812fad8e56792e1c0a8c7956dce821db4e8bfb1ec4a6e4fead",
+   "confirmatory": true
+  }
+ ],
+ "configs": [
+  {
+   "experiment_id": "EXP-001",
+   "path": "experiments/EXP-001.json",
+   "sha256": "9f7b8d15d262589247f739f087519cddf81bebbf2eabd1b196c41d7d735069b9"
+  }
+ ],
+ "pre_stated_rule_inputs": [
+  {
+   "experiment_id": "PILOT-QUIET",
+   "path": "experiments/pilot-quiet.json",
+   "sha256": "ad73ae6eeb809b8f3b32f41c3b4e317eb209b85e36679553897cacbfe85fbdd3",
+   "label": "exploratory"
+  },
+  {
+   "path": "src/scale/pilotrule.py",
+   "sha256": "7102cbe583959970b383b03a4249eac5487a6bd2ffa0653c50c841ab394a0412",
+   "rule_version": "pilot-rule-1.0"
+  }
+ ],
+ "deferred": [
+  {
+   "experiment_id": "EXP-002",
+   "values": [
+    "blocks",
+    "concurrency",
+    "generator_ceiling_rps"
+   ],
+   "rule": "research/protocol.md section 7.1 (blocks, concurrency); EXP-001 protocol item 21 (generator_ceiling_rps)",
+   "template": {
+    "path": "experiments/EXP-002.json",
+    "sha256": "b0aa85369b76dad72647db7bb61d959ca0ccb2150016f7ab9762417f9516afb4"
+   },
+   "seed_count": "to be set by the pre-stated rule from the quiet pilot",
+   "status": "awaiting the quiet-machine pilot"
+  }
+ ],
+ "not_yet_configured": {
+  "EXP-003": "rate ladder fixed from EXP-002 results before it runs (protocol item 9)",
+  "EXP-004": "config written once c_max is resolved; 5 blocks per variant"
+ },
+ "resolutions": []
+}
