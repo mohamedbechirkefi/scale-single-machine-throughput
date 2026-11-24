@@ -390,7 +390,7 @@ wheels = [
 ]
 
 [[package]]
-name = "scale-research"
+name = "scale-single-machine-throughput"
 version = "0.0.1"
 source = { virtual = "." }
 dependencies = [

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0
 [project]
-name = "scale-research"
+name = "scale-single-machine-throughput"
 version = "0.0.1"
 description = "SCALE: single-machine study of what bottlenecks dominate local request throughput"
 readme = "README.md"
