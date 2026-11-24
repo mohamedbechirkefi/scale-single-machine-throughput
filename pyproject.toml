@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0
+[project]
+name = "scale-research"
+version = "0.0.1"
+description = "SCALE: single-machine study of what bottlenecks dominate local request throughput"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+# Custom licence: SCALE Source-Available Non-Commercial Research License v1.0 (see LICENSE and NOTICE.md)
+license-files = ["LICENSE", "NOTICE.md"]
+dependencies = [
+    "numpy>=2.1",
+    "psutil>=6.0",
+    "jsonschema>=4.23",
+    "matplotlib>=3.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "hypothesis>=6.100",
+]
+
+[tool.uv]
+# D-005: only versions released at least two weeks before 2026-11-24
+exclude-newer = "2026-11-10T00:00:00Z"
+package = false
