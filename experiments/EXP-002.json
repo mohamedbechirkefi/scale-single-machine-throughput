@@ -1,17 +1,24 @@
 {
- "_comment": "CONFIRMATORY config of EXP-002 (draft v0.1 values). The CLI refuses it until the owner freezes research/protocol.md and fills protocol_sha256 (G-FREEZE).",
+ "_comment": "CONFIRMATORY config of EXP-002, frozen v1.0 (owner-approved 2026-11-24) except three values left unset on purpose: blocks and concurrency are to be set by the pre-stated quiet-pilot rule (research/protocol.md section 7.1, `scale resolve-pilot`), and generator_ceiling_rps comes from EXP-001 (EXP-001 protocol item 21). scale run refuses this file until the resolution is appended to research/freeze.json.",
  "experiment_id": "EXP-002",
  "label": "confirmatory",
  "kind": "closed_sweep",
  "endpoint": "item",
- "arms": ["A0", "A1", "A2", "A3", "A4"],
- "concurrency": [1, 2, 4, 8, 16, 32, 64],
+ "arms": [
+  "A0",
+  "A1",
+  "A2",
+  "A3",
+  "A4"
+ ],
+ "concurrency": null,
  "warmup_s": 5.0,
  "measure_s": 15.0,
- "blocks": 10,
+ "blocks": null,
  "study_seed": 20261124,
+ "generator_ceiling_rps": null,
  "idle_probe_enforce": true,
  "protocol_path": "research/experiments/EXP-002/protocol.md",
- "protocol_sha256": null,
+ "protocol_sha256": "8da83b076a0785e58c3749218e119cd7885f8879f10eab309af13644a4da1171",
  "description": "Primary one-factor-at-a-time comparison."
 }

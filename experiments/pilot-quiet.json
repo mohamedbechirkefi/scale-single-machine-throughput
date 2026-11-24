@@ -1,0 +1,15 @@
+{
+ "_comment": "EXPLORATORY quiet-machine pilot, frozen with protocol v1.0 (section 7.1). Its only use: set EXP-002's c_max and n by the pre-stated rule (`scale resolve-pilot`). Never confirmatory, never pooled with EXP-002 (distinct study seed).",
+ "experiment_id": "PILOT-QUIET",
+ "label": "exploratory",
+ "kind": "closed_sweep",
+ "endpoint": "item",
+ "arms": ["A0", "A1", "A2", "A3", "A4"],
+ "concurrency": [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024],
+ "warmup_s": 5.0,
+ "measure_s": 15.0,
+ "blocks": 5,
+ "study_seed": 20261126,
+ "idle_probe_enforce": true,
+ "description": "Quiet-machine pilot for the EXP-002 sweep range and block count (protocol 7.1)."
+}

@@ -124,26 +124,10 @@ def test_seed_plan_common_random_numbers():
     assert len(set(connection_seeds(7, 8, 8))) == 8
 
 
-def test_cli_refuses_confirmatory_while_unfrozen(capsys):
+def test_cli_refuses_exp002_until_pilot_resolved(capsys):
     rc = cli.main(["run", os.path.join(ROOT, "experiments", "EXP-002.json")])
     assert rc == cli.EXIT_REFUSED
-    assert "not frozen" in capsys.readouterr().err
-
-
-def test_freeze_status_requires_matching_hash(tmp_path):
-    (tmp_path / "research").mkdir()
-    (tmp_path / "research" / "protocol.md").write_text("| Status | **FROZEN v1.0** |\n")
-    (tmp_path / "p.md").write_text("protocol")
-    cfg = parse_config({**TINY, "label": "confirmatory", "idle_probe_enforce": True,
-                        "protocol_path": "p.md", "protocol_sha256": "0" * 64})
-    ok, why = cli.freeze_status(cfg, str(tmp_path))
-    assert not ok and "mismatch" in why
-    good = cli.sha256_file(str(tmp_path / "p.md"))
-    cfg2 = parse_config({**TINY, "label": "confirmatory", "idle_probe_enforce": True,
-                         "protocol_path": "p.md", "protocol_sha256": good})
-    assert cli.freeze_status(cfg2, str(tmp_path)) == (True, "frozen")
-    (tmp_path / "research" / "protocol.md").write_text("| Status | **DRAFT v0.1, not frozen.** |\n")
-    assert cli.freeze_status(cfg2, str(tmp_path))[0] is False
+    assert "quiet-machine pilot rule" in capsys.readouterr().err
 
 
 def test_cli_rejects_invalid_config(tmp_path, capsys):

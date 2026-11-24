@@ -72,7 +72,8 @@ class ServerProcess:
     def __init__(self, cfg: ExperimentConfig, arm: str, db_path: str, log_path: str):
         cmd = [sys.executable, "-m", "scale.server", "--db", db_path, "--arm", arm,
                "--rows", str(cfg.workload.rows),
-               "--stall-period-s", str(cfg.stall_period_s), "--stall-ms", str(cfg.stall_ms)]
+               "--stall-period-s", str(cfg.stall_period_s), "--stall-ms", str(cfg.stall_ms),
+               "--backlog", str(max(cfg.concurrency))]
         self.log = open(log_path, "w")
         self.proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=self.log, text=True)
         self.port: int | None = None

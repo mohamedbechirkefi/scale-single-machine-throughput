@@ -3,9 +3,9 @@
 
 | Field | Value |
 |---|---|
-| Status | DRAFT, not frozen; planned (protocol draft, awaiting owner freeze); optional, first to be cut if the budget is threatened |
-| Version / date | v0.1, 2026-11-24 |
-| Study protocol | `research/protocol.md` (draft v0.1), section 12 item 2 |
+| Status | FROZEN v1.0 (owner-approved 2026-11-24); not yet run; optional, first to be cut if the budget is threatened |
+| Version / date | v1.0, 2026-11-24 (draft v0.1 unchanged in content except as listed under "Amendments before freeze") |
+| Study protocol | `research/protocol.md` (frozen v1.0), section 12 item 2 |
 | Depends on | EXP-002 |
 
 1. **Precise question.** Is the dominant bottleneck found in EXP-002 a property of the chosen workload parameters?
@@ -29,3 +29,8 @@
 19. **Sensitivity.** None beyond the two variants.
 20. **What contradicts the main interpretation.** A different top arm in either variant; the main finding is then reported as workload-conditional.
 21. **Reproduction.** `uv run scale exp EXP-004` (to be implemented at M2); raw results `results/raw/EXP-004/`.
+
+
+## Amendments before freeze (owner-approved 2026-11-24)
+
+No change to this protocol's own parameters (5 blocks per variant kept). Through "other parameters as EXP-002" it inherits AM-1 (A4 queue Q = 16) and AM-3 (the concurrency sweep 1 to c_max, with c_max set by the rule of `research/protocol.md` section 7.1). AM-2: under V1 (N = 10,000) the scan is 20 times shorter, so the designed dominance of the index is expected to weaken; this is the point of V1. Its config is written once c_max is resolved.

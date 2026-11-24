@@ -1,5 +1,5 @@
 {
- "_comment": "CONFIRMATORY config of EXP-001 (draft v0.1 values). Refused until the owner freezes the protocol (G-FREEZE).",
+ "_comment": "CONFIRMATORY config of EXP-001, frozen v1.0 (owner-approved 2026-11-24). Its SHA-256 is recorded in research/freeze.json; any change makes scale run refuse it.",
  "experiment_id": "EXP-001",
  "label": "confirmatory",
  "kind": "closed_sweep",
@@ -13,6 +13,6 @@
  "idle_probe_enforce": true,
  "ab_crosscheck": true,
  "protocol_path": "research/experiments/EXP-001/protocol.md",
- "protocol_sha256": null,
+ "protocol_sha256": "4af93dc2f5c7f856b3da54a8b77accd7448491c5341023759a00455fe3e73e18",
  "description": "Load-generator ceiling and ApacheBench cross-check."
 }

@@ -370,14 +370,28 @@ class Handler(BaseHTTPRequestHandler):
             self._send(500, b'{"error":"internal"}')
 
 
+MIN_BACKLOG = 128
+
+
+def listen_backlog(max_concurrency: int) -> int:
+    """Listen backlog requested from the OS: at least 128 and at least the largest
+    concurrency level of the sweep, so a level's connection burst is not refused."""
+    if not isinstance(max_concurrency, int) or max_concurrency < 1:
+        raise ValueError("max_concurrency must be an integer >= 1")
+    return max(MIN_BACKLOG, max_concurrency)
+
+
 class ScaleServer(ThreadingHTTPServer):
     daemon_threads = True
-    request_queue_size = 128  # default 5 drops connection bursts at c = 64
+    request_queue_size = MIN_BACKLOG  # default 5 drops connection bursts at c = 64
 
     def __init__(self, addr: tuple[str, int], arm: ArmSpec, db_path: str, rows: int,
-                 stall_period_s: float = 0.0, stall_ms: float = 0.0):
+                 stall_period_s: float = 0.0, stall_ms: float = 0.0, backlog: int = MIN_BACKLOG):
         if addr[0] not in LOOPBACK:
             raise ValueError("SCALE binds to loopback only")
+        # Instance attribute read by server_activate(); raised with the sweep (amendment AM-3).
+        # The kernel may cap it (macOS kern.ipc.somaxconn, 128 on this machine).
+        self.request_queue_size = listen_backlog(backlog)
         self.arm = arm
         self.backend = make_backend(arm, db_path, rows)
         self.limiter = AdmissionLimiter(arm.workers, arm.queue) if arm.workers > 0 else _NoLimit()
@@ -429,8 +443,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--port", type=int, default=0)
     ap.add_argument("--stall-period-s", type=float, default=0.0)
     ap.add_argument("--stall-ms", type=float, default=0.0)
+    ap.add_argument("--backlog", type=int, default=MIN_BACKLOG)
     a = ap.parse_args(argv)
-    srv = ScaleServer((a.host, a.port), ARMS[a.arm], a.db, a.rows, a.stall_period_s, a.stall_ms)
+    srv = ScaleServer((a.host, a.port), ARMS[a.arm], a.db, a.rows, a.stall_period_s, a.stall_ms,
+                      backlog=a.backlog)
     print(f"READY {srv.server_address[1]}", flush=True)
     try:
         srv.serve_forever(poll_interval=0.1)

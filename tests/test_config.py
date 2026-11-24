@@ -88,7 +88,16 @@ def test_repository_configs_parse():
     root = os.path.join(os.path.dirname(__file__), "..", "experiments")
     paths = glob.glob(os.path.join(root, "*.json"))
     assert paths
+    deferred = {"EXP-002.json": {"blocks", "concurrency", "generator_ceiling_rps"}}
     for p in paths:
+        name = os.path.basename(p)
+        if name in deferred:  # values left unset on purpose until the quiet-pilot rule (protocol 7.1)
+            raw = json.load(open(p))
+            assert {k for k, v in raw.items() if v is None} == deferred[name]
+            assert raw["label"] == "confirmatory"
+            with pytest.raises(ConfigError):
+                load_config(p)
+            continue
         cfg = load_config(p)
         if cfg.experiment_id.startswith("EXP-"):
             assert cfg.label == "confirmatory"

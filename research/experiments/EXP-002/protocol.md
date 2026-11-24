@@ -3,25 +3,25 @@
 
 | Field | Value |
 |---|---|
-| Status | DRAFT, not frozen; planned (protocol draft, awaiting owner freeze) |
-| Version / date | v0.1, 2026-11-24 |
-| Study protocol | `research/protocol.md` (draft v0.1), sections 2 to 11 |
-| Depends on | EXP-001 (generator ceiling), M2 correctness tests passing |
+| Status | FROZEN v1.0 (owner-approved 2026-11-24); not yet run. c_max and n are to be set by the pre-stated rule of `research/protocol.md` section 7.1 from the quiet pilot. |
+| Version / date | v1.0, 2026-11-24 |
+| Study protocol | `research/protocol.md` (frozen v1.0), sections 2 to 11 |
+| Depends on | EXP-001 (generator ceiling), the quiet pilot of protocol section 7.1 (c_max, n), M2 correctness tests passing |
 
 1. **Precise question.** On this machine and workload, which of cache (A1), index (A2), batching (A3) and bounded concurrency (A4), each applied alone to baseline A0, changes peak goodput the most?
-2. **Mechanism.** In A0 each read is a full table scan of N = 200,000 rows under a thread per connection. A1 removes repeated work for hot keys; A2 replaces the scan by an index lookup; A3 amortises per-query cost across concurrent requests; A4 limits oversubscription and sheds excess load.
+2. **Mechanism.** In A0 each read is a full table scan of N = 200,000 rows under a thread per connection. A1 removes repeated work for hot keys; A2 replaces the scan by an index lookup, so against this full-scan baseline the index is expected to win by design (AM-2); A3 amortises per-query cost across concurrent requests; A4 limits oversubscription (W = 8, Q = 16) and sheds excess load.
 3. **Rationale.** Throughput versus concurrency and saturation (little1961, metadata only; gunther2008, abstract); tail latency (dean2013, abstract); repetition and ratio intervals (kalibera2013, kalibera2020).
-4. **Competing explanations.** (a) HTTP parsing and the Python interpreter, not the database, bound throughput, so no factor matters; (b) the generator is the ceiling (EXP-001); (c) thermal or background drift; (d) the chosen N and skew make one factor dominant by construction (EXP-004).
-5. **Hypotheses.** For j in {A1, A2, A3, A4}: H0_j: R_j = 1; H1_j: R_j != 1. Directional expectations (interpretation only): R_A1, R_A2, R_A3 > 1; A4 indeterminate. Dominance claim only if every pairwise ratio R_t / R_k of the top arm excludes 1.
+4. **Competing explanations.** (a) HTTP parsing and the Python interpreter, not the database, bound throughput, so no factor matters; (b) the generator is the ceiling (EXP-001); (c) thermal or background drift; (d) the chosen N and skew make one factor dominant by construction: this is stated in advance for A2 against the full-scan baseline (AM-2) and probed by EXP-004.
+5. **Hypotheses.** For j in {A1, A2, A3, A4}: H0_j: R_j = 1; H1_j: R_j != 1. Directional expectations (interpretation only): R_A1, R_A2, R_A3 > 1; A4 indeterminate; R_A2 expected to be the largest by design (AM-2). Dominance claim only if every pairwise ratio R_t / R_k of the top arm excludes 1.
 6. **Estimand.** Geometric mean over blocks of R_j = G*_j / G*_A0.
 7. **Experimental unit.** One run (fresh server process, fresh database, one arm, full sweep). Blocks of five paired runs are the independent replicates.
 8. **Scope.** Localhost, synthetic table, 98 % reads, 2 % writes, Zipf s = 0.99.
-9. **Variables.** Independent: arm (5 levels), concurrency c in {1, 2, 4, 8, 16, 32, 64}. Dependent: G(c), G*, p50/p95/p99, error rate, server CPU, server peak RSS, generator CPU, c_sat.
+9. **Variables.** Independent: arm (5 levels), concurrency c in {1, 2, 4, ..., c_max}, c_max in {128, 256, 512, 1024} set by protocol section 7.1 (AM-3). Dependent: G(c), G*, p50/p95/p99, error rate, server CPU, server peak RSS, generator CPU, c_sat.
 10. **Treatment and control.** Arms as in `research/protocol.md` section 3. Control: A0.
 11. **Baseline.** A0.
-12. **Sampling and seeds.** 10 blocks; block b uses request seed and arm-order seed derived from (study seed, b); dataset seed fixed.
-13. **Sample-size rationale.** Protocol section 7: with a between-block SD of log R near 0.05 (planning guess), n = 10 gives a 95 % half-width near 3.6 %. The smoke pilot estimates the SD; if above 0.07, the owner chooses n = 20 before the freeze.
-14. **Compute budget.** About 150 s per run, 50 runs, about 2.1 h (planning estimate).
+12. **Sampling and seeds.** n blocks, n to be set by the pre-stated rule from the quiet pilot (protocol section 7.1: n = 10 if every treatment arm's between-block SD of log R is at most 0.07, otherwise n = 20; AM-4); block b uses request seed and arm-order seed derived from (study seed, b); dataset seed fixed.
+13. **Sample-size rationale.** Protocol section 7: with a between-block SD of log R near 0.05 (planning guess), n = 10 gives a 95 % half-width near 3.6 %. The quiet pilot estimates the SD and the rule of protocol section 7.1 sets n before any confirmatory run.
+14. **Compute budget.** About 164 to 224 s per run (8 to 11 levels), 50 or 100 runs, about 2.3 h to 6.2 h (planning estimate).
 15. **Metric formulas and units.** G(c) = validated 200 responses / 15 s (req/s); G* = max_c G(c); R_j = G*_j / G*_A0 (dimensionless); latency in ms from send to full response; error rate = (non-200 + transport errors) / attempts; CPU = process CPU s / wall s; RSS in MB; c_sat = min c with G(c) >= 0.95 G*.
 16. **Uncertainty.** Percentile bootstrap over blocks (10,000 resamples, recorded seed) of mean log R_j; 95 % and Bonferroni 98.75 % intervals. Practical threshold [0.95, 1.05]; non-significance reported as inconclusive unless the interval lies inside it.
 17. **Exclusion and stopping.** Protocol section 10. Generator-limited cells (from EXP-001 thresholds) excluded from the confirmatory test and reported.
@@ -29,3 +29,12 @@
 19. **Sensitivity tests.** (S3) mean goodput over c in {16, 32, 64} instead of G*; run-position regression for drift. EXP-003 and EXP-004 are the external sensitivity experiments.
 20. **What contradicts the hypotheses.** All intervals for R_j contain 1; or the top arm is not separable from the second; or the ranking changes under S3.
 21. **Reproduction.** `uv run scale exp EXP-002 --blocks 10` (to be implemented at M2); raw results `results/raw/EXP-002/`; summary `research/experiments/EXP-002/metrics.csv`; figures regenerated by `uv run scale report EXP-002`.
+
+
+## Amendments before freeze (owner-approved 2026-11-24)
+
+- AM-1: A4 queue Q = 16 instead of 64 (items 2 and 10 through protocol section 3).
+- AM-2: the index is expected to win by design against the full-scan baseline (items 2, 4, 5).
+- AM-3: sweep extended beyond 64 until A1 and A3 peak inside the range; c_max by protocol section 7.1 (item 9).
+- AM-4: n to be set by the pre-stated rule from the quiet pilot (items 12, 13).
+- Consequence for the freeze record: the EXP-002 config is completed (`blocks`, `concurrency`, and `generator_ceiling_rps` from EXP-001 item 21) and its SHA-256 appended to `research/freeze.json` when the rule is applied; until then `scale run` refuses it.

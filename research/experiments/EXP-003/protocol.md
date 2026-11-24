@@ -3,9 +3,9 @@
 
 | Field | Value |
 |---|---|
-| Status | DRAFT, not frozen; planned (protocol draft, awaiting owner freeze) |
-| Version / date | v0.1, 2026-11-24 |
-| Study protocol | `research/protocol.md` (draft v0.1), section 12 item 1 |
+| Status | FROZEN v1.0 (owner-approved 2026-11-24); not yet run |
+| Version / date | v1.0, 2026-11-24 (draft v0.1 unchanged in content except as listed under "Amendments before freeze") |
+| Study protocol | `research/protocol.md` (frozen v1.0), section 12 item 1 |
 | Depends on | EXP-001, EXP-002 (rate ladder centred on EXP-002 results; ladder fixed before EXP-003 runs) |
 
 1. **Precise question.** Does the ranking of arms by closed-loop peak goodput (EXP-002) hold when capacity is measured as the highest open-loop offered rate that meets a latency objective?
@@ -29,3 +29,8 @@
 19. **Sensitivity.** SLO 100 ms instead of 50 ms.
 20. **What contradicts the main interpretation.** A different top arm than EXP-002, with non-overlapping intervals; then the main finding is qualified as load-model dependent.
 21. **Reproduction.** `uv run scale exp EXP-003` (to be implemented at M2); raw results `results/raw/EXP-003/`.
+
+
+## Amendments before freeze (owner-approved 2026-11-24)
+
+No change to this protocol's own parameters. It inherits AM-1 (A4 queue Q = 16) through the arm definitions of `research/protocol.md` section 3. Its rate ladder is fixed from EXP-002 results before it runs, as already stated in item 9; its config is written then.

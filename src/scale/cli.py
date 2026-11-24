@@ -2,7 +2,9 @@
 """Command line: ``scale smoke | run | report | test``.
 
 ``run`` refuses a confirmatory config unless the study protocol records an owner
-freeze and the config carries the matching protocol SHA-256 (G-FREEZE).
+freeze, ``research/freeze.json`` lists the protocol, the experiment protocol and the
+config file with matching SHA-256 values, and no value of the experiment is still
+deferred (G-FREEZE). ``resolve-pilot`` applies the pre-stated quiet-pilot rule.
 """
 
 from __future__ import annotations
@@ -10,6 +12,7 @@ from __future__ import annotations
 import argparse
 import datetime as _dt
 import hashlib
+import json
 import os
 import subprocess
 import sys
@@ -29,26 +32,12 @@ def sha256_file(path: str) -> str:
         return hashlib.sha256(fh.read()).hexdigest()
 
 
-def freeze_status(cfg: ExperimentConfig, root: str) -> tuple[bool, str]:
-    """A confirmatory run is allowed only if research/protocol.md declares FROZEN in its
-    status row, and the config's protocol file exists with the recorded SHA-256."""
-    proto = os.path.join(root, "research", "protocol.md")
-    try:
-        text = open(proto, encoding="utf-8").read()
-    except OSError:
-        return False, "research/protocol.md not found"
-    status_lines = [ln for ln in text.splitlines() if ln.startswith("| Status |")]
-    if not status_lines or "FROZEN" not in status_lines[0] or "not frozen" in status_lines[0].lower():
-        return False, "research/protocol.md is not frozen (owner decision, G-FREEZE)"
-    if not cfg.protocol_path or not cfg.protocol_sha256:
-        return False, "config lacks protocol_path or protocol_sha256"
-    path = os.path.join(root, cfg.protocol_path)
-    if not os.path.exists(path):
-        return False, f"{cfg.protocol_path} not found"
-    actual = sha256_file(path)
-    if actual != cfg.protocol_sha256:
-        return False, f"protocol hash mismatch: config {cfg.protocol_sha256[:12]}, file {actual[:12]}"
-    return True, "frozen"
+def freeze_status(cfg: ExperimentConfig, root: str, config_path: str | None = None) -> tuple[bool, str]:
+    """Delegates to ``scale.freeze.check`` (protocol FROZEN, freeze record, protocol and
+    config hashes, deferred values)."""
+    from . import freeze
+
+    return freeze.check(cfg, config_path, root)
 
 
 def _default_out(cfg: ExperimentConfig, root: str) -> str:
@@ -59,13 +48,25 @@ def _default_out(cfg: ExperimentConfig, root: str) -> str:
 
 def cmd_run(config_path: str, out: str | None, argv: list[str]) -> int:
     root = repo_root()
+    from . import freeze
+
+    try:  # a deferred confirmatory config is refused before validation (its values are unset)
+        with open(config_path, encoding="utf-8") as fh:
+            raw = json.load(fh)
+    except (OSError, ValueError):
+        raw = None
+    if isinstance(raw, dict) and raw.get("label") == "confirmatory":
+        why = freeze.deferred_reason(str(raw.get("experiment_id")), root)
+        if why is not None:
+            print(f"REFUSED: {raw.get('experiment_id')} is confirmatory and {why}.", file=sys.stderr)
+            return EXIT_REFUSED
     try:
         cfg = load_config(config_path)
     except (ConfigError, OSError, TypeError) as exc:
         print(f"invalid config: {exc}", file=sys.stderr)
         return 2
     if cfg.label == "confirmatory":
-        ok, why = freeze_status(cfg, root)
+        ok, why = freeze_status(cfg, root, config_path)
         if not ok:
             print(f"REFUSED: {cfg.experiment_id} is confirmatory and {why}.", file=sys.stderr)
             return EXIT_REFUSED
@@ -95,6 +96,19 @@ def cmd_report(results_dir: str, pdf: bool, levels: int, warmup: float, measure:
     return 0
 
 
+def cmd_resolve_pilot(results_dir: str) -> int:
+    from .pilotrule import PilotRuleError, resolve_pilot
+    from .report import load_runs
+
+    try:
+        out = resolve_pilot(load_runs(results_dir))
+    except (PilotRuleError, Exception) as exc:
+        print(f"pilot rule not applicable (no value set): {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
+    print(json.dumps(out, indent=1, sort_keys=True))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     if argv and argv[0] == "test":  # pass every remaining argument to pytest unchanged
@@ -114,6 +128,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--full-warmup-s", type=float, default=5.0)
     p.add_argument("--full-measure-s", type=float, default=15.0)
     p.add_argument("--full-runs", type=int, default=50)
+    q = sub.add_parser("resolve-pilot", help="apply the frozen quiet-pilot rule (protocol 7.1) to a pilot results directory")
+    q.add_argument("results_dir")
     t = sub.add_parser("test", help="run the pytest suite")
     t.add_argument("pytest_args", nargs=argparse.REMAINDER)
     a = ap.parse_args(argv)
@@ -128,6 +144,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_run(a.config, a.out, argv)
     if a.cmd == "report":
         return cmd_report(a.results_dir, a.pdf, a.full_levels, a.full_warmup_s, a.full_measure_s, a.full_runs)
+    if a.cmd == "resolve-pilot":
+        return cmd_resolve_pilot(a.results_dir)
     if a.cmd == "test":
         return subprocess.call([sys.executable, "-m", "pytest", *a.pytest_args], cwd=repo_root())
     return 2

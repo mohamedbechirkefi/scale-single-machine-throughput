@@ -3,9 +3,9 @@
 
 | Field | Value |
 |---|---|
-| Status | DRAFT, not frozen; planned (protocol draft, awaiting owner freeze) |
-| Version / date | v0.1, 2026-11-24 |
-| Study protocol | `research/protocol.md` (draft v0.1) |
+| Status | FROZEN v1.0 (owner-approved 2026-11-24); not yet run |
+| Version / date | v1.0, 2026-11-24 (draft v0.1 unchanged in content except as listed under "Amendments before freeze") |
+| Study protocol | `research/protocol.md` (frozen v1.0) |
 | Depends on | M2 harness (server, generator, schemas) |
 | Gates | EXP-002, EXP-003, EXP-004 |
 
@@ -31,3 +31,8 @@
 20. **What contradicts.** SCALE/ab ratio outside [0.9, 1.1], or corrected p99 under stall below 150 ms (the correction does not work).
 21. **Outputs.** `C_gen` table used by EXP-002 to flag generator-limited cells (goodput > 50 % of C_gen or generator CPU > 85 %).
 22. **Reproduction.** `uv run scale exp EXP-001` (command to be implemented at M2); raw results in `results/raw/EXP-001/`, summaries in `research/experiments/EXP-001/metrics.csv`.
+
+
+## Amendments before freeze (owner-approved 2026-11-24)
+
+None to this protocol. The study-level amendments AM-1 to AM-4 (`research/protocol.md` section 15) do not touch EXP-001. Config: `experiments/EXP-001.json`; run with `uv run scale run experiments/EXP-001.json`.

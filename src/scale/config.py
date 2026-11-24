@@ -48,13 +48,15 @@ class ArmSpec:
         return "baseline"
 
 
-# Planning values from research/protocol.md section 3 (draft v0.1).
+# Values from research/protocol.md section 3 (frozen v1.0, owner-approved 2026-11-24).
+# A4: W = 8 workers, Q = 16 queue slots (amendment AM-1: W + Q = 24 is below the
+# largest concurrency level, so the limiter can reject; draft v0.1 had Q = 64).
 ARMS: dict[str, ArmSpec] = {
     "A0": ArmSpec("A0"),
     "A1": ArmSpec("A1", cache_capacity_fraction=0.10),
     "A2": ArmSpec("A2", index=True),
     "A3": ArmSpec("A3", batch_max=32, batch_window_ms=1.0),
-    "A4": ArmSpec("A4", workers=8, queue=64),
+    "A4": ArmSpec("A4", workers=8, queue=16),
 }
 
 
