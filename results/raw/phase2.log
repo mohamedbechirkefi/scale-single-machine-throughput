@@ -1,0 +1,630 @@
+== start 2026-11-25T03:44:17Z rev 3fb0c6624873a8335de64477cd65126776ee09c3 dirty=       0
+{"utc": "2026-11-25T03:44:21+00:00", "probes_pct": [3.8, 3.1, 5.1], "load_average": [8.48, 20.9, 23.9], "quiet": true, "top": [[7.0, "Creative Cloud UI Helper (Renderer)"], [2.4, "claude"], [1.9, "NotificationCenter"]]}
+[confirmatory] EXP-002 block 0 position 0 arm A1
+  EXP-002-b00-A1-439fce64 c=1 goodput=89.9 rps p99=20.159583 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A1-439fce64 c=2 goodput=161.9 rps p99=27.022333 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A1-439fce64 c=4 goodput=286.6 rps p99=40.151416 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A1-439fce64 c=8 goodput=187.4 rps p99=109.477625 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A1-439fce64 c=16 goodput=165.5 rps p99=480.576916 ms err=0.0 gen_cpu=0.02
+  EXP-002-b00-A1-439fce64 c=32 goodput=167.3 rps p99=1444.160458 ms err=0.0031783869686134287 gen_cpu=0.02
+  EXP-002-b00-A1-439fce64 c=64 goodput=174.2 rps p99=1183.642834 ms err=0.009476876421531463 gen_cpu=0.02
+  EXP-002-b00-A1-439fce64 c=128 goodput=171.6 rps p99=2471.986959 ms err=0.015302218821729151 gen_cpu=0.02
+  EXP-002-b00-A1-439fce64 c=256 goodput=163.6 rps p99=7047.686625 ms err=0.014061872237846525 gen_cpu=0.02
+  EXP-002-b00-A1-439fce64 c=512 goodput=179.7 rps p99=10613.638458 ms err=0.05036984853821768 gen_cpu=0.03
+  -> ok runtime 213.2 s G*=286.6
+[confirmatory] EXP-002 block 0 position 1 arm A3
+  EXP-002-b00-A3-439fce64 c=1 goodput=49.9 rps p99=21.213917 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A3-439fce64 c=2 goodput=92.7 rps p99=25.761375 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A3-439fce64 c=4 goodput=155.1 rps p99=30.446834 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A3-439fce64 c=8 goodput=289.6 rps p99=35.361875 ms err=0.0 gen_cpu=0.02
+  EXP-002-b00-A3-439fce64 c=16 goodput=539.2 rps p99=44.329542 ms err=0.0 gen_cpu=0.05
+  EXP-002-b00-A3-439fce64 c=32 goodput=705.9 rps p99=67.850917 ms err=0.0 gen_cpu=0.07
+  EXP-002-b00-A3-439fce64 c=64 goodput=1019.0 rps p99=73.065417 ms err=0.0 gen_cpu=0.10
+  EXP-002-b00-A3-439fce64 c=128 goodput=1016.8 rps p99=142.922375 ms err=0.0 gen_cpu=0.10
+  EXP-002-b00-A3-439fce64 c=256 goodput=1010.8 rps p99=282.093375 ms err=0.0 gen_cpu=0.10
+  EXP-002-b00-A3-439fce64 c=512 goodput=1027.3 rps p99=546.026416 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1027.3333333333333
+[confirmatory] EXP-002 block 0 position 2 arm A2
+  EXP-002-b00-A2-439fce64 c=1 goodput=21250.0 rps p99=0.0785 ms err=0.0 gen_cpu=0.31
+  EXP-002-b00-A2-439fce64 c=2 goodput=28220.3 rps p99=0.107083 ms err=0.0 gen_cpu=0.47
+  EXP-002-b00-A2-439fce64 c=4 goodput=18793.3 rps p99=0.417416 ms err=0.0 gen_cpu=0.47
+  EXP-002-b00-A2-439fce64 c=8 goodput=10298.8 rps p99=1.645792 ms err=0.0 gen_cpu=0.29
+  EXP-002-b00-A2-439fce64 c=16 goodput=9857.2 rps p99=3.47075 ms err=0.0 gen_cpu=0.27
+  EXP-002-b00-A2-439fce64 c=32 goodput=9877.2 rps p99=7.010875 ms err=0.0 gen_cpu=0.27
+  EXP-002-b00-A2-439fce64 c=64 goodput=9549.4 rps p99=14.683291 ms err=0.0 gen_cpu=0.26
+  EXP-002-b00-A2-439fce64 c=128 goodput=9233.7 rps p99=29.803125 ms err=0.0 gen_cpu=0.25
+  EXP-002-b00-A2-439fce64 c=256 goodput=8614.9 rps p99=64.09125 ms err=0.0 gen_cpu=0.24
+  EXP-002-b00-A2-439fce64 c=512 goodput=6789.8 rps p99=166.252125 ms err=0.0 gen_cpu=0.20
+  -> ok runtime 206.9 s G*=28220.333333333332
+[confirmatory] EXP-002 block 0 position 3 arm A4
+  EXP-002-b00-A4-439fce64 c=1 goodput=54.1 rps p99=19.921375 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A4-439fce64 c=2 goodput=79.7 rps p99=26.944125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A4-439fce64 c=4 goodput=115.4 rps p99=44.726375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A4-439fce64 c=8 goodput=74.1 rps p99=114.282042 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A4-439fce64 c=16 goodput=73.9 rps p99=430.301542 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A4-439fce64 c=32 goodput=67.3 rps p99=2015.091 ms err=0.9929817483723777 gen_cpu=0.35
+  EXP-002-b00-A4-439fce64 c=64 goodput=67.1 rps p99=2054.709167 ms err=0.9948489239576239 gen_cpu=0.44
+  EXP-002-b00-A4-439fce64 c=128 goodput=68.0 rps p99=2503.030333 ms err=0.9957171289648049 gen_cpu=0.53
+  EXP-002-b00-A4-439fce64 c=256 goodput=70.8 rps p99=3107.416875 ms err=0.9961702127659574 gen_cpu=0.61
+  EXP-002-b00-A4-439fce64 c=512 goodput=57.6 rps p99=3066.999625 ms err=0.9964918549317049 gen_cpu=0.61
+  -> ok runtime 207.7 s G*=115.4
+[confirmatory] EXP-002 block 0 position 4 arm A0
+  EXP-002-b00-A0-439fce64 c=1 goodput=54.1 rps p99=19.820667 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A0-439fce64 c=2 goodput=79.2 rps p99=28.440625 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A0-439fce64 c=4 goodput=112.0 rps p99=63.345333 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A0-439fce64 c=8 goodput=71.1 rps p99=116.866792 ms err=0.0 gen_cpu=0.00
+  EXP-002-b00-A0-439fce64 c=16 goodput=57.0 rps p99=334.2455 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A0-439fce64 c=32 goodput=56.2 rps p99=1256.474292 ms err=0.0 gen_cpu=0.01
+  EXP-002-b00-A0-439fce64 c=64 goodput=55.6 rps p99=1820.891541 ms err=0.0035842293906810036 gen_cpu=0.01
+  EXP-002-b00-A0-439fce64 c=128 goodput=56.0 rps p99=3357.335333 ms err=0.008264462809917356 gen_cpu=0.01
+  EXP-002-b00-A0-439fce64 c=256 goodput=53.1 rps p99=8362.220042 ms err=0.1184939091915836 gen_cpu=0.01
+  EXP-002-b00-A0-439fce64 c=512 goodput=50.3 rps p99=8741.409875 ms err=0.41788743253662297 gen_cpu=0.02
+  -> ok runtime 218.7 s G*=112.0
+[confirmatory] EXP-002 block 1 position 0 arm A2
+  EXP-002-b01-A2-439fce64 c=1 goodput=21299.0 rps p99=0.0785 ms err=0.0 gen_cpu=0.31
+  EXP-002-b01-A2-439fce64 c=2 goodput=28129.7 rps p99=0.107833 ms err=0.0 gen_cpu=0.47
+  EXP-002-b01-A2-439fce64 c=4 goodput=18791.7 rps p99=0.412875 ms err=0.0 gen_cpu=0.46
+  EXP-002-b01-A2-439fce64 c=8 goodput=10397.1 rps p99=1.641834 ms err=0.0 gen_cpu=0.28
+  EXP-002-b01-A2-439fce64 c=16 goodput=9929.0 rps p99=3.497208 ms err=0.0 gen_cpu=0.27
+  EXP-002-b01-A2-439fce64 c=32 goodput=9805.1 rps p99=7.2125 ms err=0.0 gen_cpu=0.26
+  EXP-002-b01-A2-439fce64 c=64 goodput=9577.2 rps p99=14.589208 ms err=0.0 gen_cpu=0.26
+  EXP-002-b01-A2-439fce64 c=128 goodput=8662.4 rps p99=30.651042 ms err=0.0 gen_cpu=0.24
+  EXP-002-b01-A2-439fce64 c=256 goodput=7074.5 rps p99=80.468167 ms err=8.480405551838834e-05 gen_cpu=0.20
+  EXP-002-b01-A2-439fce64 c=512 goodput=6911.9 rps p99=165.035083 ms err=0.0 gen_cpu=0.20
+  -> ok runtime 207.3 s G*=28129.733333333334
+[confirmatory] EXP-002 block 1 position 1 arm A4
+  EXP-002-b01-A4-439fce64 c=1 goodput=54.1 rps p99=20.030542 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A4-439fce64 c=2 goodput=79.6 rps p99=27.978584 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A4-439fce64 c=4 goodput=115.5 rps p99=44.660125 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A4-439fce64 c=8 goodput=76.3 rps p99=109.874417 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A4-439fce64 c=16 goodput=76.3 rps p99=420.691667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A4-439fce64 c=32 goodput=68.7 rps p99=1776.601416 ms err=0.9932154091154367 gen_cpu=0.37
+  EXP-002-b01-A4-439fce64 c=64 goodput=68.3 rps p99=2473.402084 ms err=0.9946507598530394 gen_cpu=0.44
+  EXP-002-b01-A4-439fce64 c=128 goodput=69.5 rps p99=2405.991042 ms err=0.99557495817019 gen_cpu=0.52
+  EXP-002-b01-A4-439fce64 c=256 goodput=71.9 rps p99=2412.443625 ms err=0.9961162250283717 gen_cpu=0.61
+  EXP-002-b01-A4-439fce64 c=512 goodput=57.9 rps p99=3645.897125 ms err=0.9965066908139651 gen_cpu=0.61
+  -> ok runtime 207.6 s G*=115.46666666666667
+[confirmatory] EXP-002 block 1 position 2 arm A0
+  EXP-002-b01-A0-439fce64 c=1 goodput=54.0 rps p99=19.778166 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A0-439fce64 c=2 goodput=79.7 rps p99=28.009292 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A0-439fce64 c=4 goodput=111.2 rps p99=64.7385 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A0-439fce64 c=8 goodput=73.6 rps p99=113.554625 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A0-439fce64 c=16 goodput=59.1 rps p99=314.11375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A0-439fce64 c=32 goodput=59.7 rps p99=934.005166 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A0-439fce64 c=64 goodput=58.6 rps p99=1536.705875 ms err=0.0022701475595913734 gen_cpu=0.01
+  EXP-002-b01-A0-439fce64 c=128 goodput=59.4 rps p99=3614.747416 ms err=0.004469273743016759 gen_cpu=0.01
+  EXP-002-b01-A0-439fce64 c=256 goodput=56.2 rps p99=8902.789584 ms err=0.06541019955654102 gen_cpu=0.01
+  EXP-002-b01-A0-439fce64 c=512 goodput=54.1 rps p99=7345.569875 ms err=0.33876221498371334 gen_cpu=0.02
+  -> ok runtime 216.0 s G*=111.2
+[confirmatory] EXP-002 block 1 position 3 arm A1
+  EXP-002-b01-A1-439fce64 c=1 goodput=91.5 rps p99=19.829666 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A1-439fce64 c=2 goodput=159.5 rps p99=26.85825 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A1-439fce64 c=4 goodput=272.3 rps p99=41.617459 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A1-439fce64 c=8 goodput=171.1 rps p99=117.345875 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A1-439fce64 c=16 goodput=142.8 rps p99=322.026583 ms err=0.0 gen_cpu=0.02
+  EXP-002-b01-A1-439fce64 c=32 goodput=152.2 rps p99=787.764541 ms err=0.003056768558951965 gen_cpu=0.02
+  EXP-002-b01-A1-439fce64 c=64 goodput=163.2 rps p99=1219.643584 ms err=0.00850546780072904 gen_cpu=0.02
+  EXP-002-b01-A1-439fce64 c=128 goodput=153.1 rps p99=3035.929333 ms err=0.01161790017211704 gen_cpu=0.02
+  EXP-002-b01-A1-439fce64 c=256 goodput=149.2 rps p99=5394.991 ms err=0.011920529801324504 gen_cpu=0.02
+  EXP-002-b01-A1-439fce64 c=512 goodput=147.5 rps p99=11642.634583 ms err=0.06587837837837837 gen_cpu=0.02
+  -> ok runtime 212.6 s G*=272.3333333333333
+[confirmatory] EXP-002 block 1 position 4 arm A3
+  EXP-002-b01-A3-439fce64 c=1 goodput=50.4 rps p99=21.281917 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A3-439fce64 c=2 goodput=93.3 rps p99=25.735709 ms err=0.0 gen_cpu=0.00
+  EXP-002-b01-A3-439fce64 c=4 goodput=155.2 rps p99=31.151292 ms err=0.0 gen_cpu=0.01
+  EXP-002-b01-A3-439fce64 c=8 goodput=291.1 rps p99=34.821375 ms err=0.0 gen_cpu=0.02
+  EXP-002-b01-A3-439fce64 c=16 goodput=536.9 rps p99=51.600708 ms err=0.0 gen_cpu=0.05
+  EXP-002-b01-A3-439fce64 c=32 goodput=710.2 rps p99=67.832917 ms err=0.0 gen_cpu=0.07
+  EXP-002-b01-A3-439fce64 c=64 goodput=1018.8 rps p99=75.106959 ms err=0.0 gen_cpu=0.10
+  EXP-002-b01-A3-439fce64 c=128 goodput=1016.4 rps p99=144.260708 ms err=0.0 gen_cpu=0.10
+  EXP-002-b01-A3-439fce64 c=256 goodput=1019.1 rps p99=280.095292 ms err=0.0 gen_cpu=0.10
+  EXP-002-b01-A3-439fce64 c=512 goodput=1018.8 rps p99=545.931791 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 206.9 s G*=1019.0666666666667
+[confirmatory] EXP-002 block 2 position 0 arm A2
+  EXP-002-b02-A2-439fce64 c=1 goodput=21226.9 rps p99=0.079041 ms err=0.0 gen_cpu=0.31
+  EXP-002-b02-A2-439fce64 c=2 goodput=27873.5 rps p99=0.112875 ms err=0.0 gen_cpu=0.47
+  EXP-002-b02-A2-439fce64 c=4 goodput=18721.5 rps p99=0.418 ms err=0.0 gen_cpu=0.48
+  EXP-002-b02-A2-439fce64 c=8 goodput=10366.7 rps p99=1.63175 ms err=0.0 gen_cpu=0.29
+  EXP-002-b02-A2-439fce64 c=16 goodput=9645.8 rps p99=3.639417 ms err=0.0 gen_cpu=0.27
+  EXP-002-b02-A2-439fce64 c=32 goodput=9746.0 rps p99=7.211125 ms err=0.0 gen_cpu=0.27
+  EXP-002-b02-A2-439fce64 c=64 goodput=9566.1 rps p99=14.573667 ms err=0.0 gen_cpu=0.26
+  EXP-002-b02-A2-439fce64 c=128 goodput=9195.1 rps p99=29.880334 ms err=0.0 gen_cpu=0.25
+  EXP-002-b02-A2-439fce64 c=256 goodput=8579.0 rps p99=63.7465 ms err=0.0 gen_cpu=0.24
+  EXP-002-b02-A2-439fce64 c=512 goodput=7034.0 rps p99=161.142584 ms err=0.0 gen_cpu=0.21
+  -> ok runtime 206.9 s G*=27873.466666666667
+[confirmatory] EXP-002 block 2 position 1 arm A4
+  EXP-002-b02-A4-439fce64 c=1 goodput=53.3 rps p99=19.909 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A4-439fce64 c=2 goodput=80.4 rps p99=27.217208 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A4-439fce64 c=4 goodput=116.2 rps p99=43.583791 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A4-439fce64 c=8 goodput=71.5 rps p99=117.230791 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A4-439fce64 c=16 goodput=71.9 rps p99=339.691167 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A4-439fce64 c=32 goodput=64.7 rps p99=2330.415583 ms err=0.9936687379249125 gen_cpu=0.35
+  EXP-002-b02-A4-439fce64 c=64 goodput=64.3 rps p99=2571.00875 ms err=0.9953409551766091 gen_cpu=0.45
+  EXP-002-b02-A4-439fce64 c=128 goodput=66.1 rps p99=2787.337375 ms err=0.9959467639552385 gen_cpu=0.52
+  EXP-002-b02-A4-439fce64 c=256 goodput=69.1 rps p99=2714.815459 ms err=0.996220398901143 gen_cpu=0.61
+  EXP-002-b02-A4-439fce64 c=512 goodput=57.8 rps p99=3746.555958 ms err=0.9965595784193901 gen_cpu=0.61
+  -> ok runtime 207.8 s G*=116.2
+[confirmatory] EXP-002 block 2 position 2 arm A3
+  EXP-002-b02-A3-439fce64 c=1 goodput=50.3 rps p99=21.255041 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A3-439fce64 c=2 goodput=93.2 rps p99=25.362125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A3-439fce64 c=4 goodput=155.1 rps p99=29.894792 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A3-439fce64 c=8 goodput=290.5 rps p99=34.86275 ms err=0.0 gen_cpu=0.02
+  EXP-002-b02-A3-439fce64 c=16 goodput=538.1 rps p99=47.6145 ms err=0.0 gen_cpu=0.05
+  EXP-002-b02-A3-439fce64 c=32 goodput=710.5 rps p99=68.029584 ms err=0.0 gen_cpu=0.07
+  EXP-002-b02-A3-439fce64 c=64 goodput=1007.9 rps p99=75.740666 ms err=0.0 gen_cpu=0.10
+  EXP-002-b02-A3-439fce64 c=128 goodput=1020.3 rps p99=142.7045 ms err=0.0 gen_cpu=0.10
+  EXP-002-b02-A3-439fce64 c=256 goodput=1023.7 rps p99=276.490833 ms err=0.0 gen_cpu=0.10
+  EXP-002-b02-A3-439fce64 c=512 goodput=1024.3 rps p99=540.7435 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1024.3333333333333
+[confirmatory] EXP-002 block 2 position 3 arm A0
+  EXP-002-b02-A0-439fce64 c=1 goodput=54.4 rps p99=19.764417 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A0-439fce64 c=2 goodput=80.0 rps p99=28.366125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A0-439fce64 c=4 goodput=115.1 rps p99=45.352667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A0-439fce64 c=8 goodput=78.9 rps p99=107.076791 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A0-439fce64 c=16 goodput=63.0 rps p99=295.475916 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A0-439fce64 c=32 goodput=63.5 rps p99=679.931292 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A0-439fce64 c=64 goodput=63.7 rps p99=2136.26575 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A0-439fce64 c=128 goodput=63.4 rps p99=3302.417625 ms err=0.013485477178423237 gen_cpu=0.01
+  EXP-002-b02-A0-439fce64 c=256 goodput=59.3 rps p99=9570.214917 ms err=0.08539094650205761 gen_cpu=0.01
+  EXP-002-b02-A0-439fce64 c=512 goodput=57.2 rps p99=8465.579417 ms err=0.415929203539823 gen_cpu=0.02
+  -> ok runtime 218.1 s G*=115.06666666666666
+[confirmatory] EXP-002 block 2 position 4 arm A1
+  EXP-002-b02-A1-439fce64 c=1 goodput=89.5 rps p99=19.5785 ms err=0.0 gen_cpu=0.00
+  EXP-002-b02-A1-439fce64 c=2 goodput=157.7 rps p99=26.805334 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A1-439fce64 c=4 goodput=264.9 rps p99=42.516666 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A1-439fce64 c=8 goodput=181.9 rps p99=116.224667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b02-A1-439fce64 c=16 goodput=149.1 rps p99=349.881459 ms err=0.0 gen_cpu=0.02
+  EXP-002-b02-A1-439fce64 c=32 goodput=162.4 rps p99=665.452333 ms err=0.0 gen_cpu=0.02
+  EXP-002-b02-A1-439fce64 c=64 goodput=168.3 rps p99=1215.697666 ms err=0.012128325508607199 gen_cpu=0.02
+  EXP-002-b02-A1-439fce64 c=128 goodput=174.7 rps p99=2324.015875 ms err=0.014661654135338346 gen_cpu=0.02
+  EXP-002-b02-A1-439fce64 c=256 goodput=158.1 rps p99=8725.780875 ms err=0.018211920529801324 gen_cpu=0.02
+  EXP-002-b02-A1-439fce64 c=512 goodput=172.3 rps p99=9928.734708 ms err=0.13549682167949148 gen_cpu=0.02
+  -> ok runtime 213.6 s G*=264.8666666666667
+[confirmatory] EXP-002 block 3 position 0 arm A0
+  EXP-002-b03-A0-439fce64 c=1 goodput=59.6 rps p99=18.269542 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A0-439fce64 c=2 goodput=80.0 rps p99=28.677875 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A0-439fce64 c=4 goodput=114.9 rps p99=44.986916 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A0-439fce64 c=8 goodput=79.9 rps p99=107.257708 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A0-439fce64 c=16 goodput=63.1 rps p99=300.264042 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A0-439fce64 c=32 goodput=66.7 rps p99=618.554667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A0-439fce64 c=64 goodput=62.0 rps p99=1510.512083 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A0-439fce64 c=128 goodput=64.1 rps p99=3411.773458 ms err=0.01131687242798354 gen_cpu=0.01
+  EXP-002-b03-A0-439fce64 c=256 goodput=64.6 rps p99=7096.275959 ms err=0.022199798183652877 gen_cpu=0.01
+  EXP-002-b03-A0-439fce64 c=512 goodput=60.0 rps p99=9228.823584 ms err=0.3468795355587808 gen_cpu=0.02
+  -> ok runtime 217.0 s G*=114.86666666666666
+[confirmatory] EXP-002 block 3 position 1 arm A1
+  EXP-002-b03-A1-439fce64 c=1 goodput=91.3 rps p99=19.6795 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A1-439fce64 c=2 goodput=156.7 rps p99=26.7575 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A1-439fce64 c=4 goodput=266.4 rps p99=41.653709 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A1-439fce64 c=8 goodput=176.9 rps p99=112.434541 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A1-439fce64 c=16 goodput=152.7 rps p99=439.0555 ms err=0.0 gen_cpu=0.02
+  EXP-002-b03-A1-439fce64 c=32 goodput=155.2 rps p99=707.605166 ms err=0.003424657534246575 gen_cpu=0.02
+  EXP-002-b03-A1-439fce64 c=64 goodput=171.2 rps p99=1217.272667 ms err=0.005036807438977141 gen_cpu=0.02
+  EXP-002-b03-A1-439fce64 c=128 goodput=162.1 rps p99=2784.393 ms err=0.009771986970684038 gen_cpu=0.02
+  EXP-002-b03-A1-439fce64 c=256 goodput=166.3 rps p99=8251.159875 ms err=0.01848937844217152 gen_cpu=0.02
+  EXP-002-b03-A1-439fce64 c=512 goodput=158.3 rps p99=11738.074125 ms err=0.0897239263803681 gen_cpu=0.02
+  -> ok runtime 214.0 s G*=266.4
+[confirmatory] EXP-002 block 3 position 2 arm A4
+  EXP-002-b03-A4-439fce64 c=1 goodput=54.5 rps p99=19.694083 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A4-439fce64 c=2 goodput=79.7 rps p99=29.480291 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A4-439fce64 c=4 goodput=117.8 rps p99=46.514917 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A4-439fce64 c=8 goodput=77.1 rps p99=109.957792 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A4-439fce64 c=16 goodput=76.8 rps p99=319.780667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A4-439fce64 c=32 goodput=70.9 rps p99=1721.271042 ms err=0.9924854020274569 gen_cpu=0.35
+  EXP-002-b03-A4-439fce64 c=64 goodput=69.5 rps p99=2432.759625 ms err=0.994605955191121 gen_cpu=0.44
+  EXP-002-b03-A4-439fce64 c=128 goodput=70.1 rps p99=2422.481416 ms err=0.9956458515446662 gen_cpu=0.52
+  EXP-002-b03-A4-439fce64 c=256 goodput=72.8 rps p99=2327.331417 ms err=0.9960591133004926 gen_cpu=0.60
+  EXP-002-b03-A4-439fce64 c=512 goodput=59.7 rps p99=3240.24975 ms err=0.9964166029395868 gen_cpu=0.61
+  -> ok runtime 207.7 s G*=117.8
+[confirmatory] EXP-002 block 3 position 3 arm A3
+  EXP-002-b03-A3-439fce64 c=1 goodput=49.9 rps p99=21.430916 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A3-439fce64 c=2 goodput=92.5 rps p99=25.721292 ms err=0.0 gen_cpu=0.00
+  EXP-002-b03-A3-439fce64 c=4 goodput=155.3 rps p99=29.901458 ms err=0.0 gen_cpu=0.01
+  EXP-002-b03-A3-439fce64 c=8 goodput=292.3 rps p99=34.931417 ms err=0.0 gen_cpu=0.02
+  EXP-002-b03-A3-439fce64 c=16 goodput=536.3 rps p99=50.786584 ms err=0.0 gen_cpu=0.05
+  EXP-002-b03-A3-439fce64 c=32 goodput=708.2 rps p99=67.981666 ms err=0.0 gen_cpu=0.07
+  EXP-002-b03-A3-439fce64 c=64 goodput=1014.3 rps p99=75.378459 ms err=0.0 gen_cpu=0.10
+  EXP-002-b03-A3-439fce64 c=128 goodput=1015.5 rps p99=145.580166 ms err=0.0 gen_cpu=0.10
+  EXP-002-b03-A3-439fce64 c=256 goodput=1021.0 rps p99=276.568167 ms err=0.0 gen_cpu=0.10
+  EXP-002-b03-A3-439fce64 c=512 goodput=1018.1 rps p99=546.221875 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1021.0
+[confirmatory] EXP-002 block 3 position 4 arm A2
+  EXP-002-b03-A2-439fce64 c=1 goodput=21265.9 rps p99=0.078041 ms err=0.0 gen_cpu=0.31
+  EXP-002-b03-A2-439fce64 c=2 goodput=28055.3 rps p99=0.10775 ms err=0.0 gen_cpu=0.47
+  EXP-002-b03-A2-439fce64 c=4 goodput=18462.5 rps p99=0.430292 ms err=0.0 gen_cpu=0.48
+  EXP-002-b03-A2-439fce64 c=8 goodput=10367.3 rps p99=1.639042 ms err=0.0 gen_cpu=0.29
+  EXP-002-b03-A2-439fce64 c=16 goodput=9872.7 rps p99=3.524416 ms err=0.0 gen_cpu=0.27
+  EXP-002-b03-A2-439fce64 c=32 goodput=9789.9 rps p99=7.273208 ms err=0.0 gen_cpu=0.27
+  EXP-002-b03-A2-439fce64 c=64 goodput=9605.6 rps p99=14.3625 ms err=0.0 gen_cpu=0.26
+  EXP-002-b03-A2-439fce64 c=128 goodput=9210.7 rps p99=29.803708 ms err=0.0 gen_cpu=0.25
+  EXP-002-b03-A2-439fce64 c=256 goodput=8585.3 rps p99=64.158708 ms err=0.0 gen_cpu=0.24
+  EXP-002-b03-A2-439fce64 c=512 goodput=6918.1 rps p99=166.011584 ms err=0.0 gen_cpu=0.21
+  -> ok runtime 206.9 s G*=28055.333333333332
+[confirmatory] EXP-002 block 4 position 0 arm A2
+  EXP-002-b04-A2-439fce64 c=1 goodput=21742.9 rps p99=0.078 ms err=0.0 gen_cpu=0.30
+  EXP-002-b04-A2-439fce64 c=2 goodput=28547.6 rps p99=0.106291 ms err=0.0 gen_cpu=0.46
+  EXP-002-b04-A2-439fce64 c=4 goodput=19013.3 rps p99=0.407583 ms err=0.0 gen_cpu=0.46
+  EXP-002-b04-A2-439fce64 c=8 goodput=10355.3 rps p99=1.630209 ms err=0.0 gen_cpu=0.29
+  EXP-002-b04-A2-439fce64 c=16 goodput=9958.7 rps p99=3.5 ms err=0.0 gen_cpu=0.27
+  EXP-002-b04-A2-439fce64 c=32 goodput=9809.1 rps p99=7.15775 ms err=0.0 gen_cpu=0.26
+  EXP-002-b04-A2-439fce64 c=64 goodput=9554.4 rps p99=14.706125 ms err=0.0 gen_cpu=0.26
+  EXP-002-b04-A2-439fce64 c=128 goodput=9223.4 rps p99=29.70825 ms err=0.0 gen_cpu=0.25
+  EXP-002-b04-A2-439fce64 c=256 goodput=8619.3 rps p99=64.044375 ms err=0.0 gen_cpu=0.24
+  EXP-002-b04-A2-439fce64 c=512 goodput=6981.5 rps p99=163.166416 ms err=0.0 gen_cpu=0.20
+  -> ok runtime 206.9 s G*=28547.6
+[confirmatory] EXP-002 block 4 position 1 arm A3
+  EXP-002-b04-A3-439fce64 c=1 goodput=50.0 rps p99=21.477583 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A3-439fce64 c=2 goodput=92.9 rps p99=25.634792 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A3-439fce64 c=4 goodput=154.9 rps p99=29.750667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A3-439fce64 c=8 goodput=288.2 rps p99=35.397083 ms err=0.0 gen_cpu=0.02
+  EXP-002-b04-A3-439fce64 c=16 goodput=538.3 rps p99=44.581208 ms err=0.0 gen_cpu=0.05
+  EXP-002-b04-A3-439fce64 c=32 goodput=708.3 rps p99=68.115709 ms err=0.0 gen_cpu=0.07
+  EXP-002-b04-A3-439fce64 c=64 goodput=1020.5 rps p99=73.872 ms err=0.0 gen_cpu=0.10
+  EXP-002-b04-A3-439fce64 c=128 goodput=1013.4 rps p99=148.122875 ms err=0.0 gen_cpu=0.10
+  EXP-002-b04-A3-439fce64 c=256 goodput=1037.6 rps p99=275.744583 ms err=0.0 gen_cpu=0.10
+  EXP-002-b04-A3-439fce64 c=512 goodput=1020.5 rps p99=547.160083 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1037.6
+[confirmatory] EXP-002 block 4 position 2 arm A4
+  EXP-002-b04-A4-439fce64 c=1 goodput=54.3 rps p99=19.997458 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A4-439fce64 c=2 goodput=79.6 rps p99=27.8375 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A4-439fce64 c=4 goodput=114.7 rps p99=43.798166 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A4-439fce64 c=8 goodput=78.1 rps p99=109.982416 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A4-439fce64 c=16 goodput=78.4 rps p99=410.94375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A4-439fce64 c=32 goodput=70.4 rps p99=1708.849042 ms err=0.9927074341355616 gen_cpu=0.36
+  EXP-002-b04-A4-439fce64 c=64 goodput=70.5 rps p99=2029.639916 ms err=0.9944156509702609 gen_cpu=0.44
+  EXP-002-b04-A4-439fce64 c=128 goodput=71.5 rps p99=2116.917209 ms err=0.9954618191670406 gen_cpu=0.52
+  EXP-002-b04-A4-439fce64 c=256 goodput=73.1 rps p99=2109.740666 ms err=0.9960330375288391 gen_cpu=0.60
+  EXP-002-b04-A4-439fce64 c=512 goodput=56.9 rps p99=3403.191833 ms err=0.9965580967445163 gen_cpu=0.60
+  -> ok runtime 207.6 s G*=114.66666666666667
+[confirmatory] EXP-002 block 4 position 3 arm A0
+  EXP-002-b04-A0-439fce64 c=1 goodput=54.0 rps p99=20.301208 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A0-439fce64 c=2 goodput=79.9 rps p99=28.788666 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A0-439fce64 c=4 goodput=115.2 rps p99=44.627125 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A0-439fce64 c=8 goodput=77.9 rps p99=107.812 ms err=0.0 gen_cpu=0.00
+  EXP-002-b04-A0-439fce64 c=16 goodput=62.0 rps p99=299.9005 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A0-439fce64 c=32 goodput=61.5 rps p99=776.006875 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A0-439fce64 c=64 goodput=62.7 rps p99=1492.84525 ms err=0.0010615711252653928 gen_cpu=0.01
+  EXP-002-b04-A0-439fce64 c=128 goodput=62.7 rps p99=3324.063791 ms err=0.006335797254487857 gen_cpu=0.01
+  EXP-002-b04-A0-439fce64 c=256 goodput=57.7 rps p99=9198.587916 ms err=0.06981740064446831 gen_cpu=0.01
+  EXP-002-b04-A0-439fce64 c=512 goodput=55.4 rps p99=8870.472292 ms err=0.3709311127933384 gen_cpu=0.02
+  -> ok runtime 217.1 s G*=115.2
+[confirmatory] EXP-002 block 4 position 4 arm A1
+  EXP-002-b04-A1-439fce64 c=1 goodput=90.7 rps p99=19.766042 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A1-439fce64 c=2 goodput=156.5 rps p99=26.575542 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A1-439fce64 c=4 goodput=261.5 rps p99=41.682917 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A1-439fce64 c=8 goodput=175.9 rps p99=116.215208 ms err=0.0 gen_cpu=0.01
+  EXP-002-b04-A1-439fce64 c=16 goodput=152.1 rps p99=364.801875 ms err=0.0 gen_cpu=0.02
+  EXP-002-b04-A1-439fce64 c=32 goodput=152.7 rps p99=2150.973584 ms err=0.0047805302042590175 gen_cpu=0.02
+  EXP-002-b04-A1-439fce64 c=64 goodput=158.9 rps p99=1450.54625 ms err=0.005425709515859766 gen_cpu=0.02
+  EXP-002-b04-A1-439fce64 c=128 goodput=153.1 rps p99=3026.925792 ms err=0.004768097095795405 gen_cpu=0.02
+  EXP-002-b04-A1-439fce64 c=256 goodput=155.1 rps p99=7595.435958 ms err=0.009791400595998296 gen_cpu=0.02
+  EXP-002-b04-A1-439fce64 c=512 goodput=149.9 rps p99=11264.6215 ms err=0.06721991701244813 gen_cpu=0.02
+  -> ok runtime 213.7 s G*=261.46666666666664
+[confirmatory] EXP-002 block 5 position 0 arm A2
+  EXP-002-b05-A2-439fce64 c=1 goodput=21223.2 rps p99=0.079042 ms err=0.0 gen_cpu=0.31
+  EXP-002-b05-A2-439fce64 c=2 goodput=28205.9 rps p99=0.108458 ms err=0.0 gen_cpu=0.47
+  EXP-002-b05-A2-439fce64 c=4 goodput=18820.1 rps p99=0.41525 ms err=0.0 gen_cpu=0.48
+  EXP-002-b05-A2-439fce64 c=8 goodput=10358.0 rps p99=1.649375 ms err=0.0 gen_cpu=0.29
+  EXP-002-b05-A2-439fce64 c=16 goodput=9893.9 rps p99=3.472042 ms err=0.0 gen_cpu=0.27
+  EXP-002-b05-A2-439fce64 c=32 goodput=9824.7 rps p99=7.14025 ms err=0.0 gen_cpu=0.27
+  EXP-002-b05-A2-439fce64 c=64 goodput=9618.5 rps p99=14.392584 ms err=0.0 gen_cpu=0.26
+  EXP-002-b05-A2-439fce64 c=128 goodput=9216.9 rps p99=29.702667 ms err=0.0 gen_cpu=0.25
+  EXP-002-b05-A2-439fce64 c=256 goodput=8364.3 rps p99=67.942041 ms err=0.0 gen_cpu=0.25
+  EXP-002-b05-A2-439fce64 c=512 goodput=6897.4 rps p99=164.983542 ms err=0.0 gen_cpu=0.21
+  -> ok runtime 206.9 s G*=28205.866666666665
+[confirmatory] EXP-002 block 5 position 1 arm A4
+  EXP-002-b05-A4-439fce64 c=1 goodput=54.1 rps p99=19.816667 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A4-439fce64 c=2 goodput=80.5 rps p99=26.793583 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A4-439fce64 c=4 goodput=119.7 rps p99=41.798917 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A4-439fce64 c=8 goodput=75.1 rps p99=113.426125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A4-439fce64 c=16 goodput=75.7 rps p99=423.616542 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A4-439fce64 c=32 goodput=68.3 rps p99=1784.714584 ms err=0.9930364768925278 gen_cpu=0.35
+  EXP-002-b05-A4-439fce64 c=64 goodput=68.5 rps p99=2259.32375 ms err=0.9945841617052245 gen_cpu=0.44
+  EXP-002-b05-A4-439fce64 c=128 goodput=69.3 rps p99=2426.776417 ms err=0.995620148999162 gen_cpu=0.52
+  EXP-002-b05-A4-439fce64 c=256 goodput=72.4 rps p99=2306.826583 ms err=0.9960643332922613 gen_cpu=0.60
+  EXP-002-b05-A4-439fce64 c=512 goodput=59.3 rps p99=3213.40925 ms err=0.9964857693401143 gen_cpu=0.61
+  -> ok runtime 207.8 s G*=119.66666666666667
+[confirmatory] EXP-002 block 5 position 2 arm A3
+  EXP-002-b05-A3-439fce64 c=1 goodput=49.9 rps p99=21.027 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A3-439fce64 c=2 goodput=92.8 rps p99=25.628083 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A3-439fce64 c=4 goodput=155.3 rps p99=29.849625 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A3-439fce64 c=8 goodput=290.9 rps p99=35.420458 ms err=0.0 gen_cpu=0.02
+  EXP-002-b05-A3-439fce64 c=16 goodput=537.5 rps p99=49.03175 ms err=0.0 gen_cpu=0.05
+  EXP-002-b05-A3-439fce64 c=32 goodput=712.8 rps p99=66.07075 ms err=0.0 gen_cpu=0.07
+  EXP-002-b05-A3-439fce64 c=64 goodput=1021.3 rps p99=73.977667 ms err=0.0 gen_cpu=0.10
+  EXP-002-b05-A3-439fce64 c=128 goodput=1015.0 rps p99=146.83575 ms err=0.0 gen_cpu=0.10
+  EXP-002-b05-A3-439fce64 c=256 goodput=1024.9 rps p99=272.909583 ms err=0.0 gen_cpu=0.10
+  EXP-002-b05-A3-439fce64 c=512 goodput=1021.9 rps p99=535.650875 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1024.9333333333334
+[confirmatory] EXP-002 block 5 position 3 arm A1
+  EXP-002-b05-A1-439fce64 c=1 goodput=90.6 rps p99=19.653875 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A1-439fce64 c=2 goodput=161.2 rps p99=26.408416 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A1-439fce64 c=4 goodput=286.1 rps p99=40.666959 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A1-439fce64 c=8 goodput=177.3 rps p99=115.676167 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A1-439fce64 c=16 goodput=145.8 rps p99=314.897333 ms err=0.0 gen_cpu=0.02
+  EXP-002-b05-A1-439fce64 c=32 goodput=147.2 rps p99=935.830959 ms err=0.003160270880361174 gen_cpu=0.02
+  EXP-002-b05-A1-439fce64 c=64 goodput=153.4 rps p99=1354.653584 ms err=0.008189655172413794 gen_cpu=0.02
+  EXP-002-b05-A1-439fce64 c=128 goodput=164.2 rps p99=2529.38925 ms err=0.014405762304921969 gen_cpu=0.02
+  EXP-002-b05-A1-439fce64 c=256 goodput=159.0 rps p99=6864.076 ms err=0.033630470016207455 gen_cpu=0.02
+  EXP-002-b05-A1-439fce64 c=512 goodput=160.4 rps p99=11947.060166 ms err=0.054245283018867926 gen_cpu=0.02
+  -> ok runtime 214.2 s G*=286.06666666666666
+[confirmatory] EXP-002 block 5 position 4 arm A0
+  EXP-002-b05-A0-439fce64 c=1 goodput=53.6 rps p99=19.840417 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A0-439fce64 c=2 goodput=79.5 rps p99=28.240583 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A0-439fce64 c=4 goodput=114.3 rps p99=45.288916 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A0-439fce64 c=8 goodput=72.9 rps p99=117.327375 ms err=0.0 gen_cpu=0.00
+  EXP-002-b05-A0-439fce64 c=16 goodput=59.6 rps p99=326.219083 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A0-439fce64 c=32 goodput=60.0 rps p99=759.59525 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A0-439fce64 c=64 goodput=60.3 rps p99=1730.652958 ms err=0.0 gen_cpu=0.01
+  EXP-002-b05-A0-439fce64 c=128 goodput=58.2 rps p99=3837.457459 ms err=0.002285714285714286 gen_cpu=0.01
+  EXP-002-b05-A0-439fce64 c=256 goodput=59.8 rps p99=8520.555333 ms err=0.07430340557275542 gen_cpu=0.01
+  EXP-002-b05-A0-439fce64 c=512 goodput=55.2 rps p99=9077.389541 ms err=0.37225170583775585 gen_cpu=0.02
+  -> ok runtime 218.0 s G*=114.33333333333333
+[confirmatory] EXP-002 block 6 position 0 arm A0
+  EXP-002-b06-A0-439fce64 c=1 goodput=54.2 rps p99=20.013625 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A0-439fce64 c=2 goodput=49.7 rps p99=50.812125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A0-439fce64 c=4 goodput=113.6 rps p99=46.926375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A0-439fce64 c=8 goodput=71.8 rps p99=117.476375 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A0-439fce64 c=16 goodput=56.2 rps p99=339.512375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A0-439fce64 c=32 goodput=57.3 rps p99=734.655708 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A0-439fce64 c=64 goodput=56.9 rps p99=2107.376667 ms err=0.009280742459396751 gen_cpu=0.01
+  EXP-002-b06-A0-439fce64 c=128 goodput=57.7 rps p99=3854.101125 ms err=0.0011534025374855825 gen_cpu=0.01
+  EXP-002-b06-A0-439fce64 c=256 goodput=53.5 rps p99=9019.048333 ms err=0.09582863585118377 gen_cpu=0.01
+  EXP-002-b06-A0-439fce64 c=512 goodput=54.3 rps p99=9242.771 ms err=0.4189864382583869 gen_cpu=0.02
+  -> ok runtime 219.7 s G*=113.6
+[confirmatory] EXP-002 block 6 position 1 arm A2
+  EXP-002-b06-A2-439fce64 c=1 goodput=21302.1 rps p99=0.079125 ms err=0.0 gen_cpu=0.31
+  EXP-002-b06-A2-439fce64 c=2 goodput=28133.1 rps p99=0.108 ms err=0.0 gen_cpu=0.47
+  EXP-002-b06-A2-439fce64 c=4 goodput=18849.1 rps p99=0.411958 ms err=0.0 gen_cpu=0.46
+  EXP-002-b06-A2-439fce64 c=8 goodput=10330.8 rps p99=1.630166 ms err=0.0 gen_cpu=0.29
+  EXP-002-b06-A2-439fce64 c=16 goodput=9708.1 rps p99=3.62775 ms err=0.0 gen_cpu=0.27
+  EXP-002-b06-A2-439fce64 c=32 goodput=9762.8 rps p99=7.244666 ms err=0.0 gen_cpu=0.26
+  EXP-002-b06-A2-439fce64 c=64 goodput=9574.5 rps p99=14.469625 ms err=0.0 gen_cpu=0.26
+  EXP-002-b06-A2-439fce64 c=128 goodput=9107.3 rps p99=30.146834 ms err=0.0 gen_cpu=0.25
+  EXP-002-b06-A2-439fce64 c=256 goodput=8560.1 rps p99=64.061042 ms err=0.0 gen_cpu=0.24
+  EXP-002-b06-A2-439fce64 c=512 goodput=6973.2 rps p99=162.90925 ms err=0.0 gen_cpu=0.21
+  -> ok runtime 206.9 s G*=28133.133333333335
+[confirmatory] EXP-002 block 6 position 2 arm A1
+  EXP-002-b06-A1-439fce64 c=1 goodput=91.3 rps p99=19.657417 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A1-439fce64 c=2 goodput=159.0 rps p99=26.406041 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A1-439fce64 c=4 goodput=265.3 rps p99=42.052625 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A1-439fce64 c=8 goodput=176.5 rps p99=115.464333 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A1-439fce64 c=16 goodput=155.7 rps p99=358.270583 ms err=0.0 gen_cpu=0.02
+  EXP-002-b06-A1-439fce64 c=32 goodput=160.5 rps p99=702.854541 ms err=0.0024865312888520514 gen_cpu=0.02
+  EXP-002-b06-A1-439fce64 c=64 goodput=164.5 rps p99=1136.430292 ms err=0.015955325089748704 gen_cpu=0.02
+  EXP-002-b06-A1-439fce64 c=128 goodput=173.5 rps p99=2626.121333 ms err=0.006870229007633588 gen_cpu=0.02
+  EXP-002-b06-A1-439fce64 c=256 goodput=165.5 rps p99=8541.342375 ms err=0.036490683229813664 gen_cpu=0.02
+  EXP-002-b06-A1-439fce64 c=512 goodput=179.6 rps p99=11433.085375 ms err=0.04298401420959148 gen_cpu=0.03
+  -> ok runtime 215.1 s G*=265.26666666666665
+[confirmatory] EXP-002 block 6 position 3 arm A4
+  EXP-002-b06-A4-439fce64 c=1 goodput=54.1 rps p99=20.190167 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A4-439fce64 c=2 goodput=80.0 rps p99=27.699375 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A4-439fce64 c=4 goodput=115.2 rps p99=46.872584 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A4-439fce64 c=8 goodput=71.2 rps p99=117.3125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A4-439fce64 c=16 goodput=71.0 rps p99=347.805708 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A4-439fce64 c=32 goodput=65.0 rps p99=2093.189166 ms err=0.9935096057834405 gen_cpu=0.36
+  EXP-002-b06-A4-439fce64 c=64 goodput=65.4 rps p99=2788.396 ms err=0.9947809987923412 gen_cpu=0.43
+  EXP-002-b06-A4-439fce64 c=128 goodput=66.5 rps p99=2489.026708 ms err=0.9957542127833541 gen_cpu=0.52
+  EXP-002-b06-A4-439fce64 c=256 goodput=70.6 rps p99=2620.390416 ms err=0.9961501128791266 gen_cpu=0.60
+  EXP-002-b06-A4-439fce64 c=512 goodput=56.7 rps p99=3453.199375 ms err=0.9965300032250558 gen_cpu=0.61
+  -> ok runtime 207.8 s G*=115.2
+[confirmatory] EXP-002 block 6 position 4 arm A3
+  EXP-002-b06-A3-439fce64 c=1 goodput=49.9 rps p99=21.470333 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A3-439fce64 c=2 goodput=93.5 rps p99=25.718833 ms err=0.0 gen_cpu=0.00
+  EXP-002-b06-A3-439fce64 c=4 goodput=156.3 rps p99=29.573208 ms err=0.0 gen_cpu=0.01
+  EXP-002-b06-A3-439fce64 c=8 goodput=289.9 rps p99=35.812792 ms err=0.0 gen_cpu=0.02
+  EXP-002-b06-A3-439fce64 c=16 goodput=540.1 rps p99=44.332792 ms err=0.0 gen_cpu=0.05
+  EXP-002-b06-A3-439fce64 c=32 goodput=722.3 rps p99=67.873417 ms err=0.0 gen_cpu=0.07
+  EXP-002-b06-A3-439fce64 c=64 goodput=1016.3 rps p99=75.594625 ms err=0.0 gen_cpu=0.10
+  EXP-002-b06-A3-439fce64 c=128 goodput=1029.0 rps p99=140.988791 ms err=0.0 gen_cpu=0.10
+  EXP-002-b06-A3-439fce64 c=256 goodput=1033.5 rps p99=271.435209 ms err=0.0 gen_cpu=0.10
+  EXP-002-b06-A3-439fce64 c=512 goodput=1014.2 rps p99=539.704 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1033.5333333333333
+[confirmatory] EXP-002 block 7 position 0 arm A1
+  EXP-002-b07-A1-439fce64 c=1 goodput=89.9 rps p99=19.453 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A1-439fce64 c=2 goodput=114.1 rps p99=50.614625 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A1-439fce64 c=4 goodput=260.1 rps p99=42.61075 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A1-439fce64 c=8 goodput=186.6 rps p99=107.213875 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A1-439fce64 c=16 goodput=159.3 rps p99=295.340625 ms err=0.0 gen_cpu=0.02
+  EXP-002-b07-A1-439fce64 c=32 goodput=173.3 rps p99=717.507375 ms err=0.00421455938697318 gen_cpu=0.02
+  EXP-002-b07-A1-439fce64 c=64 goodput=174.9 rps p99=1261.844875 ms err=0.004554079696394687 gen_cpu=0.02
+  EXP-002-b07-A1-439fce64 c=128 goodput=178.9 rps p99=2511.337166 ms err=0.00959409594095941 gen_cpu=0.02
+  EXP-002-b07-A1-439fce64 c=256 goodput=168.9 rps p99=5966.867666 ms err=0.019357336430507164 gen_cpu=0.02
+  EXP-002-b07-A1-439fce64 c=512 goodput=175.9 rps p99=10991.09225 ms err=0.09685147159479808 gen_cpu=0.03
+  -> ok runtime 213.3 s G*=260.06666666666666
+[confirmatory] EXP-002 block 7 position 1 arm A0
+  EXP-002-b07-A0-439fce64 c=1 goodput=53.5 rps p99=20.098541 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A0-439fce64 c=2 goodput=79.1 rps p99=27.964625 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A0-439fce64 c=4 goodput=116.1 rps p99=43.493667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A0-439fce64 c=8 goodput=73.2 rps p99=116.996625 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A0-439fce64 c=16 goodput=57.5 rps p99=326.978667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A0-439fce64 c=32 goodput=58.4 rps p99=709.862208 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A0-439fce64 c=64 goodput=58.4 rps p99=1669.969458 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A0-439fce64 c=128 goodput=56.9 rps p99=3549.390375 ms err=0.004662004662004662 gen_cpu=0.01
+  EXP-002-b07-A0-439fce64 c=256 goodput=52.1 rps p99=9421.256666 ms err=0.04866180048661801 gen_cpu=0.01
+  EXP-002-b07-A0-439fce64 c=512 goodput=54.0 rps p99=8493.658833 ms err=0.29071803852889666 gen_cpu=0.02
+  -> ok runtime 215.7 s G*=116.06666666666666
+[confirmatory] EXP-002 block 7 position 2 arm A2
+  EXP-002-b07-A2-439fce64 c=1 goodput=21322.6 rps p99=0.07875 ms err=0.0 gen_cpu=0.31
+  EXP-002-b07-A2-439fce64 c=2 goodput=28101.1 rps p99=0.10875 ms err=0.0 gen_cpu=0.47
+  EXP-002-b07-A2-439fce64 c=4 goodput=18797.2 rps p99=0.413333 ms err=0.0 gen_cpu=0.47
+  EXP-002-b07-A2-439fce64 c=8 goodput=10403.8 rps p99=1.640375 ms err=0.0 gen_cpu=0.28
+  EXP-002-b07-A2-439fce64 c=16 goodput=9944.9 rps p99=3.514167 ms err=0.0 gen_cpu=0.27
+  EXP-002-b07-A2-439fce64 c=32 goodput=9795.6 rps p99=7.210125 ms err=0.0 gen_cpu=0.26
+  EXP-002-b07-A2-439fce64 c=64 goodput=9607.2 rps p99=14.591458 ms err=0.0 gen_cpu=0.26
+  EXP-002-b07-A2-439fce64 c=128 goodput=8534.9 rps p99=30.977917 ms err=0.0 gen_cpu=0.23
+  EXP-002-b07-A2-439fce64 c=256 goodput=8072.6 rps p99=65.191 ms err=0.00012386048355132777 gen_cpu=0.23
+  EXP-002-b07-A2-439fce64 c=512 goodput=6968.9 rps p99=164.156625 ms err=0.0 gen_cpu=0.21
+  -> ok runtime 207.3 s G*=28101.133333333335
+[confirmatory] EXP-002 block 7 position 3 arm A3
+  EXP-002-b07-A3-439fce64 c=1 goodput=50.0 rps p99=20.978667 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A3-439fce64 c=2 goodput=92.8 rps p99=25.791291 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A3-439fce64 c=4 goodput=156.5 rps p99=29.653167 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A3-439fce64 c=8 goodput=291.4 rps p99=34.946417 ms err=0.0 gen_cpu=0.02
+  EXP-002-b07-A3-439fce64 c=16 goodput=535.5 rps p99=49.029916 ms err=0.0 gen_cpu=0.05
+  EXP-002-b07-A3-439fce64 c=32 goodput=707.0 rps p99=68.476541 ms err=0.0 gen_cpu=0.07
+  EXP-002-b07-A3-439fce64 c=64 goodput=1007.7 rps p99=76.092958 ms err=0.0 gen_cpu=0.10
+  EXP-002-b07-A3-439fce64 c=128 goodput=1019.4 rps p99=145.789875 ms err=0.0 gen_cpu=0.10
+  EXP-002-b07-A3-439fce64 c=256 goodput=1020.5 rps p99=276.179959 ms err=0.0 gen_cpu=0.10
+  EXP-002-b07-A3-439fce64 c=512 goodput=1024.2 rps p99=541.338209 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1024.2
+[confirmatory] EXP-002 block 7 position 4 arm A4
+  EXP-002-b07-A4-439fce64 c=1 goodput=54.2 rps p99=19.995125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A4-439fce64 c=2 goodput=59.7 rps p99=51.530542 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A4-439fce64 c=4 goodput=114.7 rps p99=42.799958 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A4-439fce64 c=8 goodput=79.1 rps p99=109.011167 ms err=0.0 gen_cpu=0.00
+  EXP-002-b07-A4-439fce64 c=16 goodput=78.7 rps p99=402.454584 ms err=0.0 gen_cpu=0.01
+  EXP-002-b07-A4-439fce64 c=32 goodput=70.7 rps p99=1914.5495 ms err=0.9930707488946505 gen_cpu=0.36
+  EXP-002-b07-A4-439fce64 c=64 goodput=70.9 rps p99=2181.0345 ms err=0.9945085288121597 gen_cpu=0.42
+  EXP-002-b07-A4-439fce64 c=128 goodput=72.0 rps p99=2383.535375 ms err=0.9955199548676935 gen_cpu=0.53
+  EXP-002-b07-A4-439fce64 c=256 goodput=74.3 rps p99=2388.4555 ms err=0.9959840515656431 gen_cpu=0.61
+  EXP-002-b07-A4-439fce64 c=512 goodput=58.3 rps p99=2954.516625 ms err=0.99649535985645 gen_cpu=0.61
+  -> ok runtime 207.6 s G*=114.73333333333333
+[confirmatory] EXP-002 block 8 position 0 arm A1
+  EXP-002-b08-A1-439fce64 c=1 goodput=88.1 rps p99=19.591208 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A1-439fce64 c=2 goodput=125.0 rps p99=54.765417 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A1-439fce64 c=4 goodput=257.6 rps p99=44.211208 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A1-439fce64 c=8 goodput=179.3 rps p99=113.211 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A1-439fce64 c=16 goodput=146.1 rps p99=407.319209 ms err=0.0 gen_cpu=0.02
+  EXP-002-b08-A1-439fce64 c=32 goodput=155.7 rps p99=829.972791 ms err=0.002987622705932565 gen_cpu=0.02
+  EXP-002-b08-A1-439fce64 c=64 goodput=165.2 rps p99=1421.551458 ms err=0.006016847172081829 gen_cpu=0.02
+  EXP-002-b08-A1-439fce64 c=128 goodput=159.6 rps p99=2742.664709 ms err=0.011560693641618497 gen_cpu=0.02
+  EXP-002-b08-A1-439fce64 c=256 goodput=154.5 rps p99=5510.66525 ms err=0.017796610169491526 gen_cpu=0.02
+  EXP-002-b08-A1-439fce64 c=512 goodput=149.8 rps p99=10546.336416 ms err=0.10939357907253269 gen_cpu=0.03
+  -> ok runtime 214.3 s G*=257.6
+[confirmatory] EXP-002 block 8 position 1 arm A2
+  EXP-002-b08-A2-439fce64 c=1 goodput=21102.7 rps p99=0.080042 ms err=0.0 gen_cpu=0.31
+  EXP-002-b08-A2-439fce64 c=2 goodput=27586.5 rps p99=0.115125 ms err=0.0 gen_cpu=0.48
+  EXP-002-b08-A2-439fce64 c=4 goodput=18693.4 rps p99=0.418125 ms err=0.0 gen_cpu=0.47
+  EXP-002-b08-A2-439fce64 c=8 goodput=10330.1 rps p99=1.650667 ms err=0.0 gen_cpu=0.29
+  EXP-002-b08-A2-439fce64 c=16 goodput=9884.3 rps p99=3.56725 ms err=0.0 gen_cpu=0.27
+  EXP-002-b08-A2-439fce64 c=32 goodput=9780.9 rps p99=7.142708 ms err=0.0 gen_cpu=0.27
+  EXP-002-b08-A2-439fce64 c=64 goodput=9567.9 rps p99=14.382667 ms err=0.0 gen_cpu=0.26
+  EXP-002-b08-A2-439fce64 c=128 goodput=8719.7 rps p99=30.546292 ms err=0.0 gen_cpu=0.24
+  EXP-002-b08-A2-439fce64 c=256 goodput=7823.9 rps p99=66.661958 ms err=0.00035774823042393163 gen_cpu=0.22
+  EXP-002-b08-A2-439fce64 c=512 goodput=6968.5 rps p99=163.542 ms err=0.0 gen_cpu=0.21
+  -> ok runtime 207.2 s G*=27586.533333333333
+[confirmatory] EXP-002 block 8 position 2 arm A0
+  EXP-002-b08-A0-439fce64 c=1 goodput=53.9 rps p99=20.150042 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A0-439fce64 c=2 goodput=79.3 rps p99=28.537708 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A0-439fce64 c=4 goodput=114.9 rps p99=44.047625 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A0-439fce64 c=8 goodput=79.9 rps p99=105.676833 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A0-439fce64 c=16 goodput=62.8 rps p99=301.890916 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A0-439fce64 c=32 goodput=63.7 rps p99=670.801458 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A0-439fce64 c=64 goodput=63.9 rps p99=1529.772375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A0-439fce64 c=128 goodput=63.0 rps p99=3096.636375 ms err=0.009433962264150943 gen_cpu=0.01
+  EXP-002-b08-A0-439fce64 c=256 goodput=61.6 rps p99=7419.96525 ms err=0.032460732984293195 gen_cpu=0.01
+  EXP-002-b08-A0-439fce64 c=512 goodput=62.3 rps p99=9421.951791 ms err=0.252 gen_cpu=0.02
+  -> ok runtime 215.3 s G*=114.93333333333334
+[confirmatory] EXP-002 block 8 position 3 arm A3
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 block 8 position 4 arm A4
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 block 9 position 0 arm A2
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 block 9 position 1 arm A3
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 block 9 position 2 arm A0
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 block 9 position 3 arm A1
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 block 9 position 4 arm A4
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 re-attempt 1 block 8 arm A3
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 re-attempt 1 block 8 arm A4
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 re-attempt 1 block 9 arm A0
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 re-attempt 1 block 9 arm A1
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 re-attempt 1 block 9 arm A2
+  -> excluded runtime 1.1 s G*=None
+[confirmatory] EXP-002 re-attempt 1 block 9 arm A3
+  EXP-002-b09-A3-439fce64-r1 c=1 goodput=50.1 rps p99=21.501125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A3-439fce64-r1 c=2 goodput=93.1 rps p99=25.609833 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A3-439fce64-r1 c=4 goodput=154.8 rps p99=29.960583 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A3-439fce64-r1 c=8 goodput=290.9 rps p99=34.881375 ms err=0.0 gen_cpu=0.02
+  EXP-002-b09-A3-439fce64-r1 c=16 goodput=536.0 rps p99=52.6515 ms err=0.0 gen_cpu=0.05
+  EXP-002-b09-A3-439fce64-r1 c=32 goodput=712.4 rps p99=68.438875 ms err=0.0 gen_cpu=0.07
+  EXP-002-b09-A3-439fce64-r1 c=64 goodput=1009.4 rps p99=75.792625 ms err=0.0 gen_cpu=0.10
+  EXP-002-b09-A3-439fce64-r1 c=128 goodput=1025.7 rps p99=141.974833 ms err=0.0 gen_cpu=0.10
+  EXP-002-b09-A3-439fce64-r1 c=256 goodput=1014.8 rps p99=283.079625 ms err=0.0 gen_cpu=0.10
+  EXP-002-b09-A3-439fce64-r1 c=512 goodput=1020.0 rps p99=550.69925 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1025.6666666666667
+[confirmatory] EXP-002 re-attempt 1 block 9 arm A4
+  EXP-002-b09-A4-439fce64-r1 c=1 goodput=54.2 rps p99=19.90975 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A4-439fce64-r1 c=2 goodput=79.2 rps p99=28.614208 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A4-439fce64-r1 c=4 goodput=114.9 rps p99=42.727209 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A4-439fce64-r1 c=8 goodput=71.5 rps p99=116.444833 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A4-439fce64-r1 c=16 goodput=72.1 rps p99=449.999375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A4-439fce64-r1 c=32 goodput=65.4 rps p99=1852.776458 ms err=0.9929964589639614 gen_cpu=0.34
+  EXP-002-b09-A4-439fce64-r1 c=64 goodput=65.2 rps p99=2402.72375 ms err=0.9950108404540238 gen_cpu=0.44
+  EXP-002-b09-A4-439fce64-r1 c=128 goodput=66.7 rps p99=2356.680958 ms err=0.995763949133535 gen_cpu=0.52
+  EXP-002-b09-A4-439fce64-r1 c=256 goodput=70.2 rps p99=2248.834041 ms err=0.9961764289371344 gen_cpu=0.60
+  EXP-002-b09-A4-439fce64-r1 c=512 goodput=57.9 rps p99=3755.130292 ms err=0.9965332694304657 gen_cpu=0.62
+  -> ok runtime 207.8 s G*=114.86666666666666
+[confirmatory] EXP-002 re-attempt 2 block 8 arm A3
+  EXP-002-b08-A3-439fce64-r2 c=1 goodput=49.3 rps p99=21.806541 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A3-439fce64-r2 c=2 goodput=93.1 rps p99=25.538417 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A3-439fce64-r2 c=4 goodput=155.1 rps p99=30.351667 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A3-439fce64-r2 c=8 goodput=289.8 rps p99=35.015417 ms err=0.0 gen_cpu=0.02
+  EXP-002-b08-A3-439fce64-r2 c=16 goodput=537.3 rps p99=50.515584 ms err=0.0 gen_cpu=0.05
+  EXP-002-b08-A3-439fce64-r2 c=32 goodput=703.2 rps p99=67.663083 ms err=0.0 gen_cpu=0.07
+  EXP-002-b08-A3-439fce64-r2 c=64 goodput=1019.7 rps p99=75.23725 ms err=0.0 gen_cpu=0.10
+  EXP-002-b08-A3-439fce64-r2 c=128 goodput=1032.4 rps p99=139.699666 ms err=0.0 gen_cpu=0.10
+  EXP-002-b08-A3-439fce64-r2 c=256 goodput=1023.1 rps p99=276.472917 ms err=0.0 gen_cpu=0.10
+  EXP-002-b08-A3-439fce64-r2 c=512 goodput=1019.1 rps p99=568.0275 ms err=0.0 gen_cpu=0.10
+  -> ok runtime 207.0 s G*=1032.4
+[confirmatory] EXP-002 re-attempt 2 block 8 arm A4
+  EXP-002-b08-A4-439fce64-r2 c=1 goodput=54.1 rps p99=19.799625 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A4-439fce64-r2 c=2 goodput=79.9 rps p99=27.696667 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A4-439fce64-r2 c=4 goodput=113.6 rps p99=43.112792 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A4-439fce64-r2 c=8 goodput=76.2 rps p99=109.883375 ms err=0.0 gen_cpu=0.00
+  EXP-002-b08-A4-439fce64-r2 c=16 goodput=77.3 rps p99=413.119916 ms err=0.0 gen_cpu=0.01
+  EXP-002-b08-A4-439fce64-r2 c=32 goodput=69.3 rps p99=1934.040833 ms err=0.9929802772790475 gen_cpu=0.36
+  EXP-002-b08-A4-439fce64-r2 c=64 goodput=68.7 rps p99=2507.300959 ms err=0.994700801053666 gen_cpu=0.44
+  EXP-002-b08-A4-439fce64-r2 c=128 goodput=70.3 rps p99=2448.11775 ms err=0.9955614137781464 gen_cpu=0.53
+  EXP-002-b08-A4-439fce64-r2 c=256 goodput=72.7 rps p99=2132.157125 ms err=0.9960365509994074 gen_cpu=0.60
+  EXP-002-b08-A4-439fce64-r2 c=512 goodput=59.9 rps p99=3179.711625 ms err=0.9963885284559051 gen_cpu=0.61
+  -> ok runtime 207.7 s G*=113.6
+[confirmatory] EXP-002 re-attempt 2 block 9 arm A0
+  EXP-002-b09-A0-439fce64-r2 c=1 goodput=54.6 rps p99=19.829125 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A0-439fce64-r2 c=2 goodput=80.3 rps p99=27.935417 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A0-439fce64-r2 c=4 goodput=113.3 rps p99=45.398166 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A0-439fce64-r2 c=8 goodput=79.8 rps p99=107.02225 ms err=0.0 gen_cpu=0.00
+  EXP-002-b09-A0-439fce64-r2 c=16 goodput=63.3 rps p99=294.653541 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A0-439fce64-r2 c=32 goodput=63.9 rps p99=688.946792 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A0-439fce64-r2 c=64 goodput=62.5 rps p99=1573.821042 ms err=0.0010649627263045794 gen_cpu=0.01
+  EXP-002-b09-A0-439fce64-r2 c=128 goodput=63.9 rps p99=3197.690792 ms err=0.004153686396677051 gen_cpu=0.01
+  EXP-002-b09-A0-439fce64-r2 c=256 goodput=61.9 rps p99=8207.352 ms err=0.016931216931216932 gen_cpu=0.01
+  EXP-002-b09-A0-439fce64-r2 c=512 goodput=54.7 rps p99=8561.613541 ms err=0.26235399820305483 gen_cpu=0.02
+  -> ok runtime 216.4 s G*=113.26666666666667
+[confirmatory] EXP-002 re-attempt 2 block 9 arm A1
+  EXP-002-b09-A1-439fce64-r2 c=1 goodput=91.0 rps p99=19.545042 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A1-439fce64-r2 c=2 goodput=155.4 rps p99=27.884958 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A1-439fce64-r2 c=4 goodput=246.5 rps p99=45.473625 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A1-439fce64-r2 c=8 goodput=175.3 rps p99=114.930375 ms err=0.0 gen_cpu=0.01
+  EXP-002-b09-A1-439fce64-r2 c=16 goodput=144.7 rps p99=315.191583 ms err=0.0 gen_cpu=0.02
+  EXP-002-b09-A1-439fce64-r2 c=32 goodput=146.0 rps p99=1579.541625 ms err=0.0018231540565177757 gen_cpu=0.02
+  EXP-002-b09-A1-439fce64-r2 c=64 goodput=160.9 rps p99=1323.900958 ms err=0.006584362139917695 gen_cpu=0.02
+  EXP-002-b09-A1-439fce64-r2 c=128 goodput=170.0 rps p99=2464.468583 ms err=0.010861132660977503 gen_cpu=0.02
+  EXP-002-b09-A1-439fce64-r2 c=256 goodput=172.6 rps p99=7011.01225 ms err=0.012585812356979404 gen_cpu=0.02
+  EXP-002-b09-A1-439fce64-r2 c=512 goodput=176.2 rps p99=9923.058084 ms err=0.1730287859824781 gen_cpu=0.03
+  -> ok runtime 213.8 s G*=246.53333333333333
+[confirmatory] EXP-002 re-attempt 2 block 9 arm A2
+  EXP-002-b09-A2-439fce64-r2 c=1 goodput=21570.2 rps p99=0.080708 ms err=0.0 gen_cpu=0.30
+  EXP-002-b09-A2-439fce64-r2 c=2 goodput=28633.9 rps p99=0.108167 ms err=0.0 gen_cpu=0.46
+  EXP-002-b09-A2-439fce64-r2 c=4 goodput=19007.0 rps p99=0.410958 ms err=0.0 gen_cpu=0.46
+  EXP-002-b09-A2-439fce64-r2 c=8 goodput=10318.5 rps p99=1.637792 ms err=0.0 gen_cpu=0.29
+  EXP-002-b09-A2-439fce64-r2 c=16 goodput=9927.0 rps p99=3.495 ms err=0.0 gen_cpu=0.27
+  EXP-002-b09-A2-439fce64-r2 c=32 goodput=9822.8 rps p99=7.148833 ms err=0.0 gen_cpu=0.26
+  EXP-002-b09-A2-439fce64-r2 c=64 goodput=9617.7 rps p99=14.657667 ms err=0.0 gen_cpu=0.26
+  EXP-002-b09-A2-439fce64-r2 c=128 goodput=8603.6 rps p99=31.393042 ms err=0.0 gen_cpu=0.23
+  EXP-002-b09-A2-439fce64-r2 c=256 goodput=7942.9 rps p99=65.742083 ms err=0.0003104521693894161 gen_cpu=0.22
+  EXP-002-b09-A2-439fce64-r2 c=512 goodput=6978.4 rps p99=164.905292 ms err=0.0 gen_cpu=0.21
+  -> ok runtime 207.1 s G*=28633.866666666665
+results: results/raw/EXP-002/EXP-002-M3
+runs: 62, not ok: 12, runtime 10540.9 s
+EXP-002 exit 0
+== end 2026-11-25T06:40:02Z

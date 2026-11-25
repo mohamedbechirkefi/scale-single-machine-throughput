@@ -1,0 +1,28 @@
+{
+ "arm": "A4",
+ "arm_position": 4,
+ "block": 8,
+ "config_hash": "439fce64bd3a896e009ac89786e6630bc804906d317a3541f28fdba5d4722be0",
+ "endpoint": "item",
+ "experiment_id": "EXP-002",
+ "factor": "bounded_concurrency",
+ "failure": "idle probe failed: 16.2 % >= 15.0 %",
+ "kind": "closed_sweep",
+ "label": "confirmatory",
+ "levels": [],
+ "run_id": "EXP-002-b08-A4-439fce64-r1",
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 3552469767885977026,
+  "requests": 7800508690679584880,
+  "study": 20261124
+ },
+ "server_stats": {},
+ "status": "excluded",
+ "summary": {
+  "c_at_peak": null,
+  "c_sat": null,
+  "peak_goodput_rps": null
+ }
+}

@@ -1,0 +1,115 @@
+{
+ "command": [
+  "scale",
+  "run",
+  "experiments/EXP-002.json",
+  "--out",
+  "results/raw/EXP-002/EXP-002-M3"
+ ],
+ "config": {
+  "ab_crosscheck": false,
+  "arms": [
+   "A0",
+   "A1",
+   "A2",
+   "A3",
+   "A4"
+  ],
+  "blocks": 10,
+  "concurrency": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512
+  ],
+  "config_version": "1.0",
+  "description": "Primary one-factor-at-a-time comparison.",
+  "endpoint": "item",
+  "experiment_id": "EXP-002",
+  "generator_ceiling_rps": 27919.4,
+  "generator_processes": 1,
+  "idle_probe_enforce": true,
+  "idle_probe_threshold_pct": 15.0,
+  "kind": "closed_sweep",
+  "label": "confirmatory",
+  "measure_s": 15.0,
+  "protocol_path": "research/experiments/EXP-002/protocol.md",
+  "protocol_sha256": "8da83b076a0785e58c3749218e119cd7885f8879f10eab309af13644a4da1171",
+  "rates_rps": [],
+  "slo_max_error_rate": 0.01,
+  "slo_p99_ms": 50.0,
+  "stall_ms": 0.0,
+  "stall_period_s": 0.0,
+  "study_seed": 20261124,
+  "warmup_s": 5.0,
+  "workload": {
+   "dataset_seed": 20261124,
+   "payload_bytes": 256,
+   "rows": 200000,
+   "write_fraction": 0.02,
+   "zipf_s": 0.99
+  }
+ },
+ "config_hash": "439fce64bd3a896e009ac89786e6630bc804906d317a3541f28fdba5d4722be0",
+ "cpu": {
+  "brand": "Apple M1 Pro",
+  "logical_cpus": 10,
+  "memory_bytes": 17179869184,
+  "physical_cpus": 10
+ },
+ "dataset_sha256": "7a0c2b88f5e37c20659d0dc9e074785e2247e896245b3eb922edbb156cf57f9b",
+ "finished_utc": "2026-11-25T06:01:18.076800Z",
+ "git": {
+  "dirty": false,
+  "revision": "3fb0c6624873a8335de64477cd65126776ee09c3"
+ },
+ "idle_probe": {
+  "cpu_pct": 2.3,
+  "enforced": true,
+  "interval_s": 1.0,
+  "passed": true,
+  "threshold_pct": 15.0
+ },
+ "label": "confirmatory",
+ "load_average": [
+  2.41,
+  16.13,
+  23.57
+ ],
+ "platform": {
+  "machine": "arm64",
+  "macos": "15.3.1",
+  "python_executable": "python3",
+  "python_implementation": "CPython",
+  "release": "24.3.0",
+  "system": "Darwin"
+ },
+ "power": "Now drawing from 'AC Power'",
+ "run_id": "EXP-002-b07-A3-439fce64",
+ "runner_peak_rss_mb": 132.972544,
+ "runtime_s": 207.00589558299544,
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 3552469767885977026,
+  "requests": 8133770947940053294,
+  "study": 20261124
+ },
+ "server_peak_rss_mb": 1776.59904,
+ "started_utc": "2026-11-25T05:57:51.071584Z",
+ "versions": {
+  "jsonschema": "4.26.0",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "psutil": "7.2.2",
+  "python": "3.12.1",
+  "scale": "0.1.0",
+  "sqlite": "3.43.1"
+ }
+}
