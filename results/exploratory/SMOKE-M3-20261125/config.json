@@ -1,0 +1,40 @@
+{
+ "ab_crosscheck": false,
+ "arms": [
+  "A0",
+  "A2"
+ ],
+ "blocks": 1,
+ "concurrency": [
+  1,
+  8,
+  64
+ ],
+ "config_version": "1.0",
+ "description": "Exploratory smoke matrix: validates harness, schema and metrics.",
+ "endpoint": "item",
+ "experiment_id": "SMOKE",
+ "generator_ceiling_rps": null,
+ "generator_processes": 1,
+ "idle_probe_enforce": false,
+ "idle_probe_threshold_pct": 15.0,
+ "kind": "closed_sweep",
+ "label": "exploratory",
+ "measure_s": 3.0,
+ "protocol_path": null,
+ "protocol_sha256": null,
+ "rates_rps": [],
+ "slo_max_error_rate": 0.01,
+ "slo_p99_ms": 50.0,
+ "stall_ms": 0.0,
+ "stall_period_s": 0.0,
+ "study_seed": 9001,
+ "warmup_s": 2.0,
+ "workload": {
+  "dataset_seed": 20261124,
+  "payload_bytes": 256,
+  "rows": 200000,
+  "write_fraction": 0.02,
+  "zipf_s": 0.99
+ }
+}

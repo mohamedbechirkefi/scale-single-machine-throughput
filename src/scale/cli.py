@@ -123,6 +123,35 @@ def cmd_resolve_ceiling(results_dir: str) -> int:
     return 0
 
 
+def cmd_analyse(experiment: str, results_dir: str, out_dir: str) -> int:
+    """Frozen analysis (scale.analysis) of EXP-001 or EXP-002: analysis.json,
+    metrics.csv and figures under out_dir, built only from validated result files."""
+    from . import analysis as an
+    from .report import load_runs
+
+    runs = load_runs(results_dir)
+    os.makedirs(os.path.join(out_dir, "figures"), exist_ok=True)
+    with open(os.path.join(results_dir, "config.json"), encoding="utf-8") as fh:
+        cfg = json.load(fh)
+    if experiment == "EXP-001":
+        out = an.analyse_exp001(runs)
+        figs = an.figures_exp001(out, os.path.join(out_dir, "figures", "exp001"))
+    elif experiment == "EXP-002":
+        out = an.analyse_exp002(runs, cfg["blocks"], cfg["arms"])
+        figs = an.figures_exp002(out, os.path.join(out_dir, "figures", "exp002"))
+    else:
+        print(f"no frozen analysis for {experiment}", file=sys.stderr)
+        return 2
+    out["results_dir"] = os.path.relpath(os.path.abspath(results_dir), repo_root())
+    out["figures"] = [os.path.relpath(p, out_dir) for p in figs]
+    with open(os.path.join(out_dir, "analysis.json"), "w", encoding="utf-8") as fh:
+        json.dump(out, fh, indent=1, sort_keys=True, default=str)
+        fh.write("\n")
+    an.write_levels_csv(runs, os.path.join(out_dir, "metrics.csv"))
+    print(f"analysis: {os.path.join(out_dir, 'analysis.json')}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
     if argv and argv[0] == "test":  # pass every remaining argument to pytest unchanged
@@ -146,6 +175,10 @@ def main(argv: list[str] | None = None) -> int:
     q.add_argument("results_dir")
     g = sub.add_parser("resolve-ceiling", help="apply the frozen generator-ceiling rule (AM-5) to an EXP-001 results directory")
     g.add_argument("results_dir")
+    z = sub.add_parser("analyse", help="frozen analysis of EXP-001 or EXP-002 from a results directory")
+    z.add_argument("experiment", choices=["EXP-001", "EXP-002"])
+    z.add_argument("results_dir")
+    z.add_argument("--out-dir", required=True)
     t = sub.add_parser("test", help="run the pytest suite")
     t.add_argument("pytest_args", nargs=argparse.REMAINDER)
     a = ap.parse_args(argv)
@@ -164,6 +197,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_resolve_pilot(a.results_dir)
     if a.cmd == "resolve-ceiling":
         return cmd_resolve_ceiling(a.results_dir)
+    if a.cmd == "analyse":
+        return cmd_analyse(a.experiment, a.results_dir, a.out_dir)
     if a.cmd == "test":
         return subprocess.call([sys.executable, "-m", "pytest", *a.pytest_args], cwd=repo_root())
     return 2

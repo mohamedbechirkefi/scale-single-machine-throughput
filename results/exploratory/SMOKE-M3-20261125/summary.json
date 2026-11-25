@@ -1,0 +1,33 @@
+{
+ "degenerate": [
+  "SMOKE-b00-A2-431d6ecd: peak at the lowest swept concurrency c=1; goodput falls as concurrency rises"
+ ],
+ "figures": [
+  "figures/goodput_vs_concurrency.png",
+  "figures/goodput_vs_concurrency.svg"
+ ],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 2,
+ "pilot": {
+  "A2": {
+   "geometric_mean_ratio": 269.5541666666668,
+   "log_ratios": [
+    5.596769359640075
+   ],
+   "n_blocks": 1
+  }
+ },
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 3.4942301249990138,
+  "measure_s": 15.0,
+  "per_run_s": 145.594230124999,
+  "runs": 50,
+  "total_h": 2.0221420850694303,
+  "total_s": 7279.71150624995,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/exploratory/SMOKE-M3-20261125"
+}

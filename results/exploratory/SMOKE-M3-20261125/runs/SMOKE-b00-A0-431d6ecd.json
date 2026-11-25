@@ -1,0 +1,114 @@
+{
+ "arm": "A0",
+ "arm_position": 1,
+ "block": 0,
+ "config_hash": "431d6ecd800772b3bcf2f16596a2f3d726ecd0a67b9d6c438cef7b7435579743",
+ "endpoint": "item",
+ "experiment_id": "SMOKE",
+ "factor": "baseline",
+ "failure": null,
+ "kind": "closed_sweep",
+ "label": "exploratory",
+ "levels": [
+  {
+   "ab_rps": null,
+   "attempts": 180,
+   "concurrency": 1,
+   "connections_finished": 1,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.003504636762864434,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 60.0,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 19.430417,
+   "offered_rate_rps": null,
+   "p50_ms": 16.622542,
+   "p95_ms": 16.865667,
+   "p99_ms": 17.992084,
+   "server_cpu_util": 0.992923316461735,
+   "server_rss_mb": 26.558464,
+   "status_counts": {
+    "200": 180
+   },
+   "transport_errors": 0,
+   "validated_ok": 180,
+   "window_s": 3.0
+  },
+  {
+   "ab_rps": null,
+   "attempts": 240,
+   "concurrency": 8,
+   "connections_finished": 8,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.003829779651767629,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 80.0,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 108.693542,
+   "offered_rate_rps": null,
+   "p50_ms": 100.788959,
+   "p95_ms": 103.067708,
+   "p99_ms": 106.666583,
+   "server_cpu_util": 7.964014841401471,
+   "server_rss_mb": 66.51904,
+   "status_counts": {
+    "200": 240
+   },
+   "transport_errors": 0,
+   "validated_ok": 240,
+   "window_s": 3.0
+  },
+  {
+   "ab_rps": null,
+   "attempts": 186,
+   "concurrency": 64,
+   "connections_finished": 64,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.008962632984064812,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 62.0,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 1480.968334,
+   "offered_rate_rps": null,
+   "p50_ms": 989.816792,
+   "p95_ms": 1382.011,
+   "p99_ms": 1453.213166,
+   "server_cpu_util": 9.798011805507837,
+   "server_rss_mb": 223.428608,
+   "status_counts": {
+    "200": 186
+   },
+   "transport_errors": 0,
+   "validated_ok": 186,
+   "window_s": 3.0
+  }
+ ],
+ "run_id": "SMOKE-b00-A0-431d6ecd",
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 3966828426010927551,
+  "requests": 6999306709508467912,
+  "study": 9001
+ },
+ "server_stats": {
+  "arm": "A0",
+  "cpu_sys_s": 88.267149,
+  "cpu_user_s": 10.821041,
+  "internal_errors": 0,
+  "ru_maxrss_bytes": 223477760
+ },
+ "status": "ok",
+ "summary": {
+  "c_at_peak": 8,
+  "c_sat": 8,
+  "generator_limited_levels": [],
+  "peak_goodput_rps": 80.0
+ }
+}

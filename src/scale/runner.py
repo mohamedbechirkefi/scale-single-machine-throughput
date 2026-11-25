@@ -209,10 +209,11 @@ def summarize(cfg: ExperimentConfig, levels: list[dict[str, Any]]) -> dict[str, 
 
 
 def run_one(cfg: ExperimentConfig, arm: str, block: int, position: int, out_dir: str,
-            repo_root: str, command: list[str], log: Callable[[str], None]) -> tuple[dict, dict]:
+            repo_root: str, command: list[str], log: Callable[[str], None],
+            attempt: int = 0) -> tuple[dict, dict]:
     chash = config_hash(cfg)
     seeds = block_seeds(cfg, block)
-    run_id = f"{cfg.experiment_id}-b{block:02d}-{arm}-{chash[:8]}"
+    run_id = f"{cfg.experiment_id}-b{block:02d}-{arm}-{chash[:8]}" + (f"-r{attempt}" if attempt else "")
     started, t0 = mf.utc_now(), time.perf_counter()
     probe = mf.idle_probe(cfg.idle_probe_threshold_pct, cfg.idle_probe_enforce)
     levels: list[dict[str, Any]] = []
@@ -297,6 +298,20 @@ class _Excluded(Exception):
     pass
 
 
+MAX_REATTEMPTS = 2  # research/protocol.md section 10: at most twice per cell
+
+
+def _record(runs: list[dict[str, Any]], res: dict, man: dict, arm: str, b: int, pos: int,
+            attempt: int, log: Callable[[str], None]) -> None:
+    runs.append({"run_id": res["run_id"], "arm": arm, "block": b, "position": pos,
+                 "attempt": attempt, "sequence_index": len(runs),
+                 "status": res["status"], "failure": res["failure"],
+                 "runtime_s": round(man["runtime_s"], 3),
+                 "peak_goodput_rps": res["summary"]["peak_goodput_rps"]})
+    log(f"  -> {res['status']} runtime {man['runtime_s']:.1f} s"
+        f" G*={res['summary']['peak_goodput_rps']}")
+
+
 def run_experiment(cfg: ExperimentConfig, out_dir: str, repo_root: str, command: list[str],
                    log: Callable[[str], None] = print) -> dict[str, Any]:
     cfg.validate()
@@ -304,17 +319,25 @@ def run_experiment(cfg: ExperimentConfig, out_dir: str, repo_root: str, command:
     with open(os.path.join(out_dir, "config.json"), "w", encoding="utf-8") as fh:
         json.dump(cfg.to_dict(), fh, indent=1, sort_keys=True)
     started, t0 = mf.utc_now(), time.perf_counter()
-    runs = []
+    runs: list[dict[str, Any]] = []
     for b in range(cfg.blocks):
         for pos, arm in enumerate(arm_order(cfg.arms, cfg.study_seed, b)):
             log(f"[{cfg.label}] {cfg.experiment_id} block {b} position {pos} arm {arm}")
             res, man = run_one(cfg, arm, b, pos, out_dir, repo_root, command, log)
-            runs.append({"run_id": res["run_id"], "arm": arm, "block": b, "position": pos,
-                         "status": res["status"], "failure": res["failure"],
-                         "runtime_s": round(man["runtime_s"], 3),
-                         "peak_goodput_rps": res["summary"]["peak_goodput_rps"]})
-            log(f"  -> {res['status']} runtime {man['runtime_s']:.1f} s"
-                f" G*={res['summary']['peak_goodput_rps']}")
+            _record(runs, res, man, arm, b, pos, 0, log)
+    # Protocol section 10: excluded or failed runs of a confirmatory experiment are kept
+    # and re-attempted at the end of the sequence, at most twice per cell, with a new run
+    # id (suffix -r1, -r2); cells still failing are reported missing. Exploratory configs
+    # (the quiet pilot, smoke runs) are never re-attempted: their rules require a repeat.
+    if cfg.label == "confirmatory":
+        for attempt in range(1, MAX_REATTEMPTS + 1):
+            ok_cells = {(r["block"], r["arm"]) for r in runs if r["status"] == "ok"}
+            todo = sorted({(r["block"], r["arm"], r["position"]) for r in runs
+                           if (r["block"], r["arm"]) not in ok_cells})
+            for b, arm, pos in todo:
+                log(f"[{cfg.label}] {cfg.experiment_id} re-attempt {attempt} block {b} arm {arm}")
+                res, man = run_one(cfg, arm, b, pos, out_dir, repo_root, command, log, attempt)
+                _record(runs, res, man, arm, b, pos, attempt, log)
     batch = {"experiment_id": cfg.experiment_id, "label": cfg.label,
              "config_hash": config_hash(cfg), "started_utc": started,
              "finished_utc": mf.utc_now(), "runtime_s": time.perf_counter() - t0, "runs": runs}

@@ -1,0 +1,88 @@
+{
+ "arm": "A0",
+ "arm_position": 0,
+ "block": 0,
+ "config_hash": "11432873ece321c58de62620618d2c2a6138da60379c9d0b3e903965e35f315b",
+ "endpoint": "null",
+ "experiment_id": "SMOKE-NULL",
+ "factor": "baseline",
+ "failure": null,
+ "kind": "closed_sweep",
+ "label": "exploratory",
+ "levels": [
+  {
+   "ab_rps": 28244.04,
+   "attempts": 78746,
+   "concurrency": 1,
+   "connections_finished": 1,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.3040152656690653,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 26248.666666666668,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 0.14325,
+   "offered_rate_rps": null,
+   "p50_ms": 0.036625,
+   "p95_ms": 0.041792,
+   "p99_ms": 0.047375,
+   "server_cpu_util": 0.5532809307394085,
+   "server_rss_mb": 23.904256,
+   "status_counts": {
+    "200": 78746
+   },
+   "transport_errors": 0,
+   "validated_ok": 78746,
+   "window_s": 3.0
+  },
+  {
+   "ab_rps": 28169.5,
+   "attempts": 88086,
+   "concurrency": 8,
+   "connections_finished": 8,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.6049365854702857,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 29362.0,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 1.630125,
+   "offered_rate_rps": null,
+   "p50_ms": 0.225209,
+   "p95_ms": 0.602541,
+   "p99_ms": 0.84875,
+   "server_cpu_util": 1.2933495979068923,
+   "server_rss_mb": 24.772608,
+   "status_counts": {
+    "200": 88086
+   },
+   "transport_errors": 0,
+   "validated_ok": 88086,
+   "window_s": 3.0
+  }
+ ],
+ "run_id": "SMOKE-NULL-b00-A0-11432873",
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 5483423797094325913,
+  "requests": 4514146817211667779,
+  "study": 9002
+ },
+ "server_stats": {
+  "arm": "A0",
+  "cpu_sys_s": 5.232976,
+  "cpu_user_s": 7.9931,
+  "internal_errors": 0,
+  "ru_maxrss_bytes": 25034752
+ },
+ "status": "ok",
+ "summary": {
+  "c_at_peak": 8,
+  "c_sat": 8,
+  "generator_limited_levels": [],
+  "peak_goodput_rps": 29362.0
+ }
+}
