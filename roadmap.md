@@ -8,7 +8,7 @@ Status values: `done`, `in progress`, `planned`, `blocked(<reason>)`, `gated(<ga
 | M0 Bootstrap and feasibility | P0 | 0.5 d | none | done (2026-11-24; see progress.md) | none |
 | M1 Research and preregistration | P0 | 0.5 d | M0 | gate passed: protocol frozen v1.0 (owner-approved 2026-11-24, D-009, `research/freeze.json`); literature open items remain | none for the freeze; EXP-002 c_max and n await the quiet-pilot rule (protocol 7.1) |
 | M2 Core implementation | P0 | 1 d | M1 drafts (implementation may start before the freeze) | done (2026-11-24; see progress.md); amendments D-008 decided by the owner and applied (D-009) | none |
-| M3 Experiments | P0 | 1 to 1.5 d (about 6 h to 11 h machine time) | M2, owner freeze (done) | planned | needs a quiet machine scheduled by the coordinator; order EXP-001 and its ceiling resolution (AM-5, D-011), quiet pilot and resolution, EXP-002, EXP-003, EXP-004 |
+| M3 Experiments | P0 | 1 to 1.5 d (about 6 h to 11 h machine time) | M2, owner freeze (done) | done with documented gaps (2026-11-25) | EXP-001 and EXP-002 complete; EXP-003 not run (four unset parameters, D-014); EXP-004 optional, no frozen config; D-012 reading of the A2 exclusion awaits the owner |
 | M4 Interpretation | P0 | 0.75 d | M3 | planned | none |
 | M5 Interactive experience | P1 | 0.75 d | M4 | planned | none |
 | M6 Release candidate | P0 | 0.5 d | M4, M5 | planned | gated(G-PUBLIC) for any publication |
