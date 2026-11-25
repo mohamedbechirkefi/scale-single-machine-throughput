@@ -97,10 +97,15 @@ def test_missing_record_or_unfrozen_status_is_refused(tmp_path):
 
 
 def test_exp002_deferred_until_resolution(tmp_path):
-    assert "quiet-machine pilot rule" in freeze.deferred_reason("EXP-002", ROOT)
+    assert freeze.deferred_reason("EXP-002", ROOT) is None  # resolved at M3
     assert freeze.deferred_reason("EXP-001", ROOT) is None
-    # A resolution (rule applied, config completed and hashed) makes it acceptable.
     root = _copy_repo(tmp_path)
+    rec = json.load(open(root / "research" / "freeze.json"))
+    for d in rec["deferred"]:
+        d["status"] = "awaiting the quiet-machine pilot"
+    (root / "research" / "freeze.json").write_text(json.dumps(rec))
+    assert "quiet-machine pilot rule" in freeze.deferred_reason("EXP-002", str(root))
+    # A resolution (rule applied, config completed and hashed) makes it acceptable.
     raw = json.load(open(root / "experiments" / "EXP-002.json"))
     raw.update(blocks=10, concurrency=[1, 2, 4, 8, 16, 32, 64, 128], generator_ceiling_rps=30000.0)
     cfg_path = root / "experiments" / "EXP-002.json"

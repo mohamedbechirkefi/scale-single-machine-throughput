@@ -114,3 +114,11 @@ Append-only. Each entry: id, date, decision, decided by, context, alternatives, 
   5. *S3 and drift.* S3 uses the mean goodput over c in {16, 32, 64}, undefined if any of the three cells is generator-limited. Drift: OLS of log G* on arm indicators plus run order (and, separately, position in block), slope intervals by a 2,000-resample block bootstrap; descriptive.
   6. *EXP-001.* Per-level median and range over the five repeats; the item 17 gate uses the median SCALE/ab ratio at c = 32.
 - **Consequences.** Any later change to these readings is an amendment after the freeze and is analysed separately.
+
+## D-013 (2026-11-25): EXP-002 values set by the pre-stated rules (resolution, not an amendment)
+
+- **Decided by:** the frozen rules (protocol section 7.1, pilot-rule-1.0; section 15 AM-5, ceiling-rule-1.0), applied by the AI assistant at M3. No value was chosen by hand.
+- **Inputs.** Confirmatory EXP-001 (`results/raw/EXP-001/EXP-001-M3`, 5 runs, all ok, idle probe 1.9 % to 2.5 %) and the exploratory quiet pilot (`results/raw/PILOT-QUIET/PILOT-QUIET-M3`, 25 runs, all ok, idle probe 2.0 % to 13.0 %, all passed).
+- **Outputs.** `generator_ceiling_rps` = 27919.4 (median of run ceilings 27914.5, 27919.4, 27953.9, 27860.9, 28657.0). Pilot: A1 peaked at c = 4 in every block, A3 at c = 128 or 256, so c_max = 512 (not truncated); between-block SD of log R: A1 0.0208, A2 0.0135, A3 0.0125, A4 0.0103, all at most 0.07, so n = 10.
+- **Effect.** `experiments/EXP-002.json` completed (blocks 10, c in {1, ..., 512}, ceiling 27919.4); its SHA-256 is appended to `research/freeze.json` `configs`, the deferral is marked resolved, and the rule outputs are recorded under `resolutions`. Tests that asserted the deferred state were updated to assert the resolved state.
+- **Disclosure (C4).** The pilot shows effect sizes as a by-product (its per-run G* is in the pilot results). The rule used only peak locations and spreads. Pilot values are never pooled with EXP-002.

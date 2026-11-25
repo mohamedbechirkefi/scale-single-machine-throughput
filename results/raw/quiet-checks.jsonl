@@ -1,0 +1,4 @@
+{"utc": "2026-11-25T01:55:24+00:00", "probes_pct": [11.8, 10.8, 12.1], "load_average": [2.47, 4.07, 3.8], "quiet": true, "top": [[92.5, "deleted"], [7.1, "Creative Cloud UI Helper (Renderer)"], [2.3, "claude"]]}
+{"utc": "2026-11-25T01:56:38+00:00", "probes_pct": [3.5, 1.7, 8.0], "load_average": [1.55, 3.46, 3.59], "quiet": true, "top": [[6.6, "Creative Cloud UI Helper (Renderer)"], [1.8, "NotificationCenter"], [1.1, "claude"]]}
+{"utc": "2026-11-25T02:02:27+00:00", "probes_pct": [9.0, 2.1, 2.8], "load_average": [3.53, 3.45, 3.53], "quiet": true, "top": [[6.0, "Creative Cloud UI Helper (Renderer)"], [2.6, "claude"], [1.7, "NotificationCenter"]]}
+{"utc": "2026-11-25T02:04:09+00:00", "probes_pct": [2.3, 4.1, 2.5], "load_average": [3.25, 3.38, 3.49], "quiet": true, "top": [[5.7, "Creative Cloud UI Helper (Renderer)"], [2.9, "claude"], [1.7, "NotificationCenter"]]}

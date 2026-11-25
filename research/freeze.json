@@ -82,6 +82,12 @@
    "experiment_id": "EXP-001",
    "path": "experiments/EXP-001.json",
    "sha256": "9f7b8d15d262589247f739f087519cddf81bebbf2eabd1b196c41d7d735069b9"
+  },
+  {
+   "experiment_id": "EXP-002",
+   "path": "experiments/EXP-002.json",
+   "sha256": "09bf457c86a90244a9ced2d2c23f564434872b57a432152a23a2d045466ebdb6",
+   "note": "Template (sha256 b0aa85369b76dad72647db7bb61d959ca0ccb2150016f7ab9762417f9516afb4) completed by the pre-stated rules; no other value changed."
   }
  ],
  "pre_stated_rule_inputs": [
@@ -116,14 +122,106 @@
     "sha256": "b0aa85369b76dad72647db7bb61d959ca0ccb2150016f7ab9762417f9516afb4"
    },
    "seed_count": "to be set by the pre-stated rule from the quiet pilot",
-   "status": "awaiting the quiet-machine pilot"
+   "status": "resolved",
+   "resolved_on": "2026-11-25"
   }
  ],
  "not_yet_configured": {
   "EXP-003": "rate ladder fixed from EXP-002 results before it runs (protocol item 9)",
   "EXP-004": "config written once c_max is resolved; 5 blocks per variant"
  },
- "resolutions": [],
+ "resolutions": [
+  {
+   "date": "2026-11-25",
+   "experiment_id": "EXP-002",
+   "kind": "application of pre-stated rules (not an amendment)",
+   "ceiling_rule": {
+    "rule_version": "ceiling-rule-1.0",
+    "input": "results/raw/EXP-001/EXP-001-M3 (confirmatory EXP-001, 5 runs, all ok, idle probe enforced and passed)",
+    "output": {
+     "generator_ceiling_rps": 27919.4,
+     "n_runs": 5,
+     "rule_version": "ceiling-rule-1.0",
+     "run_ceilings_rps": [
+      27914.5,
+      27919.4,
+      27953.9,
+      27860.9,
+      28657.0
+     ]
+    }
+   },
+   "pilot_rule": {
+    "rule_version": "pilot-rule-1.0",
+    "input": "results/raw/PILOT-QUIET/PILOT-QUIET-M3 (exploratory, 25 runs, all ok, idle probe enforced and passed)",
+    "output": {
+     "blocks": 10,
+     "c_max": 512,
+     "concurrency": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256,
+      512
+     ],
+     "n_pilot_blocks": 5,
+     "peak_concurrency": {
+      "A1": [
+       4,
+       4,
+       4,
+       4,
+       4
+      ],
+      "A3": [
+       128,
+       128,
+       256,
+       128,
+       256
+      ]
+     },
+     "rule_version": "pilot-rule-1.0",
+     "sd_log_ratio": {
+      "A1": 0.020759474547523,
+      "A2": 0.013477776350563981,
+      "A3": 0.01248470860167049,
+      "A4": 0.010318971722634886
+     },
+     "sd_trigger": 0.07,
+     "truncated_at_cap": false
+    }
+   },
+   "resolved_values": {
+    "blocks": 10,
+    "concurrency": [
+     1,
+     2,
+     4,
+     8,
+     16,
+     32,
+     64,
+     128,
+     256,
+     512
+    ],
+    "generator_ceiling_rps": 27919.4
+   },
+   "config": {
+    "path": "experiments/EXP-002.json",
+    "sha256": "09bf457c86a90244a9ced2d2c23f564434872b57a432152a23a2d045466ebdb6",
+    "template_sha256": "b0aa85369b76dad72647db7bb61d959ca0ccb2150016f7ab9762417f9516afb4"
+   },
+   "revision_of_inputs": "6c3af82dae5e71fdebdc1b51545458eba9fe6626",
+   "decision": "D-013"
+  }
+ ],
  "superseded_hashes": [
   {
    "path": "research/protocol.md",

@@ -1,0 +1,104 @@
+{
+ "command": [
+  "scale",
+  "run",
+  "experiments/EXP-001.json",
+  "--out",
+  "results/raw/EXP-001/EXP-001-M3"
+ ],
+ "config": {
+  "ab_crosscheck": true,
+  "arms": [
+   "A0"
+  ],
+  "blocks": 5,
+  "concurrency": [
+   1,
+   8,
+   32
+  ],
+  "config_version": "1.0",
+  "description": "Load-generator ceiling and ApacheBench cross-check.",
+  "endpoint": "null",
+  "experiment_id": "EXP-001",
+  "generator_ceiling_rps": null,
+  "generator_processes": 1,
+  "idle_probe_enforce": true,
+  "idle_probe_threshold_pct": 15.0,
+  "kind": "closed_sweep",
+  "label": "confirmatory",
+  "measure_s": 10.0,
+  "protocol_path": "research/experiments/EXP-001/protocol.md",
+  "protocol_sha256": "4af93dc2f5c7f856b3da54a8b77accd7448491c5341023759a00455fe3e73e18",
+  "rates_rps": [],
+  "slo_max_error_rate": 0.01,
+  "slo_p99_ms": 50.0,
+  "stall_ms": 0.0,
+  "stall_period_s": 0.0,
+  "study_seed": 20261125,
+  "warmup_s": 2.0,
+  "workload": {
+   "dataset_seed": 20261124,
+   "payload_bytes": 256,
+   "rows": 200000,
+   "write_fraction": 0.02,
+   "zipf_s": 0.99
+  }
+ },
+ "config_hash": "549fdc85baebb81aefcdd5c7652a406eea315e0852d911a29565d9ba8ae1298b",
+ "cpu": {
+  "brand": "Apple M1 Pro",
+  "logical_cpus": 10,
+  "memory_bytes": 17179869184,
+  "physical_cpus": 10
+ },
+ "dataset_sha256": null,
+ "finished_utc": "2026-11-25T02:00:05.481075Z",
+ "git": {
+  "dirty": false,
+  "revision": "6c3af82dae5e71fdebdc1b51545458eba9fe6626"
+ },
+ "idle_probe": {
+  "cpu_pct": 1.9,
+  "enforced": true,
+  "interval_s": 1.0,
+  "passed": true,
+  "threshold_pct": 15.0
+ },
+ "label": "confirmatory",
+ "load_average": [
+  3.68,
+  3.54,
+  3.59
+ ],
+ "platform": {
+  "machine": "arm64",
+  "macos": "15.3.1",
+  "python_executable": "python3",
+  "python_implementation": "CPython",
+  "release": "24.3.0",
+  "system": "Darwin"
+ },
+ "power": "Now drawing from 'AC Power'",
+ "run_id": "EXP-001-b02-A0-549fdc85",
+ "runner_peak_rss_mb": 101.74464,
+ "runtime_s": 68.8741627499985,
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 7611647522867944517,
+  "requests": 7481594637607546035,
+  "study": 20261125
+ },
+ "server_peak_rss_mb": 26.37824,
+ "started_utc": "2026-11-25T01:58:56.607310Z",
+ "versions": {
+  "jsonschema": "4.26.0",
+  "matplotlib": "3.11.2",
+  "numpy": "2.5.4",
+  "psutil": "7.2.2",
+  "python": "3.12.1",
+  "scale": "0.1.0",
+  "sqlite": "3.43.1"
+ }
+}

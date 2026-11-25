@@ -1,0 +1,20 @@
+{
+ "degenerate": [],
+ "figures": [],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 1,
+ "pilot": {},
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 1.7746343749997324,
+  "measure_s": 15.0,
+  "per_run_s": 143.87463437499972,
+  "runs": 50,
+  "total_h": 1.998258810763885,
+  "total_s": 7193.731718749986,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/raw/EXP-001/STALL-CLOSED-M3"
+}

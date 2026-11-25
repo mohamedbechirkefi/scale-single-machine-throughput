@@ -1,0 +1,46 @@
+{
+ "config_hash": "c7de408934e4e9fba4227a15120048aacb2a86e05ec3b79fc56c5a69db174ee0",
+ "experiment_id": "EXP001-GP4",
+ "finished_utc": "2026-11-25T02:04:05.227383Z",
+ "label": "exploratory",
+ "runs": [
+  {
+   "arm": "A0",
+   "attempt": 0,
+   "block": 0,
+   "failure": null,
+   "peak_goodput_rps": 27159.1,
+   "position": 0,
+   "run_id": "EXP001-GP4-b00-A0-c7de4089",
+   "runtime_s": 26.366,
+   "sequence_index": 0,
+   "status": "ok"
+  },
+  {
+   "arm": "A0",
+   "attempt": 0,
+   "block": 1,
+   "failure": null,
+   "peak_goodput_rps": 27341.7,
+   "position": 0,
+   "run_id": "EXP001-GP4-b01-A0-c7de4089",
+   "runtime_s": 26.364,
+   "sequence_index": 1,
+   "status": "ok"
+  },
+  {
+   "arm": "A0",
+   "attempt": 0,
+   "block": 2,
+   "failure": null,
+   "peak_goodput_rps": 27079.9,
+   "position": 0,
+   "run_id": "EXP001-GP4-b02-A0-c7de4089",
+   "runtime_s": 26.347,
+   "sequence_index": 2,
+   "status": "ok"
+  }
+ ],
+ "runtime_s": 79.11096754199389,
+ "started_utc": "2026-11-25T02:02:46.116608Z"
+}

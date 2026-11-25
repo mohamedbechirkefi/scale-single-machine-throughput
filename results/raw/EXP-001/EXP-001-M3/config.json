@@ -1,0 +1,39 @@
+{
+ "ab_crosscheck": true,
+ "arms": [
+  "A0"
+ ],
+ "blocks": 5,
+ "concurrency": [
+  1,
+  8,
+  32
+ ],
+ "config_version": "1.0",
+ "description": "Load-generator ceiling and ApacheBench cross-check.",
+ "endpoint": "null",
+ "experiment_id": "EXP-001",
+ "generator_ceiling_rps": null,
+ "generator_processes": 1,
+ "idle_probe_enforce": true,
+ "idle_probe_threshold_pct": 15.0,
+ "kind": "closed_sweep",
+ "label": "confirmatory",
+ "measure_s": 10.0,
+ "protocol_path": "research/experiments/EXP-001/protocol.md",
+ "protocol_sha256": "4af93dc2f5c7f856b3da54a8b77accd7448491c5341023759a00455fe3e73e18",
+ "rates_rps": [],
+ "slo_max_error_rate": 0.01,
+ "slo_p99_ms": 50.0,
+ "stall_ms": 0.0,
+ "stall_period_s": 0.0,
+ "study_seed": 20261125,
+ "warmup_s": 2.0,
+ "workload": {
+  "dataset_seed": 20261124,
+  "payload_bytes": 256,
+  "rows": 200000,
+  "write_fraction": 0.02,
+  "zipf_s": 0.99
+ }
+}

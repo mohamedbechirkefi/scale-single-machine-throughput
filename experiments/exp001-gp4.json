@@ -1,0 +1,16 @@
+{
+ "_comment": "EXPLORATORY supplement to EXP-001 item 19 (generator process count 1 versus 4) on GET /null. Not part of the frozen EXP-001 config; written at M3 after the frozen EXP-001 config, before its output was read. Never confirmatory.",
+ "experiment_id": "EXP001-GP4",
+ "label": "exploratory",
+ "kind": "closed_sweep",
+ "endpoint": "null",
+ "arms": ["A0"],
+ "concurrency": [8, 32],
+ "warmup_s": 2.0,
+ "measure_s": 10.0,
+ "blocks": 3,
+ "study_seed": 9020,
+ "generator_processes": 4,
+ "idle_probe_enforce": false,
+ "description": "Exploratory generator-process sensitivity (4 processes)."
+}

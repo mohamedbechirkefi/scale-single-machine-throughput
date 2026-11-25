@@ -124,10 +124,10 @@ def test_seed_plan_common_random_numbers():
     assert len(set(connection_seeds(7, 8, 8))) == 8
 
 
-def test_cli_refuses_exp002_until_pilot_resolved(capsys):
-    rc = cli.main(["run", os.path.join(ROOT, "experiments", "EXP-002.json")])
-    assert rc == cli.EXIT_REFUSED
-    assert "quiet-machine pilot rule" in capsys.readouterr().err
+def test_exp002_accepted_by_guard_after_resolution():
+    from scale.config import load_config
+    path = os.path.join(ROOT, "experiments", "EXP-002.json")
+    assert cli.freeze_status(load_config(path), ROOT, path) == (True, "frozen")
 
 
 def test_cli_rejects_invalid_config(tmp_path, capsys):

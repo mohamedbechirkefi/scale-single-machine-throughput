@@ -1,0 +1,118 @@
+{
+ "arm": "A0",
+ "arm_position": 0,
+ "block": 0,
+ "config_hash": "549fdc85baebb81aefcdd5c7652a406eea315e0852d911a29565d9ba8ae1298b",
+ "endpoint": "null",
+ "experiment_id": "EXP-001",
+ "factor": "baseline",
+ "failure": null,
+ "kind": "closed_sweep",
+ "label": "confirmatory",
+ "levels": [
+  {
+   "ab_rps": 28406.51,
+   "attempts": 266182,
+   "concurrency": 1,
+   "connections_finished": 1,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.30260976633986514,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 26618.2,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 0.182417,
+   "offered_rate_rps": null,
+   "p50_ms": 0.036708,
+   "p95_ms": 0.041042,
+   "p99_ms": 0.046417,
+   "server_cpu_util": 0.5524770537805603,
+   "server_rss_mb": 23.904256,
+   "status_counts": {
+    "200": 266182
+   },
+   "transport_errors": 0,
+   "validated_ok": 266182,
+   "window_s": 10.0
+  },
+  {
+   "ab_rps": 27045.11,
+   "attempts": 279145,
+   "concurrency": 8,
+   "connections_finished": 8,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.6546566140861332,
+   "generator_limited": false,
+   "generator_limited_reasons": [],
+   "goodput_rps": 27914.5,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 7.613,
+   "offered_rate_rps": null,
+   "p50_ms": 0.240666,
+   "p95_ms": 0.633,
+   "p99_ms": 0.894542,
+   "server_cpu_util": 1.3247176426177114,
+   "server_rss_mb": 24.82176,
+   "status_counts": {
+    "200": 279145
+   },
+   "transport_errors": 0,
+   "validated_ok": 279145,
+   "window_s": 10.0
+  },
+  {
+   "ab_rps": 26666.26,
+   "attempts": 270631,
+   "concurrency": 32,
+   "connections_finished": 32,
+   "error_rate": 0.0,
+   "generator_cpu_util": 0.8980340658079909,
+   "generator_limited": true,
+   "generator_limited_reasons": [
+    "generator CPU 0.90 > 0.85 x 1 cores"
+   ],
+   "goodput_rps": 27063.1,
+   "invalid_body": 0,
+   "lag_p99_ms": null,
+   "max_ms": 11.497291,
+   "offered_rate_rps": null,
+   "p50_ms": 1.051,
+   "p95_ms": 2.898583,
+   "p99_ms": 4.251375,
+   "server_cpu_util": 1.3594017545921597,
+   "server_rss_mb": 25.853952,
+   "status_counts": {
+    "200": 270631
+   },
+   "transport_errors": 0,
+   "validated_ok": 270631,
+   "window_s": 10.0
+  }
+ ],
+ "run_id": "EXP-001-b00-A0-549fdc85",
+ "schema_version": "1.0.0",
+ "seeds": {
+  "dataset": 20261124,
+  "permutation": 7611647522867944517,
+  "requests": 6281935554060829781,
+  "study": 20261125
+ },
+ "server_stats": {
+  "arm": "A0",
+  "cpu_sys_s": 31.339059,
+  "cpu_user_s": 39.709357,
+  "internal_errors": 0,
+  "ru_maxrss_bytes": 26361856
+ },
+ "status": "ok",
+ "summary": {
+  "c_at_peak": 8,
+  "c_sat": 1,
+  "generator_limited_levels": [
+   32
+  ],
+  "peak_goodput_rps": 27914.5
+ }
+}

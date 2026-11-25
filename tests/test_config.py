@@ -88,7 +88,7 @@ def test_repository_configs_parse():
     root = os.path.join(os.path.dirname(__file__), "..", "experiments")
     paths = glob.glob(os.path.join(root, "*.json"))
     assert paths
-    deferred = {"EXP-002.json": {"blocks", "concurrency", "generator_ceiling_rps"}}
+    deferred: dict[str, set[str]] = {}  # EXP-002 was resolved at M3 (research/freeze.json resolutions)
     for p in paths:
         name = os.path.basename(p)
         if name in deferred:  # values left unset on purpose until the quiet-pilot rule (protocol 7.1)
@@ -104,3 +104,15 @@ def test_repository_configs_parse():
         else:
             assert cfg.label == "exploratory"
         json.dumps(cfg.to_dict())
+
+
+def test_exp002_resolved_values_match_the_freeze_resolution():
+    import os
+
+    root = os.path.join(os.path.dirname(__file__), "..")
+    cfg = load_config(os.path.join(root, "experiments", "EXP-002.json"))
+    rec = json.load(open(os.path.join(root, "research", "freeze.json")))
+    res = [r for r in rec["resolutions"] if r["experiment_id"] == "EXP-002"][-1]
+    assert cfg.blocks == res["resolved_values"]["blocks"] == res["pilot_rule"]["output"]["blocks"]
+    assert list(cfg.concurrency) == res["resolved_values"]["concurrency"] == res["pilot_rule"]["output"]["concurrency"]
+    assert cfg.generator_ceiling_rps == res["ceiling_rule"]["output"]["generator_ceiling_rps"]

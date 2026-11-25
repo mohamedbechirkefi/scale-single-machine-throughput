@@ -1,0 +1,444 @@
+== start 2026-11-25T01:56:34Z
+{"utc": "2026-11-25T01:56:38+00:00", "probes_pct": [3.5, 1.7, 8.0], "load_average": [1.55, 3.46, 3.59], "quiet": true, "top": [[6.6, "Creative Cloud UI Helper (Renderer)"], [1.8, "NotificationCenter"], [1.1, "claude"]]}
+[confirmatory] EXP-001 block 0 position 0 arm A0
+  EXP-001-b00-A0-549fdc85 c=1 goodput=26618.2 rps p99=0.046417 ms err=0.0 gen_cpu=0.30 ab=28406.51
+  EXP-001-b00-A0-549fdc85 c=8 goodput=27914.5 rps p99=0.894542 ms err=0.0 gen_cpu=0.65 ab=27045.11
+  EXP-001-b00-A0-549fdc85 c=32 goodput=27063.1 rps p99=4.251375 ms err=0.0 gen_cpu=0.90 ab=26666.26
+  -> ok runtime 68.9 s G*=27914.5
+[confirmatory] EXP-001 block 1 position 0 arm A0
+  EXP-001-b01-A0-549fdc85 c=1 goodput=26729.5 rps p99=0.0455 ms err=0.0 gen_cpu=0.30 ab=28380.86
+  EXP-001-b01-A0-549fdc85 c=8 goodput=27919.4 rps p99=0.890792 ms err=0.0 gen_cpu=0.68 ab=27024.7
+  EXP-001-b01-A0-549fdc85 c=32 goodput=26536.0 rps p99=4.273208 ms err=0.0 gen_cpu=1.05 ab=26632.59
+  -> ok runtime 68.9 s G*=27919.4
+[confirmatory] EXP-001 block 2 position 0 arm A0
+  EXP-001-b02-A0-549fdc85 c=1 goodput=26820.5 rps p99=0.045083 ms err=0.0 gen_cpu=0.30 ab=28193.05
+  EXP-001-b02-A0-549fdc85 c=8 goodput=27953.9 rps p99=0.883875 ms err=0.0 gen_cpu=0.66 ab=27005.0
+  EXP-001-b02-A0-549fdc85 c=32 goodput=25893.4 rps p99=4.113625 ms err=0.0 gen_cpu=1.40 ab=26624.2
+  -> ok runtime 68.9 s G*=27953.9
+[confirmatory] EXP-001 block 3 position 0 arm A0
+  EXP-001-b03-A0-549fdc85 c=1 goodput=26656.8 rps p99=0.045166 ms err=0.0 gen_cpu=0.30 ab=28120.12
+  EXP-001-b03-A0-549fdc85 c=8 goodput=27860.9 rps p99=0.886584 ms err=0.0 gen_cpu=0.65 ab=26942.6
+  EXP-001-b03-A0-549fdc85 c=32 goodput=27288.4 rps p99=4.309875 ms err=0.0 gen_cpu=0.72 ab=26576.47
+  -> ok runtime 68.9 s G*=27860.9
+[confirmatory] EXP-001 block 4 position 0 arm A0
+  EXP-001-b04-A0-549fdc85 c=1 goodput=26134.9 rps p99=0.047875 ms err=0.0 gen_cpu=0.30 ab=28273.74
+  EXP-001-b04-A0-549fdc85 c=8 goodput=28657.0 rps p99=0.875708 ms err=0.0 gen_cpu=0.62 ab=27076.19
+  EXP-001-b04-A0-549fdc85 c=32 goodput=27531.8 rps p99=4.321333 ms err=0.0 gen_cpu=0.67 ab=26652.2
+  -> ok runtime 68.9 s G*=28657.0
+results: results/raw/EXP-001/EXP-001-M3
+runs: 5, not ok: 0, runtime 344.5 s
+EXP-001 exit 0
+resolve-ceiling exit 0
+{
+ "generator_ceiling_rps": 27919.4,
+ "n_runs": 5,
+ "rule_version": "ceiling-rule-1.0",
+ "run_ceilings_rps": [
+  27914.5,
+  27919.4,
+  27953.9,
+  27860.9,
+  28657.0
+ ]
+}
+{"utc": "2026-11-25T02:02:27+00:00", "probes_pct": [9.0, 2.1, 2.8], "load_average": [3.53, 3.45, 3.53], "quiet": true, "top": [[6.0, "Creative Cloud UI Helper (Renderer)"], [2.6, "claude"], [1.7, "NotificationCenter"]]}
+[exploratory] STALL-OPEN block 0 position 0 arm A0
+  STALL-OPEN-b00-A0-bcacbbf2 rate=200 goodput=200.0 p99=190.115416 ms lag_p99=148.302458 slo_ok=False
+  -> ok runtime 9.0 s G*=None
+results: results/raw/EXP-001/STALL-OPEN-M3
+runs: 1, not ok: 0, runtime 9.0 s
+stall-open exit 0
+[exploratory] STALL-CLOSED block 0 position 0 arm A0
+  STALL-CLOSED-b00-A0-507faba9 c=8 goodput=24644.3 rps p99=0.909208 ms err=0.0 gen_cpu=0.56
+  -> ok runtime 9.1 s G*=24644.333333333332
+results: results/raw/EXP-001/STALL-CLOSED-M3
+runs: 1, not ok: 0, runtime 9.1 s
+stall-closed exit 0
+[exploratory] EXP001-GP4 block 0 position 0 arm A0
+  EXP001-GP4-b00-A0-c7de4089 c=8 goodput=27159.1 rps p99=0.914917 ms err=0.0 gen_cpu=0.60
+  EXP001-GP4-b00-A0-c7de4089 c=32 goodput=26939.3 rps p99=4.434834 ms err=0.0 gen_cpu=0.60
+  -> ok runtime 26.4 s G*=27159.1
+[exploratory] EXP001-GP4 block 1 position 0 arm A0
+  EXP001-GP4-b01-A0-c7de4089 c=8 goodput=27341.7 rps p99=0.9145 ms err=0.0 gen_cpu=0.61
+  EXP001-GP4-b01-A0-c7de4089 c=32 goodput=27194.8 rps p99=4.412625 ms err=0.0 gen_cpu=0.60
+  -> ok runtime 26.4 s G*=27341.7
+[exploratory] EXP001-GP4 block 2 position 0 arm A0
+  EXP001-GP4-b02-A0-c7de4089 c=8 goodput=26980.7 rps p99=0.93725 ms err=0.0 gen_cpu=0.60
+  EXP001-GP4-b02-A0-c7de4089 c=32 goodput=27079.9 rps p99=4.41675 ms err=0.0 gen_cpu=0.59
+  -> ok runtime 26.3 s G*=27079.9
+results: results/raw/EXP-001/GP4-M3
+runs: 3, not ok: 0, runtime 79.1 s
+gp4 exit 0
+{"utc": "2026-11-25T02:04:09+00:00", "probes_pct": [2.3, 4.1, 2.5], "load_average": [3.25, 3.38, 3.49], "quiet": true, "top": [[5.7, "Creative Cloud UI Helper (Renderer)"], [2.9, "claude"], [1.7, "NotificationCenter"]]}
+[exploratory] PILOT-QUIET block 0 position 0 arm A0
+  PILOT-QUIET-b00-A0-721f78b8 c=1 goodput=54.1 rps p99=20.137042 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A0-721f78b8 c=2 goodput=80.3 rps p99=28.955708 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A0-721f78b8 c=4 goodput=114.1 rps p99=44.371333 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A0-721f78b8 c=8 goodput=72.8 rps p99=115.4905 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A0-721f78b8 c=16 goodput=57.9 rps p99=320.703625 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A0-721f78b8 c=32 goodput=57.1 rps p99=756.433292 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A0-721f78b8 c=64 goodput=58.0 rps p99=1640.053292 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A0-721f78b8 c=128 goodput=59.5 rps p99=3463.9265 ms err=0.0033519553072625698 gen_cpu=0.01
+  PILOT-QUIET-b00-A0-721f78b8 c=256 goodput=53.9 rps p99=8153.210208 ms err=0.08896396396396396 gen_cpu=0.01
+  PILOT-QUIET-b00-A0-721f78b8 c=512 goodput=58.4 rps p99=8707.781542 ms err=0.24155844155844156 gen_cpu=0.02
+  PILOT-QUIET-b00-A0-721f78b8 c=1024 goodput=54.8 rps p99=9726.131125 ms err=0.4679611650485437 gen_cpu=0.04
+  -> ok runtime 246.4 s G*=114.06666666666666
+[exploratory] PILOT-QUIET block 0 position 1 arm A1
+  PILOT-QUIET-b00-A1-721f78b8 c=1 goodput=91.5 rps p99=19.571458 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A1-721f78b8 c=2 goodput=157.3 rps p99=29.907625 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A1-721f78b8 c=4 goodput=254.7 rps p99=43.177208 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A1-721f78b8 c=8 goodput=182.8 rps p99=112.366041 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A1-721f78b8 c=16 goodput=153.1 rps p99=357.164834 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b00-A1-721f78b8 c=32 goodput=160.7 rps p99=634.945125 ms err=0.0016563146997929607 gen_cpu=0.02
+  PILOT-QUIET-b00-A1-721f78b8 c=64 goodput=162.7 rps p99=1504.900542 ms err=0.006916192026037429 gen_cpu=0.02
+  PILOT-QUIET-b00-A1-721f78b8 c=128 goodput=165.3 rps p99=2682.958208 ms err=0.007606084867894315 gen_cpu=0.02
+  PILOT-QUIET-b00-A1-721f78b8 c=256 goodput=156.6 rps p99=5944.575667 ms err=0.013439731205375893 gen_cpu=0.02
+  PILOT-QUIET-b00-A1-721f78b8 c=512 goodput=163.7 rps p99=11444.17175 ms err=0.07463249151903506 gen_cpu=0.03
+  PILOT-QUIET-b00-A1-721f78b8 c=1024 goodput=165.1 rps p99=9654.797375 ms err=0.2244834063869756 gen_cpu=0.06
+  -> ok runtime 239.7 s G*=254.66666666666666
+[exploratory] PILOT-QUIET block 0 position 2 arm A3
+  PILOT-QUIET-b00-A3-721f78b8 c=1 goodput=50.3 rps p99=21.285416 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A3-721f78b8 c=2 goodput=92.9 rps p99=25.925959 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A3-721f78b8 c=4 goodput=154.9 rps p99=29.843833 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A3-721f78b8 c=8 goodput=291.3 rps p99=34.965709 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b00-A3-721f78b8 c=16 goodput=535.4 rps p99=53.671333 ms err=0.0 gen_cpu=0.05
+  PILOT-QUIET-b00-A3-721f78b8 c=32 goodput=705.2 rps p99=67.559291 ms err=0.0 gen_cpu=0.07
+  PILOT-QUIET-b00-A3-721f78b8 c=64 goodput=1012.8 rps p99=76.147792 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b00-A3-721f78b8 c=128 goodput=1016.2 rps p99=143.307333 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b00-A3-721f78b8 c=256 goodput=1012.5 rps p99=284.757125 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b00-A3-721f78b8 c=512 goodput=1012.1 rps p99=549.082167 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b00-A3-721f78b8 c=1024 goodput=1004.2 rps p99=1099.589417 ms err=0.0 gen_cpu=0.11
+  -> ok runtime 228.3 s G*=1016.2
+[exploratory] PILOT-QUIET block 0 position 3 arm A4
+  PILOT-QUIET-b00-A4-721f78b8 c=1 goodput=54.3 rps p99=19.721709 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A4-721f78b8 c=2 goodput=79.5 rps p99=30.563208 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A4-721f78b8 c=4 goodput=112.7 rps p99=51.564083 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A4-721f78b8 c=8 goodput=71.1 rps p99=135.219291 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b00-A4-721f78b8 c=16 goodput=72.0 rps p99=449.205542 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b00-A4-721f78b8 c=32 goodput=65.1 rps p99=2101.752167 ms err=0.9940442808027115 gen_cpu=0.38
+  PILOT-QUIET-b00-A4-721f78b8 c=64 goodput=64.9 rps p99=2343.127709 ms err=0.9950989281108962 gen_cpu=0.46
+  PILOT-QUIET-b00-A4-721f78b8 c=128 goodput=66.5 rps p99=2541.126958 ms err=0.9958093044370092 gen_cpu=0.52
+  PILOT-QUIET-b00-A4-721f78b8 c=256 goodput=70.3 rps p99=2157.5705 ms err=0.9962014697251736 gen_cpu=0.61
+  PILOT-QUIET-b00-A4-721f78b8 c=512 goodput=58.7 rps p99=3122.684792 ms err=0.9964815169813732 gen_cpu=0.61
+  PILOT-QUIET-b00-A4-721f78b8 c=1024 goodput=56.6 rps p99=3369.019583 ms err=0.9965275221477827 gen_cpu=0.78
+  -> ok runtime 230.4 s G*=112.66666666666667
+[exploratory] PILOT-QUIET block 0 position 4 arm A2
+  PILOT-QUIET-b00-A2-721f78b8 c=1 goodput=21180.3 rps p99=0.078792 ms err=0.0 gen_cpu=0.31
+  PILOT-QUIET-b00-A2-721f78b8 c=2 goodput=28241.2 rps p99=0.107041 ms err=0.0 gen_cpu=0.47
+  PILOT-QUIET-b00-A2-721f78b8 c=4 goodput=18787.1 rps p99=0.414542 ms err=0.0 gen_cpu=0.48
+  PILOT-QUIET-b00-A2-721f78b8 c=8 goodput=10346.9 rps p99=1.639791 ms err=0.0 gen_cpu=0.29
+  PILOT-QUIET-b00-A2-721f78b8 c=16 goodput=9855.0 rps p99=3.575584 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b00-A2-721f78b8 c=32 goodput=9705.5 rps p99=7.382666 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b00-A2-721f78b8 c=64 goodput=9706.9 rps p99=14.248708 ms err=0.0 gen_cpu=0.26
+  PILOT-QUIET-b00-A2-721f78b8 c=128 goodput=9352.2 rps p99=29.478916 ms err=0.0 gen_cpu=0.26
+  PILOT-QUIET-b00-A2-721f78b8 c=256 goodput=8621.3 rps p99=63.48625 ms err=0.0 gen_cpu=0.24
+  PILOT-QUIET-b00-A2-721f78b8 c=512 goodput=6950.9 rps p99=163.464583 ms err=0.0 gen_cpu=0.20
+  PILOT-QUIET-b00-A2-721f78b8 c=1024 goodput=5140.9 rps p99=419.4185 ms err=0.013925475051788956 gen_cpu=0.20
+  -> ok runtime 229.3 s G*=28241.2
+[exploratory] PILOT-QUIET block 1 position 0 arm A3
+  PILOT-QUIET-b01-A3-721f78b8 c=1 goodput=49.9 rps p99=21.11225 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A3-721f78b8 c=2 goodput=93.1 rps p99=25.406209 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A3-721f78b8 c=4 goodput=154.1 rps p99=29.885 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A3-721f78b8 c=8 goodput=289.6 rps p99=35.529167 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b01-A3-721f78b8 c=16 goodput=533.7 rps p99=54.821625 ms err=0.0 gen_cpu=0.05
+  PILOT-QUIET-b01-A3-721f78b8 c=32 goodput=705.8 rps p99=67.371375 ms err=0.0 gen_cpu=0.07
+  PILOT-QUIET-b01-A3-721f78b8 c=64 goodput=996.8 rps p99=77.524834 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b01-A3-721f78b8 c=128 goodput=1021.2 rps p99=145.40625 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b01-A3-721f78b8 c=256 goodput=1004.9 rps p99=287.049042 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b01-A3-721f78b8 c=512 goodput=1013.3 rps p99=557.608667 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b01-A3-721f78b8 c=1024 goodput=1015.0 rps p99=1092.336583 ms err=0.0 gen_cpu=0.11
+  -> ok runtime 228.4 s G*=1021.2
+[exploratory] PILOT-QUIET block 1 position 1 arm A2
+  PILOT-QUIET-b01-A2-721f78b8 c=1 goodput=21178.6 rps p99=0.078792 ms err=0.0 gen_cpu=0.31
+  PILOT-QUIET-b01-A2-721f78b8 c=2 goodput=28109.9 rps p99=0.108333 ms err=0.0 gen_cpu=0.47
+  PILOT-QUIET-b01-A2-721f78b8 c=4 goodput=18759.5 rps p99=0.416875 ms err=0.0 gen_cpu=0.48
+  PILOT-QUIET-b01-A2-721f78b8 c=8 goodput=10298.5 rps p99=1.635958 ms err=0.0 gen_cpu=0.30
+  PILOT-QUIET-b01-A2-721f78b8 c=16 goodput=9870.7 rps p99=3.534375 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b01-A2-721f78b8 c=32 goodput=9779.6 rps p99=7.245208 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b01-A2-721f78b8 c=64 goodput=9511.7 rps p99=14.696208 ms err=0.0 gen_cpu=0.26
+  PILOT-QUIET-b01-A2-721f78b8 c=128 goodput=9192.7 rps p99=30.108083 ms err=0.0 gen_cpu=0.25
+  PILOT-QUIET-b01-A2-721f78b8 c=256 goodput=8638.1 rps p99=63.201542 ms err=0.0 gen_cpu=0.24
+  PILOT-QUIET-b01-A2-721f78b8 c=512 goodput=6964.8 rps p99=161.729375 ms err=0.0 gen_cpu=0.21
+  PILOT-QUIET-b01-A2-721f78b8 c=1024 goodput=4949.1 rps p99=449.201458 ms err=0.015463575719798946 gen_cpu=0.19
+  -> ok runtime 229.3 s G*=28109.933333333334
+[exploratory] PILOT-QUIET block 1 position 2 arm A1
+  PILOT-QUIET-b01-A1-721f78b8 c=1 goodput=88.8 rps p99=19.593584 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A1-721f78b8 c=2 goodput=155.1 rps p99=26.601 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A1-721f78b8 c=4 goodput=263.9 rps p99=42.19925 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A1-721f78b8 c=8 goodput=169.1 rps p99=119.37075 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A1-721f78b8 c=16 goodput=144.4 rps p99=314.803791 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b01-A1-721f78b8 c=32 goodput=147.2 rps p99=1335.3055 ms err=0.0040595399188092015 gen_cpu=0.02
+  PILOT-QUIET-b01-A1-721f78b8 c=64 goodput=158.0 rps p99=1559.426209 ms err=0.00336417157275021 gen_cpu=0.02
+  PILOT-QUIET-b01-A1-721f78b8 c=128 goodput=152.2 rps p99=2768.406 ms err=0.01126028583802512 gen_cpu=0.02
+  PILOT-QUIET-b01-A1-721f78b8 c=256 goodput=145.5 rps p99=7029.805875 ms err=0.012663952962460425 gen_cpu=0.02
+  PILOT-QUIET-b01-A1-721f78b8 c=512 goodput=149.1 rps p99=10085.859292 ms err=0.17666543982333455 gen_cpu=0.03
+  PILOT-QUIET-b01-A1-721f78b8 c=1024 goodput=146.3 rps p99=9671.340792 ms err=0.2800918333879961 gen_cpu=0.06
+  -> ok runtime 239.0 s G*=263.93333333333334
+[exploratory] PILOT-QUIET block 1 position 3 arm A4
+  PILOT-QUIET-b01-A4-721f78b8 c=1 goodput=55.4 rps p99=19.623459 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A4-721f78b8 c=2 goodput=80.3 rps p99=27.653667 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A4-721f78b8 c=4 goodput=117.6 rps p99=43.796209 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A4-721f78b8 c=8 goodput=71.5 rps p99=118.906875 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A4-721f78b8 c=16 goodput=74.3 rps p99=337.23925 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A4-721f78b8 c=32 goodput=71.1 rps p99=1894.579334 ms err=0.9938084627347213 gen_cpu=0.32
+  PILOT-QUIET-b01-A4-721f78b8 c=64 goodput=68.6 rps p99=2099.361709 ms err=0.9955397198996112 gen_cpu=0.43
+  PILOT-QUIET-b01-A4-721f78b8 c=128 goodput=66.1 rps p99=2566.894417 ms err=0.9957619334469751 gen_cpu=0.52
+  PILOT-QUIET-b01-A4-721f78b8 c=256 goodput=69.8 rps p99=2209.748416 ms err=0.9962434206041383 gen_cpu=0.62
+  PILOT-QUIET-b01-A4-721f78b8 c=512 goodput=56.7 rps p99=3278.6895 ms err=0.996570415298124 gen_cpu=0.61
+  PILOT-QUIET-b01-A4-721f78b8 c=1024 goodput=55.4 rps p99=3032.975541 ms err=0.9966461372056794 gen_cpu=0.76
+  -> ok runtime 230.5 s G*=117.6
+[exploratory] PILOT-QUIET block 1 position 4 arm A0
+  PILOT-QUIET-b01-A0-721f78b8 c=1 goodput=54.1 rps p99=19.65025 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A0-721f78b8 c=2 goodput=79.6 rps p99=29.233666 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A0-721f78b8 c=4 goodput=117.6 rps p99=41.952583 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A0-721f78b8 c=8 goodput=72.3 rps p99=117.069458 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b01-A0-721f78b8 c=16 goodput=56.3 rps p99=323.2255 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A0-721f78b8 c=32 goodput=56.5 rps p99=800.663208 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A0-721f78b8 c=64 goodput=57.5 rps p99=1726.443292 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b01-A0-721f78b8 c=128 goodput=56.5 rps p99=3285.374125 ms err=0.011668611435239206 gen_cpu=0.01
+  PILOT-QUIET-b01-A0-721f78b8 c=256 goodput=56.1 rps p99=6755.513291 ms err=0.07378854625550661 gen_cpu=0.01
+  PILOT-QUIET-b01-A0-721f78b8 c=512 goodput=50.7 rps p99=9782.545334 ms err=0.4336810730253353 gen_cpu=0.02
+  PILOT-QUIET-b01-A0-721f78b8 c=1024 goodput=53.9 rps p99=9130.105166 ms err=0.36726703210649964 gen_cpu=0.04
+  -> ok runtime 246.8 s G*=117.6
+[exploratory] PILOT-QUIET block 2 position 0 arm A3
+  PILOT-QUIET-b02-A3-721f78b8 c=1 goodput=51.7 rps p99=21.07525 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A3-721f78b8 c=2 goodput=92.8 rps p99=25.603042 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A3-721f78b8 c=4 goodput=155.1 rps p99=31.473417 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A3-721f78b8 c=8 goodput=290.2 rps p99=35.235458 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b02-A3-721f78b8 c=16 goodput=534.1 rps p99=52.515292 ms err=0.0 gen_cpu=0.05
+  PILOT-QUIET-b02-A3-721f78b8 c=32 goodput=709.7 rps p99=65.8685 ms err=0.0 gen_cpu=0.07
+  PILOT-QUIET-b02-A3-721f78b8 c=64 goodput=1015.1 rps p99=75.317084 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b02-A3-721f78b8 c=128 goodput=1008.7 rps p99=148.419417 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b02-A3-721f78b8 c=256 goodput=1016.3 rps p99=294.280042 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b02-A3-721f78b8 c=512 goodput=1008.3 rps p99=553.954875 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b02-A3-721f78b8 c=1024 goodput=1012.1 rps p99=1072.346542 ms err=0.0 gen_cpu=0.11
+  -> ok runtime 228.3 s G*=1016.2666666666667
+[exploratory] PILOT-QUIET block 2 position 1 arm A1
+  PILOT-QUIET-b02-A1-721f78b8 c=1 goodput=91.3 rps p99=19.610875 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A1-721f78b8 c=2 goodput=159.9 rps p99=26.361167 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A1-721f78b8 c=4 goodput=273.5 rps p99=40.0975 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A1-721f78b8 c=8 goodput=192.4 rps p99=107.04725 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A1-721f78b8 c=16 goodput=158.7 rps p99=305.898166 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b02-A1-721f78b8 c=32 goodput=170.6 rps p99=1331.297833 ms err=0.0027279812938425566 gen_cpu=0.02
+  PILOT-QUIET-b02-A1-721f78b8 c=64 goodput=176.1 rps p99=1092.827083 ms err=0.01122754491017964 gen_cpu=0.02
+  PILOT-QUIET-b02-A1-721f78b8 c=128 goodput=162.7 rps p99=2457.311917 ms err=0.011345218800648298 gen_cpu=0.02
+  PILOT-QUIET-b02-A1-721f78b8 c=256 goodput=179.1 rps p99=8648.495083 ms err=0.016471449487554905 gen_cpu=0.02
+  PILOT-QUIET-b02-A1-721f78b8 c=512 goodput=166.6 rps p99=12239.792417 ms err=0.07065823726292302 gen_cpu=0.03
+  PILOT-QUIET-b02-A1-721f78b8 c=1024 goodput=174.3 rps p99=9973.935875 ms err=0.28870748299319726 gen_cpu=0.06
+  -> ok runtime 239.0 s G*=273.53333333333336
+[exploratory] PILOT-QUIET block 2 position 2 arm A4
+  PILOT-QUIET-b02-A4-721f78b8 c=1 goodput=54.1 rps p99=19.765583 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A4-721f78b8 c=2 goodput=79.3 rps p99=27.880834 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A4-721f78b8 c=4 goodput=117.7 rps p99=44.563458 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A4-721f78b8 c=8 goodput=72.0 rps p99=116.364584 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A4-721f78b8 c=16 goodput=72.3 rps p99=447.76225 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A4-721f78b8 c=32 goodput=66.1 rps p99=1865.285375 ms err=0.9931221154179825 gen_cpu=0.36
+  PILOT-QUIET-b02-A4-721f78b8 c=64 goodput=65.6 rps p99=2528.58275 ms err=0.9948195530285082 gen_cpu=0.44
+  PILOT-QUIET-b02-A4-721f78b8 c=128 goodput=68.3 rps p99=2530.864334 ms err=0.9957268520448577 gen_cpu=0.52
+  PILOT-QUIET-b02-A4-721f78b8 c=256 goodput=71.3 rps p99=2373.410041 ms err=0.9961244662086052 gen_cpu=0.60
+  PILOT-QUIET-b02-A4-721f78b8 c=512 goodput=58.7 rps p99=3338.860875 ms err=0.9964805471331041 gen_cpu=0.61
+  PILOT-QUIET-b02-A4-721f78b8 c=1024 goodput=55.1 rps p99=4282.303291 ms err=0.9966088473776045 gen_cpu=0.75
+  -> ok runtime 230.5 s G*=117.73333333333333
+[exploratory] PILOT-QUIET block 2 position 3 arm A0
+  PILOT-QUIET-b02-A0-721f78b8 c=1 goodput=54.2 rps p99=19.683833 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A0-721f78b8 c=2 goodput=79.5 rps p99=29.117541 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A0-721f78b8 c=4 goodput=117.9 rps p99=46.16475 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A0-721f78b8 c=8 goodput=73.9 rps p99=113.914458 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b02-A0-721f78b8 c=16 goodput=59.5 rps p99=377.307834 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A0-721f78b8 c=32 goodput=60.0 rps p99=872.643666 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b02-A0-721f78b8 c=64 goodput=59.3 rps p99=1706.794167 ms err=0.002242152466367713 gen_cpu=0.01
+  PILOT-QUIET-b02-A0-721f78b8 c=128 goodput=58.5 rps p99=3562.629209 ms err=0.0045351473922902496 gen_cpu=0.01
+  PILOT-QUIET-b02-A0-721f78b8 c=256 goodput=58.2 rps p99=8633.889375 ms err=0.0781414994720169 gen_cpu=0.01
+  PILOT-QUIET-b02-A0-721f78b8 c=512 goodput=56.1 rps p99=9287.995333 ms err=0.4015636105188344 gen_cpu=0.02
+  PILOT-QUIET-b02-A0-721f78b8 c=1024 goodput=56.3 rps p99=7272.52575 ms err=0.47577639751552797 gen_cpu=0.05
+  -> ok runtime 248.1 s G*=117.86666666666666
+[exploratory] PILOT-QUIET block 2 position 4 arm A2
+  PILOT-QUIET-b02-A2-721f78b8 c=1 goodput=21509.7 rps p99=0.080208 ms err=0.0 gen_cpu=0.30
+  PILOT-QUIET-b02-A2-721f78b8 c=2 goodput=28322.5 rps p99=0.108791 ms err=0.0 gen_cpu=0.47
+  PILOT-QUIET-b02-A2-721f78b8 c=4 goodput=18932.9 rps p99=0.414125 ms err=0.0 gen_cpu=0.47
+  PILOT-QUIET-b02-A2-721f78b8 c=8 goodput=10363.1 rps p99=1.625916 ms err=0.0 gen_cpu=0.29
+  PILOT-QUIET-b02-A2-721f78b8 c=16 goodput=9926.3 rps p99=3.513208 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b02-A2-721f78b8 c=32 goodput=9818.4 rps p99=7.132209 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b02-A2-721f78b8 c=64 goodput=9569.2 rps p99=14.645625 ms err=0.0 gen_cpu=0.26
+  PILOT-QUIET-b02-A2-721f78b8 c=128 goodput=8568.5 rps p99=29.876834 ms err=0.0 gen_cpu=0.23
+  PILOT-QUIET-b02-A2-721f78b8 c=256 goodput=8535.4 rps p99=64.976667 ms err=0.0 gen_cpu=0.24
+  PILOT-QUIET-b02-A2-721f78b8 c=512 goodput=6930.7 rps p99=164.5015 ms err=0.0 gen_cpu=0.21
+  PILOT-QUIET-b02-A2-721f78b8 c=1024 goodput=5002.5 rps p99=450.835417 ms err=0.014615889691398555 gen_cpu=0.19
+  -> ok runtime 231.1 s G*=28322.533333333333
+[exploratory] PILOT-QUIET block 3 position 0 arm A3
+  PILOT-QUIET-b03-A3-721f78b8 c=1 goodput=49.8 rps p99=22.233166 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A3-721f78b8 c=2 goodput=92.8 rps p99=25.930083 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A3-721f78b8 c=4 goodput=154.9 rps p99=30.219958 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A3-721f78b8 c=8 goodput=290.3 rps p99=35.080084 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b03-A3-721f78b8 c=16 goodput=534.6 rps p99=49.129834 ms err=0.0 gen_cpu=0.05
+  PILOT-QUIET-b03-A3-721f78b8 c=32 goodput=704.7 rps p99=68.822 ms err=0.0 gen_cpu=0.07
+  PILOT-QUIET-b03-A3-721f78b8 c=64 goodput=1014.0 rps p99=75.815917 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b03-A3-721f78b8 c=128 goodput=1020.9 rps p99=144.349291 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b03-A3-721f78b8 c=256 goodput=1013.9 rps p99=278.791833 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b03-A3-721f78b8 c=512 goodput=1011.7 rps p99=554.901041 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b03-A3-721f78b8 c=1024 goodput=1006.8 rps p99=1080.92875 ms err=0.0 gen_cpu=0.11
+  -> ok runtime 228.2 s G*=1020.9333333333333
+[exploratory] PILOT-QUIET block 3 position 1 arm A2
+  PILOT-QUIET-b03-A2-721f78b8 c=1 goodput=21664.7 rps p99=0.078833 ms err=0.0 gen_cpu=0.30
+  PILOT-QUIET-b03-A2-721f78b8 c=2 goodput=28403.9 rps p99=0.107875 ms err=0.0 gen_cpu=0.45
+  PILOT-QUIET-b03-A2-721f78b8 c=4 goodput=18814.9 rps p99=0.418833 ms err=0.0 gen_cpu=0.47
+  PILOT-QUIET-b03-A2-721f78b8 c=8 goodput=10325.9 rps p99=1.638333 ms err=0.0 gen_cpu=0.28
+  PILOT-QUIET-b03-A2-721f78b8 c=16 goodput=9902.0 rps p99=3.523875 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b03-A2-721f78b8 c=32 goodput=9744.8 rps p99=7.168792 ms err=0.0 gen_cpu=0.26
+  PILOT-QUIET-b03-A2-721f78b8 c=64 goodput=9560.3 rps p99=14.655375 ms err=0.0 gen_cpu=0.26
+  PILOT-QUIET-b03-A2-721f78b8 c=128 goodput=9184.3 rps p99=30.324792 ms err=0.0 gen_cpu=0.25
+  PILOT-QUIET-b03-A2-721f78b8 c=256 goodput=8584.3 rps p99=64.2285 ms err=0.0 gen_cpu=0.24
+  PILOT-QUIET-b03-A2-721f78b8 c=512 goodput=4847.7 rps p99=1801.178291 ms err=0.004776568808595087 gen_cpu=0.15
+  PILOT-QUIET-b03-A2-721f78b8 c=1024 goodput=4915.0 rps p99=458.904584 ms err=0.015543003645395185 gen_cpu=0.19
+  -> ok runtime 229.3 s G*=28403.866666666665
+[exploratory] PILOT-QUIET block 3 position 2 arm A0
+  PILOT-QUIET-b03-A0-721f78b8 c=1 goodput=54.1 rps p99=20.015542 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A0-721f78b8 c=2 goodput=79.6 rps p99=27.731542 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A0-721f78b8 c=4 goodput=117.6 rps p99=41.342084 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A0-721f78b8 c=8 goodput=71.9 rps p99=119.046542 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A0-721f78b8 c=16 goodput=56.8 rps p99=320.741209 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A0-721f78b8 c=32 goodput=57.3 rps p99=744.547708 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A0-721f78b8 c=64 goodput=57.5 rps p99=1811.864292 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A0-721f78b8 c=128 goodput=56.1 rps p99=3632.712 ms err=0.002372479240806643 gen_cpu=0.01
+  PILOT-QUIET-b03-A0-721f78b8 c=256 goodput=53.9 rps p99=7570.55575 ms err=0.07648401826484018 gen_cpu=0.01
+  PILOT-QUIET-b03-A0-721f78b8 c=512 goodput=53.6 rps p99=8161.916416 ms err=0.38766184310738766 gen_cpu=0.02
+  PILOT-QUIET-b03-A0-721f78b8 c=1024 goodput=50.9 rps p99=8933.557167 ms err=0.4596888260254597 gen_cpu=0.04
+  -> ok runtime 246.1 s G*=117.6
+[exploratory] PILOT-QUIET block 3 position 3 arm A4
+  PILOT-QUIET-b03-A4-721f78b8 c=1 goodput=54.1 rps p99=20.0555 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A4-721f78b8 c=2 goodput=80.8 rps p99=33.6385 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A4-721f78b8 c=4 goodput=118.9 rps p99=40.431917 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A4-721f78b8 c=8 goodput=79.8 rps p99=106.21 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b03-A4-721f78b8 c=16 goodput=79.2 rps p99=310.27475 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A4-721f78b8 c=32 goodput=71.8 rps p99=1930.994958 ms err=0.9926023106617394 gen_cpu=0.35
+  PILOT-QUIET-b03-A4-721f78b8 c=64 goodput=70.7 rps p99=2178.81275 ms err=0.9944619592450309 gen_cpu=0.44
+  PILOT-QUIET-b03-A4-721f78b8 c=128 goodput=72.5 rps p99=2332.4415 ms err=0.9954402067218149 gen_cpu=0.52
+  PILOT-QUIET-b03-A4-721f78b8 c=256 goodput=74.7 rps p99=2044.823792 ms err=0.9959884053821929 gen_cpu=0.59
+  PILOT-QUIET-b03-A4-721f78b8 c=512 goodput=59.7 rps p99=2938.054583 ms err=0.9964204958572034 gen_cpu=0.61
+  PILOT-QUIET-b03-A4-721f78b8 c=1024 goodput=57.5 rps p99=3393.50625 ms err=0.9964960916381788 gen_cpu=0.75
+  -> ok runtime 229.4 s G*=118.93333333333334
+[exploratory] PILOT-QUIET block 3 position 4 arm A1
+  PILOT-QUIET-b03-A1-721f78b8 c=1 goodput=88.1 rps p99=19.497042 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A1-721f78b8 c=2 goodput=156.6 rps p99=26.780583 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A1-721f78b8 c=4 goodput=272.8 rps p99=40.943542 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A1-721f78b8 c=8 goodput=178.0 rps p99=112.540875 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b03-A1-721f78b8 c=16 goodput=154.9 rps p99=323.971458 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b03-A1-721f78b8 c=32 goodput=163.2 rps p99=687.424041 ms err=0.0012239902080783353 gen_cpu=0.02
+  PILOT-QUIET-b03-A1-721f78b8 c=64 goodput=161.0 rps p99=1314.992167 ms err=0.005763688760806916 gen_cpu=0.02
+  PILOT-QUIET-b03-A1-721f78b8 c=128 goodput=159.3 rps p99=2806.995125 ms err=0.009531703273932863 gen_cpu=0.02
+  PILOT-QUIET-b03-A1-721f78b8 c=256 goodput=165.2 rps p99=8948.734333 ms err=0.016666666666666666 gen_cpu=0.02
+  PILOT-QUIET-b03-A1-721f78b8 c=512 goodput=172.2 rps p99=12619.175958 ms err=0.04896907216494845 gen_cpu=0.02
+  PILOT-QUIET-b03-A1-721f78b8 c=1024 goodput=164.4 rps p99=10411.545375 ms err=0.2950257289879931 gen_cpu=0.06
+  -> ok runtime 239.1 s G*=272.8
+[exploratory] PILOT-QUIET block 4 position 0 arm A0
+  PILOT-QUIET-b04-A0-721f78b8 c=1 goodput=54.1 rps p99=19.976125 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A0-721f78b8 c=2 goodput=79.9 rps p99=27.544375 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A0-721f78b8 c=4 goodput=117.5 rps p99=43.066 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A0-721f78b8 c=8 goodput=77.3 rps p99=112.895959 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A0-721f78b8 c=16 goodput=60.9 rps p99=298.527375 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A0-721f78b8 c=32 goodput=61.6 rps p99=1253.881875 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A0-721f78b8 c=64 goodput=63.0 rps p99=1682.519209 ms err=0.0010570824524312897 gen_cpu=0.01
+  PILOT-QUIET-b04-A0-721f78b8 c=128 goodput=65.1 rps p99=3321.548583 ms err=0.004081632653061225 gen_cpu=0.01
+  PILOT-QUIET-b04-A0-721f78b8 c=256 goodput=58.7 rps p99=8983.756667 ms err=0.05976520811099253 gen_cpu=0.01
+  PILOT-QUIET-b04-A0-721f78b8 c=512 goodput=56.6 rps p99=7608.794 ms err=0.3433874709976798 gen_cpu=0.02
+  PILOT-QUIET-b04-A0-721f78b8 c=1024 goodput=60.6 rps p99=8184.026 ms err=0.4054937867887508 gen_cpu=0.05
+  -> ok runtime 245.6 s G*=117.46666666666667
+[exploratory] PILOT-QUIET block 4 position 1 arm A2
+  PILOT-QUIET-b04-A2-721f78b8 c=1 goodput=21189.9 rps p99=0.079542 ms err=0.0 gen_cpu=0.31
+  PILOT-QUIET-b04-A2-721f78b8 c=2 goodput=28424.7 rps p99=0.106583 ms err=0.0 gen_cpu=0.47
+  PILOT-QUIET-b04-A2-721f78b8 c=4 goodput=18879.3 rps p99=0.413916 ms err=0.0 gen_cpu=0.48
+  PILOT-QUIET-b04-A2-721f78b8 c=8 goodput=10307.4 rps p99=1.654833 ms err=0.0 gen_cpu=0.29
+  PILOT-QUIET-b04-A2-721f78b8 c=16 goodput=9876.5 rps p99=3.515667 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b04-A2-721f78b8 c=32 goodput=9830.9 rps p99=7.137166 ms err=0.0 gen_cpu=0.27
+  PILOT-QUIET-b04-A2-721f78b8 c=64 goodput=9588.7 rps p99=14.640459 ms err=0.0 gen_cpu=0.26
+  PILOT-QUIET-b04-A2-721f78b8 c=128 goodput=9173.3 rps p99=29.917375 ms err=0.0 gen_cpu=0.25
+  PILOT-QUIET-b04-A2-721f78b8 c=256 goodput=8580.3 rps p99=64.772125 ms err=0.0 gen_cpu=0.24
+  PILOT-QUIET-b04-A2-721f78b8 c=512 goodput=6967.5 rps p99=161.87975 ms err=0.0 gen_cpu=0.21
+  PILOT-QUIET-b04-A2-721f78b8 c=1024 goodput=4951.0 rps p99=473.749833 ms err=0.015131421902766357 gen_cpu=0.19
+  -> ok runtime 229.3 s G*=28424.733333333334
+[exploratory] PILOT-QUIET block 4 position 2 arm A3
+  PILOT-QUIET-b04-A3-721f78b8 c=1 goodput=49.9 rps p99=21.494 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A3-721f78b8 c=2 goodput=93.1 rps p99=25.544333 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A3-721f78b8 c=4 goodput=154.8 rps p99=29.94525 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A3-721f78b8 c=8 goodput=290.0 rps p99=34.560083 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b04-A3-721f78b8 c=16 goodput=540.5 rps p99=41.124167 ms err=0.0 gen_cpu=0.05
+  PILOT-QUIET-b04-A3-721f78b8 c=32 goodput=711.9 rps p99=66.929833 ms err=0.0 gen_cpu=0.07
+  PILOT-QUIET-b04-A3-721f78b8 c=64 goodput=1011.3 rps p99=75.243792 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b04-A3-721f78b8 c=128 goodput=1009.0 rps p99=146.667333 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b04-A3-721f78b8 c=256 goodput=1023.7 rps p99=275.091459 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b04-A3-721f78b8 c=512 goodput=1010.7 rps p99=554.588667 ms err=0.0 gen_cpu=0.10
+  PILOT-QUIET-b04-A3-721f78b8 c=1024 goodput=1010.9 rps p99=1069.090959 ms err=0.0 gen_cpu=0.11
+  -> ok runtime 228.2 s G*=1023.7333333333333
+[exploratory] PILOT-QUIET block 4 position 3 arm A4
+  PILOT-QUIET-b04-A4-721f78b8 c=1 goodput=57.3 rps p99=18.851166 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A4-721f78b8 c=2 goodput=85.3 rps p99=28.124542 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A4-721f78b8 c=4 goodput=119.0 rps p99=42.301958 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A4-721f78b8 c=8 goodput=77.1 rps p99=109.199542 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A4-721f78b8 c=16 goodput=77.3 rps p99=417.444667 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A4-721f78b8 c=32 goodput=69.5 rps p99=1712.806208 ms err=0.9926586113361751 gen_cpu=0.35
+  PILOT-QUIET-b04-A4-721f78b8 c=64 goodput=69.9 rps p99=2225.854 ms err=0.994586385379108 gen_cpu=0.43
+  PILOT-QUIET-b04-A4-721f78b8 c=128 goodput=70.3 rps p99=2453.057667 ms err=0.9955783026387549 gen_cpu=0.52
+  PILOT-QUIET-b04-A4-721f78b8 c=256 goodput=72.7 rps p99=2335.926125 ms err=0.9960794187468528 gen_cpu=0.61
+  PILOT-QUIET-b04-A4-721f78b8 c=512 goodput=59.1 rps p99=3560.883834 ms err=0.9964903246251658 gen_cpu=0.61
+  PILOT-QUIET-b04-A4-721f78b8 c=1024 goodput=58.7 rps p99=3043.986 ms err=0.9964455789869092 gen_cpu=0.77
+  -> ok runtime 230.2 s G*=119.0
+[exploratory] PILOT-QUIET block 4 position 4 arm A1
+  PILOT-QUIET-b04-A1-721f78b8 c=1 goodput=90.2 rps p99=19.62425 ms err=0.0 gen_cpu=0.00
+  PILOT-QUIET-b04-A1-721f78b8 c=2 goodput=156.4 rps p99=27.945791 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A1-721f78b8 c=4 goodput=273.9 rps p99=40.461625 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A1-721f78b8 c=8 goodput=188.6 rps p99=105.496666 ms err=0.0 gen_cpu=0.01
+  PILOT-QUIET-b04-A1-721f78b8 c=16 goodput=157.7 rps p99=345.524417 ms err=0.0 gen_cpu=0.02
+  PILOT-QUIET-b04-A1-721f78b8 c=32 goodput=172.7 rps p99=1746.644375 ms err=0.004227517294388932 gen_cpu=0.02
+  PILOT-QUIET-b04-A1-721f78b8 c=64 goodput=175.2 rps p99=1102.91625 ms err=0.00830188679245283 gen_cpu=0.02
+  PILOT-QUIET-b04-A1-721f78b8 c=128 goodput=168.5 rps p99=2583.1625 ms err=0.010567514677103719 gen_cpu=0.02
+  PILOT-QUIET-b04-A1-721f78b8 c=256 goodput=176.5 rps p99=6237.823875 ms err=0.016716196136701337 gen_cpu=0.02
+  PILOT-QUIET-b04-A1-721f78b8 c=512 goodput=178.1 rps p99=12509.178334 ms err=0.031193326079071455 gen_cpu=0.02
+  PILOT-QUIET-b04-A1-721f78b8 c=1024 goodput=177.8 rps p99=9600.667042 ms err=0.2895578050079915 gen_cpu=0.06
+  -> ok runtime 238.8 s G*=273.93333333333334
+results: results/raw/PILOT-QUIET/PILOT-QUIET-M3
+runs: 25, not ok: 0, runtime 5869.6 s
+pilot exit 0
+resolve-pilot exit 0
+{
+ "blocks": 10,
+ "c_max": 512,
+ "concurrency": [
+  1,
+  2,
+  4,
+  8,
+  16,
+  32,
+  64,
+  128,
+  256,
+  512
+ ],
+ "n_pilot_blocks": 5,
+ "peak_concurrency": {
+  "A1": [
+   4,
+   4,
+   4,
+   4,
+   4
+  ],
+  "A3": [
+   128,
+   128,
+   256,
+   128,
+   256
+  ]
+ },
+ "rule_version": "pilot-rule-1.0",
+ "sd_log_ratio": {
+  "A1": 0.020759474547523,
+  "A2": 0.013477776350563981,
+  "A3": 0.01248470860167049,
+  "A4": 0.010318971722634886
+ },
+ "sd_trigger": 0.07,
+ "truncated_at_cap": false
+}
+== end 2026-11-25T03:41:59Z

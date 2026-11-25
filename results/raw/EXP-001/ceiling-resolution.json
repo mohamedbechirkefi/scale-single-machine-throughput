@@ -1,0 +1,12 @@
+{
+ "generator_ceiling_rps": 27919.4,
+ "n_runs": 5,
+ "rule_version": "ceiling-rule-1.0",
+ "run_ceilings_rps": [
+  27914.5,
+  27919.4,
+  27953.9,
+  27860.9,
+  28657.0
+ ]
+}

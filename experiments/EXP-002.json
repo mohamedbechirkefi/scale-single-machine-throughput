@@ -1,5 +1,5 @@
 {
- "_comment": "CONFIRMATORY config of EXP-002, frozen v1.0 (owner-approved 2026-11-24) except three values left unset on purpose: blocks and concurrency are to be set by the pre-stated quiet-pilot rule (research/protocol.md section 7.1, `scale resolve-pilot`), and generator_ceiling_rps comes from EXP-001 (EXP-001 protocol item 21). scale run refuses this file until the resolution is appended to research/freeze.json.",
+ "_comment": "CONFIRMATORY config of EXP-002, frozen v1.0 (owner-approved 2026-11-24). Completed at M3 (2026-11-25) by the pre-stated rules only: blocks and concurrency from the quiet pilot (research/protocol.md section 7.1, pilot-rule-1.0), generator_ceiling_rps from the EXP-001 ceiling runs (AM-5, ceiling-rule-1.0). The resolution and this file's SHA-256 are recorded in research/freeze.json.",
  "experiment_id": "EXP-002",
  "label": "confirmatory",
  "kind": "closed_sweep",
@@ -11,12 +11,23 @@
   "A3",
   "A4"
  ],
- "concurrency": null,
+ "concurrency": [
+  1,
+  2,
+  4,
+  8,
+  16,
+  32,
+  64,
+  128,
+  256,
+  512
+ ],
  "warmup_s": 5.0,
  "measure_s": 15.0,
- "blocks": null,
+ "blocks": 10,
  "study_seed": 20261124,
- "generator_ceiling_rps": null,
+ "generator_ceiling_rps": 27919.4,
  "idle_probe_enforce": true,
  "protocol_path": "research/experiments/EXP-002/protocol.md",
  "protocol_sha256": "8da83b076a0785e58c3749218e119cd7885f8879f10eab309af13644a4da1171",

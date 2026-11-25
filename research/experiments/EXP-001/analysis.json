@@ -1,0 +1,73 @@
+{
+ "analysis_version": "analysis-1.0",
+ "figures": [
+  "figures/exp001_ceiling.png",
+  "figures/exp001_ceiling.svg"
+ ],
+ "gate_exp002_may_start": true,
+ "gate_ratio_median_c32": 1.014881726946336,
+ "h0_ratio_median_in_band_all_levels": true,
+ "levels": {
+  "1": {
+   "ab_max": 28406.51,
+   "ab_median": 28273.74,
+   "ab_min": 28120.12,
+   "all_ratios_in_band": true,
+   "c_gen_max": 26820.5,
+   "c_gen_median": 26656.8,
+   "c_gen_min": 26134.9,
+   "error_rate_max": 0,
+   "generator_cpu_max": 0.30317701867354285,
+   "generator_cpu_median": 0.3024815705439546,
+   "n": 5,
+   "p99_median_ms": 0.0455,
+   "ratio_max": 0.9513160158265956,
+   "ratio_median": 0.9418143072479128,
+   "ratio_median_in_band": true,
+   "ratio_min": 0.9243524203023724,
+   "server_cpu_median": 0.5528553653915687
+  },
+  "8": {
+   "ab_max": 27076.19,
+   "ab_median": 27024.7,
+   "ab_min": 26942.6,
+   "all_ratios_in_band": true,
+   "c_gen_max": 28657.0,
+   "c_gen_median": 27919.4,
+   "c_gen_min": 27860.9,
+   "error_rate_max": 0,
+   "generator_cpu_max": 0.6818455786947526,
+   "generator_cpu_median": 0.6546566140861332,
+   "n": 5,
+   "p99_median_ms": 0.886584,
+   "ratio_max": 1.0583837681741781,
+   "ratio_median": 1.0340835702567681,
+   "ratio_median_in_band": true,
+   "ratio_min": 1.032145922127882,
+   "server_cpu_median": 1.3247176426177114
+  },
+  "32": {
+   "ab_max": 26666.26,
+   "ab_median": 26632.59,
+   "ab_min": 26576.47,
+   "all_ratios_in_band": true,
+   "c_gen_max": 27531.8,
+   "c_gen_median": 27063.1,
+   "c_gen_min": 25893.4,
+   "error_rate_max": 0,
+   "generator_cpu_max": 1.403620272426919,
+   "generator_cpu_median": 0.8980340658079909,
+   "n": 5,
+   "p99_median_ms": 4.273208,
+   "ratio_max": 1.033002904075461,
+   "ratio_median": 1.014881726946336,
+   "ratio_median_in_band": true,
+   "ratio_min": 0.9725512879260222,
+   "server_cpu_median": 1.3594017545921597
+  }
+ },
+ "not_ok_runs": [],
+ "repeats_ok": 5,
+ "results_dir": "results/raw/EXP-001/EXP-001-M3",
+ "runs_total": 5
+}

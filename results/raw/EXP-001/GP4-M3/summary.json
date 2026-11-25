@@ -1,0 +1,24 @@
+{
+ "degenerate": [
+  "EXP001-GP4-b00-A0-c7de4089: peak at the lowest swept concurrency c=8; goodput falls as concurrency rises",
+  "EXP001-GP4-b01-A0-c7de4089: peak at the lowest swept concurrency c=8; goodput falls as concurrency rises",
+  "EXP001-GP4-b02-A0-c7de4089: peak at the highest swept concurrency c=32; saturation not reached, G* is truncated by the sweep"
+ ],
+ "figures": [],
+ "labels": [
+  "exploratory"
+ ],
+ "n_runs": 3,
+ "pilot": {},
+ "projection_full_matrix": {
+  "levels": 7,
+  "max_overhead_s": 1.766423374995064,
+  "measure_s": 15.0,
+  "per_run_s": 143.86642337499507,
+  "runs": 50,
+  "total_h": 1.9981447690971537,
+  "total_s": 7193.321168749753,
+  "warmup_s": 5.0
+ },
+ "results_dir": "results/raw/EXP-001/GP4-M3"
+}
