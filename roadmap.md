@@ -9,7 +9,7 @@ Status values: `done`, `in progress`, `planned`, `blocked(<reason>)`, `gated(<ga
 | M1 Research and preregistration | P0 | 0.5 d | M0 | gate passed: protocol frozen v1.0 (owner-approved 2026-11-24, D-009, `research/freeze.json`); literature open items remain | none for the freeze; EXP-002 c_max and n await the quiet-pilot rule (protocol 7.1) |
 | M2 Core implementation | P0 | 1 d | M1 drafts (implementation may start before the freeze) | done (2026-11-24; see progress.md); amendments D-008 decided by the owner and applied (D-009) | none |
 | M3 Experiments | P0 | 1 to 1.5 d (about 6 h to 11 h machine time) | M2, owner freeze (done) | done with documented gaps (2026-11-25) | EXP-001 and EXP-002 complete; EXP-003 not run (four unset parameters, D-014); EXP-004 optional, no frozen config; D-012 reading of the A2 exclusion awaits the owner |
-| M4 Interpretation | P0 | 0.75 d | M3 | planned | none |
+| M4 Interpretation | P0 | 0.75 d | M3 | done (2026-11-25; D-015) | Pending owner decisions disclosed, not blocking: D-012 reading (A2 exclusion), EXP-003 parameters, EXP-004; owner-only placeholders listed in progress.md |
 | M5 Interactive experience | P1 | 0.75 d | M4 | planned | none |
 | M6 Release candidate | P0 | 0.5 d | M4, M5 | planned | gated(G-PUBLIC) for any publication |
 
@@ -61,10 +61,10 @@ Acceptance criteria:
 ## M4 Interpretation (11.6: evidence audit, manuscript synthesis)
 
 Acceptance criteria:
-- [ ] Confounders inspected; sensitivity analyses reported, including contradictory results.
-- [ ] Claims register complete; every numerical claim maps to result id, config and figure; every external claim to a verified source.
-- [ ] Second review pass challenging the preferred hypothesis.
-- [ ] Manuscript complete (3,000 to 6,000 words where justified); limitations updated.
+- [x] Confounders inspected; sensitivity analyses reported, including contradictory results (re-analysis of recorded runs only; no new measurement on a shared machine).
+- [x] Claims register complete; every numerical claim maps to result id, config and figure; every external claim to a verified source (`research/publication/evidence_audit_M4.md`).
+- [x] Second review pass challenging the preferred hypothesis (`research/publication/review_pass_2.md`).
+- [x] Manuscript complete (about 5,700 words from abstract to conclusion); limitations updated (items 18 to 25).
 
 ## M5 Interactive experience (11.6: identical results and labels across outputs)
 

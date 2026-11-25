@@ -157,3 +157,44 @@ Coordinator: quiet window. `scale run experiments/EXP-001.json`, then `scale res
 ## 2026-11-25: M3 done with documented gaps (coordinator, quiet window)
 
 The owner approved the experiment reports (owner, 2026-11-25, "approve all recommendations, RIGGED A", item 4). Subagents may not write report files, so the reports were composed by the M3 session from committed results only and written by the coordinator: 4 report(s). The coordinator checked that every decimal number in them appears in a committed file. EXP-001 and EXP-002 ran in full in an exclusive quiet-machine window (EXP-002: 50 of 50 cells). EXP-003 was not run because its frozen text leaves four parameters unset (D-014), and EXP-004 (optional) has no frozen config; both are documented failures under the M3 gate. The exclusion of A2 as generator-limited (D-012 reading) awaits the owner. M3 is **done** with these gaps. Next: owner decisions on D-012, EXP-003 and EXP-004, then M4.
+
+## 2026-11-25: Session M4 (interpretation, evidence audit, manuscript, review pass 2)
+
+**Milestone:** M4. **Authority:** owner, 2026-11-25, "Next" (`labs/_shared/owner-approvals-2026-11-25d.md`); brief `labs/_shared/M4-brief.md`. The SCALE sections of `owner-approvals-2026-11-24.md` and `-24b.md` were read; `owner-approvals-2026-11-25.md`, `-25b.md` and `-25c.md` have no SCALE section.
+
+### Starting state
+`git status`: `On branch main`, `nothing to commit, working tree clean`; HEAD `b9047ab`.
+
+### Constraint
+Other lab agents were running, so the machine was not quiet. No timing or throughput measurement was made, exploratory or otherwise. Sensitivity and confounder work re-analyses the recorded M3 outputs only.
+
+### Done
+- `scripts/m4_exploratory_confounders.py` (exploratory, J-0014): checksums of 219 raw files verified (0 mismatches), then checks X1 to X13 written to `results/exploratory/M4-REANALYSIS-20261125/summary.json`. X13 asks SQLite for query plans on a temporary 100-row database (no timing).
+- `scripts/m4_evidence_manifest.py`: `research/publication/artifact_manifest.json` rebuilt (535 entries, 0 mismatches, 0 uncovered numeric tokens over manuscript, supplementary, claims register and the four reports).
+- Corrections to M3 reports (no verdict changed): EXP-001 generator CPU at c = 8 (0.66 to 0.65); EXP-002 per-run duration (207 to 220 s), scope of the 503 count, error composition at high concurrency.
+- `research/paper/manuscript.md` (about 5,700 words, abstract to conclusion) and `supplementary.md`; `manuscript.tex` regenerated with pandoc. `research/publication/evidence_audit_M4.md`, `review_pass_2.md` (17 challenges, 8 changes), `claims_audit.md`. Claims register restructured (C-001 to C-012, E-001 to E-008). Limitations 18 to 25. D-015.
+
+### Commands and actual outputs
+- `.venv/bin/python scripts/m4_exploratory_confounders.py`: exit 0 (first X13 attempt failed with `sqlite3.OperationalError: no such table: items` because `build_database` returns a hash, not a path; fixed in the script. That failed attempt left an empty file named after the hash in the repository root, created by this session and deleted before the commit).
+- `.venv/bin/python scripts/m4_evidence_manifest.py`: first run `entries 520, mismatches 0, uncovered 58` (section numbers, versions, and three real findings: 0.66, 207 to 216, and the rounded 42,000 and 28,000 without entries); after the fixes `entries 535, mismatches 0, uncovered 0`. One intermediate run found `MISMATCH 1.04` and `0.99` for a Little's-law range drafted by the assistant; the recorded range is 0.89 to 1.05 (audit F-5).
+- `/Users/bechir/research/labs/.tools/pandoc research/paper/manuscript.md -s -t latex -o research/paper/manuscript.tex`: exit 0.
+- `.venv/bin/python -m pytest -q`: `132 passed in 25.17s`.
+
+### Report files refused to the subagent
+The Write tool refused `results/exploratory/M4-REANALYSIS-20261125/report.md`; its text was returned to the coordinator. The same content is in `summary.json`, the manuscript section 5.5 and J-0014.
+
+### Owner decisions still pending (disclosed in the manuscript and review pass, not decided)
+1. D-012 reading that excludes A2 from the confirmatory comparison.
+2. EXP-003's four unset parameters (EXP-003 not run).
+3. Whether EXP-004 runs (not run).
+4. Whether `results/raw/` (about 1.5 MB) is committed at M6.
+
+### Owner placeholders for M5
+1. Manuscript front matter: the author line is `[placeholder: author line, to be confirmed by the owner. Common decision C3 of 2026-11-24 records "Mohamed Bechir Kefi", no affiliation]`.
+2. Manuscript section 10: the repository URL is `[placeholder: repository URL, not published; publication requires the owner's approval]`.
+3. Manuscript section 11: funding `[placeholder: funding statement, to be supplied by the owner]`.
+4. Manuscript section 11: competing interests `[placeholder: competing-interests statement, to be supplied by the owner]`.
+5. Manuscript section 11: "the owner's review of this manuscript is pending".
+
+### Next action
+M5 (interactive explorer of the recorded runs), with the placeholders and pending decisions above put to the owner.

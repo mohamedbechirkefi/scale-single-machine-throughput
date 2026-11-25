@@ -18,7 +18,7 @@ For j in {A1, A2, A3, A4}, H0_j: R_j = 1, where R_j = G*_j / G*_A0 within a bloc
 ## 2. What was run
 
 - **Matrix.** 5 arms x 10 concurrency levels x 10 blocks. Each run had a fresh server and database, arm order was seeded within each block, and each level had a 5 s warmup and a 15 s window. One generator process. Jobs ran under `nice -n 10`.
-- **Timing.** 03:44:21Z to 06:40:02Z, 10540.9 s, about 207 to 216 s per run.
+- **Timing.** 03:44:21Z to 06:40:02Z, 10540.9 s, about 207 to 220 s per accepted run (206.9 to 219.7 s; corrected at M4, was printed as 207 to 216).
 - **Quiet machine.** Checked before the start (probes 3.8, 3.1, 5.1 %; `results/raw/quiet-checks-exp002.jsonl`). The probe was enforced per run: accepted runs 1.9 % to 10.0 %. The 1-min load average at run start was 1.9 to 142; the high values come from the previous run's own threads. AC power throughout.
 
 ## 3. Deviations
@@ -67,8 +67,8 @@ For j in {A1, A2, A3, A4}, H0_j: R_j = 1, where R_j = G*_j / G*_A0 within a bloc
 ### 4.5 Descriptives
 
 - **A1:** median cache hit ratio 0.59.
-- **A4:** 14,737,227 HTTP 503 rejections in total. Error rate about 0.99 at every c >= 32.
-- **Errors at c = 512:** maximum error rate 0.42 for A0 and 0.17 for A1. Cause not diagnosed; candidates are client timeouts and the listen backlog, which the kernel caps at 128.
+- **A4:** 14,737,227 HTTP 503 rejections counted by the server over the ten runs, including warmups; 10,996,866 of them fell in measurement windows (M4 re-analysis X1). Error rate about 0.99 at every c >= 32.
+- **Errors at c = 512:** maximum error rate 0.42 for A0 and 0.17 for A1. Composition (M4 re-analysis X1, corrected at M4): the errors are HTTP 500 responses from the server's generic exception handler (from c = 64 or 128 for A0 and c = 32 or 64 for A1) plus transport errors (only at c = 256 and 512). The exception type is not logged, so the cause of the 500s is not identified (the 5 s SQLite busy timeout is a candidate only); client timeouts and the listen backlog, which the kernel caps at 128, remain candidates for the transport errors. No invalid body occurred in any accepted run.
 - **A3:** zero errors at every level.
 - **Per-level detail:** goodput and p99 latency per level, with medians and ranges, are in `analysis.json`.
 
@@ -94,3 +94,9 @@ For j in {A1, A2, A3, A4}, H0_j: R_j = 1, where R_j = G*_j / G*_A0 within a bloc
 - The re-attempted cells are not adjacent in time.
 - EXP-003 and EXP-004 did not run, so the ranking is not tested against open-loop arrivals or other workloads.
 - See `research/limitations.md` items 12 to 17.
+
+## 8. M4 addendum (2026-11-25)
+
+- **Evidence audit.** Two statements of this report were corrected: the per-run duration range (above) and the 503 count, which is a server-side total including warmups. The error composition at high concurrency was added. No verdict changed. See `research/publication/evidence_audit_M4.md`.
+- **Exploratory re-analysis** (`results/exploratory/M4-REANALYSIS-20261125/summary.json`, J-0014; no new measurement). It does not change any verdict. It finds that the A4 null is structural (both A4 and A0 peak at c = 4, below W = 8, where the limiter does not engage), that A3's G* is not materially truncated (R over c <= 256 is 8.99), and that the size of A3's advantage over A1 depends on the summary metric (exploratory R_A3 / R_A1 3.85 under G*, 1.58 under a closed-loop 50 ms p99 bound).
+- **Pending the owner.** The D-012 reading that excludes A2 is still pending (owner, 2026-11-25, "Next", does not decide it).

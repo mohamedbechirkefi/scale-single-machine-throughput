@@ -28,7 +28,7 @@ None from the frozen config. The protocol also names a stall check, a 1 versus 4
 | c | SCALE C_gen median (min to max), rps | ab median (min to max), rps | SCALE/ab median (min to max) | generator CPU median (max) |
 |---|---|---|---|---|
 | 1 | 26656.8 (26134.9 to 26820.5) | 28273.7 (28120.1 to 28406.5) | 0.942 (0.924 to 0.951) | 0.30 (0.30) |
-| 8 | 27919.4 (27860.9 to 28657.0) | 27024.7 (26942.6 to 27076.2) | 1.034 (1.032 to 1.058) | 0.66 (0.68) |
+| 8 | 27919.4 (27860.9 to 28657.0) | 27024.7 (26942.6 to 27076.2) | 1.034 (1.032 to 1.058) | 0.65 (0.68) |
 | 32 | 27063.1 (25893.4 to 27531.8) | 26632.6 (26576.5 to 26666.3) | 1.015 (0.973 to 1.033) | 0.90 (1.40) |
 
 Zero errors at every level. Run ceilings (peak over the ladder) were 27914.5, 27919.4, 27953.9, 27860.9 and 28657.0 rps. **The AM-5 ceiling is 27919.4 rps** (`scale resolve-ceiling`, ceiling-rule-1.0).
@@ -51,3 +51,7 @@ Zero errors at every level. Run ceilings (peak over the ladder) were 27914.5, 27
 ## 7. Limitations
 
 One machine. The "generator ceiling" includes the server's HTTP path, so it caps any arm that serves requests as fast as `/null`, which matters for A2 in EXP-002. The stall check is a single repeat.
+
+## 8. M4 evidence-audit correction (2026-11-25)
+
+The median generator CPU at c = 8 was printed as 0.66 at M3; the recorded value is 0.6547 (`analysis.json` `levels.8.generator_cpu_median`), so the table now shows 0.65. No verdict depends on it. Audit: `research/publication/evidence_audit_M4.md`.

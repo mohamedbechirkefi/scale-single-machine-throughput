@@ -1,67 +1,278 @@
 ---
-title: "SCALE: what bottlenecks dominate local request throughput on one machine? (working title)"
-author: "Mohamed Bechir Kefi"
-date: "Skeleton, 2026-11-24"
-status: "Independent research manuscript draft. Not peer reviewed. No results yet."
+title: "Cache, index, batching or admission control? A one-factor-at-a-time throughput study with a frozen protocol of one Python and SQLite server on one laptop"
+author: "[placeholder: author line, to be confirmed by the owner. Common decision C3 of 2026-11-24 records \"Mohamed Bechir Kefi\", no affiliation]"
+date: "Draft of 2026-11-25 (M4)"
 ---
 
 <!-- SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0 -->
-<!-- Skeleton of headings only (master prompt 11.4). No content, numbers or findings until experiments have run and been audited. -->
+<!-- Canonical source. manuscript.tex is generated from this file with pandoc and is never hand-edited. Every number below is listed in research/publication/artifact_manifest.json, generated and checked by scripts/m4_evidence_manifest.py. -->
+
+**Status.** Independent research manuscript, preprint draft, not peer-reviewed. All measurements come from one laptop, one synthetic workload and one server implementation on localhost. No result transfers to production traffic or to other hardware.
+
+**Pending owner decisions disclosed in this draft.** (1) The reading of the frozen generator-limited rule that excludes the index arm from the confirmatory comparison (decision D-012) has not been reviewed by the owner; section 5.2 reports both the frozen-rule reading and what it rests on. (2) EXP-003 was not run, because four of its parameters are not set by the frozen text; the owner has not set them. (3) The owner has not decided whether the optional EXP-004 runs; it was not run. Each stays open under the owner's instruction of 2026-11-25 ("Next").
 
 # Abstract
 
+**Background.** Advice on making a local web service faster usually names caching, indexing, batching or admission control, but the size of each remedy depends on the system it is applied to. **Question.** On one fixed machine and workload, which of these four changes, each applied alone to a simple baseline, changes peak successful throughput the most? **Method.** A standard-library Python HTTP server backed by SQLite (200,000 rows, Zipf-distributed keys, 2 % writes) was run in five arms: a full-scan, thread-per-connection baseline and four one-factor changes. A protocol frozen by the owner before any confirmatory data (not registered with an external registry) fixed the primary metric (peak goodput over a closed-loop concurrency sweep from 1 to 512 connections), the within-block ratio to the baseline, percentile bootstrap intervals with a Bonferroni correction, and a rule that excludes cells whose goodput exceeds half the measured load-generator ceiling. Ten paired blocks (50 accepted runs; 12 further runs excluded by the idle-load probe and re-attempted) ran on a quiet machine. **Results.** Read batching raised peak goodput by a factor of 9.01 (98.75 % interval 8.92 to 9.09) and the cache by 2.34 (2.25 to 2.44). Bounded concurrency had no meaningful effect on peak goodput (1.015, 1.000 to 1.030), because the baseline peaks at four connections, below the admission limit. The index arm matched the measurement ceiling (median 28,131 requests per second against a 27,919 ceiling) in every block and was excluded by the frozen rule, so the question of which factor dominates is unresolved. **Conclusion.** Under this design the point estimates order batching above caching and both above admission control for peak goodput; exploratory pairwise intervals separate them, but the frozen analysis has no pairwise test. Both winning effects are conditional on the full-scan baseline, the size of the batching advantage depends on the summary metric, and the open-loop and workload sensitivity experiments did not run.
+
 # Keywords
+
+throughput benchmarking; frozen protocol; caching; request batching; admission control; SQLite
 
 # 1. Introduction
 
+When a service is too slow, the usual remedies are a cache, an index, batching or a limit on concurrent work. Which one helps most is a question about a particular system, not about the remedies in general: the answer depends on where the time goes. This study asks the question for one small, fully specified system and answers it under a protocol that was frozen before any confirmatory data existed.
+
+**Research question.** On one fixed machine (Apple M1 Pro, 10 cores, 16 GB, macOS 15.3.1) and one fixed local HTTP workload served by one Python process backed by SQLite, which single architecture change, applied one factor at a time to a simple baseline, produces the largest change in peak successful throughput: an in-process cache (A1), a database index (A2), read batching (A3) or bounded concurrency (A4)?
+
+**Hypotheses.** For each treatment arm j, H0_j: R_j = 1, against the nondirectional H1_j: R_j differs from 1, where R_j is the within-block ratio of the arm's peak goodput to the baseline's (section 3). The directional expectations were recorded for interpretation only: R_A1, R_A2 and R_A3 above 1, A4 indeterminate, and A2 largest **by design**, because the baseline answers every lookup with a full scan (protocol amendment AM-2, approved by the owner before the freeze).
+
+**Contributions.** The contributions are deliberately narrow. No novelty is claimed for the mechanisms, which are textbook, and no claim is made that a comparable study does not exist; the literature search was targeted, not systematic (section 2).
+
+1. A reproducible single-machine harness with a frozen protocol, a freeze guard in the command-line tool, pre-stated rules for the values set after the freeze, and a validated load generator (EXP-001).
+2. Paired effect sizes with bootstrap intervals for three of the four factors (EXP-002), and the reasons the fourth could not be estimated under the frozen rule.
+3. An exploratory re-analysis of the recorded runs that explains the null result for bounded concurrency, shows how much the batching advantage depends on the summary metric, and documents the error composition at high concurrency.
+4. A complete record of what did not run (EXP-003, EXP-004) and why.
+
 # 2. Related work
+
+This is a targeted, non-systematic review of thirteen sources (`research/literature_review.md`). Each citation below states how much of the source was actually read.
+
+**Measurement methodology.** Mytkowicz et al. [mytkowicz2009; abstract and author page read] show that setup choices that look innocuous can bias performance measurements; this motivated randomising arm order within blocks and checking for a time trend. Kalibera and Jones [kalibera2013; full text of the accepted manuscript read] recommend spending repetitions at the level of the experiment that carries the most variance and reporting effect sizes with confidence intervals; here the replicate is a fresh server process on a freshly built database. Their later note [kalibera2020; abstract read] treats ratios with intervals as the reporting unit, which matches the R_j effect used here.
+
+**Load models.** Schroeder, Wierman and Harchol-Balter [schroeder2006; full text read through a summarising fetch] show that closed-loop and open-loop load generators can give very different response times at the same load, and that conclusions about scheduling can change between the two models. Tene's wrk2 documentation [tene-wrk2; project page read] describes coordinated omission in closed-loop latency measurement and the remedy of measuring from the intended send time. Both motivate the open-loop sensitivity experiment EXP-003, which this study planned but did not run.
+
+**Saturation.** Little's result [little1961; bibliographic metadata only, full text not read] is the queueing identity L = λW, named in its title; it is used here only as a consistency check of the closed-loop data. Gunther's Universal Scalability Law [gunther2008, gunther2011; abstracts read] describes throughput against concurrency with contention and coherency terms; it is mentioned as a possible descriptive summary and was not fitted. Dean and Barroso [dean2013; abstract read] motivate reporting tail latency, not only means.
+
+**Relation to this study.** The study replicates no prior experiment. It applies the measurement advice above to a small comparison of four standard remedies, and its contribution is the protocol discipline and the complete reporting of a bounded result, not a new mechanism.
 
 # 3. Background and formal model
 
 ## 3.1 Notation and definitions
 
+For one run, one concurrency level c and a measurement window of length T = 15 s:
+
+- **Goodput** G(c) = (number of HTTP 200 responses whose body passes validation) / T, in requests per second.
+- **Peak goodput** G* = max over c of G(c), with ties resolved to the smallest c.
+- **Effect** R_j = G*_j / G*_A0 within a block, summarised by the geometric mean over blocks, exp(mean of log R_j).
+- **Generator-limited cell.** A level whose goodput exceeds 50 % of the generator ceiling C_gen, or whose generator CPU exceeds 85 % of its allotted cores (protocol section 4).
+- **Saturation concurrency** c_sat = the smallest c with G(c) at least 0.95 G*.
+
+The closed loop has zero think time, so the mean number of requests in flight equals c, and Little's identity gives c = X · W for throughput X and mean response time W.
+
 ## 3.2 Workload and system model
+
+One server process (Python 3.12, standard library `http.server` and `sqlite3`, HTTP/1.1 keep-alive, 127.0.0.1 only) serves a synthetic table of N = 200,000 rows with a 256-byte payload, rebuilt from a fixed seed for every run (WAL mode). 98 % of requests are reads `GET /item?sku=...` and 2 % are price writes. Keys follow a Zipf distribution with exponent 0.99 over a seeded permutation; the request sequence of a block is identical across its five arms. The arms are:
+
+| Arm | Change relative to A0 |
+|---|---|
+| A0 baseline | Thread per connection, no index on `sku` (full scan per lookup), no cache, one query per request, no admission limit |
+| A1 cache | In-process LRU of read responses, capacity 10 % of N, invalidated before a write is acknowledged |
+| A2 index | Index on `sku` built before the run |
+| A3 batching | Pending lookups collected for at most 1 ms or 32 requests, then served by one `SELECT ... WHERE sku IN (...)` |
+| A4 bounded concurrency | At most W = 8 requests in database work and a queue of Q = 16; overflow returns HTTP 503 |
+
+Because the baseline scans the whole table, a query that serves several lookups at once (A3) also shares one scan among them; this amortisation is part of the A3 mechanism in this design (section 6.1).
 
 # 4. Methods
 
 ## 4.1 Design and arms
 
+The design is one factor at a time against the baseline: each treatment arm differs from A0 in exactly one respect, and interactions are not estimated. The experimental unit is a run: a fresh server on a fresh database, one arm and one full concurrency sweep. A block executes all five arms in a seeded random order; blocks are the independent replicates, and the arms within a block are paired by request sequence and adjacency in time.
+
 ## 4.2 Workload, data and controls
+
+The data are synthetic (common decision C1). Before any confirmatory run, the test suite checked response equivalence across arms, cache invalidation (including under concurrent readers), the absence of lost writes under a seeded concurrent write sequence, and load-generator limits. A run starts only if the system-wide CPU over a 1 s idle probe is below 15 %; the load average, power source, OS, CPU, package versions, git revision and config hash are recorded per run.
 
 ## 4.3 Load generation and measurement
 
+A separate generator process on the same machine drives keep-alive connections and timestamps with a monotonic clock. EXP-002 uses a closed loop with c in {1, 2, 4, ..., 512}, 5 s warmup and a 15 s measurement window per level. EXP-001 measured the generator ceiling on a null endpoint (`GET /null`, no database work) at c in {1, 8, 32}, cross-checked each level against ApacheBench 2.3, and set C_gen by the pre-stated rule AM-5: the median of the five run ceilings.
+
 ## 4.4 Seeds, replication and resource budget
+
+The sweep top c_max and the number of blocks n were left open at the freeze and set by a pre-stated rule from a quiet-machine pilot (protocol section 7.1, rule version pilot-rule-1.0). The rule reads only the concurrency at which A1 and A3 peak and the between-block spread of log R, never the size, sign or ranking of an effect. The pilot (25 runs, 5 blocks, seed 20261126) gave A1 peaks at c = 4 in every block and A3 peaks at c = 128 or 256, so c_max = 512; the largest between-block SD of log R was 0.0208 (A1), below the 0.07 trigger, so n = 10. The EXP-002 study seed is 20261124. EXP-002 took 10540.9 s of machine time at zero cost.
 
 ## 4.5 Statistical analysis
 
+The frozen analysis (analysis-1.0, `src/scale/analysis.py`) was written and tested before any confirmatory output existed (decision D-012). Per block it computes log R_j; the estimate is the back-transformed mean; intervals are percentile bootstrap over blocks with 10,000 resamples and seed 20261124, at 95 % and at the Bonferroni-adjusted 98.75 % level for four comparisons. H0_j is rejected when the 98.75 % interval excludes 1. "No meaningful effect" requires the whole 98.75 % interval inside [0.95, 1.05]; otherwise a non-rejection is inconclusive. A dominance claim requires every 98.75 % interval of R_t / R_k for the top arm t to exclude 1, and is attempted only if all four treatment arms enter the comparison.
+
+Two readings of the frozen text were fixed in D-012 before data: a run's confirmatory G* is undefined when the level attaining it is generator-limited, and an arm enters the comparison only if its G* and the baseline's are defined in every block, because dropping single blocks would select blocks by outcome. The owner has not yet reviewed D-012.
+
+The frozen sensitivity analyses are S3 (G* replaced by the mean goodput over c in {16, 32, 64}) and a drift check (least squares of log G* on arm indicators plus run order, and separately plus position in block, with a 2,000-resample block bootstrap).
+
 ## 4.6 Protocol registration and reproducibility
 
+The protocol and the four experiment protocols were frozen by the owner on 2026-11-24. The freeze record (`research/freeze.json`) holds the SHA-256 of each frozen file (study protocol 5ea0c481..., EXP-002 protocol 8da83b07..., EXP-002 config 09bf457c...) and the outputs of the two pre-stated rules; the command-line tool refuses a confirmatory run whose config is not in the record. Every run manifest records a clean tree at revision 3fb0c66 (EXP-002) or 6c3af82 (EXP-001 and the pilot). Raw outputs are kept out of git by the repository's ignore rule and are pinned by `SHA256SUMS` files whose digests are listed in the artifact manifest.
+
 ## 4.7 Exploratory versus confirmatory work
+
+Confirmatory: EXP-001 and EXP-002 as frozen. Exploratory, and labelled so wherever it appears: the quiet pilot (used only through the pre-stated rule), the EXP-001 supplements (stall check, four generator processes, timer resolution), the alternative A2 estimates, and the M4 re-analysis of recorded runs (checks X1 to X13, chosen after the confirmatory results were known, `results/exploratory/M4-REANALYSIS-20261125/summary.json`, journal J-0014). The re-analysis executed no server or load-generation code and took no new timing measurement; its only computation beyond arithmetic on recorded outputs is X13, which asks SQLite for the query plan of the study's lookups on a 100-row copy of the schema.
 
 # 5. Results
 
 ## 5.1 EXP-001: load-generator validation
 
+All five repeats completed on a quiet machine (idle probe 1.9 % to 2.5 %).
+
+| c | SCALE generator, median rps | ApacheBench, median rps | SCALE/ab median (range) |
+|---|---|---|---|
+| 1 | 26656.8 | 28273.7 | 0.942 (0.924 to 0.951) |
+| 8 | 27919.4 | 27024.7 | 1.034 (1.032 to 1.058) |
+| 32 | 27063.1 | 26632.6 | 1.015 (0.973 to 1.033) |
+
+Every ratio lies inside [0.9, 1.1], so H0 (the two generators agree) holds and the gate for EXP-002 passed (median ratio 1.015 at c = 32). The run ceilings were 27914.5, 27919.4, 27953.9, 27860.9 and 28657.0 rps, so C_gen = 27919.4 rps. Exploratory supplements: with four generator processes the null-endpoint peak was 27159.1, 27341.7 and 27079.9 rps, no higher than with one, so the ceiling near 28,000 rps belongs to the server's HTTP path and the loopback stack as much as to the generator. Under an injected 200 ms stall every 2 s, the open loop's intended-time p99 was 190.12 ms against 0.91 ms for the closed loop, which shows the coordinated-omission correction working. The timer resolution was 4.17e-08 s.
+
 ## 5.2 EXP-002: one-factor-at-a-time comparison
 
-## 5.3 EXP-003: open-loop sensitivity
+All 50 cells completed. Twelve runs were excluded by the idle probe (16.2 % to 35.4 %) in one 12 s burst and re-attempted at the end of the sequence as protocol section 10 requires; no cell is missing. The accepted runs passed the probe at 1.9 % to 10.0 %.
 
-## 5.4 EXP-004: workload sensitivity
+**Peak goodput per arm** (median over 10 blocks, with range):
+
+| Arm | G* (rps) | c at peak | Peak cell generator-limited |
+|---|---|---|---|
+| A0 | 114.6 (111.2 to 116.1) | 4 in all blocks | 0 of 10 |
+| A1 | 265.1 (246.5 to 286.6) | 4 in all blocks | 0 of 10 |
+| A2 | 28131.4 (27586.5 to 28633.9) | 2 in all blocks | 10 of 10 |
+| A3 | 1025.3 (1019.1 to 1037.6) | 128 (2 blocks), 256 (5), 512 (3) | 0 of 10 |
+| A4 | 115.3 (113.6 to 119.7) | 4 in all blocks | 0 of 10 |
+
+**Confirmatory estimates** (geometric mean of within-block R over 10 blocks):
+
+| Arm | R | 95 % interval | 98.75 % interval | Verdict under the frozen rule |
+|---|---|---|---|---|
+| A1 cache | 2.337 | 2.269 to 2.413 | 2.254 to 2.435 | H0 rejected, R > 1 |
+| A2 index | not estimated | | | Excluded: peak generator-limited in every block |
+| A3 batching | 9.005 | 8.937 to 9.075 | 8.921 to 9.093 | H0 rejected, R > 1 |
+| A4 bounded concurrency | 1.015 | 1.003 to 1.027 | 1.000 to 1.030 | No meaningful effect (inside [0.95, 1.05]) |
+
+**Dominance: unresolved.** A2 is excluded, so the top arm across all four treatments cannot be tested. Among the included arms the point estimates rank A3 > A1 > A4; the frozen analysis contains no pairwise test among them.
+
+Figure 1 (`research/experiments/EXP-002/figures/exp002_goodput.svg`) shows the median goodput curves; Figure 2 (`exp002_ratios.svg`) shows the per-block ratios and intervals. Both are generated by `scale analyse EXP-002` from the recorded runs.
+
+**The A2 exclusion and what it rests on.** Under the frozen rule as read in D-012, A2 has no confirmatory estimate. That reading rests on three things. First, the frozen 50 % rule of protocol section 4, which flags any cell above 13959.7 rps; A2's levels c = 1, 2 and 4 are flagged in every block, and its peak at c = 2 exceeds even the ceiling itself (median 1.008 times C_gen). Second, D-012's two readings (section 4.5), written by the assistant before data and citing the expectation stated in D-008 item 5, which the owner saw when keeping the rule. Third, the premise that a cell near the ceiling measures the harness rather than the arm; the four-process supplement suggests the ceiling is the shared HTTP and loopback path, not the generator alone, which changes the name of the limit but not the fact that A2's peak sits on it. The owner has not reviewed D-012. Exploratory alternatives, which are not verdicts: the unfiltered within-block ratio is 246.8 (98.75 % interval 243.4 to 250.2); with G* taken over the levels that are not flagged (c of 8 and above) it is 90.8 (90.0 to 91.8). Both place A2 far above every other arm, and both measure A2 against a ceiling or in a region (c of 8 and above, where its goodput falls to a median 10356.6 rps while server CPU rises) that the frozen design did not intend as its peak.
+
+**Frozen sensitivity analyses.** Under S3 (mean goodput over c in {16, 32, 64}; 98.75 % intervals) the ratios are A1 2.606 (2.473 to 2.775), A2 160.93 (155.28 to 166.99), A3 12.452 (12.012 to 12.936) and A4 1.161 (1.111 to 1.209). A2 is not generator-limited at these levels and ranks first; the order of A3, A1 and A4 is unchanged; A4 rises about 16 % above the baseline, unlike under G*. The drift slope of log G* was -0.00039 per run (95 % interval -0.00073 to 0.00010) and -0.0030 per position in block (-0.0088 to 0.0016); neither shows a time trend.
+
+**Descriptives.** A1's median cache hit ratio over the run was 0.59. A3 had zero errors at every level. A4 returned HTTP 503 to about 99 % of attempts at every c of 32 and above (the server counted 14,737,227 rejections over the ten runs including warmups; 10,996,866 fell in measurement windows). The baseline and the cache lost up to 42 % and 17 % of attempts at c = 512 (maximum per-run error rate 0.419 and 0.173).
+
+## 5.3 EXP-003: open-loop sensitivity (not run)
+
+EXP-003 would rank the arms by the highest open-loop offered rate meeting a 50 ms intended-time p99 and a 1 % error limit. It did not run. Its frozen text fixes the ladder rule (8 geometric rungs from 10 % to 150 % of each arm's EXP-002 median G*), 5 blocks and the SLO, but not the open-loop connection count, the study seed, the warmup and measurement split of each rung, or which G* centres A2's ladder (150 % of A2's median G* is above the generator ceiling). Setting them after seeing EXP-002 is a design decision that belongs to the owner, and it is pending. The closed-loop ranking is therefore untested against an open-loop load model.
+
+## 5.4 EXP-004: workload sensitivity (optional, not run)
+
+EXP-004 would repeat the comparison with N = 10,000 rows and with uniform keys. It is optional, its config was never frozen, and the owner has not decided whether it runs. The ranking is therefore untested against other table sizes and key skews.
+
+## 5.5 Exploratory re-analysis of the recorded runs
+
+The M4 re-analysis (J-0014) verified the checksums of all 219 raw files (0 mismatches) and then computed the following. None of it changes a frozen verdict.
+
+- **Separation of the included arms (X3).** R_A3 / R_A1 = 3.85 (98.75 % interval 3.72 to 3.99), R_A1 / R_A4 = 2.30 (2.24 to 2.37), R_A3 / R_A4 = 8.87 (8.74 to 8.98).
+- **A3 truncation (X4).** A3's goodput is on a plateau from c = 64; in the three blocks that peaked at 512, G(512) / G(256) was 1.016, 1.001 and 1.004. With G* over c up to 256, R_A3 = 8.99 (8.91 to 9.08).
+- **Time-shifted blocks (X5).** Without blocks 8 and 9, whose re-attempted cells ran at the end of the sequence: R_A1 2.37, R_A3 9.00, R_A4 1.018 (1.002 to 1.035), still inside [0.95, 1.05].
+- **A4 per level (X6).** A4 / A0 goodput is 1.001 to 1.014 at c = 1, 2 and 4 and 0.997 at c = 8, where no request is rejected; it is 1.26 at c = 16 and 1.05 to 1.24 from c = 32.
+- **Closed-loop latency-bounded goodput (X12).** Taking the highest G(c) with closed-loop p99 at most 50 ms and errors at most 1 % (the frozen SLO values, but without coordinated-omission correction, so this is not EXP-003): A1 2.50 (2.26 to 2.92), A3 3.95 (3.06 to 5.01), A4 1.086 (1.001 to 1.248), and R_A3 / R_A1 = 1.58 (1.25 to 1.92).
+- **Background (X9).** Over 50 runs the Spearman correlation of arm-centred log G* with the idle probe is 0.20, and with the 1-min load average 0.007.
+- **Query plans (X13, no timing).** Without the index, SQLite 3.43.1 plans both the single lookup and the 16-key `IN (...)` lookup as `SCAN items`; with the index, both use `SEARCH items USING INDEX ix_items_sku`.
+- **Pilot agreement (X10).** The quiet pilot, never pooled with EXP-002, gave unfiltered geometric mean ratios of A1 2.29, A3 8.72 and A4 1.002 over 5 blocks.
+
+## 5.6 Expected versus observed
+
+| Experiment | Prediction (recorded before data) | Observation | Verdict under the frozen rule |
+|---|---|---|---|
+| EXP-001 | SCALE/ab ratio in [0.9, 1.1] at c = 1, 8, 32; gate at c = 32 | 0.942, 1.034, 1.015; every repeat in the band | H0 holds; gate passed |
+| EXP-002 A1 | R > 1 | 2.337 (2.254 to 2.435) | H0 rejected, R > 1 |
+| EXP-002 A2 | R > 1 and largest, by design | Peak on the measurement ceiling in every block | Excluded (D-012 reading, pending the owner) |
+| EXP-002 A3 | R > 1 | 9.005 (8.921 to 9.093) | H0 rejected, R > 1 |
+| EXP-002 A4 | Indeterminate for G*; lower p99 at high c with 503s | 1.015 (1.000 to 1.030); about 99 % rejected from c = 32 | No meaningful effect on G* |
+| EXP-002 dominance | A2 top by design | Not testable | Unresolved |
+| EXP-002 S3 | Ranking unchanged | A3 > A1 > A4 unchanged; A2 enters and ranks first | Ranking of included arms unchanged |
+| EXP-003 | Ranking unchanged under open loop | Not run | None (pending owner parameters) |
+| EXP-004 | Top arm unchanged for N = 10,000 and uniform keys | Not run | None (pending owner decision) |
 
 # 6. Discussion
 
+## 6.1 Mechanisms supported by the evidence
+
+**The baseline is bound by parallel full scans.** At c = 1 the baseline spends about 18.3 ms of server CPU per validated response (X2), consistent with one full scan per lookup; the query plan for its lookup is a full table scan (X13, `SCAN items`). Server CPU above one core shows that scans ran in parallel (why the interpreter permits this was not examined): goodput rises to c = 4, where server CPU is about 3.8 cores, and then falls, while the CPU cost per response rises to between about 160 and 178 ms from c = 16 with all ten cores busy and a system-time share of 0.89. The extra work per request under oversubscription is consistent with contention in the operating system or memory system, but this study did not isolate it.
+
+**Batching wins by sharing scans.** A3's mean batch size was 15.97. With no index, SQLite 3.43.1 plans the batched `IN (...)` query as one full scan (X13), so one scan serves a whole batch, so the per-response CPU cost falls to about 1.5 ms at the plateau while server CPU stays near 1.5 cores. The ninefold gain is therefore an amortisation of the baseline's full scan. It is a property of batching **against a full-scan baseline**, in the same sense as the index result, and it should not be read as a general value of batching.
+
+**The cache gain is close to its hit-ratio bound.** With a median hit ratio of 0.59 the cache can at most remove 59 % of the scans, a bound of 1 / (1 - 0.59) = 2.44; the observed 2.337 is close to it. The hit ratio is counted over the whole run, warmups and all levels included, not at the peak level, so the comparison is approximate. The hit ratio depends on the skew, the capacity and the warmup, which were fixed and not varied.
+
+**The A4 null is structural.** Both A4 and the baseline peak at c = 4, below the admission limit W = 8, where the limiter does not engage (X6). Equal peaks are then expected, and the confirmatory "no meaningful effect" says only that the limiter costs nothing at the baseline's optimum. At the unadjusted 95 % level the interval (1.003 to 1.027) excludes 1, so a small positive difference at c = 4 cannot be ruled out; it lies inside the practical band either way. Above the optimum the limiter does help: it holds goodput about 26 % above the baseline at c = 16 and, under S3, 16 % over c in {16, 32, 64}, at the price of rejecting almost every request from c = 32.
+
+## 6.2 Competing explanations
+
+| Competing explanation (protocol) | Addressed by | Status |
+|---|---|---|
+| HTTP parsing and the interpreter bound throughput, so no factor matters | A1 and A3 intervals exclude 1; A2 reaches about 28,000 rps on the same HTTP path | Rejected for A1 and A3; it is the binding limit for A2 |
+| The generator is the ceiling | EXP-001 ab cross-check; generator CPU at every peak at most 0.48 (X7); four processes do not raise the null ceiling | Rejected for A0, A1, A3, A4; for A2 the ceiling is the shared serving path, not the generator alone |
+| Thermal or background drift | Drift slopes include 0; background correlations 0.20 and 0.007 (X9); estimates without the time-shifted blocks agree (X5) | Not supported by the data |
+| N and skew make one factor dominant by construction | Stated in advance for A2 (AM-2); the scan amortisation also drives A3 (section 6.1, query plan X13) | Applies to A2 and to A3; EXP-004 would probe it and did not run |
+| A3's peak is truncated at the sweep top | Plateau from c = 64; R over c up to 256 is 8.99 (X4) | Not material |
+| The ranking reflects the closed-loop load model | EXP-003 not run; the closed-loop latency bound shrinks A3's advantage over A1 from 3.85 to 1.58 (X12) | Open; the size of the A3 advantage is metric-dependent |
+| Errors at high concurrency bias the result | Errors occur from c = 32 (HTTP 500) and c = 256 (transport), all above every included arm's peak (X1) | Not affecting G*; the cause of the HTTP 500s is not identified |
+
+## 6.3 Implications and practical significance
+
+Within its boundary the study gives a concrete ordering: for this server and workload, sharing a full scan across requests (A3) raised peak goodput much more than caching the hot keys (A1), and limiting concurrency (A4) did not change the peak. The lesson that the data support is narrow and specific to this system: the remedies that won are the ones that remove or share its dominant cost, the full scan. Whether this pattern holds for other systems is not tested here. The index, which removes the scan outright, was too fast for the measurement harness; its true advantage over the others could not be measured by this design.
+
+## 6.4 Relation to prior work
+
+The result illustrates two points from the methodology literature. The dependence of the A3 advantage on the summary metric (3.85 under G*, 1.58 under a closed-loop latency bound) is the kind of conclusion that Schroeder et al. warn can change with the load model, and the open-loop experiment that would test it did not run. The narrow intervals reflect the replication strategy recommended by Kalibera and Jones, but they describe variation between process restarts within one session on one machine (section 7).
+
 # 7. Limitations and threats to validity
+
+1. **One machine, one session.** All confirmatory runs were made on one laptop in one window of about three hours. The intervals describe variation between process restarts within that window, not between days, machines or operating-system states; they are narrower than a reproduction elsewhere would be.
+2. **One implementation and workload.** Python standard library, SQLite 3.43.1, N = 200,000, Zipf 0.99, 2 % writes. Nothing transfers to other implementations, to production traffic or to other hardware.
+3. **The baseline decides the winners.** The full-scan baseline makes the index dominant by design (AM-2) and makes batching an amortisation of scans. A baseline with an index might reorder A1, A3 and A4; this was not tested.
+4. **A2 has no confirmatory estimate.** The exclusion rests on the D-012 reading, pending the owner; the exploratory ratios near 247 and 91 measure the harness ceiling or a degraded region, not the index alone.
+5. **No pairwise test in the frozen analysis.** The order A3 > A1 > A4 is a ranking of point estimates in the confirmatory analysis; the pairwise intervals of section 5.5 are exploratory.
+6. **Metric dependence.** The size of the A3 and A4 effects changes with the summary statistic (G*, S3, closed-loop latency bound).
+7. **A4 null is structural** (section 6.1) and concerns peak goodput only.
+8. **Errors not fully diagnosed.** The server logs HTTP 500 without the exception type; transport errors at c of 256 and above are unclassified. The confirmatory runs validate every read body but do not re-check the final database state; write correctness rests on the pre-run tests.
+9. **Re-attempted cells.** Seven cells of blocks 8 and 9 ran at the end of the sequence, paired by request sequence but not in time; leaving them out changes no verdict (X5).
+10. **Unrun sensitivity experiments.** EXP-003 and EXP-004 did not run (sections 5.3 and 5.4).
+11. **Shared CPU and scheduler.** Generator and server share the cores; the placement on performance or efficiency cores is not controllable.
+12. **Pilot effect sizes were visible before EXP-002.** The pre-stated rule did not use them, and the analysis was committed before EXP-002 output (C4 disclosure in the freeze record).
+13. **Post hoc exploratory checks.** The checks X1 to X13 were chosen at M4, after the confirmatory results were known; X12 in particular was added after the per-level latencies had been inspected. They are hypothesis-generating only.
+14. **AI assistance.** The analysis readings of D-012 and every exploratory check were written by an AI assistant; they are internal quality control, not independent review.
 
 # 8. Ethics and responsible research
 
+The study uses synthetic data only, involves no human participants and no personal data, and sends no traffic beyond the local loopback interface. It makes no claim about any real service, product or organisation. No ethics approval was sought or needed, and none is claimed.
+
 # 9. Conclusion and future work
+
+On this machine and workload, read batching raised peak goodput about ninefold and an LRU cache about 2.3-fold over a full-scan baseline, and bounded concurrency left the peak unchanged because the baseline peaks below the admission limit. The index reached the measurement ceiling, and under the frozen rule the question of which factor dominates is unresolved. The ordering of batching above caching holds under every summary used here, but its size is metric-dependent.
+
+Feasible extensions, each needing an owner decision: set EXP-003's four open parameters and run the open-loop test; decide on EXP-004; and, as a new study rather than an amendment, raise the harness ceiling (for example with a compiled generator on separate cores) so that the index can be measured, and add an indexed baseline.
 
 # 10. Data and code availability
 
+All code, configurations, protocols, the freeze record, analysis outputs and figures are in the project repository: `[placeholder: repository URL, not published; publication requires the owner's approval]`. Raw run outputs are regenerated by `scale run` and are kept out of git; their SHA-256 sums are listed in `research/publication/artifact_manifest.json`. Reproduction: `uv sync --locked`; `scale run experiments/EXP-001.json`; `scale resolve-ceiling <dir>`; `scale run experiments/pilot-quiet.json`; `scale resolve-pilot <dir>`; `scale run experiments/EXP-002.json`; `scale analyse EXP-002 <dir> --out-dir research/experiments/EXP-002`; `.venv/bin/python scripts/m4_exploratory_confounders.py`; `.venv/bin/python scripts/m4_evidence_manifest.py`. A reproduction needs a quiet machine; values will differ on other hardware.
+
 # 11. Funding, competing interests and AI assistance
 
-AI assistance: an AI system (Claude, Anthropic) was used as a research and development assistant for code, protocol drafting and text. It is not an author. The author is responsible for every decision and claim (owner decision C3, 2026-11-24).
+**Funding.** `[placeholder: funding statement, to be supplied by the owner]`.
+
+**Competing interests.** `[placeholder: competing-interests statement, to be supplied by the owner]`.
+
+**AI assistance.** An AI system (Claude, Anthropic) was used as a research and development assistant for code, protocol drafting, analysis and text. It is not an author. It wrote the analysis code and the D-012 readings before confirmatory data existed, ran the experiments in an owner-scheduled quiet window, and wrote this draft and its internal review passes. The owner approved the protocol freeze, the amendments and the pre-stated rules; the owner's review of this manuscript is pending. Every number was checked by a script against the recorded outputs (`research/publication/evidence_audit_M4.md`).
 
 # References
 
+- [dean2013] J. Dean and L. A. Barroso. The tail at scale. *Communications of the ACM* 56(2):74-80, 2013. doi:10.1145/2408776.2408794. Abstract read.
+- [gunther2008] N. J. Gunther. A general theory of computational scalability based on rational functions. arXiv:0808.1431, 2008. Abstract read.
+- [gunther2011] N. J. Gunther, S. Subramanyam and S. Parvu. A methodology for optimizing multithreaded system scalability on multi-cores. arXiv:1105.4301, 2011. Abstract read.
+- [kalibera2013] T. Kalibera and R. Jones. Rigorous benchmarking in reasonable time. In *Proc. ISMM 2013*, pp. 63-74. doi:10.1145/2464157.2464160. Full text (accepted manuscript) read.
+- [kalibera2020] T. Kalibera and R. Jones. Quantifying performance changes with effect size confidence intervals. arXiv:2007.10899, 2020. Abstract read.
+- [little1961] J. D. C. Little. A proof for the queuing formula: L = λW. *Operations Research* 9(3):383-387, 1961. doi:10.1287/opre.9.3.383. Metadata only.
+- [mytkowicz2009] T. Mytkowicz, A. Diwan, M. Hauswirth and P. F. Sweeney. Producing wrong data without doing anything obviously wrong! In *Proc. ASPLOS 2009*, pp. 265-276. doi:10.1145/1508244.1508275. Abstract and author page read.
+- [schroeder2006] B. Schroeder, A. Wierman and M. Harchol-Balter. Open versus closed: a cautionary tale. In *Proc. NSDI 2006*, USENIX. https://www.usenix.org/legacy/events/nsdi06/tech/full_papers/schroeder/schroeder_html/index.html. Full text read through a summarising fetch.
+- [tene-wrk2] G. Tene. wrk2: a constant throughput, correct latency recording variant of wrk. https://github.com/giltene/wrk2, accessed 2026-11-24. Project page read.
+
 # Supplementary appendix
+
+See `research/paper/supplementary.md`: the complete experimental matrix (S1), extended tables (S2), configurations and hashes (S3), robustness results (S4), report links (S5), deviations and owner decisions (S6), and the M4 review-pass changes (S7).
