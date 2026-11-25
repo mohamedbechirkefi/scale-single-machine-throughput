@@ -25,7 +25,7 @@ Each is shown as "pending owner decision" here and on the demo page, with the re
 1. **D-012 reading (A2 exclusion).** Frozen-rule reading as applied: A2 has no confirmatory estimate and dominance is unresolved. Exploratory alternatives reported beside it, not verdicts: unfiltered within-block ratio 246.8 (98.75 % interval 243.4 to 250.2); G* over the levels not flagged 90.8 (90.0 to 91.8).
 2. **EXP-003 parameters.** Four parameters are unset by the frozen text; EXP-003 did not run.
 3. **EXP-004.** Whether the optional experiment runs; it did not run.
-4. **`results/raw/`.** Whether the raw run outputs are committed; they are pinned by digests in `research/publication/artifact_manifest.json`.
+4. **`results/raw/`.** Whether the raw run outputs stay committed. They are tracked in git since M3 (and are on the remote since the push of 2026-11-25), although the folder is listed in the ignore rule (found at M6); they are pinned by digests in `research/publication/artifact_manifest.json`.
 
 ## Why it matters
 

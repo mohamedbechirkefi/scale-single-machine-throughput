@@ -5,13 +5,16 @@
 # Repository URL: placeholder, not published; publication requires the owner's approval.
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below. Independent research project, not peer reviewed."
-title: "SCALE: what bottlenecks dominate local request throughput on one machine"
+# Title (M6, 2026-11-25): copied from the manuscript title, which is not yet owner-approved; pending the owner.
+# Previous title: "SCALE: what bottlenecks dominate local request throughput on one machine".
+title: "Cache, index, batching or admission control? A one-factor-at-a-time throughput study with a frozen protocol of one Python and SQLite server on one laptop"
 type: software
 # Author line: recorded by common decision C3 (2026-11-24); to be confirmed by the owner, no affiliation given.
 authors:
   - family-names: Kefi
     given-names: Mohamed Bechir
-version: 0.0.1
+# Version: release candidate 1 (M6); no release exists.
+version: 0.1.0-rc1
 keywords:
   - performance evaluation
   - benchmarking

@@ -16,7 +16,7 @@
  ],
  "design_parameters_not_results": "N = 200,000; payload 256 B; Zipf 0.99; dataset and EXP-002 seed 20261124; pilot seed 20261126; 10,000 bootstrap resamples; 2,000 drift resamples; Bonferroni 98.75 %; band [0.95, 1.05]; EXP-001 band [0.9, 1.1]; pilot SD trigger 0.07; 85 % generator CPU; sweep levels up to 1024; ApacheBench 2.3; SQLite 3.43.1; macOS 15.3.1; Python 3.12",
  "raw_outputs": {
-  "note": "results/raw/ is excluded from git by the repository ignore rule; these digests pin it",
+  "note": "results/raw/ is listed in the repository ignore rule, but the M3 raw outputs are tracked in git (found at M6, D-017); these digests pin them",
   "SHA256SUMS_sha256": {
    "EXP-001": "8945e81605e1b22cd0b6ddb4cff17cd0e2422c4e233d65cc9e511f8e270af337",
    "EXP-002": "de0e7fd16d47faff5a1e71d75dc49f0e627ca8e56de5f6d45f84313bcad0fe03",

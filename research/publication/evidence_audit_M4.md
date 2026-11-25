@@ -71,3 +71,7 @@ georges2007, gan2019, the SQLite copyright page and the HdrHistogram page are in
 ## 6. Gate status (roadmap M4)
 
 Every numerical claim in the manuscript, the supplementary file, the claims register and the reports maps to a result id, a config hash and a table or figure through the manifest; every external claim maps to a source whose access level is stated. The gate holds, with the pending owner decisions disclosed (D-012, EXP-003 parameters, EXP-004).
+
+## M6 note (2026-11-25)
+
+The statement above that the raw outputs are outside git is wrong: `results/raw/` is listed in `.gitignore`, but the M3 raw outputs were added to git explicitly in the M3 commits and are tracked (`git ls-files results/raw`). The digests and the 0-mismatch result are unaffected. See D-017 and `research/publication/evidence_audit_M6.md`.

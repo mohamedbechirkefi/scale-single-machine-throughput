@@ -359,7 +359,7 @@ def main() -> int:
            "generator": "scripts/m4_evidence_manifest.py",
            "audit_head_revision": subprocess.run(["git", "-C", ROOT, "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip(),
            "scanned_documents": SCANNED, "design_parameters_not_results": DESIGN_NOTE,
-           "raw_outputs": {"note": "results/raw/ is excluded from git by the repository ignore rule; these digests pin it",
+           "raw_outputs": {"note": "results/raw/ is listed in the repository ignore rule, but the M3 raw outputs are tracked in git (found at M6, D-017); these digests pin them",
                            "SHA256SUMS_sha256": raw_sums},
            "inputs_sha256": {p: sha(p) for p in (A2P, A1P, XP, FP)},
            "run_sets": {"RS-EXP-002": {"path": RAW2, "accepted_runs": OK2, "all_runs": RUNS2},

@@ -1,3 +1,5 @@
+% SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0
+% Generated from manuscript.md by pandoc (scripts/build_pdfs.py); never hand-edited.
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
@@ -185,28 +187,32 @@ Jones {[}kalibera2013; full text of the accepted manuscript read{]}
 recommend spending repetitions at the level of the experiment that
 carries the most variance and reporting effect sizes with confidence
 intervals; here the replicate is a fresh server process on a freshly
-built database. Their later note {[}kalibera2020; abstract read{]}
+built database. Their later note {[}kalibera2020; full text obtained
+from arXiv, claim checked against the abstract and introduction{]}
 treats ratios with intervals as the reporting unit, which matches the
 R\_j effect used here.
 
 \textbf{Load models.} Schroeder, Wierman and Harchol-Balter
-{[}schroeder2006; full text read through a summarising fetch{]} show
-that closed-loop and open-loop load generators can give very different
-response times at the same load, and that conclusions about scheduling
-can change between the two models. Tene's wrk2 documentation
-{[}tene-wrk2; project page read{]} describes coordinated omission in
-closed-loop latency measurement and the remedy of measuring from the
-intended send time. Both motivate the open-loop sensitivity experiment
-EXP-003, which this study planned but did not run.
+{[}schroeder2006; full text obtained, claim checked against the abstract
+and introduction{]} show that closed-loop and open-loop load generators
+can give very different response times at the same load, and that
+conclusions about scheduling can change between the two models. Tene's
+wrk2 documentation {[}tene-wrk2; project page read{]} describes
+coordinated omission in closed-loop latency measurement and the remedy
+of measuring from the intended send time. Both motivate the open-loop
+sensitivity experiment EXP-003, which this study planned but did not
+run.
 
 \textbf{Saturation.} Little's result {[}little1961; bibliographic
 metadata only, full text not read{]} is the queueing identity L = λW,
 named in its title; it is used here only as a consistency check of the
 closed-loop data. Gunther's Universal Scalability Law {[}gunther2008,
-gunther2011; abstracts read{]} describes throughput against concurrency
-with contention and coherency terms; it is mentioned as a possible
-descriptive summary and was not fitted. Dean and Barroso {[}dean2013;
-abstract read{]} motivate reporting tail latency, not only means.
+gunther2011; full texts obtained from arXiv, claim checked against the
+definition of the Universal Scalability Law in each{]} describes
+throughput against concurrency with contention and coherency terms; it
+is mentioned as a possible descriptive summary and was not fitted. Dean
+and Barroso {[}dean2013; abstract read{]} motivate reporting tail
+latency, not only means.
 
 \textbf{Relation to this study.} The study replicates no prior
 experiment. It applies the measurement advice above to a small
@@ -371,9 +377,11 @@ protocol 8da83b07\ldots, EXP-002 config 09bf457c\ldots) and the outputs
 of the two pre-stated rules; the command-line tool refuses a
 confirmatory run whose config is not in the record. Every run manifest
 records a clean tree at revision 3fb0c66 (EXP-002) or 6c3af82 (EXP-001
-and the pilot). Raw outputs are kept out of git by the repository's
-ignore rule and are pinned by \texttt{SHA256SUMS} files whose digests
-are listed in the artifact manifest.
+and the pilot). Raw outputs are in \texttt{results/raw/} and are pinned
+by \texttt{SHA256SUMS} files whose digests are listed in the artifact
+manifest. That folder is listed in the repository's ignore rule, but the
+M3 outputs were added to git explicitly and are tracked; whether they
+stay tracked is pending the owner.
 
 \subsection{4.7 Exploratory versus confirmatory
 work}\label{exploratory-versus-confirmatory-work}
@@ -542,9 +550,9 @@ rises) that the frozen design did not intend as its peak.
 2.775), A2 160.93 (155.28 to 166.99), A3 12.452 (12.012 to 12.936) and
 A4 1.161 (1.111 to 1.209). A2 is not generator-limited at these levels
 and ranks first; the order of A3, A1 and A4 is unchanged; A4 rises about
-16 \% above the baseline, unlike under G\emph{. The drift slope of log
-G} was -0.00039 per run (95 \% interval -0.00073 to 0.00010) and -0.0030
-per position in block (-0.0088 to 0.0016); neither shows a time trend.
+16 \% above the baseline, unlike under G*. The drift slope of log G* was
+-0.00039 per run (95 \% interval -0.00073 to 0.00010) and -0.0030 per
+position in block (-0.0088 to 0.0016); neither shows a time trend.
 
 \textbf{Descriptives.} A1's median cache hit ratio over the run was
 0.59. A3 had zero errors at every level. A4 returned HTTP 503 to about
@@ -560,9 +568,9 @@ run)}\label{exp-003-open-loop-sensitivity-not-run}
 EXP-003 would rank the arms by the highest open-loop offered rate
 meeting a 50 ms intended-time p99 and a 1 \% error limit. It did not
 run. Its frozen text fixes the ladder rule (8 geometric rungs from 10 \%
-to 150 \% of each arm's EXP-002 median G\emph{), 5 blocks and the SLO,
-but not the open-loop connection count, the study seed, the warmup and
-measurement split of each rung, or which G} centres A2's ladder (150 \%
+to 150 \% of each arm's EXP-002 median G*), 5 blocks and the SLO, but
+not the open-loop connection count, the study seed, the warmup and
+measurement split of each rung, or which G* centres A2's ladder (150 \%
 of A2's median G* is above the generator ceiling). Setting them after
 seeing EXP-002 is a design decision that belongs to the owner, and it is
 pending. The closed-loop ranking is therefore untested against an
@@ -881,8 +889,10 @@ availability}\label{data-and-code-availability}
 All code, configurations, protocols, the freeze record, analysis outputs
 and figures are in the project repository:
 \texttt{{[}placeholder:\ repository\ URL,\ not\ published;\ publication\ requires\ the\ owner\textquotesingle{}s\ approval{]}}.
-Raw run outputs are regenerated by \texttt{scale\ run} and are kept out
-of git; their SHA-256 sums are listed in
+Raw run outputs of the confirmatory runs and the quiet pilot are in
+\texttt{results/raw/} (tracked in git, although the folder is listed in
+the ignore rule; whether they stay tracked is pending the owner) and are
+regenerated by \texttt{scale\ run}; their SHA-256 sums are listed in
 \texttt{research/publication/artifact\_manifest.json}. Reproduction:
 \texttt{uv\ sync\ -\/-locked};
 \texttt{scale\ run\ experiments/EXP-001.json};
@@ -925,12 +935,14 @@ outputs (\texttt{research/publication/evidence\_audit\_M4.md}).
   doi:10.1145/2408776.2408794. Abstract read.
 \item
   {[}gunther2008{]} N. J. Gunther. A general theory of computational
-  scalability based on rational functions. arXiv:0808.1431, 2008.
-  Abstract read.
+  scalability based on rational functions. arXiv:0808.1431, 2008. Full
+  text (arXiv, later revision) obtained; claim checked against its
+  section on the Universal Scalability Law.
 \item
   {[}gunther2011{]} N. J. Gunther, S. Subramanyam and S. Parvu. A
   methodology for optimizing multithreaded system scalability on
-  multi-cores. arXiv:1105.4301, 2011. Abstract read.
+  multi-cores. arXiv:1105.4301, 2011. Full text (arXiv) obtained; claim
+  checked against its definition of the Universal Scalability Law.
 \item
   {[}kalibera2013{]} T. Kalibera and R. Jones. Rigorous benchmarking in
   reasonable time. In \emph{Proc. ISMM 2013}, pp.~63-74.
@@ -938,7 +950,8 @@ outputs (\texttt{research/publication/evidence\_audit\_M4.md}).
 \item
   {[}kalibera2020{]} T. Kalibera and R. Jones. Quantifying performance
   changes with effect size confidence intervals. arXiv:2007.10899, 2020.
-  Abstract read.
+  Full text (arXiv) obtained; claim checked against the abstract and
+  introduction.
 \item
   {[}little1961{]} J. D. C. Little. A proof for the queuing formula: L =
   λW. \emph{Operations Research} 9(3):383-387, 1961.
@@ -953,7 +966,8 @@ outputs (\texttt{research/publication/evidence\_audit\_M4.md}).
   Open versus closed: a cautionary tale. In \emph{Proc. NSDI 2006},
   USENIX.
   https://www.usenix.org/legacy/events/nsdi06/tech/full\_papers/schroeder/schroeder\_html/index.html.
-  Full text read through a summarising fetch.
+  Full text obtained; claim checked against the abstract and
+  introduction.
 \item
   {[}tene-wrk2{]} G. Tene. wrk2: a constant throughput, correct latency
   recording variant of wrk. https://github.com/giltene/wrk2, accessed

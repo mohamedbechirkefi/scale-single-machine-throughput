@@ -63,3 +63,23 @@ def test_every_registered_experiment_is_exported_with_status_and_verdict():
         assert e["status"] and e["verdict"]
     assert {d["id"] for d in data["pending_owner_decisions"]} == {"D-012", "EXP-003 parameters", "EXP-004", "results/raw"}
     assert all(not s["path"].startswith("results/raw") for s in data["sources"])
+
+
+# M6: the README and the article drafts quote the manuscript's numbers too.
+# Structural tokens that are not results: "11.7" is the master prompt section on the release package.
+STRUCTURAL_TOKENS = {"11.7"}
+
+
+def test_readme_and_article_numbers_are_in_the_manuscript():
+    import re
+
+    manuscript = (ROOT / "research" / "paper" / "manuscript.md").read_text(encoding="utf-8")
+    number = re.compile(r"(?<![\w.-])\d[\d,]*(?:\.\d+)?(?![\w])")
+    docs = [ROOT / "README.md", *sorted((ROOT / "articles").glob("*.md"))]
+    missing = {}
+    for doc in docs:
+        tokens = set(number.findall(doc.read_text(encoding="utf-8")))
+        bad = sorted(t for t in tokens if t not in manuscript and t not in STRUCTURAL_TOKENS)
+        if bad:
+            missing[doc.name] = bad
+    assert missing == {}

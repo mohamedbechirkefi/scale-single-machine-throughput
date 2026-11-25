@@ -24,7 +24,7 @@ Both winners are conditional on the full-scan baseline. Batching wins here large
 
 ## Still open
 
-Four decisions are pending the owner: the reading of the frozen rule that excludes the index (the manuscript reports both the frozen-rule reading and exploratory alternatives, 246.8 and 90.8), the parameters of the open-loop experiment, whether the workload experiment runs, and whether the raw run outputs are committed.
+Four decisions are pending the owner: the reading of the frozen rule that excludes the index (the manuscript reports both the frozen-rule reading and exploratory alternatives, 246.8 and 90.8), the parameters of the open-loop experiment, whether the workload experiment runs, and whether the raw run outputs stay committed.
 
 The manuscript, the experiment reports and an offline interactive page with every number and its interval are in the repository: [placeholder: repository URL, not published; publication requires the owner's approval].
 

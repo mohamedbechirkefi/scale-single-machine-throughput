@@ -38,24 +38,29 @@ Never commit an e-mail address, a name or any other personal identifier in code,
 
 ## 6. Development commands
 
-Tools used read-only from the shared folder (see `research/feasibility.md`):
+Tools used read-only from the shared folder `../.tools/` beside this repository (see `research/feasibility.md`):
 
     # resolve and lock dependencies (versions released before 2026-11-10, D-005)
-    /Users/bechir/research/labs/.tools/py/bin/uv lock
+    ../.tools/py/bin/uv lock
     # create the environment from the lockfile
-    /Users/bechir/research/labs/.tools/py/bin/uv sync --locked
+    ../.tools/py/bin/uv sync --locked
     # tests (from M2)
-    /Users/bechir/research/labs/.tools/py/bin/uv run pytest
+    ../.tools/py/bin/uv run pytest
     # manuscript: Markdown to Typst to PDF (D-002), and LaTeX source
-    /Users/bechir/research/labs/.tools/pandoc research/paper/manuscript.md -s -t typst -V mainfont="Libertinus Serif" -o research/paper/manuscript.typ
-    /Users/bechir/research/labs/.tools/py/bin/python -c "import typst; typst.compile('research/paper/manuscript.typ', output='research/paper/manuscript.pdf')"
-    /Users/bechir/research/labs/.tools/pandoc research/paper/manuscript.md -s -t latex -o research/paper/manuscript.tex
+    ../.tools/pandoc research/paper/manuscript.md -s -t typst -V mainfont="Libertinus Serif" -o research/paper/manuscript.typ
+    ../.tools/py/bin/python -c "import typst; typst.compile('research/paper/manuscript.typ', output='research/paper/manuscript.pdf')"
+    ../.tools/pandoc research/paper/manuscript.md -s -t latex -o research/paper/manuscript.tex
 
 The experiment CLI (`scale smoke | exp | report | test`) is added at M2.
 
 ### Experiment CLI (M2)
 
-    /Users/bechir/research/labs/.tools/py/bin/uv run scale test -q
-    /Users/bechir/research/labs/.tools/py/bin/uv run scale smoke [--config experiments/<exploratory>.json] [--out DIR]
-    /Users/bechir/research/labs/.tools/py/bin/uv run scale run experiments/<config>.json [--out DIR]   # confirmatory configs are refused until the owner's freeze
-    /Users/bechir/research/labs/.tools/py/bin/uv run scale report DIR [--pdf]
+    ../.tools/py/bin/uv run scale test -q
+    ../.tools/py/bin/uv run scale smoke [--config experiments/<exploratory>.json] [--out DIR]
+    ../.tools/py/bin/uv run scale run experiments/<config>.json [--out DIR]   # confirmatory configs are refused until the owner's freeze
+    ../.tools/py/bin/uv run scale report DIR [--pdf]
+
+### Release candidate (M6)
+
+    .venv/bin/python -I scripts/build_pdfs.py      # manuscript, supplementary and report PDFs, manuscript.tex, PDF metadata check
+    .venv/bin/python -I scripts/check_links.py     # relative links, quoted paths, citation keys

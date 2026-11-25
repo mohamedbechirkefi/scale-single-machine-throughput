@@ -12,7 +12,7 @@ All values below were read from the machine with the commands shown; outputs are
 | Performance / efficiency cores | `sysctl -n hw.perflevel0.physicalcpu hw.perflevel1.physicalcpu` | `8`, `2` |
 | Memory | `sysctl -n hw.memsize` | `17179869184` (16 GiB) |
 | OS | `sw_vers` | macOS `15.3.1`, build `24D70` |
-| Free disk | `df -h /Users/bechir/research/labs` | `460Gi` size, `311Gi` used, `129Gi` available (the brief's "about 127 GB" is consistent) |
+| Free disk | `df -h <research root>/labs` | `460Gi` size, `311Gi` used, `129Gi` available (the brief's "about 127 GB" is consistent) |
 | File descriptors | `ulimit -n` (session shell) | `1048576`; `launchctl limit maxfiles` soft limit `256` (the generator must raise or respect it) |
 | Listen backlog | `sysctl kern.ipc.somaxconn` | `128` |
 | Ephemeral ports | `sysctl net.inet.ip.portrange.first/last` | `49152` to `65535` |
@@ -24,11 +24,11 @@ Consequence for the design: generator and server share one machine with 8 perfor
 | Tool | Location | Version (command output) | Use |
 |---|---|---|---|
 | Python | `/usr/local/bin/python3` | `Python 3.12.1`; `sqlite3.sqlite_version` = `3.43.1` | interpreter for server, generator, analysis |
-| uv | `/Users/bechir/research/labs/.tools/py/bin/uv` | `uv 0.9.5 (d5f39331a 2025-10-21)` | lockfile and environment |
-| typst (Python package) | `/Users/bechir/research/labs/.tools/py/bin/python` | `typst 0.15.0` (module import; there is no `typst` executable in that folder) | PDF compilation |
+| uv | `<research root>/labs/.tools/py/bin/uv` | `uv 0.9.5 (d5f39331a 2025-10-21)` | lockfile and environment |
+| typst (Python package) | `<research root>/labs/.tools/py/bin/python` | `typst 0.15.0` (module import; there is no `typst` executable in that folder) | PDF compilation |
 | pypdf, pillow | same environment | `pypdf 6.20.0`, `pillow 11.3.0` | PDF inspection, figure checks |
-| pandoc | `/Users/bechir/research/labs/.tools/pandoc` | `pandoc 3.6.3` | Markdown to Typst and LaTeX |
-| Node | `/Users/bechir/research/helix/.tools/node/bin/node` | `v22.23.3` | demo build at M5 (read-only use of that folder) |
+| pandoc | `<research root>/labs/.tools/pandoc` | `pandoc 3.6.3` | Markdown to Typst and LaTeX |
+| Node | `<research root>/helix/.tools/node/bin/node` | `v22.23.3` | demo build at M5 (read-only use of that folder) |
 | git | system | `git version 2.42.1` | version control |
 | ApacheBench | `/usr/sbin/ab` | `Version 2.3 <$Revision: 1913912 $>` | differential check of the load generator (EXP-001) |
 | SQLite CLI | system | `3.43.2 2023-10-10` | inspection only |
@@ -67,3 +67,5 @@ Zero. No paid API, inference, dataset, cloud compute or hosting. All data are sy
 | Thermal and background noise | Inflated variance, drift | Idle probe, randomised order, position check, 10 blocks |
 | Python GIL | Thread arms limited by interpreter | Recorded as part of the system under test; not generalised |
 | SQLite write locking under WAL | Errors in write-heavy cells | 2 % writes, busy timeout recorded, errors counted |
+
+Note (M6, 2026-11-25): the absolute home-directory prefix of the paths above was replaced by `<research root>` (the parent of `labs/`) so that no local path of the development machine stays in the current files; commands and outputs are otherwise unchanged.

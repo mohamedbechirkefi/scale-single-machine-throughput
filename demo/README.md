@@ -9,7 +9,7 @@ Static benchmark report and resource and latency explorer of the recorded EXP-00
 
 **Data.** `public/data/results.json` is written by `.venv/bin/python -I scripts/export_demo_data.py` (repository root) from committed results only, and is checked by `tests/test_demo_export.py`. `src/results.ts` validates it and fails closed: on any malformed field the page shows no numbers.
 
-**Commands** (Node from `/Users/bechir/research/helix/.tools/node/bin`):
+**Commands** (Node 22; the development machine uses a shared, read-only Node folder outside this repository):
 
     npm ci && npm test && npm run build && npm run preview
     node tools/a11y_check.mjs dist --screenshots <dir>    # offline and accessibility check; prints A11Y-CHECK PASS or FAIL

@@ -8,6 +8,7 @@ import glob
 import json
 import math
 import os
+import re
 import subprocess
 from collections import defaultdict
 from typing import Any
@@ -245,19 +246,65 @@ def build_report(results_dir: str, full_levels: int = 7, full_warmup_s: float = 
     return summary
 
 
-def build_pdf(md_path: str, pdf_path: str) -> tuple[bool, str]:
+def has_yaml_title(md_path: str) -> bool:
+    """True when the Markdown file opens with a YAML block that sets a title."""
+    with open(md_path, encoding="utf-8") as fh:
+        text = fh.read()
+    if not text.startswith("---\n"):
+        return False
+    end = text.find("\n---", 4)
+    return end > 0 and any(line.startswith("title:") for line in text[4:end].splitlines())
+
+
+def escape_star_notation(source: str) -> str:
+    """Escape the asterisk of the notation G* (peak goodput), so that two G* in one
+    paragraph are not read as an emphasis span (M6 visual inspection). Source files
+    stay unchanged; the escape is applied to the text handed to pandoc."""
+    return re.sub(r"(?<=G)\*(?!\*)", r"\\*", source)
+
+
+def build_pdf(md_path: str, pdf_path: str, typ_path: str | None = None) -> tuple[bool, str]:
     """pandoc Markdown -> Typst (mainfont workaround from M0), compiled with the typst
-    Python package. Returns (ok, message); never fabricates a PDF on failure."""
-    typ = pdf_path[: -len(".pdf")] + ".typ"
+    Python package. Returns (ok, message); never fabricates a PDF on failure.
+
+    A file without a YAML title (experiment reports, the supplementary file) has its
+    leading level-1 heading promoted to the document title (M6), so that the PDF title
+    metadata is set. With typ_path, the intermediate Typst file is compiled beside the
+    Markdown source (Typst requires it inside the project root, and relative image
+    paths resolve from it) and then moved to typ_path; otherwise it stays beside the PDF."""
     cwd = os.path.dirname(os.path.abspath(md_path))
-    r = subprocess.run([PANDOC, os.path.abspath(md_path), "-s", "-t", "typst",
-                        "-V", "mainfont=Libertinus Serif", "-o", os.path.abspath(typ)],
-                       capture_output=True, text=True, cwd=cwd)
+    if typ_path:
+        stem = os.path.splitext(os.path.basename(md_path))[0]
+        typ = os.path.join(cwd, f".build-{stem}-{os.getpid()}.typ")
+    else:
+        typ = pdf_path[: -len(".pdf")] + ".typ"
+    # --wrap=none (M6): with pandoc's default wrapping, a sentence such as "excludes 1. ..."
+    # could start a Typst source line with "1. " and turn into a numbered list.
+    # The header keeps narrow table cells unjustified and lets long tables break across
+    # pages (M6 visual inspection).
+    header = typ + ".header"
+    with open(header, "w", encoding="utf-8") as fh:
+        fh.write("#show table: set par(justify: false)\n"
+                 "#show figure: set block(breakable: true)\n")
+    args = [PANDOC, "-f", "markdown", "-s", "-t", "typst", "--wrap=none",
+            "--include-in-header", header,
+            "-V", "mainfont=Libertinus Serif", "-o", os.path.abspath(typ)]
+    with open(md_path, encoding="utf-8") as fh:
+        source = escape_star_notation(fh.read())
+    if not has_yaml_title(md_path):
+        # Leading HTML comments (the SPDX header) are not rendered; dropping them lets
+        # pandoc promote the first level-1 heading to the title.
+        source = re.sub(r"\A(\s*<!--.*?-->\s*)+", "", source, flags=re.S)
+        args.append("--shift-heading-level-by=-1")
+    r = subprocess.run(args, input=source, capture_output=True, text=True, cwd=cwd)
+    os.remove(header)
     if r.returncode != 0:
         return False, f"pandoc failed: {r.stderr.strip()[:500]}"
     code = (f"import typst; typst.compile({os.path.abspath(typ)!r}, "
             f"output={os.path.abspath(pdf_path)!r}, root={cwd!r})")
     r = subprocess.run([TYPST_PY, "-c", code], capture_output=True, text=True, cwd=cwd)
+    if typ_path:
+        os.replace(typ, typ_path)
     if r.returncode != 0:
         return False, f"typst failed: {r.stderr.strip()[-500:]}"
     return True, pdf_path

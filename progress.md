@@ -242,3 +242,43 @@ Author line and affiliation, repository URL, demo URL, funding, competing intere
 
 ### Next action
 M6 (release candidate) on the owner's word, with the four pending decisions on the owner review checklist.
+
+## 2026-11-25: Session M6 (release candidate)
+
+**Milestone:** M6. **Authority:** owner, 2026-11-25, "Push and next" (`labs/_shared/owner-approvals-2026-11-25f.md`); briefs `labs/_shared/M6-brief.md` and `labs/_shared/M6-timing-addendum.md` (the addendum takes precedence). `owner-approvals-2026-11-25e.md` was read for the pending SCALE decisions. Decision D-017.
+
+### Starting state
+`git status`: `On branch main`, `nothing to commit, working tree clean`; HEAD `24a4de2` (M5, pushed).
+
+### Constraint
+The machine was shared with other lab sessions (load average 2.18, 1.97, 1.70 at the first clone). No timing measurement and no harness smoke were made. Reproduction re-ran the frozen analysis and the scripts on committed recorded outputs.
+
+### Clean clone 1 (HEAD 24a4de2, before any M6 change)
+- `git clone -q <repo> <scratch>/clone`: 451 tracked files. `uv sync --frozen --all-groups --all-extras`: environment created (`Audited 25 packages` on a second run).
+- `.venv/bin/python -m pytest -q -p no:cacheprovider`: `135 passed in 29.76s`.
+- `scale analyse EXP-001 results/raw/EXP-001/EXP-001-M3 --out-dir <scratch>/an-EXP-001` and the same for EXP-002: `analysis.json` and `metrics.csv` byte-identical to `research/experiments/EXP-00N/`; the 3 PNG figures identical; the 3 SVG figures differ only in the `dc:date` stamp and random element ids (identical after normalising).
+- `shasum -a 256 -c SHA256SUMS`: EXP-001 36 OK, EXP-002 126 OK, PILOT-QUIET 57 OK, 0 failures.
+- `scripts/m4_exploratory_confounders.py`: exit 0, output differs only in `code_revision_at_run`. `scripts/m4_evidence_manifest.py`: `entries 535, mismatches 0, uncovered 0`, output differs only in revision fields and one digest.
+- `scale report results/exploratory/SMOKE-M3-20261125`: unchanged except the SVG stamp and ids.
+- `scripts/export_demo_data.py`: `wrote demo/public/data/results.json (52094 bytes)`; `--check`: `EXPORT-CHECK PASS`; `git status` clean.
+- Demo: `npm ci --prefer-offline` `added 53 packages in 626ms`; `npm test` `Tests 14 passed (14)`; `npm run build` `built in 282ms`; `node tools/a11y_check.mjs dist` 9 PASS lines and `A11Y-CHECK PASS`.
+
+### Findings and fixes
+1. **Raw outputs tracked.** `git ls-files results/raw | wc -l` gives 226, although `.gitignore` lists the folder (added in `3fb0c66` and `1558fee`, pushed on 2026-11-25). Statements that said otherwise corrected (D-017); no file added or removed; the owner decision stays open.
+2. **PDF builder** (found by visual inspection of every page at 60 ppi): a sentence of manuscript section 4.5 rendered as a numbered list (pandoc line wrapping; fixed with `--wrap=none`); two italic spans in sections 5.2 and 5.3 from paired G* (asterisk escaped before pandoc); the supplementary matrix table could not break across pages and left a near-empty first page (figures made breakable); narrow table cells justified with wide gaps (justification off in tables); reports and supplementary had no PDF title (first heading promoted). Final: `.venv/bin/python -I scripts/build_pdfs.py --typ-dir <scratch>/typ` printed `PDF-BUILD PASS`: manuscript 14 pages (184132 bytes), supplementary 6, EXP-001 3, EXP-002 5, EXP-003 1, EXP-004 1. The first build attempt failed with `RuntimeError: input file must be contained in project root` (intermediate file placed outside the Typst root); fixed by compiling beside the source and moving the intermediate file to scratch.
+3. **References:** 2 uncited bib entries removed; 4 sources' full texts obtained and claims checked; 3 not obtainable free (labels kept). `evidence_audit_M6.md` section 1.
+4. **Links:** `scripts/check_links.py` first run `LINK-CHECK FAIL (14)` (12 placeholder or base-folder paths, 2 uncited bib entries); final `LINK-CHECK PASS` over 54 Markdown files.
+5. **Scan:** 0 tokens, 0 private keys, 0 `.env` files; 1 non-personal e-mail address (commit-trailer rule); 22 lines with home-directory paths in 6 files, replaced in 4 files. Note for this journal: entries above (lines 17 and 180) quote two absolute home-directory paths; they are kept because this file is append-only, and later text uses relative paths.
+6. **SPDX:** 91 of 94 new files with headers; `demo/.npmrc` fixed, `manuscript.tex` now generated with the header, `manuscript.md` keeps it after the YAML block.
+7. **Data manifest:** dataset rebuilt from its seed, SHA-256 `7a0c2b88...` equal to the record. Artifact manifest: 25 paths exist, 4 of 4 input digests match.
+8. **CITATION.cff:** version `0.1.0-rc1`; title copied from the manuscript, pending the owner; no `date-released`; structure check `CFF-STRUCTURE PASS` (Ruby YAML parser, keys and types of CFF 1.2.0).
+
+### Working repository checks
+- `.venv/bin/python -m pytest -q -p no:cacheprovider`: `139 passed in 25.13s` (135 plus 3 link tests plus 1 README and article number test).
+- Demo: `npm test` `Tests 14 passed (14)`; `npm run build` built; `node tools/a11y_check.mjs dist` `A11Y-CHECK PASS`.
+
+### Not done
+- No box of `author_review.md` ticked (none had been ticked). No timing run. No push, tag or release.
+
+### Next action
+The owner's review of `research/publication/author_review.md` (section "Prepared for the owner") and the G-PUBLIC decision.

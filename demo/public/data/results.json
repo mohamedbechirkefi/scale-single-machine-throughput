@@ -12,7 +12,7 @@
   },
   {
    "path": "research/claims_register.csv",
-   "sha256": "365fcc7c3dfd3ac1cc800e836c73a8df83a1568279bb761613866305f535529d"
+   "sha256": "cc2a5283040cefee178cb1aaf61f969f94f1d64f6dac57d6eb45107fdbba97a7"
   },
   {
    "path": "research/experiment_registry.csv",
@@ -36,11 +36,11 @@
   },
   {
    "path": "research/paper/manuscript.md",
-   "sha256": "a50931351521acb99400a3f6d3ad35841bf0165d0bce17c4b5c9df4000bf9568"
+   "sha256": "f00fc5c6f7ffb5fba939ebe3e9ddf07495865ccecda9e674ba940f38b0872977"
   },
   {
    "path": "research/publication/artifact_manifest.json",
-   "sha256": "ee01f0ebca05907cc2668f315deca6b73c5d439c9dd6cba913a70c1d4a1296f5"
+   "sha256": "b51cbeeccd21d7985741f1f0af91e75ffcee87c0ab90fe96a3a5c26a7c42d13a"
   },
   {
    "path": "results/exploratory/M4-REANALYSIS-20261125/summary.json",
@@ -500,11 +500,11 @@
   },
   {
    "id": "results/raw",
-   "title": "Whether the raw run outputs (results/raw/) are committed",
+   "title": "Whether the raw run outputs (results/raw/) stay committed",
    "readings": [
     {
      "label": "Not decided",
-     "text": "They are kept out of git by the repository's ignore rule and pinned by SHA256SUMS digests in the artifact manifest. This page reads committed files only.",
+     "text": "They are tracked in git since M3, although the folder is listed in the repository's ignore rule, and are pinned by SHA256SUMS digests in the artifact manifest. This page does not read them.",
      "estimates": []
     }
    ]

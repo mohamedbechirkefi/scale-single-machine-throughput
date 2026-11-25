@@ -394,11 +394,12 @@ def build(root: Path) -> dict[str, Any]:
         },
         {
             "id": "results/raw",
-            "title": "Whether the raw run outputs (results/raw/) are committed",
+            "title": "Whether the raw run outputs (results/raw/) stay committed",
             "readings": [
                 {"label": "Not decided",
-                 "text": ("They are kept out of git by the repository's ignore rule and pinned by SHA256SUMS digests "
-                          "in the artifact manifest. This page reads committed files only."),
+                 "text": ("They are tracked in git since M3, although the folder is listed in the repository's "
+                          "ignore rule, and are pinned by SHA256SUMS digests in the artifact manifest. "
+                          "This page does not read them."),
                  "estimates": []},
             ],
         },

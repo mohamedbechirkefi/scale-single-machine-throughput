@@ -11,7 +11,7 @@ Status values: `done`, `in progress`, `planned`, `blocked(<reason>)`, `gated(<ga
 | M3 Experiments | P0 | 1 to 1.5 d (about 6 h to 11 h machine time) | M2, owner freeze (done) | done with documented gaps (2026-11-25) | EXP-001 and EXP-002 complete; EXP-003 not run (four unset parameters, D-014); EXP-004 optional, no frozen config; D-012 reading of the A2 exclusion awaits the owner |
 | M4 Interpretation | P0 | 0.75 d | M3 | done (2026-11-25; D-015) | Pending owner decisions disclosed, not blocking: D-012 reading (A2 exclusion), EXP-003 parameters, EXP-004; owner-only placeholders listed in progress.md |
 | M5 Interactive experience | P1 | 0.75 d | M4 | done (2026-11-25; D-016) | Sandbox cut (D-016); pending owner decisions shown on the page, not decided; owner placeholders remain |
-| M6 Release candidate | P0 | 0.5 d | M4, M5 | planned | gated(G-PUBLIC) for any publication |
+| M6 Release candidate | P0 | 0.5 d | M4, M5 | release candidate prepared, awaiting owner review and G-PUBLIC | gated(G-PUBLIC) for any publication; owner sign-off |
 
 ## M0 Bootstrap and feasibility (done)
 
@@ -77,11 +77,13 @@ Acceptance criteria:
 ## M6 Release candidate (11.6: PDFs, clean-clone reproduction)
 
 Acceptance criteria:
-- [ ] Manuscript and report PDFs compiled with the Typst path and visually inspected; `manuscript.tex` generated.
-- [ ] Clean clone into a separate directory: locked install, tests, smoke reproduction, demo build; actual outputs recorded.
-- [ ] Data manifests, links and references verified; secret and licence scan.
-- [ ] `research/publication/` checklists completed; owner review recorded.
-- [ ] No push or publication without the owner's explicit approval (G-PUBLIC).
+- [x] Manuscript and report PDFs compiled with the Typst path and visually inspected; `manuscript.tex` generated (`scripts/build_pdfs.py`, `PDF-BUILD PASS`, 2026-11-25).
+- [x] Clean clone into a separate directory: locked install, tests, smoke reproduction, demo build; actual outputs recorded (`research/publication/reproducibility_report.md`).
+- [x] Data manifests, links and references verified; secret and licence scan (`research/publication/evidence_audit_M6.md`, `dependency_licences.md`).
+- [ ] `research/publication/` checklists completed; owner review recorded. Checklists prepared at M6; the owner's review is pending.
+- [x] No push or publication without the owner's explicit approval (G-PUBLIC). Nothing was pushed, tagged or released at M6.
+
+Status: **release candidate prepared, awaiting owner review and G-PUBLIC** (2026-11-25). M6 is not done until the owner signs off.
 
 ## Five-day plan (planning estimate)
 
