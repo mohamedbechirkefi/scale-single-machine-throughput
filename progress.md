@@ -153,3 +153,7 @@ Coordinator: schedule a quiet window. Then `scale run experiments/EXP-001.json`,
 
 ### Next action
 Coordinator: quiet window. `scale run experiments/EXP-001.json`, then `scale resolve-ceiling <EXP-001 dir>`, the quiet pilot and `scale resolve-pilot <dir>`; complete the EXP-002 config from both outputs and append its hash to `research/freeze.json`.
+
+## 2026-11-25: M3 done with documented gaps (coordinator, quiet window)
+
+The owner approved the experiment reports (owner, 2026-11-25, "approve all recommendations, RIGGED A", item 4). Subagents may not write report files, so the reports were composed by the M3 session from committed results only and written by the coordinator: 4 report(s). The coordinator checked that every decimal number in them appears in a committed file. EXP-001 and EXP-002 ran in full in an exclusive quiet-machine window (EXP-002: 50 of 50 cells). EXP-003 was not run because its frozen text leaves four parameters unset (D-014), and EXP-004 (optional) has no frozen config; both are documented failures under the M3 gate. The exclusion of A2 as generator-limited (D-012 reading) awaits the owner. M3 is **done** with these gaps. Next: owner decisions on D-012, EXP-003 and EXP-004, then M4.
