@@ -44,3 +44,21 @@ No harness smoke run was made: the frozen analysis and the report scripts were r
 ## 2. PDFs
 
 `.venv/bin/python -I scripts/build_pdfs.py --typ-dir <scratch>/typ` (repository builder `scale.report.build_pdf`, pandoc to Typst, typst Python package) built six PDFs and regenerated `research/paper/manuscript.tex`; every PDF passed the metadata check (title set, no e-mail address, no local path, under 5 MB). Page counts: manuscript 14, supplementary 6, EXP-001 report 3, EXP-002 report 5, EXP-003 report 1, EXP-004 report 1. Every page was rendered to PNG at 60 ppi and inspected; the fixes made to the builder are listed in `progress.md` (Session M6) and D-017.
+
+## 3. Clean clone 2 (HEAD `91fbb13`, after the M6 changes)
+
+Fresh local clone; load average 2.70, 2.56, 2.36 (shared machine).
+
+| Step | Actual output |
+|---|---|
+| Clone | HEAD `91fbb13`; 462 tracked files |
+| `uv sync --frozen --all-groups --all-extras` | `Installed 25 packages in 80ms` |
+| Tests | `139 passed in 30.75s` |
+| `scale analyse EXP-001` and `EXP-002` from `results/raw/` | `analysis.json` and `metrics.csv` byte-identical for both |
+| `scripts/m4_evidence_manifest.py` | `entries 535, mismatches 0, uncovered 0`; differences in revision fields only |
+| `scripts/export_demo_data.py`, `--check` | `wrote demo/public/data/results.json (52131 bytes)`, `EXPORT-CHECK PASS`; `git status` clean |
+| `scripts/check_links.py` | `LINK-CHECK PASS` |
+| `scripts/build_pdfs.py` | First attempt: `FileNotFoundError` for `<scratch>/.tools/pandoc`, because the builder looks for the shared tools beside the repository's parent folder (`../.tools`), which a clone outside `labs/` lacks. With the documented overrides `SCALE_PANDOC` and `SCALE_TYPST_PYTHON`: `PDF-BUILD PASS`, same page counts and byte sizes; `manuscript.tex` byte-identical; each PDF's extracted text identical to the committed PDF (the files differ only in their creation-date stamps) |
+| Demo | `added 53 packages in 469ms`; `Tests 14 passed (14)`; `built in 285ms`; 9 PASS lines and `A11Y-CHECK PASS`; `git status` clean |
+
+Both clones were deleted at the end of the session.

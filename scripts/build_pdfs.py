@@ -5,6 +5,7 @@ regenerate manuscript.tex with pandoc, and check each PDF's metadata with pypdf
 (title set, no e-mail address, no local path, size under 5 MB).
 
 Usage: .venv/bin/python -I scripts/build_pdfs.py [--typ-dir DIR]
+Outside labs/, set SCALE_PANDOC and SCALE_TYPST_PYTHON (see scale.report).
 (pypdf and typst are read from the shared tools Python, scale.report.TYPST_PY.)
 The intermediate .typ files go to --typ-dir (default: a temporary directory that is
 removed). Exit 1 on any build or metadata failure. Never writes a PDF on failure."""

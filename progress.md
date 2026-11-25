@@ -282,3 +282,6 @@ The machine was shared with other lab sessions (load average 2.18, 1.97, 1.70 at
 
 ### Next action
 The owner's review of `research/publication/author_review.md` (section "Prepared for the owner") and the G-PUBLIC decision.
+
+### Re-check in a fresh clone (HEAD 91fbb13)
+Tests `139 passed in 30.75s`; frozen analyses byte-identical; manifest `entries 535, mismatches 0, uncovered 0`; export `EXPORT-CHECK PASS` with a clean tree; `LINK-CHECK PASS`; `build_pdfs.py` needed `SCALE_PANDOC` and `SCALE_TYPST_PYTHON` outside `labs/` (first attempt `FileNotFoundError`), then `PDF-BUILD PASS` with identical page counts, sizes and extracted text and a byte-identical `manuscript.tex`; demo `Tests 14 passed (14)`, built, `A11Y-CHECK PASS`. Both clones deleted. Details: `research/publication/reproducibility_report.md` section 3.
