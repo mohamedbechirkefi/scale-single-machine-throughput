@@ -1,0 +1,1601 @@
+{
+ "schema": "lab-demo-results",
+ "schema_version": "1.0.0",
+ "project": "SCALE",
+ "question": "On one fixed machine and one fixed local HTTP workload, which single architecture change, applied one factor at a time to a simple full-scan baseline, produces the largest change in peak successful throughput: a cache (A1), an index (A2), read batching (A3) or bounded concurrency (A4)?",
+ "status_label": "Preprint draft, not peer-reviewed. Measured on one laptop, one synthetic workload and one server on localhost; no result transfers to production traffic or other hardware. EXP-001 and EXP-002 ran under a protocol frozen by the owner; EXP-003 and EXP-004 did not run. Four owner decisions are pending.",
+ "code_revision": "530d4eafa391e200aaf13468f831b41d15030ea8",
+ "sources": [
+  {
+   "path": "experiments/EXP-002.json",
+   "sha256": "09bf457c86a90244a9ced2d2c23f564434872b57a432152a23a2d045466ebdb6"
+  },
+  {
+   "path": "research/claims_register.csv",
+   "sha256": "365fcc7c3dfd3ac1cc800e836c73a8df83a1568279bb761613866305f535529d"
+  },
+  {
+   "path": "research/experiment_registry.csv",
+   "sha256": "cb14066309d238ffe892b6fb1f962633c37535d300fe44df8e78364062664e2c"
+  },
+  {
+   "path": "research/experiments/EXP-001/analysis.json",
+   "sha256": "9be27422c2d4f8304604bb4a7e0352b2c6c632d85aaa09c95d464c7aece137af"
+  },
+  {
+   "path": "research/experiments/EXP-002/analysis.json",
+   "sha256": "bc0c6cbabfd4623a5cb9626011f8cb76b721c92adef52fbff89026f4a56cac77"
+  },
+  {
+   "path": "research/experiments/EXP-002/metrics.csv",
+   "sha256": "d4fb497a36e04e83f63b5e594042f30c1e148875343e3a3e2cae72a7ff371525"
+  },
+  {
+   "path": "research/freeze.json",
+   "sha256": "e34316cfd951b6a3286cf2cfdb023e63e5fd8ddf7f0232af0e9ab31ffe174a67"
+  },
+  {
+   "path": "research/paper/manuscript.md",
+   "sha256": "a50931351521acb99400a3f6d3ad35841bf0165d0bce17c4b5c9df4000bf9568"
+  },
+  {
+   "path": "research/publication/artifact_manifest.json",
+   "sha256": "ee01f0ebca05907cc2668f315deca6b73c5d439c9dd6cba913a70c1d4a1296f5"
+  },
+  {
+   "path": "results/exploratory/M4-REANALYSIS-20261125/summary.json",
+   "sha256": "cc773ec21eb87fe7932d233f4e419b422b2682f651e4c2b49c02e795991586e7"
+  }
+ ],
+ "experiments": [
+  {
+   "id": "EXP-001",
+   "title": "Load-generator and measurement validation",
+   "status": "complete (confirmatory, M3 2026-11-25)",
+   "verdict": "H0 holds (the two generators agree within 10 % at every level); gate for EXP-002 passed",
+   "estimates": [
+    {
+     "label": "SCALE/ab median ratio, c = 1",
+     "kind": "confirmatory",
+     "estimate": 0.9418143072479128,
+     "ci_low": 0.9243524203023724,
+     "ci_high": 0.9513160158265956,
+     "ci_level": null,
+     "unit": "ratio",
+     "display": "0.942",
+     "interval_display": "0.924 to 0.951",
+     "interval_kind": "range over 5 repeats",
+     "interval95_display": null
+    },
+    {
+     "label": "SCALE/ab median ratio, c = 8",
+     "kind": "confirmatory",
+     "estimate": 1.0340835702567681,
+     "ci_low": 1.032145922127882,
+     "ci_high": 1.0583837681741781,
+     "ci_level": null,
+     "unit": "ratio",
+     "display": "1.034",
+     "interval_display": "1.032 to 1.058",
+     "interval_kind": "range over 5 repeats",
+     "interval95_display": null
+    },
+    {
+     "label": "SCALE/ab median ratio, c = 32",
+     "kind": "confirmatory",
+     "estimate": 1.014881726946336,
+     "ci_low": 0.9725512879260222,
+     "ci_high": 1.033002904075461,
+     "ci_level": null,
+     "unit": "ratio",
+     "display": "1.015",
+     "interval_display": "0.973 to 1.033",
+     "interval_kind": "range over 5 repeats",
+     "interval95_display": null
+    },
+    {
+     "label": "Generator ceiling C_gen (AM-5: median of 5 run ceilings)",
+     "kind": "confirmatory",
+     "estimate": 27919.4,
+     "ci_low": null,
+     "ci_high": null,
+     "ci_level": null,
+     "unit": "rps",
+     "display": "27919.4",
+     "interval_display": null,
+     "interval_kind": null,
+     "interval95_display": null
+    }
+   ],
+   "claim_ids": [
+    "C-001"
+   ],
+   "report_path": "research/experiments/EXP-001/report.md",
+   "notes": [
+    "Run ceilings: 27914.5, 27919.4, 27953.9, 27860.9, 28657.0 rps (freeze record).",
+    "Intervals here are the range over the five repeats, not confidence intervals."
+   ]
+  },
+  {
+   "id": "EXP-002",
+   "title": "One-factor-at-a-time comparison (closed-loop concurrency sweep)",
+   "status": "complete (confirmatory, M3 2026-11-25)",
+   "verdict": "A1 and A3: H0 rejected, R > 1. A4: no meaningful effect (inside [0.95, 1.05]). A2: excluded, peak generator-limited in every block (D-012 reading, pending owner decision). Dominance: unresolved.",
+   "estimates": [
+    {
+     "label": "R, A1 cache / A0 (peak goodput)",
+     "kind": "confirmatory",
+     "estimate": 2.3365147700553806,
+     "ci_low": 2.2535367830592254,
+     "ci_high": 2.435400431626871,
+     "ci_level": 0.9875,
+     "unit": "ratio",
+     "display": "2.337",
+     "interval_display": "2.254 to 2.435",
+     "interval_kind": "98.75 % bootstrap, 10 blocks",
+     "interval95_display": "2.269 to 2.413"
+    },
+    {
+     "label": "R, A3 batching / A0 (peak goodput)",
+     "kind": "confirmatory",
+     "estimate": 9.005222401553057,
+     "ci_low": 8.92066045434161,
+     "ci_high": 9.092588611335715,
+     "ci_level": 0.9875,
+     "unit": "ratio",
+     "display": "9.005",
+     "interval_display": "8.921 to 9.093",
+     "interval_kind": "98.75 % bootstrap, 10 blocks",
+     "interval95_display": "8.937 to 9.075"
+    },
+    {
+     "label": "R, A4 bounded concurrency / A0 (peak goodput)",
+     "kind": "confirmatory",
+     "estimate": 1.014942177596356,
+     "ci_low": 0.9999798900907082,
+     "ci_high": 1.0301251764492383,
+     "ci_level": 0.9875,
+     "unit": "ratio",
+     "display": "1.015",
+     "interval_display": "1.000 to 1.030",
+     "interval_kind": "98.75 % bootstrap, 10 blocks",
+     "interval95_display": "1.003 to 1.027"
+    },
+    {
+     "label": "S3 ratio, A1 cache / A0 (mean goodput over c in 16, 32, 64)",
+     "kind": "frozen sensitivity",
+     "estimate": 2.6064531273334652,
+     "ci_low": 2.473053936895603,
+     "ci_high": 2.7746707928427625,
+     "ci_level": 0.9875,
+     "unit": "ratio",
+     "display": "2.606",
+     "interval_display": "2.473 to 2.775",
+     "interval_kind": "98.75 % bootstrap, 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "S3 ratio, A2 index / A0 (mean goodput over c in 16, 32, 64)",
+     "kind": "frozen sensitivity",
+     "estimate": 160.93008392638325,
+     "ci_low": 155.2817218022348,
+     "ci_high": 166.98888151288708,
+     "ci_level": 0.9875,
+     "unit": "ratio",
+     "display": "160.93",
+     "interval_display": "155.28 to 166.99",
+     "interval_kind": "98.75 % bootstrap, 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "S3 ratio, A3 batching / A0 (mean goodput over c in 16, 32, 64)",
+     "kind": "frozen sensitivity",
+     "estimate": 12.452491209002348,
+     "ci_low": 12.011783295137906,
+     "ci_high": 12.936464442118154,
+     "ci_level": 0.9875,
+     "unit": "ratio",
+     "display": "12.452",
+     "interval_display": "12.012 to 12.936",
+     "interval_kind": "98.75 % bootstrap, 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "S3 ratio, A4 bounded concurrency / A0 (mean goodput over c in 16, 32, 64)",
+     "kind": "frozen sensitivity",
+     "estimate": 1.161026901054373,
+     "ci_low": 1.1111721194852977,
+     "ci_high": 1.209048339079433,
+     "ci_level": 0.9875,
+     "unit": "ratio",
+     "display": "1.161",
+     "interval_display": "1.111 to 1.209",
+     "interval_kind": "98.75 % bootstrap, 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "Drift slope of log G* per run (frozen drift check)",
+     "kind": "frozen sensitivity",
+     "estimate": -0.0003860148357164306,
+     "ci_low": -0.0007326955022273429,
+     "ci_high": 0.00010221174162330369,
+     "ci_level": 0.95,
+     "unit": "per run",
+     "display": "-0.00039",
+     "interval_display": "-0.00073 to 0.00010",
+     "interval_kind": "95 % block bootstrap",
+     "interval95_display": null
+    },
+    {
+     "label": "Drift slope of log G* per position in block (frozen drift check)",
+     "kind": "frozen sensitivity",
+     "estimate": -0.003035148233294916,
+     "ci_low": -0.008811650643394819,
+     "ci_high": 0.0015568096795136818,
+     "ci_level": 0.95,
+     "unit": "per position",
+     "display": "-0.0030",
+     "interval_display": "-0.0088 to 0.0016",
+     "interval_kind": "95 % block bootstrap",
+     "interval95_display": null
+    },
+    {
+     "label": "Peak goodput G*, A0 baseline (median over 10 blocks)",
+     "kind": "descriptive",
+     "estimate": 114.6,
+     "ci_low": 111.2,
+     "ci_high": 116.06666666666666,
+     "ci_level": null,
+     "unit": "rps",
+     "display": "114.6",
+     "interval_display": "111.2 to 116.1",
+     "interval_kind": "range over 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "Peak goodput G*, A1 cache (median over 10 blocks)",
+     "kind": "descriptive",
+     "estimate": 265.06666666666666,
+     "ci_low": 246.53333333333333,
+     "ci_high": 286.6,
+     "ci_level": null,
+     "unit": "rps",
+     "display": "265.1",
+     "interval_display": "246.5 to 286.6",
+     "interval_kind": "range over 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "Peak goodput G*, A2 index (median over 10 blocks)",
+     "kind": "descriptive",
+     "estimate": 28131.433333333334,
+     "ci_low": 27586.533333333333,
+     "ci_high": 28633.866666666665,
+     "ci_level": null,
+     "unit": "rps",
+     "display": "28131.4",
+     "interval_display": "27586.5 to 28633.9",
+     "interval_kind": "range over 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "Peak goodput G*, A3 batching (median over 10 blocks)",
+     "kind": "descriptive",
+     "estimate": 1025.3000000000002,
+     "ci_low": 1019.0666666666667,
+     "ci_high": 1037.6,
+     "ci_level": null,
+     "unit": "rps",
+     "display": "1025.3",
+     "interval_display": "1019.1 to 1037.6",
+     "interval_kind": "range over 10 blocks",
+     "interval95_display": null
+    },
+    {
+     "label": "Peak goodput G*, A4 bounded concurrency (median over 10 blocks)",
+     "kind": "descriptive",
+     "estimate": 115.30000000000001,
+     "ci_low": 113.6,
+     "ci_high": 119.66666666666667,
+     "ci_level": null,
+     "unit": "rps",
+     "display": "115.3",
+     "interval_display": "113.6 to 119.7",
+     "interval_kind": "range over 10 blocks",
+     "interval95_display": null
+    }
+   ],
+   "claim_ids": [
+    "C-002",
+    "C-003",
+    "C-004",
+    "C-005",
+    "C-006"
+   ],
+   "report_path": "research/experiments/EXP-002/report.md",
+   "notes": [
+    "All 50 cells completed; 12 runs excluded by the idle probe were re-attempted, so no cell is missing.",
+    "The frozen analysis contains no pairwise test among the included arms; the order A3 > A1 > A4 is a ranking of point estimates.",
+    "Peak goodput intervals are the range over 10 blocks, not confidence intervals."
+   ]
+  },
+  {
+   "id": "EXP-003",
+   "title": "Open-loop SLO goodput (load-model sensitivity)",
+   "status": "not run",
+   "verdict": "None: not run (pending owner decision on four unset parameters)",
+   "estimates": [],
+   "claim_ids": [],
+   "report_path": "research/experiments/EXP-003/report.md",
+   "notes": [
+    "The closed-loop ranking is therefore untested against an open-loop load model."
+   ]
+  },
+  {
+   "id": "EXP-004",
+   "title": "Workload sensitivity (table size and key skew)",
+   "status": "not run",
+   "verdict": "None: not run (pending owner decision on whether it runs)",
+   "estimates": [],
+   "claim_ids": [],
+   "report_path": "research/experiments/EXP-004/report.md",
+   "notes": [
+    "The ranking is therefore untested against other table sizes and key skews."
+   ]
+  }
+ ],
+ "assumptions": [
+  {
+   "name": "Machine",
+   "value": "Apple M1 Pro, 10 cores, 16 GB, macOS 15.3.1",
+   "source": "manuscript 1"
+  },
+  {
+   "name": "Server",
+   "value": "Python 3.12 standard library http.server and sqlite3, 127.0.0.1 only",
+   "source": "manuscript 3.2"
+  },
+  {
+   "name": "Table",
+   "value": "N = 200,000 rows, 256-byte payload, rebuilt from a fixed seed for every run",
+   "source": "manuscript 3.2"
+  },
+  {
+   "name": "Workload",
+   "value": "98 % reads, 2 % writes; Zipf exponent 0.99",
+   "source": "manuscript 3.2"
+  },
+  {
+   "name": "Concurrency sweep",
+   "value": "c in {1, 2, 4, ..., 512}, closed loop, zero think time",
+   "source": "manuscript 4.3"
+  },
+  {
+   "name": "Window",
+   "value": "5 s warmup and a 15 s measurement window per level",
+   "source": "experiments/EXP-002.json"
+  },
+  {
+   "name": "Blocks",
+   "value": "10 paired blocks, arm order randomised within each block",
+   "source": "experiments/EXP-002.json"
+  },
+  {
+   "name": "A1 cache",
+   "value": "In-process LRU of read responses, capacity 10 % of N",
+   "source": "manuscript 3.2"
+  },
+  {
+   "name": "A3 batching",
+   "value": "At most 1 ms or 32 requests",
+   "source": "manuscript 3.2"
+  },
+  {
+   "name": "A4 bounded concurrency",
+   "value": "W = 8 and a queue of Q = 16; overflow returns HTTP 503",
+   "source": "manuscript 3.2"
+  },
+  {
+   "name": "Generator-limited rule",
+   "value": "Goodput above 50 % of C_gen (13959.7 rps) or generator CPU above 85 %",
+   "source": "protocol section 4"
+  },
+  {
+   "name": "Decision rule",
+   "value": "Bonferroni 98.75 % intervals; no meaningful effect if inside [0.95, 1.05]",
+   "source": "manuscript 4.5"
+  },
+  {
+   "name": "Bootstrap",
+   "value": "10,000 resamples, seed 20261124",
+   "source": "manuscript 4.5"
+  },
+  {
+   "name": "Idle probe",
+   "value": "System-wide CPU below 15 % over 1 s before each run",
+   "source": "manuscript 4.2"
+  }
+ ],
+ "limitations": [
+  "One machine, one session. All confirmatory runs were made on one laptop in one window of about three hours. The intervals describe variation between process restarts within that window, not between days, machines or operating-system states; they are narrower than a reproduction elsewhere would be.",
+  "One implementation and workload. Python standard library, SQLite 3.43.1, N = 200,000, Zipf 0.99, 2 % writes. Nothing transfers to other implementations, to production traffic or to other hardware.",
+  "The baseline decides the winners. The full-scan baseline makes the index dominant by design (AM-2) and makes batching an amortisation of scans. A baseline with an index might reorder A1, A3 and A4; this was not tested.",
+  "A2 has no confirmatory estimate. The exclusion rests on the D-012 reading, pending the owner; the exploratory ratios near 247 and 91 measure the harness ceiling or a degraded region, not the index alone.",
+  "No pairwise test in the frozen analysis. The order A3 > A1 > A4 is a ranking of point estimates in the confirmatory analysis; the pairwise intervals of section 5.5 are exploratory.",
+  "Metric dependence. The size of the A3 and A4 effects changes with the summary statistic (G*, S3, closed-loop latency bound).",
+  "A4 null is structural (section 6.1) and concerns peak goodput only.",
+  "Errors not fully diagnosed. The server logs HTTP 500 without the exception type; transport errors at c of 256 and above are unclassified. The confirmatory runs validate every read body but do not re-check the final database state; write correctness rests on the pre-run tests.",
+  "Re-attempted cells. Seven cells of blocks 8 and 9 ran at the end of the sequence, paired by request sequence but not in time; leaving them out changes no verdict (X5).",
+  "Unrun sensitivity experiments. EXP-003 and EXP-004 did not run (sections 5.3 and 5.4).",
+  "Shared CPU and scheduler. Generator and server share the cores; the placement on performance or efficiency cores is not controllable.",
+  "Pilot effect sizes were visible before EXP-002. The pre-stated rule did not use them, and the analysis was committed before EXP-002 output (C4 disclosure in the freeze record).",
+  "Post hoc exploratory checks. The checks X1 to X13 were chosen at M4, after the confirmatory results were known; X12 in particular was added after the per-level latencies had been inspected. They are hypothesis-generating only.",
+  "AI assistance. The analysis readings of D-012 and every exploratory check were written by an AI assistant; they are internal quality control, not independent review."
+ ],
+ "pending_owner_decisions": [
+  {
+   "id": "D-012",
+   "title": "The reading of the frozen generator-limited rule that excludes the index arm (A2)",
+   "readings": [
+    {
+     "label": "Frozen-rule reading as applied (D-012)",
+     "text": "A run's G* is undefined when its peak level is generator-limited, and an arm enters the comparison only if G* is defined in every block. A2 then has no confirmatory estimate and the dominance question is unresolved.",
+     "estimates": []
+    },
+    {
+     "label": "Exploratory alternatives the manuscript reports beside it (not verdicts)",
+     "text": "Both place A2 far above every other arm, and both measure A2 against a ceiling or in a region that the frozen design did not intend as its peak.",
+     "estimates": [
+      {
+       "label": "A2 / A0, unfiltered within-block ratio",
+       "kind": "exploratory",
+       "estimate": 246.81051718600818,
+       "ci_low": 243.3761728220649,
+       "ci_high": 250.2314126355095,
+       "ci_level": 0.9875,
+       "unit": "ratio",
+       "display": "246.8",
+       "interval_display": "243.4 to 250.2",
+       "interval_kind": "98.75 % bootstrap, 10 blocks",
+       "interval95_display": null
+      },
+      {
+       "label": "A2 / A0, G* over the levels not flagged (c of 8 and above)",
+       "kind": "exploratory",
+       "estimate": 90.77708253484334,
+       "ci_low": 90.04811732510535,
+       "ci_high": 91.77377421873113,
+       "ci_level": 0.9875,
+       "unit": "ratio",
+       "display": "90.8",
+       "interval_display": "90.0 to 91.8",
+       "interval_kind": "98.75 % bootstrap, 10 blocks",
+       "interval95_display": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "EXP-003 parameters",
+   "title": "The four EXP-003 parameters the frozen text leaves unset",
+   "readings": [
+    {
+     "label": "Unset",
+     "text": "The open-loop connection count, the study seed, the warmup and measurement split of each rung, and which G* centres A2's ladder. EXP-003 did not run.",
+     "estimates": []
+    }
+   ]
+  },
+  {
+   "id": "EXP-004",
+   "title": "Whether the optional EXP-004 runs",
+   "readings": [
+    {
+     "label": "Not decided",
+     "text": "Its config was never frozen; it did not run.",
+     "estimates": []
+    }
+   ]
+  },
+  {
+   "id": "results/raw",
+   "title": "Whether the raw run outputs (results/raw/) are committed",
+   "readings": [
+    {
+     "label": "Not decided",
+     "text": "They are kept out of git by the repository's ignore rule and pinned by SHA256SUMS digests in the artifact manifest. This page reads committed files only.",
+     "estimates": []
+    }
+   ]
+  }
+ ],
+ "excluded_arms": [
+  {
+   "arm": "A2",
+   "name": "A2 index",
+   "verdict": "Excluded: peak generator-limited in every block",
+   "reason": "A2's peak (median 28131.4 rps at c = 2) lies above the frozen 50 % threshold of 13959.7 rps in every block; no confirmatory estimate under the D-012 reading, which is a pending owner decision.",
+   "display_values": [
+    "28131.4",
+    "13959.7"
+   ]
+  }
+ ],
+ "exploratory": {
+  "id": "M4-REANALYSIS-20261125",
+  "title": "Exploratory re-analysis of the recorded EXP-002 runs (no new measurement)",
+  "label": "exploratory",
+  "note": "Chosen after the confirmatory results were known; hypothesis-generating only. None of it changes a frozen verdict.",
+  "claim_ids": [
+   "C-007",
+   "C-008",
+   "C-009",
+   "C-010",
+   "C-011",
+   "C-012"
+  ],
+  "report_path": "results/exploratory/M4-REANALYSIS-20261125/report.md",
+  "groups": [
+   {
+    "title": "Separation of the included arms (X3)",
+    "estimates": [
+     {
+      "label": "R_A3 / R_A1",
+      "kind": "exploratory",
+      "estimate": 3.8541260329116667,
+      "ci_low": 3.719581387194742,
+      "ci_high": 3.986687586841861,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "3.85",
+      "interval_display": "3.72 to 3.99",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     },
+     {
+      "label": "R_A1 / R_A4",
+      "kind": "exploratory",
+      "estimate": 2.3021161418169145,
+      "ci_low": 2.23792700686593,
+      "ci_high": 2.372307893100991,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "2.30",
+      "interval_display": "2.24 to 2.37",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     },
+     {
+      "label": "R_A3 / R_A4",
+      "kind": "exploratory",
+      "estimate": 8.872645752962734,
+      "ci_low": 8.743833928816134,
+      "ci_high": 8.983277710359179,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "8.87",
+      "interval_display": "8.74 to 8.98",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     }
+    ]
+   },
+   {
+    "title": "A3 truncation at the sweep top (X4)",
+    "estimates": [
+     {
+      "label": "R_A3 with G* over c up to 256",
+      "kind": "exploratory",
+      "estimate": 8.994137437783161,
+      "ci_low": 8.90877437584668,
+      "ci_high": 9.076639229610807,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "8.99",
+      "interval_display": "8.91 to 9.08",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     }
+    ]
+   },
+   {
+    "title": "Without the time-shifted blocks 8 and 9 (X5)",
+    "estimates": [
+     {
+      "label": "R_A1, 8 blocks",
+      "kind": "exploratory",
+      "estimate": 2.3696079071299105,
+      "ci_low": null,
+      "ci_high": null,
+      "ci_level": null,
+      "unit": "ratio",
+      "display": "2.37",
+      "interval_display": null,
+      "interval_kind": null,
+      "interval95_display": null
+     },
+     {
+      "label": "R_A3, 8 blocks",
+      "kind": "exploratory",
+      "estimate": 9.00180890766709,
+      "ci_low": null,
+      "ci_high": null,
+      "ci_level": null,
+      "unit": "ratio",
+      "display": "9.00",
+      "interval_display": null,
+      "interval_kind": null,
+      "interval95_display": null
+     },
+     {
+      "label": "R_A4, 8 blocks",
+      "kind": "exploratory",
+      "estimate": 1.018412209765816,
+      "ci_low": 1.00177328187026,
+      "ci_high": 1.0345266551183534,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "1.018",
+      "interval_display": "1.002 to 1.035",
+      "interval_kind": "98.75 % bootstrap, 8 blocks",
+      "interval95_display": null
+     }
+    ]
+   },
+   {
+    "title": "Closed-loop latency-bounded goodput, p99 at most 50 ms, errors at most 1 % (X12; not EXP-003)",
+    "estimates": [
+     {
+      "label": "A1 / A0",
+      "kind": "exploratory",
+      "estimate": 2.5009247755288357,
+      "ci_low": 2.256239802266416,
+      "ci_high": 2.9182956639270965,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "2.50",
+      "interval_display": "2.26 to 2.92",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     },
+     {
+      "label": "A3 / A0",
+      "kind": "exploratory",
+      "estimate": 3.9497425238716635,
+      "ci_low": 3.060430936258968,
+      "ci_high": 5.008119615928458,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "3.95",
+      "interval_display": "3.06 to 5.01",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     },
+     {
+      "label": "A4 / A0",
+      "kind": "exploratory",
+      "estimate": 1.086359080717367,
+      "ci_low": 1.001219082015341,
+      "ci_high": 1.247979500211808,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "1.086",
+      "interval_display": "1.001 to 1.248",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     },
+     {
+      "label": "R_A3 / R_A1",
+      "kind": "exploratory",
+      "estimate": 1.5793128056146621,
+      "ci_low": 1.2543773990047975,
+      "ci_high": 1.921377736237698,
+      "ci_level": 0.9875,
+      "unit": "ratio",
+      "display": "1.58",
+      "interval_display": "1.25 to 1.92",
+      "interval_kind": "98.75 % bootstrap, 10 blocks",
+      "interval95_display": null
+     }
+    ]
+   },
+   {
+    "title": "Quiet pilot, never pooled with EXP-002 (X10; unfiltered geometric means over 5 blocks, no interval)",
+    "estimates": [
+     {
+      "label": "A1 / A0",
+      "kind": "exploratory",
+      "estimate": 2.2894826799107464,
+      "ci_low": null,
+      "ci_high": null,
+      "ci_level": null,
+      "unit": "ratio",
+      "display": "2.29",
+      "interval_display": null,
+      "interval_kind": null,
+      "interval95_display": null
+     },
+     {
+      "label": "A3 / A0",
+      "kind": "exploratory",
+      "estimate": 8.721688530201563,
+      "ci_low": null,
+      "ci_high": null,
+      "ci_level": null,
+      "unit": "ratio",
+      "display": "8.72",
+      "interval_display": null,
+      "interval_kind": null,
+      "interval95_display": null
+     },
+     {
+      "label": "A4 / A0",
+      "kind": "exploratory",
+      "estimate": 1.0021546451753995,
+      "ci_low": null,
+      "ci_high": null,
+      "ci_level": null,
+      "unit": "ratio",
+      "display": "1.002",
+      "interval_display": null,
+      "interval_kind": null,
+      "interval95_display": null
+     }
+    ]
+   }
+  ]
+ },
+ "explorer": {
+  "label": "measured (recorded EXP-002 runs)",
+  "source": "research/experiments/EXP-002/analysis.json descriptives.per_level; server memory from research/experiments/EXP-002/metrics.csv",
+  "n_runs_per_cell": 10,
+  "concurrency": [
+   1,
+   2,
+   4,
+   8,
+   16,
+   32,
+   64,
+   128,
+   256,
+   512
+  ],
+  "generator_ceiling_rps": 27919.4,
+  "generator_limited_threshold_rps": 13959.7,
+  "generator_limited_threshold_display": "13959.7",
+  "arms": [
+   {
+    "arm": "A0",
+    "name": "A0 baseline",
+    "levels": [
+     {
+      "c": 1,
+      "goodput_median": 54.06666666666666,
+      "goodput_min": 53.46666666666667,
+      "goodput_max": 59.6,
+      "p99_median_ms": 19.834771,
+      "p99_min_ms": 18.269542,
+      "p99_max_ms": 20.301208,
+      "server_cpu_median": 0.9912831461974368,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 26.550272,
+      "server_rss_mb_min": 26.345472,
+      "server_rss_mb_max": 26.689536,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 2,
+      "goodput_median": 79.56666666666666,
+      "goodput_min": 49.666666666666664,
+      "goodput_max": 80.26666666666667,
+      "p99_median_ms": 28.403375,
+      "p99_min_ms": 27.935417,
+      "p99_max_ms": 50.812125,
+      "server_cpu_median": 1.9131795697375567,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 36.585471999999996,
+      "server_rss_mb_min": 35.127296,
+      "server_rss_mb_max": 39.632896,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 4,
+      "goodput_median": 114.6,
+      "goodput_min": 111.2,
+      "goodput_max": 116.06666666666666,
+      "p99_median_ms": 45.3207915,
+      "p99_min_ms": 43.493667,
+      "p99_max_ms": 64.7385,
+      "server_cpu_median": 3.8115484376159987,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 55.214079999999996,
+      "server_rss_mb_min": 51.642368,
+      "server_rss_mb_max": 57.851904,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 8,
+      "goodput_median": 75.76666666666667,
+      "goodput_min": 71.06666666666666,
+      "goodput_max": 79.93333333333334,
+      "p99_median_ms": 110.6833125,
+      "p99_min_ms": 105.676833,
+      "p99_max_ms": 117.476375,
+      "server_cpu_median": 7.854391307023954,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 90.431488,
+      "server_rss_mb_min": 82.460672,
+      "server_rss_mb_max": 98.189312,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 16,
+      "goodput_median": 60.8,
+      "goodput_min": 56.2,
+      "goodput_max": 63.333333333333336,
+      "p99_median_ms": 308.002333,
+      "p99_min_ms": 294.653541,
+      "p99_max_ms": 339.512375,
+      "server_cpu_median": 9.70813727293671,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 133.09542399999998,
+      "server_rss_mb_min": 126.271488,
+      "server_rss_mb_max": 146.6368,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 32,
+      "goodput_median": 60.766666666666666,
+      "goodput_min": 56.2,
+      "goodput_max": 66.73333333333333,
+      "p99_median_ms": 722.258958,
+      "p99_min_ms": 618.554667,
+      "p99_max_ms": 1256.474292,
+      "server_cpu_median": 9.717867634395787,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 224.74752,
+      "server_rss_mb_min": 218.742784,
+      "server_rss_mb_max": 242.335744,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 64,
+      "goodput_median": 61.16666666666667,
+      "goodput_min": 55.6,
+      "goodput_max": 63.93333333333333,
+      "p99_median_ms": 1621.89525,
+      "p99_min_ms": 1492.84525,
+      "p99_max_ms": 2136.26575,
+      "server_cpu_median": 9.777494217091984,
+      "error_rate_median": 0.0005307855626326964,
+      "error_rate_max": 0.009280742459396751,
+      "server_rss_mb_median": 376.725504,
+      "server_rss_mb_min": 367.525888,
+      "server_rss_mb_max": 382.40256,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 128,
+      "goodput_median": 61.06666666666666,
+      "goodput_min": 56.0,
+      "goodput_max": 64.06666666666666,
+      "p99_median_ms": 3384.5543955000003,
+      "p99_min_ms": 3096.636375,
+      "p99_max_ms": 3854.101125,
+      "server_cpu_median": 9.804845932442433,
+      "error_rate_median": 0.005498900958246259,
+      "error_rate_max": 0.013485477178423237,
+      "server_rss_mb_median": 685.4000639999999,
+      "server_rss_mb_min": 670.466048,
+      "server_rss_mb_max": 692.731904,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 256,
+      "goodput_median": 58.5,
+      "goodput_min": 52.13333333333333,
+      "goodput_max": 64.6,
+      "p99_median_ms": 8711.672458500001,
+      "p99_min_ms": 7096.275959,
+      "p99_max_ms": 9570.214917,
+      "server_cpu_median": 9.812800534627526,
+      "error_rate_median": 0.06761380010050466,
+      "error_rate_max": 0.1184939091915836,
+      "server_rss_mb_median": 1221.558272,
+      "server_rss_mb_min": 1137.754112,
+      "server_rss_mb_max": 1266.499584,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 512,
+      "goodput_median": 54.96666666666667,
+      "goodput_min": 50.333333333333336,
+      "goodput_max": 62.333333333333336,
+      "p99_median_ms": 8805.9410835,
+      "p99_min_ms": 7345.569875,
+      "p99_max_ms": 9421.951791,
+      "server_cpu_median": 9.781792506823695,
+      "error_rate_median": 0.3589053241760596,
+      "error_rate_max": 0.4189864382583869,
+      "server_rss_mb_median": 1951.072256,
+      "server_rss_mb_min": 1837.858816,
+      "server_rss_mb_max": 2087.89504,
+      "generator_limited_runs": 0
+     }
+    ]
+   },
+   {
+    "arm": "A1",
+    "name": "A1 cache",
+    "levels": [
+     {
+      "c": 1,
+      "goodput_median": 90.66666666666666,
+      "goodput_min": 88.13333333333334,
+      "goodput_max": 91.46666666666667,
+      "p99_median_ms": 19.655645999999997,
+      "p99_min_ms": 19.453,
+      "p99_max_ms": 20.159583,
+      "server_cpu_median": 0.9880996823118677,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 27.082752,
+      "server_rss_mb_min": 26.820608,
+      "server_rss_mb_max": 27.426816,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 2,
+      "goodput_median": 157.2,
+      "goodput_min": 114.13333333333334,
+      "goodput_max": 161.93333333333334,
+      "p99_median_ms": 26.831792,
+      "p99_min_ms": 26.406041,
+      "p99_max_ms": 54.765417,
+      "server_cpu_median": 1.9135271496878483,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 40.787968,
+      "server_rss_mb_min": 38.535168,
+      "server_rss_mb_max": 43.352064,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 4,
+      "goodput_median": 265.06666666666666,
+      "goodput_min": 246.53333333333333,
+      "goodput_max": 286.6,
+      "p99_median_ms": 41.867771000000005,
+      "p99_min_ms": 40.151416,
+      "p99_max_ms": 45.473625,
+      "server_cpu_median": 3.8140504138020956,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 64.733184,
+      "server_rss_mb_min": 61.063168,
+      "server_rss_mb_max": 79.396864,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 8,
+      "goodput_median": 177.06666666666666,
+      "goodput_min": 171.06666666666666,
+      "goodput_max": 187.4,
+      "p99_median_ms": 115.19735399999999,
+      "p99_min_ms": 107.213875,
+      "p99_max_ms": 117.345875,
+      "server_cpu_median": 7.789945444545559,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 107.012096,
+      "server_rss_mb_min": 103.399424,
+      "server_rss_mb_max": 114.016256,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 16,
+      "goodput_median": 150.63333333333333,
+      "goodput_min": 142.8,
+      "goodput_max": 165.46666666666667,
+      "p99_median_ms": 354.07602099999997,
+      "p99_min_ms": 295.340625,
+      "p99_max_ms": 480.576916,
+      "server_cpu_median": 9.691875131430853,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 145.932288,
+      "server_rss_mb_min": 133.152768,
+      "server_rss_mb_max": 153.305088,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 32,
+      "goodput_median": 155.46666666666664,
+      "goodput_min": 146.0,
+      "goodput_max": 173.26666666666668,
+      "p99_median_ms": 808.8686660000001,
+      "p99_min_ms": 665.452333,
+      "p99_max_ms": 2150.973584,
+      "server_cpu_median": 9.701643310426052,
+      "error_rate_median": 0.0031085197196565693,
+      "error_rate_max": 0.0047805302042590175,
+      "server_rss_mb_median": 222.33087999999998,
+      "server_rss_mb_min": 218.103808,
+      "server_rss_mb_max": 231.34208,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 64,
+      "goodput_median": 164.83333333333331,
+      "goodput_min": 153.4,
+      "goodput_max": 174.86666666666667,
+      "p99_median_ms": 1240.7442295,
+      "p99_min_ms": 1136.430292,
+      "p99_max_ms": 1450.54625,
+      "server_cpu_median": 9.740695709371279,
+      "error_rate_median": 0.007387008656165745,
+      "error_rate_max": 0.015955325089748704,
+      "server_rss_mb_median": 371.851264,
+      "server_rss_mb_min": 365.559808,
+      "server_rss_mb_max": 378.748928,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 128,
+      "goodput_median": 167.1,
+      "goodput_min": 153.06666666666666,
+      "goodput_max": 178.93333333333334,
+      "p99_median_ms": 2577.7552915,
+      "p99_min_ms": 2324.015875,
+      "p99_max_ms": 3035.929333,
+      "server_cpu_median": 9.75456574485728,
+      "error_rate_median": 0.011210913151298,
+      "error_rate_max": 0.015302218821729151,
+      "server_rss_mb_median": 672.72704,
+      "server_rss_mb_min": 659.832832,
+      "server_rss_mb_max": 682.917888,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 256,
+      "goodput_median": 161.3,
+      "goodput_min": 149.2,
+      "goodput_max": 172.6,
+      "p99_median_ms": 7029.3494375,
+      "p99_min_ms": 5394.991,
+      "p99_max_ms": 8725.780875,
+      "server_cpu_median": 9.7933948852423,
+      "error_rate_median": 0.018004265349646425,
+      "error_rate_max": 0.036490683229813664,
+      "server_rss_mb_median": 1241.7351680000002,
+      "server_rss_mb_min": 1231.110144,
+      "server_rss_mb_max": 1275.936768,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 512,
+      "goodput_median": 166.33333333333334,
+      "goodput_min": 147.46666666666667,
+      "goodput_max": 179.73333333333332,
+      "p99_median_ms": 11127.856875,
+      "p99_min_ms": 9923.058084,
+      "p99_max_ms": 11947.060166,
+      "server_cpu_median": 9.757861088969566,
+      "error_rate_median": 0.07847192169640811,
+      "error_rate_max": 0.1730287859824781,
+      "server_rss_mb_median": 2210.226176,
+      "server_rss_mb_min": 1890.418688,
+      "server_rss_mb_max": 2339.897344,
+      "generator_limited_runs": 0
+     }
+    ]
+   },
+   {
+    "arm": "A2",
+    "name": "A2 index",
+    "levels": [
+     {
+      "c": 1,
+      "goodput_median": 21282.466666666667,
+      "goodput_min": 21102.733333333334,
+      "goodput_max": 21742.933333333334,
+      "p99_median_ms": 0.07889550000000001,
+      "p99_min_ms": 0.078,
+      "p99_max_ms": 0.080708,
+      "server_cpu_median": 0.6614997028312364,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 26.689536,
+      "server_rss_mb_min": 26.492928,
+      "server_rss_mb_max": 26.886144,
+      "generator_limited_runs": 10
+     },
+     {
+      "c": 2,
+      "goodput_median": 28131.433333333334,
+      "goodput_min": 27586.533333333333,
+      "goodput_max": 28633.866666666665,
+      "p99_median_ms": 0.1080835,
+      "p99_min_ms": 0.106291,
+      "p99_max_ms": 0.115125,
+      "server_cpu_median": 1.2055019868200278,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 31.834111999999998,
+      "server_rss_mb_min": 31.506432,
+      "server_rss_mb_max": 32.161792,
+      "generator_limited_runs": 10
+     },
+     {
+      "c": 4,
+      "goodput_median": 18795.266666666666,
+      "goodput_min": 18462.466666666667,
+      "goodput_max": 19013.333333333332,
+      "p99_median_ms": 0.41429150000000003,
+      "p99_min_ms": 0.407583,
+      "p99_max_ms": 0.430292,
+      "server_cpu_median": 1.9462731480450786,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 33.603584,
+      "server_rss_mb_min": 33.243136,
+      "server_rss_mb_max": 34.127872,
+      "generator_limited_runs": 10
+     },
+     {
+      "c": 8,
+      "goodput_median": 10356.633333333333,
+      "goodput_min": 10298.8,
+      "goodput_max": 10403.8,
+      "p99_median_ms": 1.6397085,
+      "p99_min_ms": 1.630166,
+      "p99_max_ms": 1.650667,
+      "server_cpu_median": 2.778199376337955,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 36.20864,
+      "server_rss_mb_min": 35.618816,
+      "server_rss_mb_max": 36.61824,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 16,
+      "goodput_median": 9889.1,
+      "goodput_min": 9645.8,
+      "goodput_max": 9958.733333333334,
+      "p99_median_ms": 3.5070835000000002,
+      "p99_min_ms": 3.47075,
+      "p99_max_ms": 3.639417,
+      "server_cpu_median": 2.859758893582949,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 40.148992,
+      "server_rss_mb_min": 39.305216,
+      "server_rss_mb_max": 41.94304,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 32,
+      "goodput_median": 9800.366666666667,
+      "goodput_min": 9746.0,
+      "goodput_max": 9877.2,
+      "p99_median_ms": 7.1839375,
+      "p99_min_ms": 7.010875,
+      "p99_max_ms": 7.273208,
+      "server_cpu_median": 2.8708229341840292,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 47.243263999999996,
+      "server_rss_mb_min": 45.54752,
+      "server_rss_mb_max": 48.922624,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 64,
+      "goodput_median": 9575.866666666667,
+      "goodput_min": 9549.4,
+      "goodput_max": 9618.533333333333,
+      "p99_median_ms": 14.5814375,
+      "p99_min_ms": 14.3625,
+      "p99_max_ms": 14.706125,
+      "server_cpu_median": 2.932453211838554,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 61.308928,
+      "server_rss_mb_min": 60.37504,
+      "server_rss_mb_max": 62.734336,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 128,
+      "goodput_median": 9151.2,
+      "goodput_min": 8534.933333333332,
+      "goodput_max": 9233.733333333334,
+      "p99_median_ms": 30.013584,
+      "p99_min_ms": 29.702667,
+      "p99_max_ms": 31.393042,
+      "server_cpu_median": 3.0384006356196576,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 89.66963200000001,
+      "server_rss_mb_min": 86.458368,
+      "server_rss_mb_max": 91.01312,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 256,
+      "goodput_median": 8462.233333333334,
+      "goodput_min": 7074.533333333334,
+      "goodput_max": 8619.266666666666,
+      "p99_median_ms": 64.67485400000001,
+      "p99_min_ms": 63.7465,
+      "p99_max_ms": 80.468167,
+      "server_cpu_median": 3.1668767077497186,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.00035774823042393163,
+      "server_rss_mb_median": 147.90656,
+      "server_rss_mb_min": 146.423808,
+      "server_rss_mb_max": 149.372928,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 512,
+      "goodput_median": 6968.7,
+      "goodput_min": 6789.8,
+      "goodput_max": 7034.0,
+      "p99_median_ms": 164.5309585,
+      "p99_min_ms": 161.142584,
+      "p99_max_ms": 166.252125,
+      "server_cpu_median": 3.6523993743703542,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 264.060928,
+      "server_rss_mb_min": 262.537216,
+      "server_rss_mb_max": 266.174464,
+      "generator_limited_runs": 0
+     }
+    ]
+   },
+   {
+    "arm": "A3",
+    "name": "A3 batching",
+    "levels": [
+     {
+      "c": 1,
+      "goodput_median": 49.96666666666667,
+      "goodput_min": 49.333333333333336,
+      "goodput_max": 50.4,
+      "p99_median_ms": 21.3564165,
+      "p99_min_ms": 20.978667,
+      "p99_max_ms": 21.806541,
+      "server_cpu_median": 0.9181994257871156,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 30.826496,
+      "server_rss_mb_min": 29.65504,
+      "server_rss_mb_max": 33.193984,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 2,
+      "goodput_median": 93.0,
+      "goodput_min": 92.53333333333333,
+      "goodput_max": 93.46666666666667,
+      "p99_median_ms": 25.6768125,
+      "p99_min_ms": 25.362125,
+      "p99_max_ms": 25.791291,
+      "server_cpu_median": 0.9764226691004456,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 43.999232,
+      "server_rss_mb_min": 35.569664,
+      "server_rss_mb_max": 48.41472,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 4,
+      "goodput_median": 155.16666666666666,
+      "goodput_min": 154.8,
+      "goodput_max": 156.46666666666667,
+      "p99_median_ms": 29.898125,
+      "p99_min_ms": 29.573208,
+      "p99_max_ms": 31.151292,
+      "server_cpu_median": 1.019196485860403,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 75.12064,
+      "server_rss_mb_min": 69.419008,
+      "server_rss_mb_max": 85.475328,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 8,
+      "goodput_median": 290.66666666666663,
+      "goodput_min": 288.2,
+      "goodput_max": 292.3333333333333,
+      "p99_median_ms": 34.980917,
+      "p99_min_ms": 34.821375,
+      "p99_max_ms": 35.812792,
+      "server_cpu_median": 1.1096994922236356,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 102.91609600000001,
+      "server_rss_mb_min": 98.320384,
+      "server_rss_mb_max": 110.788608,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 16,
+      "goodput_median": 537.4333333333334,
+      "goodput_min": 535.4666666666667,
+      "goodput_max": 540.1333333333333,
+      "p99_median_ms": 49.030833,
+      "p99_min_ms": 44.329542,
+      "p99_max_ms": 52.6515,
+      "server_cpu_median": 1.2715532622590229,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 143.835136,
+      "server_rss_mb_min": 137.674752,
+      "server_rss_mb_max": 155.615232,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 32,
+      "goodput_median": 709.2666666666667,
+      "goodput_min": 703.2,
+      "goodput_max": 722.2666666666667,
+      "p99_median_ms": 67.9275415,
+      "p99_min_ms": 66.07075,
+      "p99_max_ms": 68.476541,
+      "server_cpu_median": 1.3527457654384638,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 227.352576,
+      "server_rss_mb_min": 216.907776,
+      "server_rss_mb_max": 235.307008,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 64,
+      "goodput_median": 1017.5333333333333,
+      "goodput_min": 1007.7333333333333,
+      "goodput_max": 1021.2666666666667,
+      "p99_median_ms": 75.3078545,
+      "p99_min_ms": 73.065417,
+      "p99_max_ms": 76.092958,
+      "server_cpu_median": 1.5529064824161447,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 390.21772799999997,
+      "server_rss_mb_min": 374.53824,
+      "server_rss_mb_max": 407.9616,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 128,
+      "goodput_median": 1018.0999999999999,
+      "goodput_min": 1013.4,
+      "goodput_max": 1032.4,
+      "p99_median_ms": 143.5915415,
+      "p99_min_ms": 139.699666,
+      "p99_max_ms": 148.122875,
+      "server_cpu_median": 1.5567423292621267,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 662.315008,
+      "server_rss_mb_min": 655.11424,
+      "server_rss_mb_max": 675.643392,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 256,
+      "goodput_median": 1022.0333333333333,
+      "goodput_min": 1010.8,
+      "goodput_max": 1037.6,
+      "p99_median_ms": 276.481875,
+      "p99_min_ms": 271.435209,
+      "p99_max_ms": 283.079625,
+      "server_cpu_median": 1.5324758841385009,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 1114.1201919999999,
+      "server_rss_mb_min": 1105.608704,
+      "server_rss_mb_max": 1146.748928,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 512,
+      "goodput_median": 1020.2666666666667,
+      "goodput_min": 1014.2,
+      "goodput_max": 1027.3333333333333,
+      "p99_median_ms": 545.9791035000001,
+      "p99_min_ms": 535.650875,
+      "p99_max_ms": 568.0275,
+      "server_cpu_median": 1.5266679003108137,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 1776.0174080000002,
+      "server_rss_mb_min": 1722.810368,
+      "server_rss_mb_max": 1835.188224,
+      "generator_limited_runs": 0
+     }
+    ]
+   },
+   {
+    "arm": "A4",
+    "name": "A4 bounded concurrency",
+    "levels": [
+     {
+      "c": 1,
+      "goodput_median": 54.13333333333333,
+      "goodput_min": 53.266666666666666,
+      "goodput_max": 54.46666666666667,
+      "p99_median_ms": 19.9155625,
+      "p99_min_ms": 19.694083,
+      "p99_max_ms": 20.190167,
+      "server_cpu_median": 0.9913606084162983,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 26.624000000000002,
+      "server_rss_mb_min": 26.099712,
+      "server_rss_mb_max": 26.722304,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 2,
+      "goodput_median": 79.73333333333333,
+      "goodput_min": 59.666666666666664,
+      "goodput_max": 80.53333333333333,
+      "p99_median_ms": 27.768437499999997,
+      "p99_min_ms": 26.793583,
+      "p99_max_ms": 51.530542,
+      "server_cpu_median": 1.9147552595076638,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 37.961728,
+      "server_rss_mb_min": 35.094528,
+      "server_rss_mb_max": 41.910272,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 4,
+      "goodput_median": 115.30000000000001,
+      "goodput_min": 113.6,
+      "goodput_max": 119.66666666666667,
+      "p99_median_ms": 43.6909785,
+      "p99_min_ms": 41.798917,
+      "p99_max_ms": 46.872584,
+      "server_cpu_median": 3.8069256032092236,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 55.517184,
+      "server_rss_mb_min": 52.887552,
+      "server_rss_mb_max": 60.686336,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 8,
+      "goodput_median": 75.66666666666667,
+      "goodput_min": 71.2,
+      "goodput_max": 79.13333333333334,
+      "p99_median_ms": 111.7042705,
+      "p99_min_ms": 109.011167,
+      "p99_max_ms": 117.3125,
+      "server_cpu_median": 7.8620263399088035,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 90.472448,
+      "server_rss_mb_min": 82.345984,
+      "server_rss_mb_max": 101.90848,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 16,
+      "goodput_median": 76.0,
+      "goodput_min": 71.0,
+      "goodput_max": 78.73333333333333,
+      "p99_median_ms": 412.031833,
+      "p99_min_ms": 319.780667,
+      "p99_max_ms": 449.999375,
+      "server_cpu_median": 7.874988835194071,
+      "error_rate_median": 0.0,
+      "error_rate_max": 0.0,
+      "server_rss_mb_median": 146.48934400000002,
+      "server_rss_mb_min": 142.966784,
+      "server_rss_mb_max": 156.860416,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 32,
+      "goodput_median": 68.5,
+      "goodput_min": 64.66666666666667,
+      "goodput_max": 70.86666666666666,
+      "p99_median_ms": 1883.6629790000002,
+      "p99_min_ms": 1708.849042,
+      "p99_max_ms": 2330.415583,
+      "server_cpu_median": 8.464157747598046,
+      "error_rate_median": 0.9930164679282446,
+      "error_rate_max": 0.9936687379249125,
+      "server_rss_mb_median": 231.284736,
+      "server_rss_mb_min": 220.823552,
+      "server_rss_mb_max": 237.682688,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 64,
+      "goodput_median": 68.4,
+      "goodput_min": 64.33333333333333,
+      "goodput_max": 70.93333333333334,
+      "p99_median_ms": 2417.7416875,
+      "p99_min_ms": 2029.639916,
+      "p99_max_ms": 2788.396,
+      "server_cpu_median": 8.30125281694052,
+      "error_rate_median": 0.9946757804533527,
+      "error_rate_max": 0.9953409551766091,
+      "server_rss_mb_median": 390.938624,
+      "server_rss_mb_min": 385.908736,
+      "server_rss_mb_max": 405.733376,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 128,
+      "goodput_median": 69.4,
+      "goodput_min": 66.06666666666666,
+      "goodput_max": 72.0,
+      "p99_median_ms": 2424.6289165,
+      "p99_min_ms": 2116.917209,
+      "p99_max_ms": 2787.337375,
+      "server_cpu_median": 7.888554029115573,
+      "error_rate_median": 0.995633000271914,
+      "error_rate_max": 0.9959467639552385,
+      "server_rss_mb_median": 709.4190080000001,
+      "server_rss_mb_min": 699.662336,
+      "server_rss_mb_max": 729.120768,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 256,
+      "goodput_median": 72.13333333333333,
+      "goodput_min": 69.06666666666666,
+      "goodput_max": 74.26666666666667,
+      "p99_median_ms": 2357.8934584999997,
+      "p99_min_ms": 2109.740666,
+      "p99_max_ms": 3107.416875,
+      "server_cpu_median": 6.857910798400296,
+      "error_rate_median": 0.9960902791603166,
+      "error_rate_max": 0.996220398901143,
+      "server_rss_mb_median": 1305.657344,
+      "server_rss_mb_min": 1291.812864,
+      "server_rss_mb_max": 1317.814272,
+      "generator_limited_runs": 0
+     },
+     {
+      "c": 512,
+      "goodput_median": 57.86666666666667,
+      "goodput_min": 56.666666666666664,
+      "goodput_max": 59.93333333333333,
+      "p99_median_ms": 3321.7207915,
+      "p99_min_ms": 2954.516625,
+      "p99_max_ms": 3755.130292,
+      "server_cpu_median": 5.414053951572834,
+      "error_rate_median": 0.9965010253352076,
+      "error_rate_max": 0.9965595784193901,
+      "server_rss_mb_median": 2243.493888,
+      "server_rss_mb_min": 2220.720128,
+      "server_rss_mb_max": 2257.3056,
+      "generator_limited_runs": 0
+     }
+    ]
+   }
+  ]
+ }
+}

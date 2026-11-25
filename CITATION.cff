@@ -1,15 +1,17 @@
 # SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0
 # Licence: SCALE Source-Available Non-Commercial Research License v1.0 (custom; see LICENSE).
 # No SPDX "license" field is given because the licence is not on the SPDX list.
+# date-released is omitted until a release exists (owner instruction 2026-11-25, "Next" (second)).
+# Repository URL: placeholder, not published; publication requires the owner's approval.
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below. Independent research project, not peer reviewed."
 title: "SCALE: what bottlenecks dominate local request throughput on one machine"
 type: software
+# Author line: recorded by common decision C3 (2026-11-24); to be confirmed by the owner, no affiliation given.
 authors:
   - family-names: Kefi
     given-names: Mohamed Bechir
 version: 0.0.1
-date-released: 2026-11-24
 keywords:
   - performance evaluation
   - benchmarking

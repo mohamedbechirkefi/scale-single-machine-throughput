@@ -198,3 +198,47 @@ The Write tool refused `results/exploratory/M4-REANALYSIS-20261125/report.md`; i
 
 ### Next action
 M5 (interactive explorer of the recorded runs), with the placeholders and pending decisions above put to the owner.
+
+## 2026-11-25: Session M5 (interactive experience)
+
+**Milestone:** M5. **Authority:** owner, 2026-11-25, "Next" (second) (`labs/_shared/owner-approvals-2026-11-25e.md`), stack as in `-25d`; briefs `labs/_shared/M5-brief.md` and `M5-timing-addendum.md`. Decision D-016.
+
+### Starting state
+`git status`: `On branch main`, `nothing to commit, working tree clean`; HEAD `08eae92`.
+
+### Done
+- `demo/` from the shared template (no version changed, no dependency added; sandbox files removed, D-016). Page: overview with status label and the four pending owner decisions (each reading shown, none chosen); published results with labels, intervals and interval types; an effect plot of R with 98.75 % intervals in which A2 has its own "no confirmatory estimate" row; EXP-003 and EXP-004 panels; the resource and latency explorer of recorded EXP-002 runs (goodput, p99, server CPU, error rate, server memory; arm toggles; concurrency selector with a readout table; generator ceiling and 50 % threshold; generator-limited cells as open markers); the exploratory M4 re-analysis in its own dashed section; design values; limitations from manuscript section 7; source hashes.
+- `scripts/export_demo_data.py` writes `demo/public/data/results.json` (committed inputs only; nothing from `results/raw/`); `tests/test_demo_export.py` (3 tests: fresh export identical; every display string verbatim in the manuscript, no exceptions; every registered experiment and pending decision exported).
+- `demo/src/results.ts` validation extended (estimate kind and interval type, pending decisions, excluded arms, exploratory block, explorer) and fails closed; 14 vitest tests.
+- `tools/a11y_check.mjs` step 7 drives the explorer offline (D-016).
+- README (status, key results, pending decisions, demo quick start, `docs/demo.png` with alt text, 184232 bytes), `CITATION.cff` (`date-released` removed), `articles/medium.md` and `articles/linkedin.md` (new drafts), `articles/README.md`, `demo/README.md`.
+- Screenshots inspected (desktop light, desktop dark, mobile). Fixed after inspection: a 3 px horizontal overflow at 360 px (long select), cramped interval-type column, and the threshold label overlapping the A2 line (halo added).
+
+### Commands and actual outputs
+- `npm ci --prefer-offline`: `added 53 packages in 1s`.
+- `.venv/bin/python -I scripts/export_demo_data.py`: `wrote demo/public/data/results.json (52094 bytes)`; `--check`: `EXPORT-CHECK PASS`.
+- `npm test`: `Test Files 1 passed (1)`, `Tests 14 passed (14)`.
+- `npm run build`: `built`, no error.
+- First checker run: `FAIL keyboard reaches every focusable element: 14 reached of 24` (key collisions between unlabelled checkboxes and table regions; ids added) and `FAIL no horizontal page scroll at 360 px: overflow 3px` (fixed). Final run of `node tools/a11y_check.mjs dist --screenshots <scratchpad>/shots`:
+
+```
+PASS results render (no fail-closed panel): 4 experiment panels
+PASS text contrast, light scheme (WCAG AA)
+PASS text contrast, dark scheme (WCAG AA)
+PASS keyboard reaches every focusable element: 24 reached of 24
+PASS visible focus indicator
+PASS no horizontal page scroll at 360 px: overflow 0px
+PASS reduced motion: no running animations: 0 running
+PASS no request leaves the local origin
+PASS offline after first load: results stay, explorer responds: Recorded values at c = 256: Goodput (validated responses per second)ArmMedian (r
+A11Y-CHECK PASS
+```
+
+- Fail-closed check: with one explorer median set to -1 in `dist/data/results.json`, the checker printed `FAIL results render (no fail-closed panel): 0 experiment panels` and `A11Y-CHECK FAIL (2)`; `dist` was then rebuilt.
+- `.venv/bin/python -m pytest -q`: `135 passed in 25.30s`.
+
+### Owner placeholders (unchanged, still visible)
+Author line and affiliation, repository URL, demo URL, funding, competing interests. No SCALE item is in the post-M4 approvals (`-25c`), so no SCALE title or statement is recorded as owner-approved. `author_review.md`: no box ticked.
+
+### Next action
+M6 (release candidate) on the owner's word, with the four pending decisions on the owner review checklist.

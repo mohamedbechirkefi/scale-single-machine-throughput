@@ -10,7 +10,7 @@ Status values: `done`, `in progress`, `planned`, `blocked(<reason>)`, `gated(<ga
 | M2 Core implementation | P0 | 1 d | M1 drafts (implementation may start before the freeze) | done (2026-11-24; see progress.md); amendments D-008 decided by the owner and applied (D-009) | none |
 | M3 Experiments | P0 | 1 to 1.5 d (about 6 h to 11 h machine time) | M2, owner freeze (done) | done with documented gaps (2026-11-25) | EXP-001 and EXP-002 complete; EXP-003 not run (four unset parameters, D-014); EXP-004 optional, no frozen config; D-012 reading of the A2 exclusion awaits the owner |
 | M4 Interpretation | P0 | 0.75 d | M3 | done (2026-11-25; D-015) | Pending owner decisions disclosed, not blocking: D-012 reading (A2 exclusion), EXP-003 parameters, EXP-004; owner-only placeholders listed in progress.md |
-| M5 Interactive experience | P1 | 0.75 d | M4 | planned | none |
+| M5 Interactive experience | P1 | 0.75 d | M4 | done (2026-11-25; D-016) | Sandbox cut (D-016); pending owner decisions shown on the page, not decided; owner placeholders remain |
 | M6 Release candidate | P0 | 0.5 d | M4, M5 | planned | gated(G-PUBLIC) for any publication |
 
 ## M0 Bootstrap and feasibility (done)
@@ -70,9 +70,9 @@ Acceptance criteria:
 
 Static benchmark report plus an interactive resource and latency explorer of recorded runs (TypeScript, React, Vite, using Node read-only from the shared tools folder, unless a simpler static page is justified).
 Acceptance criteria:
-- [ ] Offline after initial load; fails closed on malformed results; keyboard usable; reduced motion; mobile layout; accessible contrast.
-- [ ] Measured results, sandbox results and assumptions visibly distinguished; no fabricated data.
-- [ ] Demo, paper, reports and articles use the same verified numbers and labels.
+- [x] Offline after initial load; fails closed on malformed results; keyboard usable; reduced motion; mobile layout; accessible contrast (`A11Y-CHECK PASS`; malformed file gives FAIL; see progress.md).
+- [x] Measured results, sandbox results and assumptions visibly distinguished; no fabricated data (no sandbox, D-016; every estimate labelled by kind).
+- [x] Demo, paper, reports and articles use the same verified numbers and labels (`tests/test_demo_export.py`).
 
 ## M6 Release candidate (11.6: PDFs, clean-clone reproduction)
 
