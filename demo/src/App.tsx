@@ -50,6 +50,13 @@ export function App() {
             Runs offline after the first load. No data about visitors is collected or sent anywhere. This page runs no
             benchmark, no inference and no timing of its own, and contacts no local or remote service.
           </p>
+          <p>
+            Mohamed Bechir Kefi, independent researcher. Source:{" "}
+            <a href="https://github.com/mohamedbechirkefi/scale-single-machine-throughput">
+              github.com/mohamedbechirkefi/scale-single-machine-throughput
+            </a>
+            .
+          </p>
         </div>
       </footer>
     </>
@@ -112,15 +119,15 @@ function Published({ r }: { r: Results }) {
           and has no confirmatory estimate, so which factor dominates is unresolved.
         </p>
         <div className="panel pending" role="region" aria-labelledby="h-pending">
-          <h3 id="h-pending">Pending owner decisions</h3>
+          <h3 id="h-pending">Owner decisions</h3>
           <p className="note">
-            The owner's instruction of 2026-11-25 leaves these open. The page shows each reading the manuscript reports and
-            chooses none of them.
+            The owner answered these on 2026-11-26. The page shows each reading the manuscript reports and labels the one
+            the owner chose; the alternatives stay exploratory.
           </p>
           {r.pending_owner_decisions.map((d) => (
             <div key={d.id} className="decision">
               <h4>
-                <span className="badge kind-pending">pending owner decision</span> {d.id}: {d.title}
+                <span className="badge kind-pending">owner decision</span> {d.id}: {d.title}
               </h4>
               {d.readings.map((rd) => (
                 <div key={rd.label} className="reading">

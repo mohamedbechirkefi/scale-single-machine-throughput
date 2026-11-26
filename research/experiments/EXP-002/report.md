@@ -90,7 +90,7 @@ For j in {A1, A2, A3, A4}, H0_j: R_j = 1, where R_j = G*_j / G*_A0 within a bloc
 
 - One machine, one implementation, one workload.
 - A3's G* may be truncated in the 3 blocks that peaked at c = 512.
-- The exclusion of A2 rests on the reading fixed in D-012, which is pending the owner's review.
+- The exclusion of A2 rests on the reading fixed in D-012; the owner chose this frozen-rule reading for A2 (owner, 2026-11-26, decision sheet).
 - The re-attempted cells are not adjacent in time.
 - EXP-003 and EXP-004 did not run, so the ranking is not tested against open-loop arrivals or other workloads.
 - See `research/limitations.md` items 12 to 17.
@@ -100,3 +100,7 @@ For j in {A1, A2, A3, A4}, H0_j: R_j = 1, where R_j = G*_j / G*_A0 within a bloc
 - **Evidence audit.** Two statements of this report were corrected: the per-run duration range (above) and the 503 count, which is a server-side total including warmups. The error composition at high concurrency was added. No verdict changed. See `research/publication/evidence_audit_M4.md`.
 - **Exploratory re-analysis** (`results/exploratory/M4-REANALYSIS-20261125/summary.json`, J-0014; no new measurement). It does not change any verdict. It finds that the A4 null is structural (both A4 and A0 peak at c = 4, below W = 8, where the limiter does not engage), that A3's G* is not materially truncated (R over c <= 256 is 8.99), and that the size of A3's advantage over A1 depends on the summary metric (exploratory R_A3 / R_A1 3.85 under G*, 1.58 under a closed-loop 50 ms p99 bound).
 - **Pending the owner.** The D-012 reading that excludes A2 is still pending (owner, 2026-11-25, "Next", does not decide it).
+
+## 9. Owner answers (2026-11-26)
+
+- **A2.** Owner, 2026-11-26, decision sheet: A2 is read under the frozen rule as applied (no confirmatory estimate; dominance unresolved). The alternatives of section 4.4 stay exploratory. No result of this report changed.

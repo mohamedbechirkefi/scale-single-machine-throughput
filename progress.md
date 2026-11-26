@@ -285,3 +285,31 @@ The owner's review of `research/publication/author_review.md` (section "Prepared
 
 ### Re-check in a fresh clone (HEAD 91fbb13)
 Tests `139 passed in 30.75s`; frozen analyses byte-identical; manifest `entries 535, mismatches 0, uncovered 0`; export `EXPORT-CHECK PASS` with a clean tree; `LINK-CHECK PASS`; `build_pdfs.py` needed `SCALE_PANDOC` and `SCALE_TYPST_PYTHON` outside `labs/` (first attempt `FileNotFoundError`), then `PDF-BUILD PASS` with identical page counts, sizes and extracted text and a byte-identical `manuscript.tex`; demo `Tests 14 passed (14)`, built, `A11Y-CHECK PASS`. Both clones deleted. Details: `research/publication/reproducibility_report.md` section 3.
+
+## 2026-11-26: Owner answers of the decision sheet applied
+
+**Authority:** owner, 2026-11-26, decision sheet (`labs/_shared/owner-decision-sheet-2026-11-26.md`, `labs/_shared/owner-approvals-2026-11-26.md`); brief `labs/_shared/OWNER-ANSWERS-brief.md`. Decision D-018.
+
+### Starting state
+`git status --short`: empty (clean tree); HEAD `8c12866` (M6, local).
+
+### Constraint
+Timing project on a shared machine (load average 9.96, 11.50, 7.08 at the checks): no benchmark, load test or harness smoke was run.
+
+### Changes (wording and configuration only)
+Manuscript (author line, status paragraph, D-012 and EXP-003/EXP-004 wording, repository URL, funding, competing interests, raw outputs), supplementary, limitations 23 and 25, EXP-002 report (limitation line, new section 9), EXP-003 and EXP-004 reports (new owner-answer sections), registry status text of EXP-003 and EXP-004, README, articles, `CITATION.cff`, `.gitignore` comment, `CLAUDE.md`, `results/README.md`, `roadmap.md`, `author_review.md`, `release_checklist.md`, `reproducibility_report.md`, demo README, footer and owner-decision panel, `scripts/export_demo_data.py`; new `demo/wrangler.jsonc`. Details in D-018.
+
+### Commands and outputs
+- `git ls-files -z | xargs -0 grep -a -l '/Users/'`: `progress.md`, `scripts/build_pdfs.py` (both kept; `reproducibility_report.md` section 4).
+- `.venv/bin/python -I scripts/export_demo_data.py`: `wrote demo/public/data/results.json (52296 bytes)`; `--check`: `EXPORT-CHECK PASS`.
+- `.venv/bin/python -m pytest -q -p no:cacheprovider`: `139 passed in 25.12s`.
+- `.venv/bin/python -I scripts/m4_evidence_manifest.py`: `entries 535, mismatches 0, uncovered 0`; the only change to `artifact_manifest.json` was `audit_head_revision`, restored with `git checkout`.
+- `.venv/bin/python -I scripts/check_links.py`: `checked 54 Markdown files`, `LINK-CHECK PASS`.
+- `.venv/bin/python -I scripts/build_pdfs.py --typ-dir <scratch>/typ`: `PDF-BUILD PASS` (manuscript 14 pages, supplementary 6, EXP-001 3, EXP-002 5, EXP-003 2, EXP-004 1). EXP-001's source did not change, so its PDF was restored with `git checkout`. A first build used a scratch folder shared with other sessions; it was repeated in a private folder with identical sizes. Manuscript pages 1 and 13 (author line, owner-decision paragraph, data availability, funding and competing interests), EXP-002 page 5 and EXP-003 page 2 rendered with Ghostscript at 60 to 80 ppi and inspected: text correct, no layout fault.
+- Demo (Node 22 from the shared read-only folder, npm cache in scratch): `npm ci --prefer-offline` `added 53 packages in 6s`; `npm test` `Tests 14 passed (14)`; `npm run build` `built in 628ms`; `node tools/a11y_check.mjs dist` 9 PASS lines (keyboard 25 of 25, one more focusable element: the footer repository link; "no request leaves the local origin") and `A11Y-CHECK PASS`. The built page loads only `./assets/` files; the only absolute URLs in the bundle are XML namespaces, React's error-page base and the footer link.
+
+### Not done
+No box of `author_review.md` ticked. No push, deploy or tag. No timing run.
+
+### Next action
+The owner's full-text review and sign-off (B16), the article drafts (B15), and the EXP-003 and EXP-004 parameters (G-FREEZE) when the owner sets them. The coordinator pushes and deploys.

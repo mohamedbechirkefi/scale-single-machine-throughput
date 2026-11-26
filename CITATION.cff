@@ -2,18 +2,17 @@
 # Licence: SCALE Source-Available Non-Commercial Research License v1.0 (custom; see LICENSE).
 # No SPDX "license" field is given because the licence is not on the SPDX list.
 # date-released is omitted until a release exists (owner instruction 2026-11-25, "Next" (second)).
-# Repository URL: placeholder, not published; publication requires the owner's approval.
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below. Independent research project, not peer reviewed."
-# Title (M6, 2026-11-25): copied from the manuscript title, which is not yet owner-approved; pending the owner.
-# Previous title: "SCALE: what bottlenecks dominate local request throughput on one machine".
+# Title: the manuscript title, owner-approved (owner, 2026-11-26, decision sheet).
 title: "Cache, index, batching or admission control? A one-factor-at-a-time throughput study with a frozen protocol of one Python and SQLite server on one laptop"
 type: software
-# Author line: recorded by common decision C3 (2026-11-24); to be confirmed by the owner, no affiliation given.
 authors:
   - family-names: Kefi
     given-names: Mohamed Bechir
-# Version: release candidate 1 (M6); no release exists.
+    affiliation: "Independent researcher"
+repository-code: "https://github.com/mohamedbechirkefi/scale-single-machine-throughput"
+# Version: release candidate 1 (M6); no release exists. At the release it becomes 0.1.0 with date-released set to the release day.
 version: 0.1.0-rc1
 keywords:
   - performance evaluation

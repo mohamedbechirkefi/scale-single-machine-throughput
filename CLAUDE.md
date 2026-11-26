@@ -54,7 +54,7 @@ At session start: run `git status`, inspect existing files, never overwrite owne
 
 ### Git
 - Local commits only, with the owner's git identity passed through `git -c user.name=... -c user.email=... commit` exactly as given in the session brief (`labs/_shared/M0-brief.md` under the research root; the address is not repeated here, to keep e-mail addresses out of committed files); the message ends with a blank line and `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
-- Run `git status` before and after committing. `results/raw/` is listed in `.gitignore`; the M3 raw outputs are nevertheless tracked (D-017), and whether they stay is the owner's decision. Do not add or remove raw files without that decision.
+- Run `git status` before and after committing. `results/raw/` is listed in `.gitignore`; the M3 raw outputs are nevertheless tracked (D-017) and stay tracked (owner, 2026-11-26, decision sheet). Do not add or remove raw files without an owner decision.
 
 ## 4. Session end
 

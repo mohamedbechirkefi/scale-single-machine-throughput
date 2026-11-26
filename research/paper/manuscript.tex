@@ -56,17 +56,15 @@
 \urlstyle{same}
 \hypersetup{
   pdftitle={Cache, index, batching or admission control? A one-factor-at-a-time throughput study with a frozen protocol of one Python and SQLite server on one laptop},
-  pdfauthor={{[}placeholder: author line, to be confirmed by the owner. Common decision C3 of 2026-11-24 records ``Mohamed Bechir Kefi'', no affiliation{]}},
+  pdfauthor={Mohamed Bechir Kefi, independent researcher},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
 \title{Cache, index, batching or admission control? A
 one-factor-at-a-time throughput study with a frozen protocol of one
 Python and SQLite server on one laptop}
-\author{{[}placeholder: author line, to be confirmed by the owner.
-Common decision C3 of 2026-11-24 records ``Mohamed Bechir Kefi'', no
-affiliation{]}}
-\date{Draft of 2026-11-25 (M4)}
+\author{Mohamed Bechir Kefi, independent researcher}
+\date{Draft of 2026-11-26 (release candidate)}
 
 \begin{document}
 \maketitle
@@ -76,14 +74,14 @@ peer-reviewed. All measurements come from one laptop, one synthetic
 workload and one server implementation on localhost. No result transfers
 to production traffic or to other hardware.
 
-\textbf{Pending owner decisions disclosed in this draft.} (1) The
-reading of the frozen generator-limited rule that excludes the index arm
-from the confirmatory comparison (decision D-012) has not been reviewed
-by the owner; section 5.2 reports both the frozen-rule reading and what
-it rests on. (2) EXP-003 was not run, because four of its parameters are
-not set by the frozen text; the owner has not set them. (3) The owner
-has not decided whether the optional EXP-004 runs; it was not run. Each
-stays open under the owner's instruction of 2026-11-25 (``Next'').
+\textbf{Owner decisions disclosed in this draft} (owner, 2026-11-26,
+decision sheet). (1) For the index arm the owner chose the frozen
+generator-limited rule as applied in decision D-012: A2 has no
+confirmatory estimate and the dominance question is unresolved; the
+alternatives of section 5.2 stay exploratory. (2) EXP-003 was not run,
+because four of its parameters are not set by the frozen text; it is to
+run later, after the owner sets them. (3) The optional EXP-004 was not
+run; it is to run later, after the owner sets its parameters.
 
 \section{Abstract}\label{abstract}
 
@@ -359,8 +357,9 @@ Two readings of the frozen text were fixed in D-012 before data: a run's
 confirmatory G* is undefined when the level attaining it is
 generator-limited, and an arm enters the comparison only if its G* and
 the baseline's are defined in every block, because dropping single
-blocks would select blocks by outcome. The owner has not yet reviewed
-D-012.
+blocks would select blocks by outcome. For A2 the owner chose the frozen
+rule as applied under these readings (owner, 2026-11-26, decision
+sheet).
 
 The frozen sensitivity analyses are S3 (G* replaced by the mean goodput
 over c in \{16, 32, 64\}) and a drift check (least squares of log G* on
@@ -536,14 +535,15 @@ in D-008 item 5, which the owner saw when keeping the rule. Third, the
 premise that a cell near the ceiling measures the harness rather than
 the arm; the four-process supplement suggests the ceiling is the shared
 HTTP and loopback path, not the generator alone, which changes the name
-of the limit but not the fact that A2's peak sits on it. The owner has
-not reviewed D-012. Exploratory alternatives, which are not verdicts:
-the unfiltered within-block ratio is 246.8 (98.75 \% interval 243.4 to
-250.2); with G* taken over the levels that are not flagged (c of 8 and
-above) it is 90.8 (90.0 to 91.8). Both place A2 far above every other
-arm, and both measure A2 against a ceiling or in a region (c of 8 and
-above, where its goodput falls to a median 10356.6 rps while server CPU
-rises) that the frozen design did not intend as its peak.
+of the limit but not the fact that A2's peak sits on it. The owner chose
+this frozen-rule reading for A2 (owner, 2026-11-26, decision sheet).
+Exploratory alternatives, which are not verdicts: the unfiltered
+within-block ratio is 246.8 (98.75 \% interval 243.4 to 250.2); with G*
+taken over the levels that are not flagged (c of 8 and above) it is 90.8
+(90.0 to 91.8). Both place A2 far above every other arm, and both
+measure A2 against a ceiling or in a region (c of 8 and above, where its
+goodput falls to a median 10356.6 rps while server CPU rises) that the
+frozen design did not intend as its peak.
 
 \textbf{Frozen sensitivity analyses.} Under S3 (mean goodput over c in
 \{16, 32, 64\}; 98.75 \% intervals) the ratios are A1 2.606 (2.473 to
@@ -572,17 +572,17 @@ to 150 \% of each arm's EXP-002 median G*), 5 blocks and the SLO, but
 not the open-loop connection count, the study seed, the warmup and
 measurement split of each rung, or which G* centres A2's ladder (150 \%
 of A2's median G* is above the generator ceiling). Setting them after
-seeing EXP-002 is a design decision that belongs to the owner, and it is
-pending. The closed-loop ranking is therefore untested against an
-open-loop load model.
+seeing EXP-002 is a design decision that belongs to the owner; EXP-003
+is to run later, after the owner sets them. The closed-loop ranking is
+therefore untested against an open-loop load model.
 
 \subsection{5.4 EXP-004: workload sensitivity (optional, not
 run)}\label{exp-004-workload-sensitivity-optional-not-run}
 
 EXP-004 would repeat the comparison with N = 10,000 rows and with
-uniform keys. It is optional, its config was never frozen, and the owner
-has not decided whether it runs. The ranking is therefore untested
-against other table sizes and key skews.
+uniform keys. It is optional, its config was never frozen, and it is to
+run later, after the owner sets its parameters. The ranking is therefore
+untested against other table sizes and key skews.
 
 \subsection{5.5 Exploratory re-analysis of the recorded
 runs}\label{exploratory-re-analysis-of-the-recorded-runs}
@@ -659,7 +659,7 @@ passed \\
 EXP-002 A1 & R \textgreater{} 1 & 2.337 (2.254 to 2.435) & H0 rejected,
 R \textgreater{} 1 \\
 EXP-002 A2 & R \textgreater{} 1 and largest, by design & Peak on the
-measurement ceiling in every block & Excluded (D-012 reading, pending
+measurement ceiling in every block & Excluded (D-012 reading, chosen by
 the owner) \\
 EXP-002 A3 & R \textgreater{} 1 & 9.005 (8.921 to 9.093) & H0 rejected,
 R \textgreater{} 1 \\
@@ -670,10 +670,10 @@ EXP-002 dominance & A2 top by design & Not testable & Unresolved \\
 EXP-002 S3 & Ranking unchanged & A3 \textgreater{} A1 \textgreater{} A4
 unchanged; A2 enters and ranks first & Ranking of included arms
 unchanged \\
-EXP-003 & Ranking unchanged under open loop & Not run & None (pending
-owner parameters) \\
+EXP-003 & Ranking unchanged under open loop & Not run & None (to run
+after the owner sets the parameters) \\
 EXP-004 & Top arm unchanged for N = 10,000 and uniform keys & Not run &
-None (pending owner decision) \\
+None (to run after the owner sets the parameters) \\
 \end{longtable}
 
 \section{6. Discussion}\label{discussion}
@@ -811,9 +811,9 @@ validity}\label{limitations-and-threats-to-validity}
   and A4; this was not tested.
 \item
   \textbf{A2 has no confirmatory estimate.} The exclusion rests on the
-  D-012 reading, pending the owner; the exploratory ratios near 247 and
-  91 measure the harness ceiling or a degraded region, not the index
-  alone.
+  D-012 reading, which the owner chose for A2; the exploratory ratios
+  near 247 and 91 measure the harness ceiling or a degraded region, not
+  the index alone.
 \item
   \textbf{No pairwise test in the frozen analysis.} The order A3
   \textgreater{} A1 \textgreater{} A4 is a ranking of point estimates in
@@ -878,20 +878,20 @@ unresolved. The ordering of batching above caching holds under every
 summary used here, but its size is metric-dependent.
 
 Feasible extensions, each needing an owner decision: set EXP-003's four
-open parameters and run the open-loop test; decide on EXP-004; and, as a
-new study rather than an amendment, raise the harness ceiling (for
-example with a compiled generator on separate cores) so that the index
-can be measured, and add an indexed baseline.
+open parameters and run the open-loop test; set EXP-004's parameters and
+run it; and, as a new study rather than an amendment, raise the harness
+ceiling (for example with a compiled generator on separate cores) so
+that the index can be measured, and add an indexed baseline.
 
 \section{10. Data and code
 availability}\label{data-and-code-availability}
 
 All code, configurations, protocols, the freeze record, analysis outputs
 and figures are in the project repository:
-\texttt{{[}placeholder:\ repository\ URL,\ not\ published;\ publication\ requires\ the\ owner\textquotesingle{}s\ approval{]}}.
+\url{https://github.com/mohamedbechirkefi/scale-single-machine-throughput}.
 Raw run outputs of the confirmatory runs and the quiet pilot are in
 \texttt{results/raw/} (tracked in git, although the folder is listed in
-the ignore rule; whether they stay tracked is pending the owner) and are
+the ignore rule; they stay tracked, owner, 2026-11-26) and are
 regenerated by \texttt{scale\ run}; their SHA-256 sums are listed in
 \texttt{research/publication/artifact\_manifest.json}. Reproduction:
 \texttt{uv\ sync\ -\/-locked};
@@ -909,11 +909,10 @@ hardware.
 \section{11. Funding, competing interests and AI
 assistance}\label{funding-competing-interests-and-ai-assistance}
 
-\textbf{Funding.}
-\texttt{{[}placeholder:\ funding\ statement,\ to\ be\ supplied\ by\ the\ owner{]}}.
+\textbf{Funding.} No funding was received.
 
-\textbf{Competing interests.}
-\texttt{{[}placeholder:\ competing-interests\ statement,\ to\ be\ supplied\ by\ the\ owner{]}}.
+\textbf{Competing interests.} The author declares no competing
+interests.
 
 \textbf{AI assistance.} An AI system (Claude, Anthropic) was used as a
 research and development assistant for code, protocol drafting, analysis

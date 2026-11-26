@@ -33,3 +33,7 @@ None. The EXP-002 closed-loop ranking is untested against an open-loop load mode
 ## 5. Needed from the owner
 
 Values for the four gaps above, recorded as a dated amendment, then a frozen config.
+
+## 6. Owner answer (2026-11-26)
+
+Owner, 2026-11-26, decision sheet: EXP-003 is recorded as not run; it is to run later, after the owner sets the four parameters above (a G-FREEZE step, then a quiet-machine run).

@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0 -->
 # Supplementary material
 
-Companion to `research/paper/manuscript.md` (draft of 2026-11-25, M4). Independent research preprint draft, not peer-reviewed. Every number is listed in `research/publication/artifact_manifest.json`.
+Companion to `research/paper/manuscript.md` (draft of 2026-11-26, release candidate). Independent research preprint draft, not peer-reviewed. Every number is listed in `research/publication/artifact_manifest.json`.
 
 ## S1. Complete experimental matrix
 
@@ -11,8 +11,8 @@ Companion to `research/paper/manuscript.md` (draft of 2026-11-25, M4). Independe
 | EXP-001 supplements | Exploratory | Stall check (open and closed loop, 1 repeat each); 4 generator processes (3 repeats); timer resolution | 2 + 3 runs | Complete |
 | PILOT-QUIET | Exploratory (rule input only) | 5 arms x 11 levels (c 1 to 1024) x 5 blocks, seed 20261126 | 25 of 25 ok | Used only through pilot-rule-1.0 |
 | EXP-002 | Confirmatory | 5 arms x 10 levels (c 1 to 512) x 10 blocks, 5 s + 15 s per level, seed 20261124 | 62 runs: 50 accepted, 12 excluded by the idle probe | 50 of 50 cells |
-| EXP-003 | Confirmatory (planned) | 5 arms x 8 open-loop rungs x 5 blocks | 0 | Not run: four parameters unset, pending the owner |
-| EXP-004 | Confirmatory (optional) | 2 variants x 5 arms x 5 blocks | 0 | Not run: pending the owner's decision |
+| EXP-003 | Confirmatory (planned) | 5 arms x 8 open-loop rungs x 5 blocks | 0 | Not run: four parameters unset; to run later after the owner sets the parameters |
+| EXP-004 | Confirmatory (optional) | 2 variants x 5 arms x 5 blocks | 0 | Not run: to run later after the owner sets the parameters |
 | M4-REANALYSIS-20261125 | Exploratory | Read-only re-analysis of the recorded runs (X1 to X13; X13 asks SQLite for query plans, no timing) | 0 new runs | Complete |
 
 Earlier exploratory runs made on a loaded machine before the freeze (J-0002 to J-0009, `results/exploratory/`) are kept and are never used as findings.
@@ -114,11 +114,11 @@ Rows other than the first are exploratory except S3, which is the frozen sensiti
 | AM-1 to AM-4 (A4 queue 16, index wins by design, sweep extension, seed count after the pilot) | Amendments before the freeze | Owner-approved 2026-11-24 (D-009) |
 | AM-5 (C_gen = median of the EXP-001 run ceilings) | Rule fixed before data | Owner-approved 2026-11-24 (D-011) |
 | c_max = 512, n = 10, C_gen = 27919.4 | Application of pre-stated rules | D-013; not an amendment |
-| D-012 analysis readings (generator-limited run G* undefined; arm-level exclusion) | Assistant reading before data | **Pending the owner** |
+| D-012 analysis readings (generator-limited run G* undefined; arm-level exclusion) | Assistant reading before data | Owner chose the frozen rule as applied for A2 (2026-11-26); review of D-012 open |
 | 12 idle-probe exclusions, 7 cells re-attempted at the end | Protocol section 10 as written | D-014 |
 | EXP-001 supplements run as exploratory | Outside the frozen config | D-014 |
-| EXP-003 not run (connection count, seed, rung split, A2's centre unset) | Planned experiment not executed | **Pending the owner** |
-| EXP-004 not run | Optional experiment | **Pending the owner** |
+| EXP-003 not run (connection count, seed, rung split, A2's centre unset) | Planned experiment not executed | Not run; to run later after the owner sets the parameters (2026-11-26) |
+| EXP-004 not run | Optional experiment | Not run; to run later after the owner sets the parameters (2026-11-26) |
 | M4 re-analysis X1 to X13 | Exploratory, chosen after the results were known; no new timing measurement | D-015 |
 
 ## S7. Changes made after the second review pass

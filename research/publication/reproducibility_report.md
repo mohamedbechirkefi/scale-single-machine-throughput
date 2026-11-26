@@ -62,3 +62,12 @@ Fresh local clone; load average 2.70, 2.56, 2.36 (shared machine).
 | Demo | `added 53 packages in 469ms`; `Tests 14 passed (14)`; `built in 285ms`; 9 PASS lines and `A11Y-CHECK PASS`; `git status` clean |
 
 Both clones were deleted at the end of the session.
+
+## 4. Local home paths (B9, owner, 2026-11-26)
+
+The owner chose to scrub absolute home-directory paths from editable files in a new commit, without rewriting history. A search of every tracked file on 2026-11-26 (`git ls-files -z | xargs -0 grep -a -l '/Users/'`, binary files included) found such paths in two files only, and none needed scrubbing:
+
+- `progress.md`, lines 17 and 180: two paths quoted in the M0 and M4 entries. Kept, because the journal is append-only; its M6 entry already notes them.
+- `scripts/build_pdfs.py`, line 38: the text `/Users/` inside the regular expression that makes the PDF check fail when a local path appears in a PDF. It is a detection pattern, not a path, and is kept.
+
+No frozen protocol, checksummed result, run log or licence file contains such a path. Earlier commits keep the paths that M6 replaced (history not rewritten), and the repository has been public since 2026-11-25.

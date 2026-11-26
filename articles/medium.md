@@ -3,7 +3,7 @@
 
 # How much work can one computer actually handle? (working title, draft)
 
-*Draft, not published. Author: [placeholder: author line, to be confirmed by the owner]. Independent research, not peer-reviewed.*
+*Draft, not published. Author: Mohamed Bechir Kefi, independent researcher. Independent research, not peer-reviewed.*
 
 When a web service is too slow, the usual advice is a cache, an index, batching or a limit on concurrent work. Which one helps most depends on where the time goes in a particular system. This study asked the question for one small, fully specified system: a Python standard-library HTTP server backed by SQLite, on one laptop, on localhost, with a synthetic table of 200,000 rows.
 
@@ -24,8 +24,8 @@ Both winners are conditional on the full-scan baseline. Batching wins here large
 
 ## Still open
 
-Four decisions are pending the owner: the reading of the frozen rule that excludes the index (the manuscript reports both the frozen-rule reading and exploratory alternatives, 246.8 and 90.8), the parameters of the open-loop experiment, whether the workload experiment runs, and whether the raw run outputs stay committed.
+The owner kept the frozen rule that excludes the index (the manuscript also reports exploratory alternatives, 246.8 and 90.8, which are not verdicts) and kept the raw run outputs in the repository. The open-loop and workload experiments did not run; they are to run later, after the owner sets their parameters.
 
-The manuscript, the experiment reports and an offline interactive page with every number and its interval are in the repository: [placeholder: repository URL, not published; publication requires the owner's approval].
+The manuscript, the experiment reports and an offline interactive page with every number and its interval are in the repository: https://github.com/mohamedbechirkefi/scale-single-machine-throughput.
 
-*AI assistance: an AI system (Claude, Anthropic) assisted with code, analysis and drafting; it is not an author. Funding: [placeholder: funding statement, to be supplied by the owner]. Competing interests: [placeholder: competing-interests statement, to be supplied by the owner].*
+*AI assistance: an AI system (Claude, Anthropic) assisted with code, analysis and drafting; it is not an author. Funding: no funding was received. Competing interests: the author declares no competing interests.*

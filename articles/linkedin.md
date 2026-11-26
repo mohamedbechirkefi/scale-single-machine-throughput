@@ -9,4 +9,4 @@ I tested this on one laptop, with one Python and SQLite server and a protocol fr
 
 The narrow lesson: the remedies that won are the ones that share or remove this system's dominant cost, the full scan. It is one machine and one synthetic workload, not production traffic, and the paper is a preprint draft, not peer-reviewed.
 
-Manuscript, reports and an offline interactive page: [placeholder: repository URL, not published; publication requires the owner's approval].
+Manuscript, reports and an offline interactive page: https://github.com/mohamedbechirkefi/scale-single-machine-throughput.

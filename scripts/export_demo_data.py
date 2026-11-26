@@ -6,9 +6,9 @@ carries a ``kind`` (confirmatory, frozen sensitivity, descriptive,
 exploratory) and an ``interval_kind``; project-specific top-level keys, which
 ``demo/src/results.ts`` validates and which fail closed:
 
-* ``pending_owner_decisions``: the four SCALE decisions left open by the
-  owner's instruction of 2026-11-25 ("Next" (second)), each with the readings
-  the manuscript reports; none is chosen here;
+* ``pending_owner_decisions``: the four SCALE decisions answered by the owner
+  on 2026-11-26 (decision sheet), each with the readings the manuscript
+  reports and the owner's choice (the key name is kept for the schema);
 * ``excluded_arms``: A2, which has no confirmatory estimate under the D-012
   reading, so the page can show it with the same weight as the estimates;
 * ``exploratory``: the M4 re-analysis of recorded runs (X3, X4, X5, X10, X12),
@@ -21,8 +21,8 @@ exploratory) and an ``interval_kind``; project-specific top-level keys, which
 Inputs are committed files only: the two analysis files, the EXP-002 metrics
 table, the M4 exploratory summary, the freeze record, the EXP-002 config, the
 experiment registry, the claims register, the artifact manifest and the
-manuscript. Nothing is read from ``results/raw/`` (its commit is an open owner
-decision). Every ``display``, ``interval_display`` and ``interval95_display``
+manuscript. Nothing is read from ``results/raw/`` (tracked, by owner decision
+of 2026-11-26, but not needed by the page). Every ``display``, ``interval_display`` and ``interval95_display``
 string is formatted to the precision the manuscript prints;
 ``tests/test_demo_export.py`` checks that each appears verbatim in
 ``research/paper/manuscript.md``. The output has no timestamp.
@@ -266,7 +266,7 @@ def build(root: Path) -> dict[str, Any]:
             "title": reg["EXP-002"]["title"],
             "status": short_status(reg["EXP-002"]["status"]),
             "verdict": ("A1 and A3: H0 rejected, R > 1. A4: no meaningful effect (inside [0.95, 1.05]). "
-                        "A2: excluded, peak generator-limited in every block (D-012 reading, pending owner decision). "
+                        "A2: excluded, peak generator-limited in every block (D-012 reading, chosen by the owner). "
                         "Dominance: unresolved."),
             "estimates": exp002_est,
             "claim_ids": claim_ids["EXP-002"],
@@ -281,7 +281,7 @@ def build(root: Path) -> dict[str, Any]:
             "id": "EXP-003",
             "title": reg["EXP-003"]["title"],
             "status": short_status(reg["EXP-003"]["status"]),
-            "verdict": "None: not run (pending owner decision on four unset parameters)",
+            "verdict": "None: not run; to run later after the owner sets the four unset parameters",
             "estimates": [],
             "claim_ids": claim_ids["EXP-003"],
             "report_path": reg["EXP-003"]["report_location"],
@@ -291,7 +291,7 @@ def build(root: Path) -> dict[str, Any]:
             "id": "EXP-004",
             "title": reg["EXP-004"]["title"],
             "status": short_status(reg["EXP-004"]["status"]),
-            "verdict": "None: not run (pending owner decision on whether it runs)",
+            "verdict": "None: not run; to run later after the owner sets the parameters",
             "estimates": [],
             "claim_ids": claim_ids["EXP-004"],
             "report_path": reg["EXP-004"]["report_location"],
@@ -364,7 +364,7 @@ def build(root: Path) -> dict[str, Any]:
             "id": "D-012",
             "title": "The reading of the frozen generator-limited rule that excludes the index arm (A2)",
             "readings": [
-                {"label": "Frozen-rule reading as applied (D-012)",
+                {"label": "Owner's choice: frozen-rule reading as applied (D-012)",
                  "text": ("A run's G* is undefined when its peak level is generator-limited, and an arm enters the "
                           "comparison only if G* is defined in every block. A2 then has no confirmatory estimate and "
                           "the dominance question is unresolved."),
@@ -379,24 +379,25 @@ def build(root: Path) -> dict[str, Any]:
             "id": "EXP-003 parameters",
             "title": "The four EXP-003 parameters the frozen text leaves unset",
             "readings": [
-                {"label": "Unset",
-                 "text": ("The open-loop connection count, the study seed, the warmup and measurement split of each "
-                          "rung, and which G* centres A2's ladder. EXP-003 did not run."),
+                {"label": "Not run; to run later after the owner sets the parameters",
+                 "text": ("Unset: the open-loop connection count, the study seed, the warmup and measurement split of "
+                          "each rung, and which G* centres A2's ladder. EXP-003 did not run."),
                  "estimates": []},
             ],
         },
         {
             "id": "EXP-004",
-            "title": "Whether the optional EXP-004 runs",
+            "title": "The optional EXP-004",
             "readings": [
-                {"label": "Not decided", "text": "Its config was never frozen; it did not run.", "estimates": []},
+                {"label": "Not run; to run later after the owner sets the parameters",
+                 "text": "Its config was never frozen; it did not run.", "estimates": []},
             ],
         },
         {
             "id": "results/raw",
-            "title": "Whether the raw run outputs (results/raw/) stay committed",
+            "title": "The raw run outputs (results/raw/) in the repository",
             "readings": [
-                {"label": "Not decided",
+                {"label": "Owner's choice: they stay tracked",
                  "text": ("They are tracked in git since M3, although the folder is listed in the repository's "
                           "ignore rule, and are pinned by SHA256SUMS digests in the artifact manifest. "
                           "This page does not read them."),
@@ -451,7 +452,7 @@ def build(root: Path) -> dict[str, Any]:
         "verdict": "Excluded: peak generator-limited in every block",
         "reason": (f"A2's peak (median {f(desc['A2']['gstar_unfiltered_median'], 1)} rps at c = 2) lies above the "
                    f"frozen 50 % threshold of {f(threshold, 1)} rps in every block; no confirmatory estimate under the "
-                   "D-012 reading, which is a pending owner decision."),
+                   "D-012 reading, which the owner chose."),
         "display_values": [f(desc["A2"]["gstar_unfiltered_median"], 1), f(threshold, 1)],
     }]
 
@@ -492,7 +493,7 @@ def build(root: Path) -> dict[str, Any]:
         "status_label": ("Preprint draft, not peer-reviewed. Measured on one laptop, one synthetic workload and one "
                          "server on localhost; no result transfers to production traffic or other hardware. "
                          "EXP-001 and EXP-002 ran under a protocol frozen by the owner; EXP-003 and EXP-004 did not "
-                         "run. Four owner decisions are pending."),
+                         "run; both are to run later after the owner sets their parameters."),
         "code_revision": results_revision(root),
         "sources": [],
         "experiments": experiments,

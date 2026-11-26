@@ -22,3 +22,7 @@ None. The EXP-002 result is not tested against other table sizes or key skews. N
 ## 4. Needed from the owner
 
 Decide whether EXP-004 runs. If it does, approve a config: c_max = 512 from the pilot rule, 5 blocks per variant, and a study seed.
+
+## 5. Owner answer (2026-11-26)
+
+Owner, 2026-11-26, decision sheet: EXP-004 is recorded as not run; it is to run later, after the owner sets its parameters.
