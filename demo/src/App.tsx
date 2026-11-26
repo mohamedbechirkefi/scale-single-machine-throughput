@@ -86,7 +86,7 @@ cd demo && npm ci && npm test && npm run build`}</code></pre>
             protocol drafting, analysis and text; it is not an author.
           </p>
           <p>
-            Type: Barlow Condensed (Jeremy Tribby) and Source Serif 4 (Frank Grie&szlig;hammer, Adobe), both under the SIL
+            Type: Antonio (Vernon Adams) and Literata (TypeTogether), both under the SIL
             Open Font License 1.1, served from this site.
           </p>
         </div>

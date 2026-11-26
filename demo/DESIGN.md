@@ -24,8 +24,12 @@ Light only: a drawing is ink on film, and a dark variant would read as a bluepri
 
 ## Type
 
-- **Barlow Condensed** (600, latin): headings, labels, gauge numerals, table heads, the title block. Its narrow, straight-sided forms recall the lettering of engineering drawings and highway signs.
-- **Source Serif 4** (variable weight, latin): body and table text, with tabular lining figures. A technical-report serif makes the long methodological text comfortable and sets SCALE apart from the sans-serif pages of the other labs.
+On 2026-11-26 both faces were replaced so that no two lab demos share a typeface (owner request; Barlow Condensed and Source Serif 4 now belong to other labs).
+
+- **Antonio** (variable weight, latin; used at 600, and at 500 for the smallest labels): headings, labels, gauge numerals, table heads, the title block. A tall, tightly condensed grotesque with straight sides and a very high x-height, close to the stencilled and plotted lettering on engineering drawings and instrument dials. It has tabular figures, so gauge readings and legend values stay aligned.
+- **Literata** (variable weight, latin; used at 400 and 700): body and table text, with tabular lining figures. A sturdy book serif drawn for long reading on screens; its firm wedge serifs and even colour suit the long methodological text and keep SCALE the one serif-bodied lab next to a condensed sans.
+
+Tuning for the new faces, measured in Chrome: Antonio's cap height is 0.86 em against 0.70 for Barlow Condensed and it sets about 6 per cent wider at the same size and weight, so heading and large numeral sizes were multiplied by 0.86 and smaller display labels, chart ticks and gauge captions by 0.9 (cap heights stay equal or slightly taller, lines get shorter). The smallest labels (chart ticks, title-block keys, small dial captions) moved to weight 500 with 0.02 to 0.03 em tracking, because Antonio's 600 closes up at 12 px. Literata has a slightly higher x-height than Source Serif 4 (0.51 against 0.49 em) at about the same width, so the 17 px body stays and its line height went from 1.68 to 1.64.
 
 ## Layout
 
@@ -73,4 +77,4 @@ The load gauge: the study's confirmatory ratios as needles on a log-scale dial w
 
 ## Brand files
 
-`public/brand/`: `scale-mark.svg`, `scale-mark-dark.svg`, `scale-mark-mono.svg`, `scale-wordmark.svg`, `scale-lockup.svg`, `scale-lockup-dark.svg`, `scale-lockup-mono.svg`, `favicon.svg`, `favicon-32.png`, `og.png` (1200 x 630). Mark: a load gauge (a half-ring dial with a separated redline segment), a needle and a square hub that doubles as a packed container. Wordmark: SCALE drawn from half-ring bowls and straight strokes on a 120-unit cap height. All paths drawn by hand; `svg_audit.py` scores 99 to 100 with no warning.
+`public/brand/`: `scale-mark.svg`, `scale-mark-dark.svg`, `scale-mark-mono.svg`, `scale-wordmark.svg`, `scale-lockup.svg`, `scale-lockup-dark.svg`, `scale-lockup-mono.svg`, `favicon.svg`, `favicon-32.png`, `og.png` (1200 x 630). Mark: a load gauge (a half-ring dial with a separated redline segment), a needle and a square hub that doubles as a packed container. Wordmark: SCALE drawn from half-ring bowls and straight strokes on a 120-unit cap height. All paths drawn by hand; `svg_audit.py` scores 99 to 100 with no warning. The wordmark is not drawn from any typeface, so the 2026-11-26 typeface change left the mark, wordmark, lockups and favicon unchanged; `og.png` was re-exported with Antonio and Literata from `tools/og/og.html`.

@@ -324,3 +324,25 @@ The owner's full-text review and sign-off (B16), the article drafts (B15), and t
 - `npm test`: "Test Files 1 passed (1)", "Tests 14 passed (14)". `npm run build`: JS 257.42 kB (79.56 kB gzip), CSS 14.87 kB, fonts 22.30 kB and 50.93 kB; `dist/` 467,308 bytes in total. `node tools/a11y_check.mjs dist`: 9 PASS lines, keyboard 29 of 29, "A11Y-CHECK PASS". `.venv/bin/python -m pytest -q`: "139 passed in 25.00s".
 - Screenshots: `python3 -m http.server 5228 --bind 127.0.0.1` (stopped after use). The Chrome `--screenshot` mode with `--virtual-time-budget=4000` froze the needle animation at its first frame (a headless artefact: a real-time CDP check showed the three needle animations running at 0.8 s and finished with the correct transforms at 4.3 s), so the final screenshots were taken over CDP in real time (desktop 1440 wide, phone 390 wide by device emulation). Two critique passes: fixed the needle transform origin, moved the dial caption below the hub, rebuilt the title block grid, enlarged phone gauge text, stacked the tables on phones, added the load generator to the illustration.
 - Next action: the coordinator deploys on the owner's word. Nothing pushed.
+
+## 2026-11-26: Demo typefaces replaced, unique pair across the labs (owner request)
+
+Authority: owner request of 2026-11-26 (shared brief `labs/_shared/FONT-UNIQUE-brief.md`): no two lab demos share a typeface. SCALE replaces both faces: Barlow Condensed becomes Antonio (display) and Source Serif 4 becomes Literata (text). Presentation only: no number, data, fixture, test expectation, accessible name or scientific sentence changed. No push, no deploy.
+
+**Changes.** `@fontsource/barlow-condensed` and `@fontsource-variable/source-serif-4` removed; `@fontsource-variable/antonio@5.3.0` and `@fontsource-variable/literata@5.3.0` added (OFL 1.1, latin subset of the weight axis only, self-hosted through `@font-face` in `style.css`). Both faces have tabular figures (checked in Chrome with `tnum`). Measured in Chrome: Antonio cap height 0.86 em against 0.70 for Barlow Condensed and about 6 per cent wider at 600, so headings and large numerals were scaled by 0.86 and smaller display labels, chart ticks and gauge captions by 0.9; the smallest labels moved to weight 500 with light tracking. Literata x-height 0.51 em against 0.49 for Source Serif 4: body kept at 17 px, line height 1.68 to 1.64. The wordmark is hand-drawn geometry, not drawn from a typeface, so the logo set was not redrawn. `og.png` re-exported with the new faces from a new in-repo source `demo/tools/og/og.html` (layout of the brand-round source; headline 56 px Antonio, text 24 px Literata). `demo/DESIGN.md`, `demo/README.md` and the footer type credit updated.
+
+**Commands and actual outputs.**
+
+```
+$ npm uninstall @fontsource/barlow-condensed @fontsource-variable/source-serif-4   removed 2 packages
+$ npm_config_before=2026-11-12 npm install --save-exact @fontsource-variable/antonio@5.3.0 @fontsource-variable/literata@5.3.0   added 2 packages
+$ npm test                                             Tests 14 passed (14)
+$ npm run build                                        index js 257.39 kB (gzip 79.53 kB); antonio woff2 26.59 kB; literata woff2 52.49 kB
+$ node tools/a11y_check.mjs dist                       A11Y-CHECK PASS
+$ PYTHONPATH=src .venv/bin/python -m pytest -q tests/test_demo_export.py   4 passed
+$ du -sk dist                                          500 KB on disk; 473,666 bytes
+```
+
+Screenshots (desktop 1440 and phone 390, full page, Chrome headless over CDP, preview on 127.0.0.1:5241, stopped after) reviewed: headings, gauge, tables and the title block fit; no wrapping, overflow or clipped label introduced.
+
+**Next action.** The coordinator deploys the rebuilt demo when the owner approves.
