@@ -15,3 +15,12 @@ Static benchmark report and resource and latency explorer of the recorded EXP-00
 
     npm ci && npm test && npm run build && npm run preview
     node tools/a11y_check.mjs dist --screenshots <dir>    # offline and accessibility check; prints A11Y-CHECK PASS or FAIL
+
+**Design.** On 2026-11-26 the page received its own brand identity, motion and layout at the owner's request: the plan is `DESIGN.md`, and the logo, favicon and Open Graph image are in `public/brand/`, drawn for this repository and covered by its licence. No result, data file, test expectation or label changed.
+
+## Third-party notes
+
+- **Barlow Condensed** by Jeremy Tribby: package `@fontsource/barlow-condensed`, version v5.3.0, pinned exactly; only the latin subset at weight 600 is bundled. Licence: SIL Open Font License (OFL-1.1).
+- **Source Serif 4** by Frank Griesshammer for Adobe: package `@fontsource-variable/source-serif-4`, version v5.3.1, pinned exactly; only the latin subset of the variable weight axis is bundled. Licence: SIL Open Font License (OFL-1.1).
+
+Both are self-hosted in the built page; nothing is loaded from another origin. They are the only dependencies added; the other pinned versions are unchanged.

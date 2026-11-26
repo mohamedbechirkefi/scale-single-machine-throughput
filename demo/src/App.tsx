@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: LicenseRef-SCALE-NC-Research-1.0
 import { useEffect, useState } from "react";
-import { EffectPlot, Explorer } from "./charts";
+import { EffectPlot, Explorer, Gauge } from "./charts";
+import { Hero } from "./Hero";
 import { fmtEstimate, fmtInterval, loadResults, ResultsError, type Estimate, type Results } from "./results";
 
 type State = { kind: "loading" } | { kind: "error"; message: string } | { kind: "ready"; results: Results };
@@ -16,24 +17,28 @@ export function App() {
       );
   }, []);
 
+  const r = state.kind === "ready" ? state.results : null;
   return (
     <>
       <a className="skip" href="#main">Skip to content</a>
-      <header className="site">
-        <div className="wrap">
-          <p className="kicker">SCALE, a single-machine throughput study</p>
-          <h1>Cache, index, batching or admission control: which change moves peak throughput most on one laptop?</h1>
+      <header className="bar">
+        <div className="bar-in">
+          <a className="brand" href="#main" aria-label="SCALE, back to the top">
+            <img src="brand/scale-lockup.svg" alt="" width={112} height={32} />
+          </a>
           <nav aria-label="Sections">
-            <a href="#overview">Overview</a>
-            <a href="#results">Results</a>
+            <a href="#overview">Result</a>
+            <a href="#results">Experiments</a>
             <a href="#explorer">Explorer</a>
             <a href="#exploratory">Exploratory</a>
             <a href="#assumptions">Assumptions</a>
-            <a href="#method">Method and limitations</a>
+            <a href="#method">Method</a>
+            <a href="#reproduce">Reproduce</a>
           </nav>
         </div>
       </header>
       <main id="main" className="wrap">
+        <Hero r={r} />
         {state.kind === "loading" && <p role="status">Loading the published results.</p>}
         {state.kind === "error" && (
           <div role="alert" className="panel error">
@@ -43,19 +48,46 @@ export function App() {
           </div>
         )}
         {state.kind === "ready" && <Published r={state.results} />}
+        <section id="reproduce" aria-labelledby="h-reproduce">
+          <h2 id="h-reproduce">Reproduce</h2>
+          <p>
+            Every number on this page is read from <code>public/data/results.json</code>, which a script writes from the
+            committed results; nothing is typed in by hand. From the repository root:
+          </p>
+          <pre className="cmd"><code>{`.venv/bin/python -I scripts/export_demo_data.py
+cd demo && npm ci && npm test && npm run build`}</code></pre>
+          <p>
+            Re-running the benchmark needs the same quiet, single machine; the frozen protocol is{" "}
+            <code>research/protocol.md</code> and the experiment reports are under <code>research/experiments/</code>.
+          </p>
+        </section>
       </main>
       <footer className="site">
         <div className="wrap">
+          <div className="title-block" role="group" aria-label="Drawing title block">
+            <div className="tb-mark"><img src="brand/scale-mark.svg" alt="" width={56} height={56} /></div>
+            <div className="tb-cell tb-title"><span className="tb-k">Study</span><span className="tb-v">SCALE: single-machine server throughput</span></div>
+            <div className="tb-cell"><span className="tb-k">Author</span><span className="tb-v">Mohamed Bechir Kefi, independent researcher</span></div>
+            <div className="tb-cell"><span className="tb-k">Status</span><span className="tb-v">Preprint draft, not peer-reviewed</span></div>
+            <div className="tb-cell"><span className="tb-k">Data revision</span><span className="tb-v"><code>{r ? r.code_revision.slice(0, 7) : "not loaded"}</code></span></div>
+            <div className="tb-cell"><span className="tb-k">Licence</span><span className="tb-v">SCALE Source-Available Non-Commercial Research License v1.0</span></div>
+          </div>
+          <ul className="foot-links">
+            <li><a href="https://github.com/mohamedbechirkefi/scale-single-machine-throughput">Source repository on GitHub</a></li>
+            <li><a href="https://github.com/mohamedbechirkefi/scale-single-machine-throughput/blob/main/research/paper/manuscript.md">Manuscript (preprint draft, not peer-reviewed)</a></li>
+            <li><a href="https://labs.kefimohamedbechir.workers.dev">All lab studies</a></li>
+          </ul>
           <p>
             Runs offline after the first load. No data about visitors is collected or sent anywhere. This page runs no
             benchmark, no inference and no timing of its own, and contacts no local or remote service.
           </p>
           <p>
-            Mohamed Bechir Kefi, independent researcher. Source:{" "}
-            <a href="https://github.com/mohamedbechirkefi/scale-single-machine-throughput">
-              github.com/mohamedbechirkefi/scale-single-machine-throughput
-            </a>
-            .
+            AI assistance: an AI system (Claude, Anthropic) was used as a research and development assistant for code,
+            protocol drafting, analysis and text; it is not an author.
+          </p>
+          <p>
+            Type: Barlow Condensed (Jeremy Tribby) and Source Serif 4 (Frank Grie&szlig;hammer, Adobe), both under the SIL
+            Open Font License 1.1, served from this site.
           </p>
         </div>
       </footer>
@@ -73,7 +105,7 @@ function EstimateTable({ caption, rows }: { caption: string; rows: Estimate[] })
   const has95 = rows.some((r) => r.interval95_display !== null);
   return (
     <div className="table-scroll" role="region" aria-label={caption} tabIndex={0} id={rid}>
-      <table>
+      <table className="stack">
         <thead>
           <tr>
             <th scope="col">Quantity</th>
@@ -88,11 +120,11 @@ function EstimateTable({ caption, rows }: { caption: string; rows: Estimate[] })
           {rows.map((x) => (
             <tr key={x.label}>
               <th scope="row">{x.label}</th>
-              <td><KindBadge kind={x.kind} /></td>
-              <td className="num">{fmtEstimate(x)}{x.unit && x.unit !== "ratio" ? ` ${x.unit}` : ""}</td>
-              <td className="num">{fmtInterval(x)}</td>
-              {has95 && <td className="num">{x.interval95_display ?? ""}</td>}
-              <td className="meta">{x.interval_kind ?? "none reported"}</td>
+              <td data-label="Label"><KindBadge kind={x.kind} /></td>
+              <td className="num" data-label="Estimate">{fmtEstimate(x)}{x.unit && x.unit !== "ratio" ? ` ${x.unit}` : ""}</td>
+              <td className="num" data-label="Interval">{fmtInterval(x)}</td>
+              {has95 && <td className="num" data-label="95 % interval">{x.interval95_display ?? ""}</td>}
+              <td className="meta" data-label="Interval type">{x.interval_kind ?? "none reported"}</td>
             </tr>
           ))}
         </tbody>
@@ -110,7 +142,8 @@ function Published({ r }: { r: Results }) {
   return (
     <>
       <section id="overview" aria-labelledby="h-overview">
-        <h2 id="h-overview">Overview</h2>
+        <h2 id="h-overview">What the gauge reads</h2>
+        <Gauge rows={effectRows} excluded={r.excluded_arms} />
         <p className="status-label">{r.status_label}</p>
         <p>{r.question}</p>
         <p>
@@ -173,7 +206,7 @@ function Published({ r }: { r: Results }) {
             ))}
             <p className="meta">
               Report: <code>{e.report_path}</code>
-              {e.claim_ids.length > 0 && <> · Claims: {e.claim_ids.join(", ")}</>}
+              {e.claim_ids.length > 0 && <>; claims: {e.claim_ids.join(", ")}</>}
             </p>
           </article>
         ))}
@@ -201,7 +234,7 @@ function Published({ r }: { r: Results }) {
             </div>
           ))}
           <p className="meta">
-            Report: <code>{r.exploratory.report_path}</code> · Claims: {r.exploratory.claim_ids.join(", ")}
+            Report: <code>{r.exploratory.report_path}</code>; claims: {r.exploratory.claim_ids.join(", ")}
           </p>
         </div>
       </section>

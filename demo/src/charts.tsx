@@ -321,3 +321,129 @@ export function Explorer({ data }: { data: ExplorerData }) {
     </div>
   );
 }
+
+/* ---------------- Key result: the load gauge ---------------- */
+
+/** Reveal once when scrolled into view; immediate under reduced motion or without IntersectionObserver. */
+export function useReveal<T extends Element>() {
+  const ref = useRef<T>(null);
+  const [shown, setShown] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const reduce = typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce || typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
+    const io = new IntersectionObserver((es) => {
+      if (es.some((e) => e.isIntersecting)) {
+        setShown(true);
+        io.disconnect();
+      }
+    }, { threshold: 0.2 });
+    io.observe(el);
+    // Safety net: never leave data hidden if the observer does not report.
+    const t = setTimeout(() => setShown(true), 2500);
+    return () => {
+      io.disconnect();
+      clearTimeout(t);
+    };
+  }, []);
+  return [ref, shown] as const;
+}
+
+const G_MIN = Math.log(0.8);
+const G_MAX = Math.log(12);
+/** Dial angle in degrees (SVG, 180 = left, 270 = up, 360 = right) for a ratio on the log scale. */
+const gAngle = (v: number) => 180 + ((Math.log(v) - G_MIN) / (G_MAX - G_MIN)) * 180;
+
+/** Confirmatory ratios R as needles on a log-scale load gauge; excluded arms listed with the same weight. */
+export function Gauge({ rows, excluded }: { rows: { name: string; e: Estimate }[]; excluded: ExcludedArm[] }) {
+  const [ref, shown] = useReveal<HTMLElement>();
+  const W = 560, CX = 280, CY = 292, R = 236;
+  const p = (deg: number, r: number) => [CX + r * Math.cos((deg * Math.PI) / 180), CY + r * Math.sin((deg * Math.PI) / 180)];
+  const arc = (a1: number, a2: number, r: number) => {
+    const [x1, y1] = p(a1, r), [x2, y2] = p(a2, r);
+    return `M${x1.toFixed(2)} ${y1.toFixed(2)} A${r} ${r} 0 ${a2 - a1 > 180 ? 1 : 0} 1 ${x2.toFixed(2)} ${y2.toFixed(2)}`;
+  };
+  const minor = [0.8, 0.9, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12];
+  const major = [1, 2, 5, 10];
+  const desc =
+    "Load gauge of the confirmatory effects, EXP-002: ratio R of each arm's peak goodput to the baseline's on a log scale. " +
+    rows.map((r) => `${r.name}: R ${r.e.display}, 98.75 % interval ${r.e.interval_display}`).join("; ") +
+    ". " + excluded.map((x) => `${x.name}: no confirmatory estimate (${x.verdict})`).join("; ") + ".";
+  const ordered = [...rows].sort((a, b) => a.e.estimate - b.e.estimate);
+  useEffect(() => {
+    if (!shown || !ref.current) return;
+    if (typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    ref.current.querySelectorAll<SVGGElement>(".needle").forEach((el, i) => {
+      const to = el.style.transform;
+      const from = el.dataset.from;
+      if (!from || typeof el.animate !== "function") return;
+      el.animate([{ transform: from }, { transform: to }],
+        { duration: 1100, delay: i * 80, easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "backwards" });
+    });
+  }, [shown, ref]);
+  return (
+    <figure className="gauge" ref={ref} data-shown={shown ? "true" : "false"} aria-labelledby="gauge-cap">
+      <div className="gauge-body">
+        <svg viewBox={`0 0 ${W} 370`} role="img" aria-label={desc} className="gauge-svg">
+          <path className="dial-face" d={`${arc(180, 360, R)} L${CX} ${CY} Z`} />
+          <path className="dial-rim" d={arc(180, 360, R)} />
+          <path className="dial-band" d={arc(gAngle(0.95), gAngle(1.05), R - 14)} />
+          {minor.map((v) => {
+            const [x1, y1] = p(gAngle(v), R), [x2, y2] = p(gAngle(v), R - (major.includes(v) ? 22 : 11));
+            return <line key={v} className={major.includes(v) ? "tick-major" : "tick-minor"} x1={x1} y1={y1} x2={x2} y2={y2} />;
+          })}
+          {major.map((v) => {
+            const [x, y] = p(gAngle(v), R - 40);
+            return <text key={v} className="dial-num" x={x} y={y + 6} textAnchor="middle">{v}</text>;
+          })}
+          {ordered.map((r, i) => {
+            const a = gAngle(r.e.estimate);
+            const from = gAngle(1);
+            const [lx, ly] = p(a, R + 16);
+            return (
+              <g key={r.name}>
+                <path className={`ci-arc n${i}`} d={arc(gAngle(r.e.ci_low!), gAngle(r.e.ci_high!), R - 6)} />
+                <g className={`needle n${i}`}
+                  data-from={`translate(${CX}px, ${CY}px) rotate(${from}deg)`}
+                  style={{ transform: shown ? `translate(${CX}px, ${CY}px) rotate(${a}deg)` : `translate(${CX}px, ${CY}px) rotate(${from}deg)` }}>
+                  <path d={`M-14 -5 L${R - 30} -1.5 L${R - 30} 1.5 L-14 5 Z`} />
+                </g>
+                <text className="needle-label" x={lx} y={ly + 6}
+                  textAnchor={a > 300 ? "start" : a < 240 ? "end" : "middle"}>{r.name.split(" ")[0]}</text>
+              </g>
+            );
+          })}
+          <rect className="hub" x={CX - 16} y={CY - 16} width={32} height={32} />
+          <text className="dial-caption" x={CX} y={CY + 42} textAnchor="middle">R, peak goodput against the baseline</text>
+          <text className="dial-caption small" x={CX} y={CY + 70} textAnchor="middle">log scale, 1 = no change</text>
+        </svg>
+        <ul className="gauge-legend">
+          {[...rows].sort((a, b) => b.e.estimate - a.e.estimate).map((r) => (
+            <li key={r.name}>
+              <span className="gl-name">{r.name}</span>
+              <span className="gl-val num">{r.e.display}</span>
+              <span className="meta">98.75 % interval {r.e.interval_display}</span>
+            </li>
+          ))}
+          {excluded.map((x) => (
+            <li key={x.arm} className="gl-excluded">
+              <span className="gl-name">{x.name}</span>
+              <span className="gl-val">no needle</span>
+              <span className="meta">{x.verdict}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <figcaption id="gauge-cap">
+        <span className="badge kind-confirmatory">confirmatory</span> EXP-002, ten paired blocks. Each needle is the
+        geometric mean ratio of the arm's peak goodput to the baseline's; the thick arc under it is its Bonferroni
+        98.75 % interval, and the shaded strip near 1 is the practical-equivalence band [0.95, 1.05]. The index arm has no
+        needle because its peak reached the measurement ceiling; it is listed with the same weight.
+      </figcaption>
+    </figure>
+  );
+}
